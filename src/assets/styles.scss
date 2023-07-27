@@ -15364,7 +15364,7 @@
   .ps-container > .ps-scrollbar-x-rail {
     display: none;
     position: absolute;
-    /* please don't change 'position' */
+   
     opacity: 0;
     -webkit-transition: background-color .2s linear, opacity .2s linear;
     transition: background-color .2s linear, opacity .2s linear;

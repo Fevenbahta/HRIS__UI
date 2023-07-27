@@ -5,65 +5,75 @@
     <app-min-nav></app-min-nav>
   </div>
 
-          <div class="col-md-8 mt-5">
+
+          <div class="col-md-8">
             <div class="card mt-5 mb-5">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">Edit EmergencyContacts</h4>
+                        <h4 class="card-title">Emergency Contacts</h4>
                         <p class="card-category">Complete your emergencycontacts</p>
                     </div>
                     <div class="card-body">
                         <form (ngSubmit)="addEmergencyContact()">
+                  <div class="card-body">
                     <div class="row">
-                      <div class="col-md-6">
-                        <mat-form-field class="example-full-width">
-                          <input matInput placeholder="name" type="text" name="name" [(ngModel)]="addEmergencyContactRequest.name">
-                        </mat-form-field>
+                      <div class="col-md-4">
+                        
+                          <input  class="form-control" placeholder="name" type="text" name="name" [(ngModel)]="addEmergencyContactRequest.name">
+                        
                       </div>
-                      <div class="col-md-6">
-                        <mat-form-field class="example-full-width">
-                          <input matInput placeholder="Relationship" type="text" name="relationship" [(ngModel)]="addEmergencyContactRequest.relationship">
-                        </mat-form-field>
+                      <div class="col-md-4">
+                        
+                          <input  class="form-control" placeholder="Relationship" type="text" name="relationship" [(ngModel)]="addEmergencyContactRequest.relationship">
+                        
                       </div>
-                        <div class="col-md-6">
-                          <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Region" name="region" [(ngModel)]="addEmergencyContactRequest.region "type="text"required>
-                          </mat-form-field>
+                        <div class="col-md-4">
+                         
+                            <input  class="form-control" placeholder="Region" name="region" [(ngModel)]="addEmergencyContactRequest.region "type="text"required>
+                          
                         </div>
-                        <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                              <input matInput placeholder="Town" type="text" name="town" [(ngModel)]="addEmergencyContactRequest.town">
-                            </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                           
+                              <input class="form-control" placeholder="Town" type="text" name="town" [(ngModel)]="addEmergencyContactRequest.town">
+                            
                           </div>
-                        <div class="col-md-6">
-                          <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Subcity" type="text" name="subcity" [(ngModel)]="addEmergencyContactRequest.subCity">
-                          </mat-form-field>
+                        <div class="col-md-4">
+                          
+                            <input class="form-control" placeholder="Subcity" type="text" name="subcity" [(ngModel)]="addEmergencyContactRequest.subCity">
+                         
                         </div>
-                        <div class="col-md-6">
-                          <mat-form-field class="example-full-width">
-                            <input matInput placeholder="kebele" type="text" name="kebele" [(ngModel)]="addEmergencyContactRequest.kebele" >
-                          </mat-form-field>
+                        <div class="col-md-4">
+                          
+                            <input class="form-control" placeholder="kebele" type="text" name="kebele" [(ngModel)]="addEmergencyContactRequest.kebele" >
+                          
                         </div>
-                       
-                          <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                              <input matInput placeholder="House Number" type="text" name="houseNumber" [(ngModel)]="addEmergencyContactRequest.houseNo">
-                            </mat-form-field>
+                       </div>
+                      </div>
+                         
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-4">
+                           
+                              <input class="form-control" placeholder="House Number" type="text" name="houseNumber" [(ngModel)]="addEmergencyContactRequest.houseNo">
+                           
                           </div>
                           
-                          <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                              <mat-label>Phone Number</mat-label>
-                              <input matInput placeholder="+251 XXX XXX XXX" name="phoneNumber" [(ngModel)]="addEmergencyContactRequest.phoneNumber" required>
-                            </mat-form-field>
+                          <div class="col-md-4">
+                           
+                              
+                              <input class="form-control" placeholder="+251 XXX XXX XXX" name="phoneNumber" [(ngModel)]="addEmergencyContactRequest.phoneNumber" required>
+                           
                             <mat-error *ngIf="!addEmergencyContactRequest.phoneNumber && emergencycontactForm.get('phoneNumber').touched">
                               Phone Number is required
                             </mat-error>
                           </div>
-                    </div>
-               
-                  
+                 
+               </div>
+                  </div>
                  
                     <div> <button type="button" class="btn btn-sm btn-success" (click)="addEmergencyContact()">Add Emergency Contact</button>
                     </div>

@@ -18,6 +18,8 @@ import { TrainingComponent } from './modules/training/training.component';
 import { EmergencycontactComponent } from './modules/emergencycontact/emergencycontact.component';
 import { DepositeAuthenticationComponent } from './modules/deposite-authenticaton/deposite-authenticaton.component';
 import { EditEmployeeComponent } from './modules/updatemodules/edit-employee/edit-employee.component';
+import { EditContactComponent } from './modules/updatemodules/edit-contact/edit-contact.component';
+import { EditJobDescriptionComponent } from './modules/updatemodules/edit-job-description/edit-job-description.component';
 
 const routes: Routes = [
   {path: '',
@@ -67,7 +69,21 @@ component: SupervisorComponent},
 {path:'employee-list',
 component: EmployeeListComponent},
 {path:'edit-employee',
-component: EditEmployeeComponent}
+component: EditEmployeeComponent},
+{path:'edit-contact',
+component: EditContactComponent},
+{path:'edit-qualification',
+component: QualificationComponent},
+{path:'edit-jobdescription',
+component: JobdescriptionComponent},
+{path:'edit-emergencycontact',
+component: EmergencycontactComponent},
+{path:'edit-spouse',
+component: SpouseComponent},
+{path:'edit-training',
+component: TrainingComponent},
+{path:'edit-depositeauthentication',
+component: DepositeAuthenticationComponent}
 ]
 }]
 

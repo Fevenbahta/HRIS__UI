@@ -19,7 +19,7 @@ export class DepositeAuthenticationService {
   getAllDepositeAuthentication(): Observable<DepositeAuthentication[]> {
     return this.http.get<DepositeAuthentication[]>(this.apiUrl + 'api/DepositeAuthentication');
   }
-  getDepositeAuthentication(id:number): Observable<DepositeAuthentication> {
+  getDepositeAuthentication(id:string): Observable<DepositeAuthentication> {
     return this.http.get<DepositeAuthentication>(this.apiUrl + 'api/DepositeAuthentication/'+id);
   }
 
@@ -29,7 +29,7 @@ export class DepositeAuthenticationService {
     return this.http.post<DepositeAuthentication>(this.apiUrl + 'api/DepositeAuthentication', addDepositeAuthenticationRequest,httpOptions);
   }
 
-  updateDepositeAuthentication(depositeauthenticationDetails:DepositeAuthentication, Id:number): Observable<DepositeAuthentication> {
+  updateDepositeAuthentication(depositeauthenticationDetails:DepositeAuthentication, Id:string): Observable<DepositeAuthentication> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<DepositeAuthentication>(this.apiUrl + 'api/DepositeAuthentication/'+Id, depositeauthenticationDetails,httpOptions);
   }

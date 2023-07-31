@@ -19,7 +19,7 @@ export class EducationService {
   getAllEducation(): Observable<Education[]> {
     return this.http.get<Education[]>(this.apiUrl + 'api/Education');
   }
-  getEducation(id:number): Observable<Education> {
+  getEducation(id:string): Observable<Education> {
     return this.http.get<Education>(this.apiUrl + 'api/Education/'+id);
   }
 
@@ -29,7 +29,7 @@ export class EducationService {
     return this.http.post<Education>(this.apiUrl + 'api/Education', addEducationRequest,httpOptions);
   }
 
-  updateEducation(educationDetails:Education, Id:number): Observable<Education> {
+  updateEducation(educationDetails:Education, Id:string): Observable<Education> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<Education>(this.apiUrl + 'api/Education/'+Id, educationDetails,httpOptions);
   }

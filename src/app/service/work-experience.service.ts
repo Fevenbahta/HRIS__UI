@@ -19,7 +19,7 @@ export class WorkExperienceService {
   getAllWorkExperience(): Observable<WorkExperience[]> {
     return this.http.get<WorkExperience[]>(this.apiUrl + 'api/WorkExperience');
   }
-  getWorkExperience(id:number): Observable<WorkExperience> {
+  getWorkExperience(id:string): Observable<WorkExperience> {
     return this.http.get<WorkExperience>(this.apiUrl + 'api/WorkExperience/'+id);
   }
 
@@ -29,7 +29,7 @@ export class WorkExperienceService {
     return this.http.post<WorkExperience>(this.apiUrl + 'api/WorkExperience', addWorkExperienceRequest,httpOptions);
   }
 
-  updateWorkExperience(workexperienceDetails:WorkExperience, Id:number): Observable<WorkExperience> {
+  updateWorkExperience(workexperienceDetails:WorkExperience, Id:string): Observable<WorkExperience> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<WorkExperience>(this.apiUrl + 'api/WorkExperience/'+Id, workexperienceDetails,httpOptions);
   }

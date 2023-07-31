@@ -7,22 +7,22 @@ export interface Contact{
   // updatedDate: string,
   // updatedBy: string,
   // isActive: Boolean
-  status:number;
-  pId:number;
-  id: String,
-  empId:String, 
-createdBy: String, 
-  createdDate: String, 
+  status?:number;
+  pId?:number;
+  id?: string,
+  empId?:string, 
+createdBy?: String, 
+  createdDate?: String, 
   updatedDate: String, 
   updatedBy: String, 
- region: String, 
-  town: String, 
-  phoneNumber: String, 
-  email: String,
+ region: string, 
+  town: string, 
+  phoneNumber: string, 
+  email: string,
   postCode:Number,
-  houseNo: String,
-  Kebele:String,
-  woreda:String ,
-  subCity:String
+  houseNo: string,
+  Kebele:string,
+  woreda:string ,
+  subCity:string
 }   
 

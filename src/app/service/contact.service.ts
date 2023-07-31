@@ -18,7 +18,7 @@ export class ContactService {
   getAllContacts(): Observable<Contact[]> {
     return this.http.get<Contact[]>(this.apiUrl + 'api/Address');
   }
-  getContact(id:number): Observable<Contact> {
+  getContact(id:string): Observable<Contact> {
     return this.http.get<Contact>(this.apiUrl + 'api/Address/'+id);
   }
 
@@ -28,7 +28,7 @@ export class ContactService {
     return this.http.post<Contact>(this.apiUrl + 'api/Address', addContactRequest,httpOptions);
   }
 
-  updateContact(contactDetails:Contact, Id:number): Observable<Contact> {
+  updateContact(contactDetails:Contact, Id:string): Observable<Contact> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<Contact>(this.apiUrl + 'api/Address/'+Id, contactDetails,httpOptions);
   }

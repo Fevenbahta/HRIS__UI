@@ -33,6 +33,8 @@ component: PositionComponent},
 {path:'admin/step',
 component: StepComponent},
 {path:'admin/grade',
+component: GradeComponent},
+{path:'admin/grade',
 component: GradeComponent}
 ]
 }

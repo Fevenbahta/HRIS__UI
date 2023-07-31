@@ -19,7 +19,7 @@ export class EmergencyContactService {
   getAllEmergencyContact(): Observable<EmergencyContact[]> {
     return this.http.get<EmergencyContact[]>(this.apiUrl + 'api/EmergencyContact');
   }
-  getEmergencyContact(id:number): Observable<EmergencyContact> {
+  getEmergencyContact(id:string): Observable<EmergencyContact> {
     return this.http.get<EmergencyContact>(this.apiUrl + 'api/EmergencyContact/'+id);
   }
 
@@ -29,7 +29,7 @@ export class EmergencyContactService {
     return this.http.post<EmergencyContact>(this.apiUrl + 'api/EmergencyContact', addEmergencyContactRequest,httpOptions);
   }
 
-  updateEmergencyContact(emergencycontactDetails:EmergencyContact, Id:number): Observable<EmergencyContact> {
+  updateEmergencyContact(emergencycontactDetails:EmergencyContact, Id:string): Observable<EmergencyContact> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<EmergencyContact>(this.apiUrl + 'api/EmergencyContact/'+Id, emergencycontactDetails,httpOptions);
   }

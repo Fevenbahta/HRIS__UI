@@ -20,6 +20,11 @@ import { DepositeAuthenticationComponent } from './modules/deposite-authenticato
 import { EditEmployeeComponent } from './modules/updatemodules/edit-employee/edit-employee.component';
 import { EditContactComponent } from './modules/updatemodules/edit-contact/edit-contact.component';
 import { EditJobDescriptionComponent } from './modules/updatemodules/edit-job-description/edit-job-description.component';
+import { EditSpouseComponent } from './modules/updatemodules/edit-spouse/edit-spouse.component';
+import { EditEmergencyContactComponent } from './modules/updatemodules/edit-emergencycontact/edit-emergencycontact.component';
+import { EditTrainingComponent } from './modules/updatemodules/edit-training/edit-training.component';
+import { EditDepositeAuthenticationComponent } from './modules/updatemodules/edit-depositeauthentication/edit-depositeauthentication.component';
+import { EditQualificationComponent } from './modules/updatemodules/edit-qualification/edit-qualification.component';
 
 const routes: Routes = [
   {path: '',
@@ -73,17 +78,17 @@ component: EditEmployeeComponent},
 {path:'edit-contact',
 component: EditContactComponent},
 {path:'edit-qualification',
-component: QualificationComponent},
+component: EditQualificationComponent},
 {path:'edit-jobdescription',
-component: JobdescriptionComponent},
+component: EditJobDescriptionComponent},
 {path:'edit-emergencycontact',
-component: EmergencycontactComponent},
-{path:'edit-spouse',
-component: SpouseComponent},
-{path:'edit-training',
-component: TrainingComponent},
+component: EditEmergencyContactComponent},
+{path:'edit-spouse/:id',
+component: EditSpouseComponent},
+{path:'edit-training/:id',
+component: EditTrainingComponent},
 {path:'edit-depositeauthentication',
-component: DepositeAuthenticationComponent}
+component: EditDepositeAuthenticationComponent}
 ]
 }]
 

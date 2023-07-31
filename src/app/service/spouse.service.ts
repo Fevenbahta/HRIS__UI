@@ -19,7 +19,7 @@ export class SpouseService {
   getAllSpouse(): Observable<Spouse[]> {
     return this.http.get<Spouse[]>(this.apiUrl + 'api/Spouse');
   }
-  getSpouse(id:number): Observable<Spouse> {
+  getSpouse(id:string): Observable<Spouse> {
     return this.http.get<Spouse>(this.apiUrl + 'api/Spouse/'+id);
   }
 
@@ -29,12 +29,12 @@ export class SpouseService {
     return this.http.post<Spouse>(this.apiUrl + 'api/Spouse', addSpouseRequest,httpOptions);
   }
 
-  updateSpouse(spouseDetails:Spouse, Id:number): Observable<Spouse> {
+  updateSpouse(spouseDetails:Spouse, Id:string): Observable<Spouse> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<Spouse>(this.apiUrl + 'api/Spouse/'+Id, spouseDetails,httpOptions);
   }
 
-  deleteSpouse(Id: number): Observable<string> {
+  deleteSpouse(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.delete<string>(this.apiUrl + 'api/Spouse/' + Id, httpOptions);
   }

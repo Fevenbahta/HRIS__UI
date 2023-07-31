@@ -40,10 +40,10 @@ export interface EmployeePosition{
   pid:number;
   id: string,
   empId:string;
-  divisionId:String,
-  stepId: String,
-  branchId: String,
-  position: String,
+  divisionId:string,
+  stepId: string,
+  branchId: string,
+  position: string,
   status:0,
   startDate: String,
   endDate: String
@@ -56,7 +56,7 @@ updatedBy: string,
 export interface Branch{
   pid:number;
   id: string,
-  name: String,
+  name: string,
   city: string,
 createdBy: string,
 createdDate: string,

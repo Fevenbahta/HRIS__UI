@@ -54,6 +54,26 @@
                 </form>
             </div>
         </div>
+        <h6>Deposit Authentication List</h6>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Bank</th>
+        <th>Bank Branch</th>
+        <th>Bank Account</th>
+        <th>TIN Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through the depositeauthentications array and display each deposit authentication record -->
+      <tr *ngFor="let auth of depositeauthentications">
+        <td>{{ auth.bank }}</td>
+        <td>{{ auth.bankBranch }}</td>
+        <td>{{ auth.bankAccount }}</td>
+        <td>{{ auth.tinNumber }}</td>
+      </tr>
+    </tbody>
+  </table>
     </div>
    </div></div>
 </div>

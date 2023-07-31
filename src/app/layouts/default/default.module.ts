@@ -49,12 +49,12 @@ import { EmergencycontactComponent } from 'app/modules/emergencycontact/emergenc
 import { DepositeAuthenticationComponent } from 'app/modules/deposite-authenticaton/deposite-authenticaton.component';
 import { EditEmployeeComponent } from 'app/modules/updatemodules/edit-employee/edit-employee.component';
 import { EditContactComponent } from 'app/modules/updatemodules/edit-contact/edit-contact.component';
-import { EditQualificationComponent } from 'app/modules/updatemodules/edit-qualification/edit-qualification.component';
 import { EditSpouseComponent } from 'app/modules/updatemodules/edit-spouse/edit-spouse.component';
 import { EditJobDescriptionComponent } from 'app/modules/updatemodules/edit-job-description/edit-job-description.component';
 import { EditTrainingComponent } from 'app/modules/updatemodules/edit-training/edit-training.component';
 import { EditEmergencyContactComponent } from 'app/modules/updatemodules/edit-emergencycontact/edit-emergencycontact.component';
 import { EditDepositeAuthenticationComponent } from 'app/modules/updatemodules/edit-depositeauthentication/edit-depositeauthentication.component';
+import { EditQualificationComponent } from 'app/modules/updatemodules/edit-qualification/edit-qualification.component';
 
 
 
@@ -83,12 +83,14 @@ EmergencycontactComponent,
 DepositeAuthenticationComponent,
 EditEmployeeComponent,
 EditContactComponent,
-EditQualificationComponent,
+
 EditSpouseComponent,
 EditJobDescriptionComponent,
 EditTrainingComponent,
 EditDepositeAuthenticationComponent,
-EditEmergencyContactComponent
+EditEmergencyContactComponent,
+EditQualificationComponent
+
   ],
   imports: [
     CommonModule,

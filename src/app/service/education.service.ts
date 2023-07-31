@@ -34,7 +34,7 @@ export class EducationService {
     return this.http.put<Education>(this.apiUrl + 'api/Education/'+Id, educationDetails,httpOptions);
   }
 
-  deleteEducation(Id: number): Observable<string> {
+  deleteEducation(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.delete<string>(this.apiUrl + 'api/Education/' + Id, httpOptions);
   }

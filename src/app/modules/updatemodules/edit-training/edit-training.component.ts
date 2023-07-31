@@ -10,9 +10,15 @@ import { TrainingService } from 'app/service/training.service';
   styleUrls: ['./edit-training.component.scss']
 })
 export class EditTrainingComponent implements OnInit {
-  trainingId: number;
+  trainingId: string;
   training: Training;
+  trainingSaved: boolean = false;
+  trainings:Training[]=[]
 
+  buttons = [
+    { label: ' Add Employee ', route: '/employee-registration' },
+    { label: '  List Employee ', route: '/employee-list' }
+  ];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -21,7 +27,7 @@ export class EditTrainingComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.trainingId = +params['id'];
+      this.trainingId = params['id'].toString();
       this.getTrainingById();
     });
   }
@@ -40,13 +46,41 @@ export class EditTrainingComponent implements OnInit {
   updateTraining(): void {
     this.trainingService.updateTraining(this.training,this.trainingId).subscribe(
       () => {
-        // Training updated successfully, you can redirect to the training list or show a success message.
-        this.router.navigate(['/training']);
+        this.trainingSaved=true;
+                // this.router.navigate(['/training']);
       },
       (error) => {
         console.error(error);
       }
     );
   }
+  editTraining(training: Training): void {
+    // Here, we will navigate to the edit page for the selected training.
+    this.router.navigate(["/edit-training", training.id]);
+  }
+  deleteTraining(training: Training): void {
+    // Here, we can show a confirmation dialog/modal to confirm the deletion.
+    const confirmDelete = confirm('Are you sure you want to delete this training?');
+  
+    if (confirmDelete) {
+      // If the user confirms the deletion, we can call the service to delete the training.
+      this.trainingService.deleteTraining(training.id).subscribe(
+        () => {
+          // Training deleted successfully, we can update the list of trainings after deletion.
+          // Here, we are simply filtering out the deleted training from the trainings array.
+          this.trainings = this.trainings.filter((t) => t.id !== training.id);
+  
+          // You can also show a success message to the user.
+          alert('Training deleted successfully!');
+        },
+        (error) => {
+          console.error(error);
+          // If there was an error during deletion, you can show an error message.
+          alert('Failed to delete the training. Please try again later.');
+        }
+      );
+    }
+  }
+  
 }
 

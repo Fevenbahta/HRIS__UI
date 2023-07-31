@@ -83,6 +83,24 @@
                 </form>
             </div>
         </div>
+        <h6>Emergency Contact List</h6>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Relationship</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through the emergencycontacts array and display each emergency contact record -->
+      <tr *ngFor="let contact of emergencycontacts">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.phoneNumber }}</td>
+        <td>{{ contact.relationship }}</td>
+      </tr>
+    </tbody>
+  </table>
     </div>
    </div></div>
 </div>

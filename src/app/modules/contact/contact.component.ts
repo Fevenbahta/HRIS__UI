@@ -13,7 +13,7 @@ import { PidService } from 'app/service/pid.service';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
   contacts:Contact[]=[];
@@ -79,5 +79,9 @@ this.router.navigate([jobdescription])
  error(response){
   console.log(response)
 }
-})}}
+})}
+updateContact(id: string) {
+  // Navigate to the employee form with the data of the employee to be updated
+  this.router.navigate(['/edit-contact', id]);
+}}
 

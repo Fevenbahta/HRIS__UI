@@ -82,6 +82,32 @@
                 </form>
             </div>
         </div>
+        <!-- contact.component.html -->
+<h6>contact info </h6>
+<table class="table">
+  <thead>
+    <tr>
+
+      <th>Region</th>
+      <th>Town</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+      <th>Post Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Use *ngFor to loop through the contacts and display each contact's information -->
+    <tr *ngFor="let contact of contacts">
+   
+      <td>{{ contact.region }}</td>
+      <td>{{ contact.town }}</td>
+      <td>{{ contact.phoneNumber }}</td>
+      <td>{{ contact.email }}</td>
+      <td>{{ contact.postCode }}</td>
+    </tr>
+  </tbody>
+</table>
+
     </div>
    </div></div>
 </div>

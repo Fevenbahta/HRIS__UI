@@ -137,6 +137,66 @@
             <div class="clearfix"></div></form>
         </div>
       </div>
+      <!-- qualification.component.html -->
+
+<div class="container">
+  
+
+
+  <!-- Education Table -->
+  <h6>Education History</h6>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Education Level</th>
+        <th>Name of Institute</th>
+        <th>Field of Study</th>
+        <th>From</th>
+        <th>To</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through the educations array and display each education record -->
+      <tr *ngFor="let education of educations">
+        <td>{{ education.eductionName }}</td>
+        <td>{{ education.nameOfInstitute }}</td>
+        <td>{{ education.fieldOfStudy }}</td>
+        <td>{{ education.from }}</td>
+        <td>{{ education.to }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add Work Experience Form -->
+ 
+  <!-- Work Experience Table -->
+  <h6>Work Experience History</h6>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Company Name</th>
+        <th>Position Held</th>
+        <th>From</th>
+        <th>To</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through the workExperiences array and display each work experience record -->
+      <tr *ngFor="let workExperience of workExperiences">
+        <td>{{ workExperience.companyName }}</td>
+        <td>{{ workExperience.postionHeld }}</td>
+        <td>{{ workExperience.from }}</td>
+        <td>{{ workExperience.to }}</td>
+        <!-- <td>
+          <button class="btn btn-sm btn-primary" (click)="editSpouse(spouse)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteSpouse(spouse)">Delete</button>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
     </div>
   </div>
 </div>

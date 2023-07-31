@@ -19,7 +19,7 @@ export class TrainingService {
   getAllTraining(): Observable<Training[]> {
     return this.http.get<Training[]>(this.apiUrl + 'api/Training');
   }
-  getTraining(id:number): Observable<Training> {
+  getTraining(id:string): Observable<Training> {
     return this.http.get<Training>(this.apiUrl + 'api/Training/'+id);
   }
 
@@ -29,12 +29,12 @@ export class TrainingService {
     return this.http.post<Training>(this.apiUrl + 'api/Training', addTrainingRequest,httpOptions);
   }
 
-  updateTraining(trainingDetails:Training, Id:number): Observable<Training> {
+  updateTraining(trainingDetails:Training, Id:string): Observable<Training> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<Training>(this.apiUrl + 'api/Training/'+Id, trainingDetails,httpOptions);
   }
 
-  deleteTraining(Id: number): Observable<string> {
+  deleteTraining(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.delete<string>(this.apiUrl + 'api/Training/' + Id, httpOptions);
   }

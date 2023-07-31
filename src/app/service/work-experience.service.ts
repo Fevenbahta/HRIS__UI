@@ -34,7 +34,7 @@ export class WorkExperienceService {
     return this.http.put<WorkExperience>(this.apiUrl + 'api/WorkExperience/'+Id, workexperienceDetails,httpOptions);
   }
 
-  deleteWorkExperience(Id: number): Observable<string> {
+  deleteWorkExperience(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.delete<string>(this.apiUrl + 'api/WorkExperience/' + Id, httpOptions);
   }

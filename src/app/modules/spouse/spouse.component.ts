@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Spouse } from 'app/models/spouse.model';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { SpouseService } from 'app/service/spouse.service';
@@ -12,7 +13,7 @@ export class SpouseComponent implements OnInit {
 
   spouseSaved: boolean = false;
   spouses: Spouse[] = []; 
-
+ spouse : Spouse;
   addSpouseRequest: Spouse = {
     pId: 0,
     id: undefined,
@@ -30,14 +31,15 @@ export class SpouseComponent implements OnInit {
 
 
   constructor(
-    private spouseservice:SpouseService,
-    private employeeIdService: EmployeeIdService,) { }
+    private spouseService:SpouseService,
+    private employeeIdService: EmployeeIdService,
+    private router: Router,) { }
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
     { label: '  List Employee ', route: '/employee-list' }
   ];
   ngOnInit(): void {
-    this.spouseservice.getAllSpouse() 
+    this.spouseService.getAllSpouse() 
   .subscribe({ 
     next: (spouses) => { 
       this.spouses = spouses; 
@@ -49,7 +51,7 @@ export class SpouseComponent implements OnInit {
   }
   addSpouse() {
     this.addSpouseRequest.empId = this.employeeIdService.employeeId
-    this.spouseservice.addSpouse(this.addSpouseRequest).subscribe({
+    this.spouseService.addSpouse(this.addSpouseRequest).subscribe({
       next: (employee) => {
         this.spouseSaved = true;
         setTimeout(() => {
@@ -76,5 +78,32 @@ export class SpouseComponent implements OnInit {
         console.log(response)
       }
     });
+  }
+  editSpouse(Spouse: Spouse): void {
+    // Here, we will navigate to the edit page for the selected Spouse.
+    this.router.navigate(['/edit-spouse', Spouse.id]);
+  }
+  deleteSpouse(Spouse: Spouse): void {
+    // Here, we can show a confirmation dialog/modal to confirm the deletion.
+    const confirmDelete = confirm('Are you sure you want to delete this Spouse?');
+  
+    if (confirmDelete) {
+      // If the user confirms the deletion, we can call the service to delete the Spouse.
+      this.spouseService.deleteSpouse(this.spouse.id).subscribe(
+        () => {
+          // Spouse deleted successfully, we can update the list of Spouses after deletion.
+          // Here, we are simply filtering out the deleted Spouse from the Spouses array.
+          this.spouses = this.spouses.filter((t) => t.id !== this.spouse.id);
+  
+          // You can also show a success message to the user.
+          alert('Spouse deleted successfully!');
+        },
+        (error) => {
+          console.error(error);
+          // If there was an error during deletion, you can show an error message.
+          alert('Failed to delete the Spouse. Please try again later.');
+        }
+      );
+    }
   }
 }

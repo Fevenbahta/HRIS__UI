@@ -17,6 +17,7 @@ import { SpouseComponent } from './modules/spouse/spouse.component';
 import { TrainingComponent } from './modules/training/training.component';
 import { EmergencycontactComponent } from './modules/emergencycontact/emergencycontact.component';
 import { DepositeAuthenticationComponent } from './modules/deposite-authenticaton/deposite-authenticaton.component';
+import { EditEmployeeComponent } from './modules/updatemodules/edit-employee/edit-employee.component';
 
 const routes: Routes = [
   {path: '',
@@ -64,7 +65,9 @@ component: BranchComponent},
 {path:'admin/supervisor',
 component: SupervisorComponent},
 {path:'employee-list',
-component: EmployeeListComponent}
+component: EmployeeListComponent},
+{path:'edit-employee',
+component: EditEmployeeComponent}
 ]
 }]
 

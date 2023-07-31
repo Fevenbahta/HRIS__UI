@@ -42,4 +42,9 @@ deleteEmployee(id:string){
       console.log(response);
     }
   })
+
+}
+updateEmployee(id: string) {
+  // Navigate to the employee form with the data of the employee to be updated
+  this.router.navigate(['/edit-employee', id]);
 }}

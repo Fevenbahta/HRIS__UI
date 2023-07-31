@@ -1,29 +1,33 @@
-<div class="row">
-  <div class="col-md-12">
-    <app-shared-nav [buttons]="buttons"></app-shared-nav>
-  </div> 
-  <div class="col-md-3">
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+  <div class="container-fluid ">
+<div class="row  ">
+  <div class="col-md-3 pt-5 ">
     <app-min-nav></app-min-nav>
   </div>
+
   <div class="col-md-8">
     <div class="card mt-5 mb-5">
       <div class="card">
         <div class="card-header card-header-danger">
-          <h4 class="card-title">Edit Qualification</h4>
+          <h4 class="card-title">Training</h4>
           <p class="card-category">Complete your Qualification</p>
         </div>
         <div class="card-body">
         
           <form (ngSubmit)="addTraining()">
-            <div><p>Training</p></div>
+            
             <div class="row"> 
-              <div class="col-md-12">
+              <div class="card-body">
+           
               <div class="col-md-6 ">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="type Of Training" type="text" name="typeOfTraining" [(ngModel)]="addTrainingRequest.typeOfTraining">
-                </mat-form-field>
+               
+                  <input  class="form-control" placeholder="Type Of Training" type="text" name="typeOfTraining" [(ngModel)]="addTrainingRequest.typeOfTraining">
+              
               </div>
-             </div>
+            
+            </div>
+            <div class="card-body">
+              <div class="row"> 
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                   <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="addTrainingRequest.from">
@@ -38,7 +42,8 @@
                   <mat-datepicker #toPicker></mat-datepicker>
                 </mat-form-field>
               </div>
-              
+              </div>
+            </div>
               <!-- Add more training form fields here... -->
             </div>
             <div><button type="button" class="btn btn-sm btn-success" (click)="addTraining()">Add Training</button>

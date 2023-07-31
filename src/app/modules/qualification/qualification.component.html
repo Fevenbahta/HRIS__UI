@@ -1,41 +1,46 @@
-<div class="row">
-  <div class="col-md-12">
-    <app-shared-nav [buttons]="buttons"></app-shared-nav>
-  </div> 
-  <div class="col-md-3">
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+  <div class="container-fluid ">
+<div class="row  ">
+  <div class="col-md-3 pt-5 ">
     <app-min-nav></app-min-nav>
   </div>
   <div class="col-md-8">
-    <div class="card mt-5 mb-5">
+    <div class="card  mb-5">
       <div class="card">
         <div class="card-header card-header-danger">
-          <h4 class="card-title">Edit Qualification</h4>
+          <h4 class="card-title">Qualification</h4>
           <p class="card-category">Complete your Qualification</p>
         </div>
         <div class="card-body">
           <!-- Education Form -->
           <form (ngSubmit)="addEducation()">
-            <div><p>Education</p></div>
+            
+            <div class="card-body">
+              <div><p>Education</p></div>
             <div class="row">
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Institution Name" type="text" name="nameOfInstitute" [(ngModel)]="addEducationRequest.nameOfInstitute" required>
-                </mat-form-field>
+              <div class="col-md-4">
+               
+                  <input  class="form-control" placeholder="Institution Name" type="text" name="nameOfInstitute" [(ngModel)]="addEducationRequest.nameOfInstitute" required>
+              
               </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Field Of Study" type="text" name="fieldOfStudy" [(ngModel)]="addEducationRequest.fieldOfStudy">
-                </mat-form-field>
+              <div class="col-md-4">
+                
+                  <input  class="form-control" placeholder="Field Of Study" type="text" name="fieldOfStudy" [(ngModel)]="addEducationRequest.fieldOfStudy">
+                
               </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Education level</mat-label>
-                  <mat-select placeholder="Select educationlevel" name="selectedEducationLevel" required [(ngModel)]="selectedEducationLevel" >
+              <div class="col-md-4">
+               
+                 
+                  <mat-select  class="form-control" placeholder="Select educationlevel" name="selectedEducationLevel" required [(ngModel)]="selectedEducationLevel" >
                     <!-- Replace the options below with your actual division options -->
                     <mat-option *ngFor="let educationlevel of educationlevels" [value]="educationlevel.id">
                       {{educationlevel.educationName}}
-                    </mat-option></mat-select></mat-form-field>
+                    </mat-option></mat-select>
                     </div>
+                  </div>
+            </div>
+            <div class="card-body">
+            <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                   <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="addEducationRequest.from">
@@ -50,8 +55,8 @@
                   <mat-datepicker #toPicker></mat-datepicker>
                 </mat-form-field>
               </div>
-          </div>
-            
+              </div>
+            </div>
             <button type="button" class="btn btn-sm btn-success" (click)="addEducation()">Add Education</button>
            
             <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
@@ -60,41 +65,51 @@
               Education added successfully!
             </div>
           </form>
-
+</div>
           <!-- Work Experience Form -->
+          <div class="card-body">
           <form (ngSubmit)="addWorkExperience()">
+            <div class="card-body">
             <div><p>Work Experience</p></div>
             <div class="row"> 
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Name" type="text" name="Name" [(ngModel)]="addWorkExperienceRequest.name">
-                </mat-form-field>
+              <div class="col-md-4">
+               
+                  <input  class="form-control" placeholder="Name" type="text" name="Name" [(ngModel)]="addWorkExperienceRequest.name">
+              
               </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Company Name" type="text" name="companyName" [(ngModel)]="addWorkExperienceRequest.companyName">
-                </mat-form-field>
+              <div class="col-md-4">
+               
+                  <input  class="form-control" placeholder="Company Name" type="text" name="companyName" [(ngModel)]="addWorkExperienceRequest.companyName">
+                
               </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Position Held" type="text" name="postionHeld" [(ngModel)]="addWorkExperienceRequest.postionHeld">
-                </mat-form-field>
+              <div class="col-md-4">
+                
+                  <input  class="form-control" placeholder="Position Held" type="text" name="postionHeld" [(ngModel)]="addWorkExperienceRequest.postionHeld">
+                
               </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Description" type="text" name="description" [(ngModel)]="addWorkExperienceRequest.description">
-                </mat-form-field>
+            </div>
+          </div>
+          <div class="card-body">
+          <div class="row"> 
+              <div class="col-md-4">
+                
+                  <input class="form-control" placeholder="Description" type="text" name="description" [(ngModel)]="addWorkExperienceRequest.description">
+                
               </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Salary Amount" type="text" name="salary" [(ngModel)]="addWorkExperienceRequest.salary">
-                </mat-form-field>
+              <div class="col-md-4">
+                
+                  <input class="form-control" placeholder="Salary Amount" type="text" name="salary" [(ngModel)]="addWorkExperienceRequest.salary">
+                
               </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Reason for termination" type="text" name="reasonTermination" [(ngModel)]="addWorkExperienceRequest.reasonTermination">
-                </mat-form-field>
+              <div class="col-md-4">
+               
+                  <input class="form-control" placeholder="Reason for termination" type="text" name="reasonTermination" [(ngModel)]="addWorkExperienceRequest.reasonTermination">
+              
               </div>
+              </div>
+            </div>
+            <div class="card-body">
+            <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                   <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="addWorkExperienceRequest.from">
@@ -109,9 +124,10 @@
                   <mat-datepicker #toPicker></mat-datepicker>
                 </mat-form-field>
               </div>
-              
-              <!-- Add more work experience form fields here... -->
             </div>
+            </div>
+              <!-- Add more work experience form fields here... -->
+           
             <button type="button" class="btn btn-sm btn-success" (click)="addWorkExperience()">Add Work Experience</button>
             <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
              -->

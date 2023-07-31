@@ -96,6 +96,16 @@ this.stepservice.getAllStep()
   }
 });
 
+
+this.employeepositionservice.getAllEmployeePosition() 
+  .subscribe({ 
+    next: (employeepositions) => { 
+      this.employeepositions = employeepositions; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
 }
 
 addEmployeePosition(){

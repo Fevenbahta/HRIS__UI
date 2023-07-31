@@ -22,7 +22,7 @@ export interface Employee{
     crime: Boolean, 
     crimeDescription: String ,
     firstSupervisor:string,
-    secondSupervisor:String,
+    secondSupervisor:string,
     status:number;
 }
 export interface Supervisor{

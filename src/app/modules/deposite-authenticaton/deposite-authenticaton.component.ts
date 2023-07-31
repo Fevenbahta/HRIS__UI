@@ -37,7 +37,18 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
     private depositeauthenticationservice: DepositeAuthenticationService,
     private employeeIdService: EmployeeIdService,
     private router:Router){}
+
+
   ngOnInit():void {
+    this.depositeauthenticationservice.getAllDepositeAuthentication() 
+    .subscribe({ 
+      next: (depositeauthentications) => { 
+        this.depositeauthentications = depositeauthentications; 
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, 
+  });
   }
   depositeauthenticationForm: FormGroup = this.formBuilder.group({
     phoneNumber: ['', Validators.required],

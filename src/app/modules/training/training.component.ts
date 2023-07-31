@@ -37,6 +37,16 @@ export class TrainingComponent implements OnInit {
     private employeeIdService: EmployeeIdService,) { }
 
   ngOnInit(): void {
+
+      this.trainingService.getAllTraining() 
+    .subscribe({ 
+      next: (trainings) => { 
+        this.trainings = trainings; 
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, 
+  });
   }
   addTraining() {
     this.addTrainingRequest.empId = this.employeeIdService.employeeId;

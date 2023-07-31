@@ -40,6 +40,15 @@ constructor(
   private employeeIdService: EmployeeIdService,
   private router:Router){}
 ngOnInit():void {
+  this.emergencycontactservice.getAllEmergencyContact() 
+  .subscribe({ 
+    next: (emergencycontacts) => { 
+      this.emergencycontacts = emergencycontacts; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
 }
 emergencycontactForm: FormGroup = this.formBuilder.group({
   phoneNumber: ['', Validators.required],

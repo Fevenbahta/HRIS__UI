@@ -47,4 +47,15 @@ deleteEmployee(id:string){
 updateEmployee(id: string) {
   // Navigate to the employee form with the data of the employee to be updated
   this.router.navigate(['/edit-employee', id]);
-}}
+}
+
+ 
+getFirstSupervisorName(firstSupervisor: string): string { 
+  const employee = this.employees.find((g) => g.empId === firstSupervisor); 
+  return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
+} 
+getSecondSupervisorName(secondSupervisor: string): string { 
+  const employee = this.employees.find((g) => g.empId === secondSupervisor); 
+  return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
+} 
+}

@@ -37,6 +37,15 @@ export class SpouseComponent implements OnInit {
     { label: '  List Employee ', route: '/employee-list' }
   ];
   ngOnInit(): void {
+    this.spouseservice.getAllSpouse() 
+  .subscribe({ 
+    next: (spouses) => { 
+      this.spouses = spouses; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
   }
   addSpouse() {
     this.addSpouseRequest.empId = this.employeeIdService.employeeId

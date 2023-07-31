@@ -95,6 +95,24 @@ export class QualificationComponent implements OnInit {
     console.log(response)
   }
 });
+this.educationservice.getAllEducation() 
+  .subscribe({ 
+    next: (educations) => { 
+      this.educations = educations; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
+this.workExperienceService.getAllWorkExperience() 
+  .subscribe({ 
+    next: (workExperiences) => { 
+      this.workExperiences = workExperiences; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
   }
 
   addWorkExperience() {

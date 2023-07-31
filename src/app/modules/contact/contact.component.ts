@@ -16,6 +16,7 @@ import { PidService } from 'app/service/pid.service';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
+  contacts:Contact[]=[];
   addContactRequest:Contact={
     pId:0,
     id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -44,9 +45,19 @@ constructor(
   private employeeIdService: EmployeeIdService,
   private router:Router){}
 ngOnInit():void {
+  this.contactservice.getAllContacts() 
+  .subscribe({ 
+    next: (contacts) => { 
+      this.contacts = contacts; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
 }
 contactForm: FormGroup = this.formBuilder.group({
   phoneNumber: ['', Validators.required],
+  
 });
 
 buttons = [

@@ -36,7 +36,6 @@ export class QualificationComponent implements OnInit {
   addWorkExperienceRequest: WorkExperience = {
     pId: 0,
     id: undefined,
-    name: "",
     description: "",
     createdBy: "",
     createdDate: "2023-07-26T06:13:52.512Z",
@@ -122,7 +121,7 @@ this.workExperienceService.getAllWorkExperience()
         this.addWorkExperienceRequest = {
           pId: 0,
           id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-          name: "",
+      
           description: "",
           createdBy: "",
           createdDate: "",
@@ -178,9 +177,9 @@ this.workExperienceService.getAllWorkExperience()
     });
   }
 
-  editEducation(Education: Education): void {
+  editEducation(education: Education): void {
     // Here, we will navigate to the edit page for the selected Education.
-    this.router.navigate(['/edit-education', Education.id]);
+    this.router.navigate(['/edit-education', education.id]);
   }
   deleteEducation(Education: Education): void {
     // Here, we can show a confirmation dialog/modal to confirm the deletion.

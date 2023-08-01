@@ -42,48 +42,55 @@ export class EditQualificationComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.educationId = params['id'].toString();
       this.workExperienceId = params['id'].toString();
-  
+      // Get all work experiences
+      this.workExperienceService.getAllWorkExperience().subscribe({
+        next: (workExperiences) => {
+          this.workExperiences = workExperiences;
+        },
+        error: (response) => {
+          console.log(response);
+        }
+      });
+    
+      // Get all educations
+      this.educationService.getAllEducation().subscribe({
+        next: (educations) => {
+          this.educations = educations;
+        },
+        error: (response) => {
+          console.log(response);
+        }
+      });
       // Get the work experience by ID
-      this.workExperienceService.getWorkExperience(this.workExperienceId).subscribe({
-        next: (workExperience) => {
-          this.workExperience = workExperience;
-        },
-        error: (response) => {
-          console.log(response);
-        }
-      });
+      if (this.educationId) {
+        this.educationService.getEducation(this.educationId).subscribe({
+          next: (education) => {
+            this.education = education;
+        
+            this.selectedEducationLevel = education?.eductionName; // Use safe navigation operator
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
+      }
   
-      // Get the education by ID
-      this.educationService.getEducation(this.educationId).subscribe({
-        next: (education) => {
-          this.education = education;
-          this.selectedEducationLevel = education?.eductionName; // Use safe navigation operator
-        },
-        error: (response) => {
-          console.log(response);
-        }
-      });
-    });
-  
-    // Get all work experiences
-    this.workExperienceService.getAllWorkExperience().subscribe({
-      next: (workExperiences) => {
-        this.workExperiences = workExperiences;
-      },
-      error: (response) => {
-        console.log(response);
+      // Get the work experience by ID if it exists
+      if (this.workExperienceId) {
+        this.workExperienceService.getWorkExperience(this.workExperienceId).subscribe({
+          next: (workExperience) => {
+            this.workExperience = workExperience;
+        
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
       }
     });
   
-    // Get all educations
-    this.educationService.getAllEducation().subscribe({
-      next: (educations) => {
-        this.educations = educations;
-      },
-      error: (response) => {
-        console.log(response);
-      }
-    });
+  
+
   }
   
 

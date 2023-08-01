@@ -12,10 +12,16 @@ import { EditContactComponent } from './modules/updatemodules/edit-contact/edit-
 import { EditJobDescriptionComponent } from './modules/updatemodules/edit-job-description/edit-job-description.component';
 import { EditSpouseComponent } from './modules/updatemodules/edit-spouse/edit-spouse.component';
 import { EditTrainingComponent } from './modules/updatemodules/edit-training/edit-training.component';
+import { WorkexperienceComponent } from './modules/workexperience/workexperience.component';
+import { EducationComponent } from './modules/education/education.component';
+import { EditWorkexperienceComponent } from './modules/updatemodules/edit-workexperience/edit-workexperience.component';
+import { EditEducationComponent } from './modules/updatemodules/edit-education/edit-education.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
+    
 
   
 

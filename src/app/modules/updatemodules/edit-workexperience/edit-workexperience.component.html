@@ -1,0 +1,96 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-3 pt-5 ">
+      <app-min-nav></app-min-nav>
+    </div>
+    <div class="col-md-8">
+      <div class="card  mb-5">
+        <div class="card">
+          <div class="card-header cardhead">
+            <h4 class="card-title">Qualification</h4>
+            <p class="card-category">Complete your Qualification</p>
+          </div>
+            <!-- Work Experience Form -->
+            <div class="card-body">
+            <form (ngSubmit)="updateWorkExperience()">
+              <div class="card-body">
+              <div><p>Work Experience</p></div>
+              <div class="row"> 
+            
+                <div class="col-md-4">
+                 
+                    <input  class="form-control" placeholder="Company Name" type="text" name="companyName" [(ngModel)]="workExperience.companyName">
+                  
+                </div>
+                <div class="col-md-4">
+                  
+                    <input  class="form-control" placeholder="Position Held" type="text" name="postionHeld" [(ngModel)]="workExperience.postionHeld">
+                  
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+            <div class="row"> 
+                <div class="col-md-4">
+                  
+                    <input class="form-control" placeholder="Description" type="text" name="description" [(ngModel)]="workExperience.description">
+                  
+                </div>
+                <div class="col-md-4">
+                  
+                    <input class="form-control" placeholder="Salary Amount" type="text" name="salary" [(ngModel)]="workExperience.salary">
+                  
+                </div>
+                <div class="col-md-4">
+                 
+                    <input class="form-control" placeholder="Reason for termination" type="text" name="reasonTermination" [(ngModel)]="workExperience.reasonTermination">
+                
+                </div>
+                </div>
+              </div>
+              <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="workExperience.from">
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="workExperience.to">
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              </div>
+                <!-- Add more work experience form fields here... -->
+             
+              <button type="button" class="btn btn-sm btnsave" (click)="updateWorkExperience()">update Work Experience</button>
+              <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
+               -->
+              <div *ngIf="workExperienceUpdated" class="alert alert-success mt-3">
+                Work Experience added successfully!
+              </div>
+              <div class="clearfix"></div></form>
+          </div>
+        </div>
+        <!-- qualification.component.html -->
+  
+  <div class="container">
+    
+  
+  
+    <!-- Education Table -->
+   
+  
+  
+  </div>
+  
+      </div>
+    </div>
+  </div>
+  

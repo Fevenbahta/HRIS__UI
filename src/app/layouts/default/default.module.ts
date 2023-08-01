@@ -55,6 +55,10 @@ import { EditTrainingComponent } from 'app/modules/updatemodules/edit-training/e
 import { EditEmergencyContactComponent } from 'app/modules/updatemodules/edit-emergencycontact/edit-emergencycontact.component';
 import { EditDepositeAuthenticationComponent } from 'app/modules/updatemodules/edit-depositeauthentication/edit-depositeauthentication.component';
 import { EditQualificationComponent } from 'app/modules/updatemodules/edit-qualification/edit-qualification.component';
+import { WorkexperienceComponent } from 'app/modules/workexperience/workexperience.component';
+import { EducationComponent } from 'app/modules/education/education.component';
+import { EditWorkexperienceComponent } from 'app/modules/updatemodules/edit-workexperience/edit-workexperience.component';
+import { EditEducationComponent } from 'app/modules/updatemodules/edit-education/edit-education.component';
 
 
 
@@ -89,7 +93,11 @@ EditJobDescriptionComponent,
 EditTrainingComponent,
 EditDepositeAuthenticationComponent,
 EditEmergencyContactComponent,
-EditQualificationComponent
+EditQualificationComponent,
+WorkexperienceComponent,
+    EducationComponent,
+    EditWorkexperienceComponent,
+    EditEducationComponent,
 
   ],
   imports: [

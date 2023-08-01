@@ -25,6 +25,10 @@ import { EditEmergencyContactComponent } from './modules/updatemodules/edit-emer
 import { EditTrainingComponent } from './modules/updatemodules/edit-training/edit-training.component';
 import { EditDepositeAuthenticationComponent } from './modules/updatemodules/edit-depositeauthentication/edit-depositeauthentication.component';
 import { EditQualificationComponent } from './modules/updatemodules/edit-qualification/edit-qualification.component';
+import { WorkexperienceComponent } from './modules/workexperience/workexperience.component';
+import { EducationComponent } from './modules/education/education.component';
+import { EditWorkexperienceComponent } from './modules/updatemodules/edit-workexperience/edit-workexperience.component';
+import { EditEducationComponent } from './modules/updatemodules/edit-education/edit-education.component';
 
 const routes: Routes = [
   {path: '',
@@ -44,9 +48,10 @@ component:EmployeeRegistrationComponent}
 component: ContactComponent},
 {path:'employee-registration/job-description',
 component: JobdescriptionComponent},
-
-{path:'employee-registration/qualification',
-component: QualificationComponent},
+{path:'employee-registration/education',
+component: EducationComponent},
+{path:'employee-registration/work-experience',
+component: WorkexperienceComponent},
 {path:'employee-registration/spouse',
 component: SpouseComponent},
 {path:'employee-registration/training',
@@ -73,14 +78,14 @@ component: BranchComponent},
 component: SupervisorComponent},
 {path:'employee-list',
 component: EmployeeListComponent},
-{path:'employee-list/:id',
+{path:'edit-employee/:id',
 component: EditEmployeeComponent},
 {path:'edit-contact/:id',
 component: EditContactComponent},
 {path:'edit-education/:id',
-component: EditQualificationComponent},
+component: EditEducationComponent},
 {path:'edit-workExperience/:id',
-component: EditQualificationComponent},
+component: EditWorkexperienceComponent},
 {path:'edit-employeePosition/:id',
 component: EditJobDescriptionComponent},
 {path:'edit-emergencyContact/:id',

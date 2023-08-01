@@ -1,0 +1,110 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-3 pt-5 ">
+      <app-min-nav></app-min-nav>
+    </div>
+    <div class="col-md-8">
+      <div class="card  mb-5">
+        <div class="card">
+          <div class="card-header cardhead">
+            <h4 class="card-title">Qualification</h4>
+            <p class="card-category">Complete your Qualification</p>
+          </div>
+          <div class="card-body">
+            <!-- Education Form -->
+            <form (ngSubmit)="updateEducation()">
+              
+              <div class="card-body">
+                <div><p>Education</p></div>
+              <div class="row">
+                <div class="col-md-4">
+                 
+                    <input  class="form-control" placeholder="Institution Name" type="text" name="nameOfInstitute" [(ngModel)]="education.nameOfInstitute" required>
+                
+                </div>
+                <div class="col-md-4">
+                  
+                    <input  class="form-control" placeholder="Field Of Study" type="text" name="fieldOfStudy" [(ngModel)]="education.fieldOfStudy">
+                  
+                </div>
+                <div class="col-md-4">
+                 
+                   
+                    <mat-select  class="form-control" placeholder="Select educationlevel" name="selectedEducationLevel" required [(ngModel)]="selectedEducationLevel" >
+                      <!-- Replace the options below with your actual division options -->
+                      <mat-option *ngFor="let educationlevel of educationlevels" [value]="educationlevel.id">
+                        {{educationlevel.educationName}}
+                      </mat-option></mat-select>
+                      </div>
+                    </div>
+              </div>
+              <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="education.from">
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="education.to">
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-sm btnsave" (click)="updateEducation()">update Education</button>
+             
+              <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
+              -->
+              <div *ngIf="educationUpdated" class="alert alert-success mt-3">
+                Education added successfully!
+              </div>
+            </form>
+  </div>
+    
+        <!-- qualification.component.html -->
+  
+  <div class="container">
+    
+  
+  
+    <!-- Education Table -->
+    <h6>Education History</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Education Level</th>
+          <th>Name of Institute</th>
+          <th>Field of Study</th>
+          <th>From</th>
+          <th>To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the educations array and display each education record -->
+        <tr *ngFor="let education of educations">
+          <td>{{ education.eductionName }}</td>
+          <td>{{ education.nameOfInstitute }}</td>
+          <td>{{ education.fieldOfStudy }}</td>
+          <td>{{ education.from }}</td>
+          <td>{{ education.to }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="editEducation(education)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteEducation(education)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Add Work Experience Form -->
+   </div>
+  
+      </div>
+    </div>
+  </div>
+  

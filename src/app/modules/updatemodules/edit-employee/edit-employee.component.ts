@@ -56,9 +56,11 @@ export class EditEmployeeComponent implements OnInit {
       this.employeeId = params['empId']; // Updated to use empId as the route parameter
       this.employeeService.getEmployee(this.employeeId).subscribe((employee) => {
         this.employee = employee;
-        this.populateForm(); // Call the method to populate the form with employee data
+        this.populateForm();
+        console.log(employee) // Call the method to populate the form with employee data
       });
     });
+ 
   }
 
   populateForm(): void {

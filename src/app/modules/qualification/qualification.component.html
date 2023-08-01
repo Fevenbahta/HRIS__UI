@@ -163,6 +163,10 @@
         <td>{{ education.fieldOfStudy }}</td>
         <td>{{ education.from }}</td>
         <td>{{ education.to }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editEducation(education)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteEducation(education)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -187,10 +191,10 @@
         <td>{{ workExperience.postionHeld }}</td>
         <td>{{ workExperience.from }}</td>
         <td>{{ workExperience.to }}</td>
-        <!-- <td>
-          <button class="btn btn-sm btn-primary" (click)="editSpouse(spouse)">Edit</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteSpouse(spouse)">Delete</button>
-        </td> -->
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editWorkExperience(workExperience)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteWorkExperience(workExperience)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>

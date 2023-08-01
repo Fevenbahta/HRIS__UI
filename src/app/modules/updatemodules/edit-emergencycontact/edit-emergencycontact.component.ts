@@ -12,6 +12,7 @@ export class EditEmergencyContactComponent implements OnInit {
   emergencyContactId: string;
   emergencyContact: EmergencyContact;
   emergencyContactUpdated: boolean = false;
+  emergencyContacts:EmergencyContact[]=[];
 
   constructor(
     private emergencyContactService: EmergencyContactService,
@@ -41,4 +42,33 @@ export class EditEmergencyContactComponent implements OnInit {
       }
     });
   }
+  editEmergencyContact(EmergencyContact: EmergencyContact): void {
+    // Here, we will navigate to the edit page for the selected EmergencyContact.
+    this.router.navigate(["/edit-EmergencyContact", EmergencyContact.id]);
+  }
+  deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
+    // Here, we can show a confirmation dialog/modal to confirm the deletion.
+    const confirmDelete = confirm('Are you sure you want to delete this EmergencyContact?');
+  
+    if (confirmDelete) {
+      // If the user confirms the deletion, we can call the service to delete the EmergencyContact.
+      this.emergencyContactService.deleteEmergencyContact(this.emergencyContact.id).subscribe(
+        () => {
+          // EmergencyContact deleted successfully, we can update the list of EmergencyContacts after deletion.
+          // Here, we are simply filtering out the deleted EmergencyContact from the EmergencyContacts array.
+          this.emergencyContacts = this.emergencyContacts.filter((t) => t.id !== EmergencyContact.id);
+  
+          // You can also show a success message to the user.
+          alert('EmergencyContact deleted successfully!');
+        },
+        (error) => {
+          console.error(error);
+          // If there was an error during deletion, you can show an error message.
+          alert('Failed to delete the EmergencyContact. Please try again later.');
+        }
+      );
+    }
+  }
+  
+  
 }

@@ -88,7 +88,8 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
    error(response){
     console.log(response)
   }
-  })}}
+  })}
+}
   
   
   

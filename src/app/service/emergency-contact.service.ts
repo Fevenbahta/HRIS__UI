@@ -34,7 +34,7 @@ export class EmergencyContactService {
     return this.http.put<EmergencyContact>(this.apiUrl + 'api/EmergencyContact/'+Id, emergencycontactDetails,httpOptions);
   }
 
-  deleteEmergencyContact(Id: number): Observable<string> {
+  deleteEmergencyContact(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.delete<string>(this.apiUrl + 'api/EmergencyContact/' + Id, httpOptions);
   }

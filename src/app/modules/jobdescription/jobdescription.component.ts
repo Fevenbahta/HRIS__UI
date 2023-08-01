@@ -20,7 +20,7 @@ import { StepService } from 'app/service/step.service';
 export class JobdescriptionComponent implements OnInit {
   jobdescriptionSaved: boolean = false;
 employeepositions:EmployeePosition[]=[]
-
+employeePosition:EmployeePosition
   divisions:Division[]= [];
   selectedDivision: string='';
 

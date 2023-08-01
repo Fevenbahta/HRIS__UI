@@ -1,1 +1,86 @@
-<p>edit-depositeauthentication works!</p>
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-3 pt-5 ">
+      <app-min-nav></app-min-nav>
+    </div>
+  
+  
+            <div class="col-md-8">
+              <div class="card mt-5 mb-5">
+                  <div class="card">
+                      <div class="card-header cardhead">
+                          <h4 class="card-title">DepositeAuthentications</h4>
+                          <p class="card-category">Complete your depositeauthentications</p>
+                      </div>
+                      <div class="card-body">
+                          <form (ngSubmit)="updateDepositeAuthentication()">
+                            <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                         
+                            <input  class="form-control" placeholder="Bank" type="text" name="bank" [(ngModel)]="depositeAuthentication.bank">
+                         
+                        </div>
+                        <div class="col-md-6">
+                          
+                            <input  class="form-control" placeholder="Bank Branch" type="text" name="bankBranch" [(ngModel)]="depositeAuthentication.bankBranch">
+                        
+                        </div>  
+                      </div>
+                 </div>
+                 <div class="card-body">
+                 <div class="row">
+                         <div class="col-md-6">
+                             
+                                <input  class="form-control"  placeholder="Tin Number" type="text" name="tinNumber" [(ngModel)]="depositeAuthentication.tinNumber">
+                              
+                            </div>
+                          <div class="col-md-6">
+                           
+                              <input  class="form-control"  placeholder="Bank Account" name="bankAccount" [(ngModel)]="depositeAuthentication.bankAccount "type="text"required>
+                          
+                          </div>
+                       
+                        </div>
+                      
+                        </div>
+                   
+                      <div> <button type="button" class="btn btn-sm btnsave" (click)="updateDepositeAuthentication()">update Emergency Contact</button>
+                      </div>
+                           <div *ngIf="depositeAuthenticationUpdated" class="alert alert-success mt-3">
+                          depositeauthentication added successfully!
+                         </div> <div class="clearfix"></div>
+                  </form>
+              </div>
+          </div>
+          <h6>Deposit Authentication List</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Bank</th>
+          <th>Bank Branch</th>
+          <th>Bank Account</th>
+          <th>TIN Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the depositeauthentications array and display each deposit authentication record -->
+        <tr *ngFor="let auth of depositeAuthentications">
+          <td>{{ auth.bank }}</td>
+          <td>{{ auth.bankBranch }}</td>
+          <td>{{ auth.bankAccount }}</td>
+          <td>{{ auth.tinNumber }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="editDepositeAuthentication(depositeAuthentication)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteDepositeAuthentication(depositeAuthentication)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+     </div></div>
+  </div>
+  </div>
+  
+  

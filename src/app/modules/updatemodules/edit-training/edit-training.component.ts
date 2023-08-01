@@ -29,7 +29,17 @@ export class EditTrainingComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.trainingId = params['id'].toString();
       this.getTrainingById();
+      
     });
+    this.trainingService.getAllTraining() 
+    .subscribe({ 
+      next: (trainings) => { 
+        this.trainings = trainings; 
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, 
+  });
   }
 
   getTrainingById(): void {

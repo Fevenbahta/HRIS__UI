@@ -20,12 +20,12 @@
               <div class="row">
                 <div class="col-md-4">
                  
-                    <input  class="form-control" placeholder="Institution Name" type="text" name="nameOfInstitute" [(ngModel)]="addEducationRequest.nameOfInstitute" required>
+                    <input  class="form-control" placeholder="Institution Name" type="text" name="nameOfInstitute" [(ngModel)]="education.nameOfInstitute" required>
                 
                 </div>
                 <div class="col-md-4">
                   
-                    <input  class="form-control" placeholder="Field Of Study" type="text" name="fieldOfStudy" [(ngModel)]="addEducationRequest.fieldOfStudy">
+                    <input  class="form-control" placeholder="Field Of Study" type="text" name="fieldOfStudy" [(ngModel)]="education.fieldOfStudy">
                   
                 </div>
                 <div class="col-md-4">
@@ -43,14 +43,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
-                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="addEducationRequest.from">
+                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="education.from">
                     <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
                     <mat-datepicker #fromPicker></mat-datepicker>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
-                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="addEducationRequest.to">
+                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="education.to">
                     <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
                     <mat-datepicker #toPicker></mat-datepicker>
                   </mat-form-field>
@@ -61,7 +61,7 @@
              
               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
               -->
-              <div *ngIf="educationSaved" class="alert alert-success mt-3">
+              <div *ngIf="educationUpdated" class="alert alert-success mt-3">
                 Education added successfully!
               </div>
             </form>
@@ -74,17 +74,17 @@
               <div class="row"> 
                 <div class="col-md-4">
                  
-                    <input  class="form-control" placeholder="Name" type="text" name="Name" [(ngModel)]="addWorkExperienceRequest.name">
+                    <input  class="form-control" placeholder="Name" type="text" name="Name" [(ngModel)]="workExperience.name">
                 
                 </div>
                 <div class="col-md-4">
                  
-                    <input  class="form-control" placeholder="Company Name" type="text" name="companyName" [(ngModel)]="addWorkExperienceRequest.companyName">
+                    <input  class="form-control" placeholder="Company Name" type="text" name="companyName" [(ngModel)]="workExperience.companyName">
                   
                 </div>
                 <div class="col-md-4">
                   
-                    <input  class="form-control" placeholder="Position Held" type="text" name="postionHeld" [(ngModel)]="addWorkExperienceRequest.postionHeld">
+                    <input  class="form-control" placeholder="Position Held" type="text" name="postionHeld" [(ngModel)]="workExperience.postionHeld">
                   
                 </div>
               </div>
@@ -93,17 +93,17 @@
             <div class="row"> 
                 <div class="col-md-4">
                   
-                    <input class="form-control" placeholder="Description" type="text" name="description" [(ngModel)]="addWorkExperienceRequest.description">
+                    <input class="form-control" placeholder="Description" type="text" name="description" [(ngModel)]="workExperience.description">
                   
                 </div>
                 <div class="col-md-4">
                   
-                    <input class="form-control" placeholder="Salary Amount" type="text" name="salary" [(ngModel)]="addWorkExperienceRequest.salary">
+                    <input class="form-control" placeholder="Salary Amount" type="text" name="salary" [(ngModel)]="workExperience.salary">
                   
                 </div>
                 <div class="col-md-4">
                  
-                    <input class="form-control" placeholder="Reason for termination" type="text" name="reasonTermination" [(ngModel)]="addWorkExperienceRequest.reasonTermination">
+                    <input class="form-control" placeholder="Reason for termination" type="text" name="reasonTermination" [(ngModel)]="workExperience.reasonTermination">
                 
                 </div>
                 </div>
@@ -112,14 +112,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
-                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="addWorkExperienceRequest.from">
+                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="workExperience.from">
                     <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
                     <mat-datepicker #fromPicker></mat-datepicker>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
-                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="addWorkExperienceRequest.to">
+                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="workExperience.to">
                     <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
                     <mat-datepicker #toPicker></mat-datepicker>
                   </mat-form-field>
@@ -131,7 +131,7 @@
               <button type="button" class="btn btn-sm btnsave" (click)="updateWorkExperience()">update Work Experience</button>
               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
                -->
-              <div *ngIf="workExperienceSaved" class="alert alert-success mt-3">
+              <div *ngIf="workExperienceUpdated" class="alert alert-success mt-3">
                 Work Experience added successfully!
               </div>
               <div class="clearfix"></div></form>
@@ -163,6 +163,10 @@
           <td>{{ education.fieldOfStudy }}</td>
           <td>{{ education.from }}</td>
           <td>{{ education.to }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="editEducation(education)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteEducation(education)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -187,6 +191,10 @@
           <td>{{ workExperience.postionHeld }}</td>
           <td>{{ workExperience.from }}</td>
           <td>{{ workExperience.to }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="editWorkExperience(workExperience)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteWorkExperience(workExperience)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>

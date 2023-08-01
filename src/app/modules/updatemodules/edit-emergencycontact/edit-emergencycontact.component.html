@@ -1,1 +1,113 @@
-<p>edit-emergencycontact works!</p>
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-3 pt-5 ">
+      <app-min-nav></app-min-nav>
+    </div>
+  
+  
+            <div class="col-md-8">
+              <div class="card mt-5 mb-5">
+                  <div class="card">
+                      <div class="card-header cardhead">
+                          <h4 class="card-title">Emergency Contacts</h4>
+                          <p class="card-category">Complete your emergencycontacts</p>
+                      </div>
+                      <div class="card-body">
+                          <form (ngSubmit)="updateEmergencyContact()">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-4">
+                          
+                            <input  class="form-control" placeholder="name" type="text" name="name" [(ngModel)]="emergencyContact.name">
+                          
+                        </div>
+                        <div class="col-md-4">
+                          
+                            <input  class="form-control" placeholder="Relationship" type="text" name="relationship" [(ngModel)]="emergencyContact.relationship">
+                          
+                        </div>
+                          <div class="col-md-4">
+                           
+                              <input  class="form-control" placeholder="Region" name="region" [(ngModel)]="emergencyContact.region "type="text"required>
+                            
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                      <div class="row">
+                          <div class="col-md-4">
+                             
+                                <input class="form-control" placeholder="Town" type="text" name="town" [(ngModel)]="emergencyContact.town">
+                              
+                            </div>
+                          <div class="col-md-4">
+                            
+                              <input class="form-control" placeholder="Subcity" type="text" name="subcity" [(ngModel)]="emergencyContact.subCity">
+                           
+                          </div>
+                          <div class="col-md-4">
+                            
+                              <input class="form-control" placeholder="kebele" type="text" name="kebele" [(ngModel)]="emergencyContact.kebele" >
+                            
+                          </div>
+                         </div>
+                        </div>
+                           
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-4">
+                             
+                                <input class="form-control" placeholder="House Number" type="text" name="houseNumber" [(ngModel)]="emergencyContact.houseNo">
+                             
+                            </div>
+                            
+                            <div class="col-md-4">
+                             
+                                
+                                <input class="form-control" placeholder="+251 XXX XXX XXX" name="phoneNumber" [(ngModel)]="emergencyContact.phoneNumber" required>
+                             
+                              <mat-error *ngIf="!emergencyContact.phoneNumber && emergencycontactForm.get('phoneNumber').touched">
+                                Phone Number is required
+                              </mat-error>
+                            </div>
+                   
+                 </div>
+                    </div>
+                   
+                      <div> <button type="button" class="btn btn-sm btnsave" (click)="updateEmergencyContact()">Add Emergency Contact</button>
+                      </div>
+                           <div *ngIf="emergencyContactUpdated" class="alert alert-success mt-3">
+                          emergencycontact added successfully!
+                         </div> <div class="clearfix"></div>
+                  </form>
+              </div>
+          </div>
+          <h6>Emergency Contact List</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Relationship</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the emergencycontacts array and display each emergency contact record -->
+        <tr *ngFor="let contact of emergencyContacts">
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.phoneNumber }}</td>
+          <td>{{ contact.relationship }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="editEmergencyContact(emergencyContact)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteEmergencyContact(emergencyContact)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+     </div></div>
+  </div>
+  </div>
+  
+  

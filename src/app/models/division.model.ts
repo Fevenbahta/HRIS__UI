@@ -1,4 +1,5 @@
 export interface Division{
+  pId:number,
   departmentId: String;
   divisionId:String;
    description:string;

@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeePositionService } from 'app/service/employee-position';
 import { Branch, Division, EmployeePosition, Position, Step } from 'app/models/job-description.model';
+import { DivisionService } from 'app/service/division.service';
+import { StepService } from 'app/service/step.service';
+import { PositionService } from 'app/service/position.service';
+import { EmployeeIdService } from 'app/service/employee-id.service';
+import { BranchService } from 'app/service/branch.service';
 
 @Component({
   selector: 'app-edit-job-description',
@@ -22,7 +27,7 @@ export class EditJobDescriptionComponent implements OnInit {
  
   steps:Step[]= [];
   selectedStep: string='';
-  employeePositionSaved: boolean = false;
+
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
     { label: '  List Employee ', route: '/employee-list' }
@@ -30,19 +35,72 @@ export class EditJobDescriptionComponent implements OnInit {
   constructor(
     private employeePositionService: EmployeePositionService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private divisionservice: DivisionService,
+    private stepservice: StepService,
+    private positionservice:PositionService ,
+    private employeeIdService:EmployeeIdService,
+    private branchservice:BranchService
+
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.employeePositionId = params['id'];
+      this.employeePositionId = params['id'].toString();
+      // this.getemployeePositionById()
+
+
       this.employeePositionService.getEmployeePosition(this.employeePositionId).subscribe((employeePosition) => {
         this.employeePosition = employeePosition;
+
+        this.selectedDivision = employeePosition.divisionId;
+        this.selectedPosition = employeePosition.position;
+        this.selectedBranch = employeePosition.branchId;
+        this.selectedStep = employeePosition.stepId;
+
+        this.employeePositionService.getAllEmployeePosition().subscribe((employeePositions) => {
+          this.employeePositions = employeePositions;
+        });
+      
+        // Fetch the available divisions and populate the divisions array
+        this.divisionservice.getAllDivisions().subscribe((divisions) => {
+          this.divisions = divisions;
+        });
+      
+        // Fetch the available positions and populate the positions array
+        this.positionservice.getAllPosition().subscribe((positions) => {
+          this.positions = positions;
+        });
+      
+        // Fetch the available branches and populate the branches array
+        this.branchservice.getAllBranch().subscribe((branches) => {
+          this.branches = branches;
+        });
+      
+        // Fetch the available steps and populate the steps array
+        this.stepservice.getAllStep().subscribe((steps) => {
+          this.steps = steps;
+        });
       });
     });
   }
-
+  getemployeePositionById(): void {
+    this.employeePositionService.getEmployeePosition(this.employeePositionId).subscribe(
+      (employeePosition) => {
+        this.employeePosition = employeePosition;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
   updateEmployeePosition(): void {
+    this.employeePositionUpdated=true;
+
+    // this.employeePosition.divisionId = this.selectedDivision;
+    // this.employeePosition.position = this.selectedPosition;
+    // this.employeePosition.stepId = this.selectedStep;
+    // this.employeePosition.branchId = this.selectedBranch;
     this.employeePositionService.updateEmployeePosition(this.employeePosition, this.employeePositionId).subscribe({
       next: () => {
         this.employeePositionUpdated = true;
@@ -54,11 +112,11 @@ export class EditJobDescriptionComponent implements OnInit {
         console.log(response);
       }
     });
-    this.employeePositionSaved=true
+ 
   }
   editEmployeePosition(EmployeePosition: EmployeePosition): void {
     // Here, we will navigate to the edit page for the selected EmployeePosition.
-    this.router.navigate(["/edit-EmployeePosition", EmployeePosition.id]);
+    this.router.navigate(["/edit-employeePosition", EmployeePosition.id]);
   }
   deleteEmployeePosition(EmployeePosition: EmployeePosition): void {
     // Here, we can show a confirmation dialog/modal to confirm the deletion.

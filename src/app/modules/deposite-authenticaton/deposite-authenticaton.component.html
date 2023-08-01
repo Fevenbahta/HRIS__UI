@@ -71,6 +71,9 @@
         <td>{{ auth.bankBranch }}</td>
         <td>{{ auth.bankAccount }}</td>
         <td>{{ auth.tinNumber }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editDepositeAuthentication(auth)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteDepositeAuthentication(auth)">Delete</button></td>
       </tr>
     </tbody>
   </table>

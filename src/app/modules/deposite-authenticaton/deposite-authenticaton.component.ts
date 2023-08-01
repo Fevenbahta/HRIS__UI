@@ -15,7 +15,8 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
   export class DepositeAuthenticationComponent implements OnInit {
     depositeauthenticationSaved: boolean = false;
     depositeauthentications: DepositeAuthentication[] = []; 
-  
+    depositeAuthentication: DepositeAuthentication;
+
     addDepositeAuthenticationRequest:DepositeAuthentication={
       pId:0,
       id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -31,6 +32,7 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
      tinNumber: '',
   
   }
+  
   constructor(
     private formBuilder: FormBuilder,
   
@@ -49,6 +51,7 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
         console.log(response); 
       }, 
   });
+
   }
   depositeauthenticationForm: FormGroup = this.formBuilder.group({
     phoneNumber: ['', Validators.required],
@@ -89,6 +92,35 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
     console.log(response)
   }
   })}
+editDepositeAuthentication(depositeAuthentication: DepositeAuthentication): void {
+  // Here, we will navigate to the edit page for the selected DepositeAuthentication.
+ 
+  this.router.navigate(["/edit-depositeAuthentication", depositeAuthentication.id]);
+}
+
+  deleteDepositeAuthentication(DepositeAuthentication: DepositeAuthentication): void {
+    // Here, we can show a confirmation dialog/modal to confirm the deletion.
+    const confirmDelete = confirm('Are you sure you want to delete this DepositeAuthentication?');
+  
+    if (confirmDelete) {
+      // If the user confirms the deletion, we can call the service to delete the DepositeAuthentication.
+      this.depositeauthenticationservice.deleteDepositeAuthentication(this.depositeAuthentication.id).subscribe(
+        () => {
+          // DepositeAuthentication deleted successfully, we can update the list of DepositeAuthentications after deletion.
+          // Here, we are simply filtering out the deleted DepositeAuthentication from the DepositeAuthentications array.
+          this.depositeauthentications = this.depositeauthentications.filter((t) => t.id !== DepositeAuthentication.id);
+  
+          // You can also show a success message to the user.
+          alert('DepositeAuthentication deleted successfully!');
+        },
+        (error) => {
+          console.error(error);
+          // If there was an error during deletion, you can show an error message.
+          alert('Failed to delete the DepositeAuthentication. Please try again later.');
+        }
+      );
+    }
+  }
 }
   
   

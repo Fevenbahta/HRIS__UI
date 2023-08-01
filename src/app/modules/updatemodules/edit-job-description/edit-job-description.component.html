@@ -87,7 +87,7 @@
             </div>
                           <button  mat-raised-button type="submit" class="btn btn-sm btnsave">update</button>
                           <div class="clearfix"></div>
-                          <div *ngIf="employeePositionSaved" class="alert alert-success mt-3">
+                          <div *ngIf="employeePositionUpdated" class="alert alert-success mt-3">
                            Job Description added successfully!
                           </div>
                       </form>
@@ -121,6 +121,10 @@
           <td>{{ employeePosition.status }}</td>
           <td>{{ employeePosition.startDate }}</td>
           <td>{{ employeePosition.endDate }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="editEmployeePosition(employeePosition)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteEmployeePosition(employeePosition)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>

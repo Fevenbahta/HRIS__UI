@@ -13,7 +13,7 @@ export class EditSpouseComponent implements OnInit {
   spouseId: string;
   spouse: Spouse;
   spouses:Spouse[]=[]
- spouseSaved: boolean = false;
+ spouseUpdated: boolean = false;
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
     { label: '  List Employee ', route: '/employee-list' }
@@ -28,7 +28,18 @@ export class EditSpouseComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.spouseId = params['id'],toString();
       this.getSpouseById();
+      
     });
+
+    this.spouseService.getAllSpouse() 
+    .subscribe({ 
+      next: (spouses) => { 
+        this.spouses = spouses; 
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, })
+    
   }
 
   getSpouseById(): void {
@@ -47,7 +58,7 @@ export class EditSpouseComponent implements OnInit {
       () => {
         // Spouse updated successfully, you can redirect to the spouse list or show a success message.
         // this.router.navigate(['/spouse']);
-        this.spouseSaved=true;
+        this.spouseUpdated=true;
       },
       (error) => {
         console.error(error);
@@ -56,7 +67,7 @@ export class EditSpouseComponent implements OnInit {
   }
   editSpouse(Spouse: Spouse): void {
     // Here, we will navigate to the edit page for the selected Spouse.
-    this.router.navigate(['/edit-Spouse', Spouse.id]);
+    this.router.navigate(['/edit-spouse', Spouse.id]);
   }
   deleteSpouse(Spouse: Spouse): void {
     // Here, we can show a confirmation dialog/modal to confirm the deletion.

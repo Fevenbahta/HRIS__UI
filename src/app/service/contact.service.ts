@@ -33,7 +33,7 @@ export class ContactService {
     return this.http.put<Contact>(this.apiUrl + 'api/Address/'+Id, contactDetails,httpOptions);
   }
 
-  deleteContact(Id: number): Observable<string> {
+  deleteContact(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.delete<string>(this.apiUrl + 'api/Address/' + Id, httpOptions);
   }

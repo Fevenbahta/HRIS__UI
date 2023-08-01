@@ -15,6 +15,7 @@ export class EmergencycontactComponent implements OnInit {
   emergencycontactSaved: boolean = false;
   emergencycontacts: EmergencyContact[] = []; 
 emergencyContact:EmergencyContact;
+
   addEmergencyContactRequest:EmergencyContact={
     pId:0,
     id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -94,9 +95,9 @@ addEmergencyContact() {
 }
 })}
 
-editEmergencyContact(EmergencyContact: EmergencyContact): void {
+editEmergencyContact(emergencyContact: EmergencyContact): void {
   // Here, we will navigate to the edit page for the selected EmergencyContact.
-  this.router.navigate(["/edit-EmergencyContact", EmergencyContact.id]);
+  this.router.navigate(["/edit-emergencyContact", emergencyContact.id]);
 }
 deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
   // Here, we can show a confirmation dialog/modal to confirm the deletion.

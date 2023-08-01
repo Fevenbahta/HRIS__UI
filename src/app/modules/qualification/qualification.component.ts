@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Division } from 'app/models/division.model';
-import { EducationLevel } from 'app/models/job-description.model';
+import { Division, EducationLevel } from 'app/models/job-description.model';
 import { Education, WorkExperience,} from 'app/models/work-experience.model';
 import { DivisionService } from 'app/service/division.service';
 import { EducationService } from 'app/service/education.service';
@@ -79,14 +78,7 @@ export class QualificationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.divisionservice.getAllDivisions().subscribe({
-      next: (divisions) => {
-        this.divisions = divisions;
-      },
-      error(response) {
-        console.log(response)
-      }
-    });
+
     this.educationlevelservice.getAllEducationLevels()
 .subscribe({
   next: (educationlevels) => {
@@ -98,8 +90,8 @@ export class QualificationComponent implements OnInit {
 });
 this.educationservice.getAllEducation() 
   .subscribe({ 
-    next: (educations) => { 
-      this.educations = educations; 
+    next: (education) => { 
+      this.educations = education; 
           }, 
     error(response) { 
       console.log(response); 
@@ -107,8 +99,8 @@ this.educationservice.getAllEducation()
 });
 this.workExperienceService.getAllWorkExperience() 
   .subscribe({ 
-    next: (workExperiences) => { 
-      this.workExperiences = workExperiences; 
+    next: (workExperience) => { 
+      this.workExperiences = workExperience; 
           }, 
     error(response) { 
       console.log(response); 
@@ -188,7 +180,7 @@ this.workExperienceService.getAllWorkExperience()
 
   editEducation(Education: Education): void {
     // Here, we will navigate to the edit page for the selected Education.
-    this.router.navigate(['/edit-Education', Education.id]);
+    this.router.navigate(['/edit-education', Education.id]);
   }
   deleteEducation(Education: Education): void {
     // Here, we can show a confirmation dialog/modal to confirm the deletion.
@@ -216,7 +208,7 @@ this.workExperienceService.getAllWorkExperience()
 
   editWorkExperience(WorkExperience: WorkExperience): void {
     // Here, we will navigate to the edit page for the selected WorkExperience.
-    this.router.navigate(['/edit-WorkExperience', WorkExperience.id]);
+    this.router.navigate(['/edit-workExperience', WorkExperience.id]);
   }
   deleteWorkExperience(WorkExperience: WorkExperience): void {
     // Here, we can show a confirmation dialog/modal to confirm the deletion.

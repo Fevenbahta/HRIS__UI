@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmergencyContact } from 'app/models/emergency-contact.model';
 import { EmergencyContactService } from 'app/service/emergency-contact.service';
@@ -13,8 +14,12 @@ export class EditEmergencyContactComponent implements OnInit {
   emergencyContact: EmergencyContact;
   emergencyContactUpdated: boolean = false;
   emergencyContacts:EmergencyContact[]=[];
+  
+
+
 
   constructor(
+    private formBuilder: FormBuilder,
     private emergencyContactService: EmergencyContactService,
     private route: ActivatedRoute,
     private router: Router
@@ -27,9 +32,29 @@ export class EditEmergencyContactComponent implements OnInit {
         this.emergencyContact = emergencyContact;
       });
     });
-  }
 
+    this.emergencyContactService.getAllEmergencyContact() 
+    .subscribe({ 
+      next: (emergencycontacts) => { 
+        this.emergencyContacts = emergencycontacts; 
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, 
+  });
+  }
+  getEmergencyContactById(): void {
+    this.emergencyContactService.getEmergencyContact(this.emergencyContactId).subscribe(
+      (emergencyContact) => {
+        this.emergencyContact = emergencyContact;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
   updateEmergencyContact(): void {
+    this.emergencyContactUpdated=true;
     this.emergencyContactService.updateEmergencyContact(this.emergencyContact, this.emergencyContactId).subscribe({
       next: () => {
         this.emergencyContactUpdated = true;
@@ -42,9 +67,17 @@ export class EditEmergencyContactComponent implements OnInit {
       }
     });
   }
+  emergencycontactForm: FormGroup = this.formBuilder.group({
+    phoneNumber: ['', Validators.required],
+  });
+  
+  buttons = [
+    { label: ' Add Employee ', route: '/employee-registration' },
+    { label: '  List Employee ', route: '/employee-list' }
+  ];
   editEmergencyContact(EmergencyContact: EmergencyContact): void {
     // Here, we will navigate to the edit page for the selected EmergencyContact.
-    this.router.navigate(["/edit-EmergencyContact", EmergencyContact.id]);
+    this.router.navigate(["/edit-emergencyContact", EmergencyContact.id]);
   }
   deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
     // Here, we can show a confirmation dialog/modal to confirm the deletion.

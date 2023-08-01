@@ -1,6 +1,6 @@
 export interface DepositeAuthentication{
   pId:number;
-    id?: string;
+    id: string;
   createdBy: string,
   createdDate: string,
   updatedDate: string,

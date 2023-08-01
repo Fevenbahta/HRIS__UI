@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Division } from 'app/models/division.model';
+
 
 import { Employee } from 'app/models/employee.model';
-import { Branch, EducationLevel, EmployeePosition, Position, Step } from 'app/models/job-description.model';
+import { Branch, Division, EducationLevel, EmployeePosition, Position, Step } from 'app/models/job-description.model';
 import { DivisionService } from 'app/service/division.service';
 import { EducationLevelService } from 'app/service/educationlevel.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
@@ -165,9 +165,9 @@ addEmployeePosition(){
     const position = this.positions.find((position) => position.positionId === positionId);
     return position ? position.name : '';
   }
-  editEmployeePosition(EmployeePosition: EmployeePosition): void {
+  editEmployeePosition(employeePosition: EmployeePosition): void {
     // Here, we will navigate to the edit page for the selected EmployeePosition.
-    this.router.navigate(["/edit-EmployeePosition", EmployeePosition.id]);
+    this.router.navigate(["/edit-employeePosition", employeePosition.id]);
   }
   deleteEmployeePosition(EmployeePosition: EmployeePosition): void {
     // Here, we can show a confirmation dialog/modal to confirm the deletion.

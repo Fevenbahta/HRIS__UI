@@ -7,7 +7,7 @@ import { EmployeeService } from 'app/service/employee.service';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']
+  styleUrls: ['./employee-list.component.scss']
 })
 export class EmployeeListComponent {
   employees:Employee[]= [];
@@ -44,11 +44,10 @@ deleteEmployee(id:string){
   })
 
 }
-updateEmployee(id: string) {
-  // Navigate to the employee form with the data of the employee to be updated
-  this.router.navigate(['/edit-employee', id]);
+editEmployee(employee: Employee): void {
+  // Here, we will navigate to the edit page for the selected EmergencyContact.
+  this.router.navigate(["/edit-employee", employee.empId]);
 }
-
  
 getFirstSupervisorName(firstSupervisor: string): string { 
   const employee = this.employees.find((g) => g.empId === firstSupervisor); 

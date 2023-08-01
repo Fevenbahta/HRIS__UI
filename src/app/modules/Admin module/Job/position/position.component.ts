@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Division } from 'app/models/division.model';
-import { Position } from 'app/models/job-description.model';
 
+import { Division, Position } from 'app/models/job-description.model';
 import { DivisionService } from 'app/service/division.service';
+
 
 import { PositionService } from 'app/service/position.service';
 

@@ -108,11 +108,11 @@ export class WorkexperienceComponent {
     
       if (confirmDelete) {
         // If the user confirms the deletion, we can call the service to delete the WorkExperience.
-        this.workExperienceService.deleteWorkExperience(this.workExperience.id).subscribe(
+        this.workExperienceService.deleteWorkExperience(WorkExperience.id).subscribe(
           () => {
             // WorkExperience deleted successfully, we can update the list of WorkExperiences after deletion.
             // Here, we are simply filtering out the deleted WorkExperience from the WorkExperiences array.
-            this.workExperiences = this.workExperiences.filter((t) => t.id !== this.workExperience.id);
+            this.workExperiences = this.workExperiences.filter((t) => t.id !== WorkExperience.id);
     
             // You can also show a success message to the user.
             alert('WorkExperience deleted successfully!');

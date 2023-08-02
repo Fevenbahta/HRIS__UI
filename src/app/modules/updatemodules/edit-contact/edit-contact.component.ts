@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EditContactComponent implements OnInit {
   contact:Contact;
   contacts:Contact[]=[]
-contactId: string;
+  contactId: string;
   addContactRequest: Contact = {
     region: '',
     town: '',
@@ -70,9 +70,12 @@ contactId: string;
   });
   updateContact(): void {
     if (this.addContactRequest.id) {
+      
       this.contactService.updateContact(this.addContactRequest,this.addContactRequest.id ).subscribe({
         next: (contact) => {
-          this.router.navigate(['contacts']);
+         
+          this.router.navigate(['/employee-registration/contact']); 
+          
         },
         error: (response) => {
           console.log(response);
@@ -80,16 +83,7 @@ contactId: string;
       });
     }
   }
-  // getContactById(): void {
-  //   this.contactService.getContact(this.contactId).subscribe(
-  //     (contact) => {
-  //       this.contact = contact;
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }
+
   editContact(Contact: Contact): void {
     // Here, we will navigate to the edit page for the selected Contact.
     this.router.navigate(["/edit-contact", this.contact.id]);

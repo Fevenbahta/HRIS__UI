@@ -54,7 +54,7 @@ export class EditSpouseComponent implements OnInit {
   }
 
   updateSpouse(): void {
-    this.spouseService.updateSpouse(this.spouse, this.spouseId, ).subscribe(
+    this.spouseService.updateSpouse(this.spouse, this.spouseId ).subscribe(
       () => {
         // Spouse updated successfully, you can redirect to the spouse list or show a success message.
         // this.router.navigate(['/spouse']);

@@ -105,7 +105,7 @@ deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
 
   if (confirmDelete) {
     // If the user confirms the deletion, we can call the service to delete the EmergencyContact.
-    this.emergencycontactservice.deleteEmergencyContact(this.emergencyContact.id).subscribe(
+    this.emergencycontactservice.deleteEmergencyContact(EmergencyContact.id).subscribe(
       () => {
         // EmergencyContact deleted successfully, we can update the list of EmergencyContacts after deletion.
         // Here, we are simply filtering out the deleted EmergencyContact from the EmergencyContacts array.

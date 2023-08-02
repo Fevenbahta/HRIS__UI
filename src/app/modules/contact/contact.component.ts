@@ -20,12 +20,12 @@ export class ContactComponent {
   contact:Contact;
   addContactRequest:Contact={
     pId:0,
-    id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    id:  "",
    createdBy: '', 
      createdDate: "2023-07-20T13:56:00.062Z", 
      updatedDate: "2023-07-20T13:56:00.062Z", 
      updatedBy: '', 
-     empId: "3fa85d64-5717-4562-b3fc-2c963f66afa6",
+     empId: "",
     region: '', 
      town: '', 
      phoneNumber: '', 
@@ -94,7 +94,7 @@ deleteContact(Contact: Contact): void {
 
   if (confirmDelete) {
     // If the user confirms the deletion, we can call the service to delete the Contact.
-    this.contactservice.deleteContact(this.contact.id).subscribe(
+    this.contactservice.deleteContact(Contact.id).subscribe(
       () => {
         // Contact deleted successfully, we can update the list of Contact after deletion.
         // Here, we are simply filtering out the deleted Contact from the Contact array.

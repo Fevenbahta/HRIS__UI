@@ -24,7 +24,7 @@ export interface Education{
   updatedDate: string,
   updatedBy: string,
   status:number,
-  empId: string,
+  empId?: string,
   from: string,
   to: string,
   nameOfInstitute: string,

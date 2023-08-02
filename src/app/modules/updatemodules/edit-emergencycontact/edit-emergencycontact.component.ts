@@ -56,16 +56,14 @@ export class EditEmergencyContactComponent implements OnInit {
   updateEmergencyContact(): void {
     this.emergencyContactUpdated=true;
     this.emergencyContactService.updateEmergencyContact(this.emergencyContact, this.emergencyContactId).subscribe({
-      next: () => {
-        this.emergencyContactUpdated = true;
-        setTimeout(() => {
-          this.emergencyContactUpdated = false;
-        }, 2000);
+      next: (emergencyContact) => {
+        this.router.navigate(['/employee-registration/emergency-contact']); 
       },
       error: (response) => {
         console.log(response);
       }
     });
+
   }
   emergencycontactForm: FormGroup = this.formBuilder.group({
     phoneNumber: ['', Validators.required],
@@ -85,7 +83,7 @@ export class EditEmergencyContactComponent implements OnInit {
   
     if (confirmDelete) {
       // If the user confirms the deletion, we can call the service to delete the EmergencyContact.
-      this.emergencyContactService.deleteEmergencyContact(this.emergencyContact.id).subscribe(
+      this.emergencyContactService.deleteEmergencyContact(EmergencyContact.id).subscribe(
         () => {
           // EmergencyContact deleted successfully, we can update the list of EmergencyContacts after deletion.
           // Here, we are simply filtering out the deleted EmergencyContact from the EmergencyContacts array.

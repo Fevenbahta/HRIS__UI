@@ -37,7 +37,7 @@ export class EducationComponent {
     updatedDate: "2023-07-26T06:13:52.512Z",
     updatedBy: "",
     status: 0,
-    empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
+    empId: undefined,
     from: '',
     to: "",
     nameOfInstitute: '',
@@ -122,11 +122,11 @@ this.educationservice.getAllEducation()
   
     if (confirmDelete) {
       // If the user confirms the deletion, we can call the service to delete the Education.
-      this.educationservice.deleteEducation(this.education.id).subscribe(
+      this.educationservice.deleteEducation(Education.id).subscribe(
         () => {
           // Education deleted successfully, we can update the list of Educations after deletion.
           // Here, we are simply filtering out the deleted Education from the Educations array.
-          this.educations = this.educations.filter((t) => t.id !== this.education.id);
+          this.educations = this.educations.filter((t) => t.id !== Education.id);
   
           // You can also show a success message to the user.
           alert('Education deleted successfully!');

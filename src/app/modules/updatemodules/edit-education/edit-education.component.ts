@@ -68,12 +68,10 @@ export class EditEducationComponent {
 
   updateEducation(): void {
     this.educationUpdated = true;
-
-    // Assuming the EducationService has a method to update education
     this.education.eductionName = this.selectedEducationLevel;
     this.educationService.updateEducation(this.education, this.educationId).subscribe({
       next: () => {
-
+        this.router.navigate(['/employee-registration/education']); 
       },
       error: (response) => {
         console.log(response);
@@ -94,11 +92,11 @@ export class EditEducationComponent {
 
     if (confirmDelete) {
       // If the user confirms the deletion, we can call the service to delete the Education.
-      this.educationService.deleteEducation(this.education.id).subscribe(
+      this.educationService.deleteEducation(Education.id).subscribe(
         () => {
           // Education deleted successfully, we can update the list of Educations after deletion.
           // Here, we are simply filtering out the deleted Education from the Educations array.
-          this.educations = this.educations.filter((t) => t.id !== this.education.id);
+          this.educations = this.educations.filter((t) => t.id !== Education.id);
 
           // You can also show a success message to the user.
           alert('Education deleted successfully!');

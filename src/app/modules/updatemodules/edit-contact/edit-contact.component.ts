@@ -3,6 +3,8 @@ import { ContactService } from 'app/service/contact.service';
 import { Contact } from 'app/models/contact.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-edit-contact',
@@ -36,7 +38,8 @@ export class EditContactComponent implements OnInit {
     private contactService: ContactService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -89,17 +92,19 @@ export class EditContactComponent implements OnInit {
     this.router.navigate(["/edit-contact", this.contact.id]);
   }
   deleteContact(Contact: Contact): void {
-    // Here, we can show a confirmation dialog/modal to confirm the deletion.
-    const confirmDelete = confirm('Are you sure you want to delete this Contact?');
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
   
-    if (confirmDelete) {
+  
+    if (result) {
       // If the user confirms the deletion, we can call the service to delete the Contact.
-      this.contactService.deleteContact(this.contact.id).subscribe(
+      this.contactService.deleteContact(Contact.id).subscribe(
         () => {
           // Contact deleted successfully, we can update the list of Contact after deletion.
           // Here, we are simply filtering out the deleted Contact from the Contact array.
-          this.contacts = this.contacts.filter((t) => t.id !== this.contact.id);
-  
+          this.contacts = this.contacts.filter((t) => t.id !== Contact.id);
+          this.router.navigate(['employee-registration/contact']);
           // You can also show a success message to the user.
           alert('Contact deleted successfully!');
         },
@@ -110,4 +115,5 @@ export class EditContactComponent implements OnInit {
         }
       );
     }
-  }}
+  })}
+}

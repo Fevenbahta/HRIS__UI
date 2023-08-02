@@ -7,6 +7,8 @@ import { StepService } from 'app/service/step.service';
 import { PositionService } from 'app/service/position.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { BranchService } from 'app/service/branch.service';
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-job-description',
@@ -56,7 +58,8 @@ updatedBy: '',
     private stepservice: StepService,
     private positionservice:PositionService ,
     private employeeIdService:EmployeeIdService,
-    private branchservice:BranchService
+    private branchservice:BranchService,
+    private dialog: MatDialog
 
   ) {}
 
@@ -133,10 +136,10 @@ updatedBy: '',
     this.router.navigate(["/edit-employeePosition", EmployeePosition.id]);
   }
   deleteEmployeePosition(EmployeePosition: EmployeePosition): void {
-    // Here, we can show a confirmation dialog/modal to confirm the deletion.
-    const confirmDelete = confirm('Are you sure you want to delete this EmployeePosition?');
-  
-    if (confirmDelete) {
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+    if (result) {
       // If the user confirms the deletion, we can call the service to delete the EmployeePosition.
       this.employeePositionService.deleteEmployeePosition(EmployeePosition.id).subscribe(
         () => {
@@ -144,7 +147,7 @@ updatedBy: '',
           // Here, we are simply filtering out the deleted EmployeePosition from the EmployeePositions array.
           this.employeePositions = this.employeePositions.filter((t) => t.id !== EmployeePosition.id);
   
-          // You can also show a success message to the user.
+          this.router.navigate(['employee-registration/job-description']);
           alert('EmployeePosition deleted successfully!');
         },
         (error) => {
@@ -155,6 +158,9 @@ updatedBy: '',
       );
     }
   }
+  
+)}
+
   getDivisionName(divisionId: string): string {
     const division = this.divisions.find((division) => division.divisionId === divisionId);
     return division ? division.description : '';

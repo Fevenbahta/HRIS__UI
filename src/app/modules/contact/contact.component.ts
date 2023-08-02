@@ -6,6 +6,8 @@ import { Contact } from 'app/models/contact.model';
 import { ContactService } from 'app/service/contact.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { PidService } from 'app/service/pid.service';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -44,6 +46,7 @@ constructor(
   private pIdservice: PidService, 
   private contactservice: ContactService,
   private employeeIdService: EmployeeIdService,
+  private dialog:MatDialog,
   private router:Router){}
 ngOnInit():void {
   this.contactservice.getAllContacts() 
@@ -89,17 +92,19 @@ editContact(contact: Contact): void {
 
 
 deleteContact(Contact: Contact): void {
-  // Here, we can show a confirmation dialog/modal to confirm the deletion.
-  const confirmDelete = confirm('Are you sure you want to delete this Contact?');
+  const dialogRef = this.dialog.open(DeleteConfirmationComponent);
 
-  if (confirmDelete) {
+  dialogRef.afterClosed().subscribe((result) => {
+
+
+  if (result) {
     // If the user confirms the deletion, we can call the service to delete the Contact.
     this.contactservice.deleteContact(Contact.id).subscribe(
       () => {
         // Contact deleted successfully, we can update the list of Contact after deletion.
         // Here, we are simply filtering out the deleted Contact from the Contact array.
-        this.contacts = this.contacts.filter((t) => t.id !== this.contact.id);
-
+        this.contacts = this.contacts.filter((t) => t.id !== Contact.id);
+        this.router.navigate(['employee-registration/contact']);
         // You can also show a success message to the user.
         alert('Contact deleted successfully!');
       },
@@ -110,6 +115,6 @@ deleteContact(Contact: Contact): void {
       }
     );
   }
-}
+})}
 }
 

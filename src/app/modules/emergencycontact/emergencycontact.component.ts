@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EmergencyContact } from 'app/models/emergency-contact.model';
 import { EmergencyContactService } from 'app/service/emergency-contact.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { PidService } from 'app/service/pid.service';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-emergencycontact',
@@ -18,7 +20,7 @@ emergencyContact:EmergencyContact;
 
   addEmergencyContactRequest:EmergencyContact={
     pId:0,
-    id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    id:  "",
    createdBy: '', 
      createdDate: "2023-07-20T13:56:00.062Z", 
      updatedDate: "2023-07-20T13:56:00.062Z", 
@@ -39,6 +41,7 @@ constructor(
   private formBuilder: FormBuilder,
   private emergencycontactservice: EmergencyContactService,
   private employeeIdService: EmployeeIdService,
+  private dialog: MatDialog,
   private router:Router){}
 ngOnInit():void {
   this.emergencycontactservice.getAllEmergencyContact() 
@@ -100,10 +103,10 @@ editEmergencyContact(emergencyContact: EmergencyContact): void {
   this.router.navigate(["/edit-emergencyContact", emergencyContact.id]);
 }
 deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
-  // Here, we can show a confirmation dialog/modal to confirm the deletion.
-  const confirmDelete = confirm('Are you sure you want to delete this EmergencyContact?');
+   const dialogRef = this.dialog.open(DeleteConfirmationComponent);
 
-  if (confirmDelete) {
+  dialogRef.afterClosed().subscribe((result) => {
+  if (result) {
     // If the user confirms the deletion, we can call the service to delete the EmergencyContact.
     this.emergencycontactservice.deleteEmergencyContact(EmergencyContact.id).subscribe(
       () => {
@@ -111,7 +114,7 @@ deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
         // Here, we are simply filtering out the deleted EmergencyContact from the EmergencyContacts array.
         this.emergencycontacts = this.emergencycontacts.filter((t) => t.id !== EmergencyContact.id);
 
-        // You can also show a success message to the user.
+        this.router.navigate(['employee-registration/emergency-contact']);
         alert('EmergencyContact deleted successfully!');
       },
       (error) => {
@@ -122,4 +125,4 @@ deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
     );
   }
 }
-}
+)}}

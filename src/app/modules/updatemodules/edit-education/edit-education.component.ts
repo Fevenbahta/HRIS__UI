@@ -76,7 +76,6 @@ export class EditEducationComponent {
 
   }
 
-
   updateEducation(): void { console.log(this.education)
     this.educationUpdated = true;
     this.education.eductionName = this.selectedEducationLevel;

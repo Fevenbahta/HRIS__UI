@@ -59,6 +59,8 @@ import { WorkexperienceComponent } from 'app/modules/workexperience/workexperien
 import { EducationComponent } from 'app/modules/education/education.component';
 import { EditWorkexperienceComponent } from 'app/modules/updatemodules/edit-workexperience/edit-workexperience.component';
 import { EditEducationComponent } from 'app/modules/updatemodules/edit-education/edit-education.component';
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -98,8 +100,10 @@ WorkexperienceComponent,
     EducationComponent,
     EditWorkexperienceComponent,
     EditEducationComponent,
+    DeleteConfirmationComponent
 
   ],
+
   imports: [
     CommonModule,
     RouterModule,
@@ -126,6 +130,7 @@ WorkexperienceComponent,
  MatPaginatorModule,
  MatTableModule,
  SharedModule,
+ MatDialogModule
 
   ],
 
@@ -133,5 +138,6 @@ providers: [
 
   EmployeeService
 ],
+
 })
 export class DefaultModule { }

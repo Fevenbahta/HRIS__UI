@@ -13,6 +13,8 @@ export class EditDepositeAuthenticationComponent implements OnInit {
   depositeAuthentication: DepositeAuthentication;
   depositeAuthenticationUpdated: boolean = false;
   depositeAuthentications:DepositeAuthentication[]=[];
+
+  
   constructor(
     private depositeAuthenticationService: DepositeAuthenticationService,
     private route: ActivatedRoute,
@@ -53,6 +55,7 @@ export class EditDepositeAuthenticationComponent implements OnInit {
     this.depositeAuthenticationService.updateDepositeAuthentication(this.depositeAuthentication, this.depositeAuthenticationId).subscribe({
       next: () => {
         this.depositeAuthenticationUpdated = true;
+        this.router.navigate(['/employee-registration/deposite-authentication']); 
         setTimeout(() => {
           this.depositeAuthenticationUpdated = false;
         }, 2000);
@@ -61,6 +64,7 @@ export class EditDepositeAuthenticationComponent implements OnInit {
         console.log(response);
       }
     });
+
   }
   editDepositeAuthentication(DepositeAuthentication: DepositeAuthentication): void {
     // Here, we will navigate to the edit page for the selected DepositeAuthentication.
@@ -72,12 +76,12 @@ export class EditDepositeAuthenticationComponent implements OnInit {
   
     if (confirmDelete) {
       // If the user confirms the deletion, we can call the service to delete the DepositeAuthentication.
-      this.depositeAuthenticationService.deleteDepositeAuthentication(this.depositeAuthentication.id).subscribe(
+      this.depositeAuthenticationService.deleteDepositeAuthentication(DepositeAuthentication.id).subscribe(
         () => {
           // DepositeAuthentication deleted successfully, we can update the list of DepositeAuthentications after deletion.
           // Here, we are simply filtering out the deleted DepositeAuthentication from the DepositeAuthentications array.
           this.depositeAuthentications = this.depositeAuthentications.filter((t) => t.id !== DepositeAuthentication.id);
-  
+          this.router.navigate(['/employee-registration/deposite-authentication']); 
           // You can also show a success message to the user.
           alert('DepositeAuthentication deleted successfully!');
         },

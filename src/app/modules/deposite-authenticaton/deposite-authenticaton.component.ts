@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { DepositeAuthentication } from 'app/models/deposite-authentication.model';
 import { DepositeAuthenticationService } from 'app/service/deposite-authentcation.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 @Component({
   selector: 'app-deposite-authenticaton',
   templateUrl: './deposite-authenticaton.component.html',
@@ -38,7 +39,8 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
   
     private depositeauthenticationservice: DepositeAuthenticationService,
     private employeeIdService: EmployeeIdService,
-    private router:Router){}
+    private router:Router,
+    private dialog: MatDialog ){}
 
 
   ngOnInit():void {
@@ -98,29 +100,35 @@ editDepositeAuthentication(depositeAuthentication: DepositeAuthentication): void
   this.router.navigate(["/edit-depositeAuthentication", depositeAuthentication.id]);
 }
 
-  deleteDepositeAuthentication(DepositeAuthentication: DepositeAuthentication): void {
-    // Here, we can show a confirmation dialog/modal to confirm the deletion.
-    const confirmDelete = confirm('Are you sure you want to delete this DepositeAuthentication?');
-  
-    if (confirmDelete) {
-      // If the user confirms the deletion, we can call the service to delete the DepositeAuthentication.
-      this.depositeauthenticationservice.deleteDepositeAuthentication(this.depositeAuthentication.id).subscribe(
+deleteDepositeAuthentication(depositeAuthentication: DepositeAuthentication): void {
+  const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+    width: '300px', // Set the desired width of the dialog
+    data: { message: 'Are you sure you want to delete this DepositeAuthentication?' } // Pass any data you want to the delete confirmation component
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    // The result will be true if the user confirmed the deletion, otherwise false
+    if (result === true) {
+      // If the user confirmed the deletion, you can proceed with the delete logic here
+      this.depositeauthenticationservice.deleteDepositeAuthentication(depositeAuthentication.id).subscribe(
         () => {
           // DepositeAuthentication deleted successfully, we can update the list of DepositeAuthentications after deletion.
           // Here, we are simply filtering out the deleted DepositeAuthentication from the DepositeAuthentications array.
-          this.depositeauthentications = this.depositeauthentications.filter((t) => t.id !== DepositeAuthentication.id);
-  
+          this.depositeauthentications = this.depositeauthentications.filter((t) => t.id !== depositeAuthentication.id);
+
           // You can also show a success message to the user.
-          alert('DepositeAuthentication deleted successfully!');
+          console.log('DepositeAuthentication deleted successfully!');
         },
         (error) => {
           console.error(error);
           // If there was an error during deletion, you can show an error message.
-          alert('Failed to delete the DepositeAuthentication. Please try again later.');
+          console.log('Failed to delete the DepositeAuthentication. Please try again later.');
         }
       );
     }
-  }
+  });
+}
+
 }
   
   

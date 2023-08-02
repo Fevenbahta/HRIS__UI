@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { Training } from 'app/models/training.model';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { TrainingService } from 'app/service/training.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
@@ -34,6 +35,7 @@ export class TrainingComponent implements OnInit {
     { label: '  List Employee ', route: '/employee-list' }
   ];
   constructor(
+    private dialog: MatDialog ,
     private trainingService: TrainingService,
     private employeeIdService: EmployeeIdService,
     private router: Router,) { }
@@ -89,27 +91,32 @@ export class TrainingComponent implements OnInit {
   }
 
   deleteTraining(training: Training): void {
-    // Here, we can show a confirmation dialog/modal to confirm the deletion.
-    const confirmDelete = confirm('Are you sure you want to delete this training?');
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '300px', // Set the desired width of the dialog
+      data: { message: 'Are you sure you want to delete this training?' } // Pass any data you want to the delete confirmation component
+    });
   
-    if (confirmDelete) {
-      // If the user confirms the deletion, we can call the service to delete the training.
-      this.trainingService.deleteTraining(training.id).subscribe(
-        () => {
-          // Training deleted successfully, we can update the list of trainings after deletion.
-          // Here, we are simply filtering out the deleted training from the trainings array.
-          this.trainings = this.trainings.filter((t) => t.id !== training.id);
+    dialogRef.afterClosed().subscribe(result => {
+      // The result will be true if the user confirmed the deletion, otherwise false
+      if (result === true) {
+        // If the user confirmed the deletion, you can proceed with the delete logic here
+        this.trainingService.deleteTraining(training.id).subscribe(
+          () => {
+            // Training deleted successfully, we can update the list of trainings after deletion.
+            // Here, we are simply filtering out the deleted training from the trainings array.
+            this.trainings = this.trainings.filter((t) => t.id !== training.id);
   
-          // You can also show a success message to the user.
-          alert('Training deleted successfully!');
-        },
-        (error) => {
-          console.error(error);
-          // If there was an error during deletion, you can show an error message.
-          alert('Failed to delete the training. Please try again later.');
-        }
-      );
-    }
+            // You can also show a success message to the user.
+            console.log('Training deleted successfully!');
+          },
+          (error) => {
+            console.error(error);
+            // If there was an error during deletion, you can show an error message.
+            console.log('Failed to delete the training. Please try again later.');
+          }
+        );
+      }
+    });
   }
   
 }

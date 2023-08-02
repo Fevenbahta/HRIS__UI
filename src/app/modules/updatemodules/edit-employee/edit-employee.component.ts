@@ -31,44 +31,60 @@ export class EditEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.employeeForm = this.formBuilder.group({
  
-      updatedDate: [ "2023-07-25T09:28:33.440Z", Validators.required],
-      updatedBy: ['string', Validators.required],
-      firstName: ['', Validators.required],
-      middleName: [''],
-      lastName: ['', Validators.required],
-      joinDate: ['', Validators.required],
-      sex: ['', Validators.required],
-      dateOfBityh: ['', Validators.required],
-      placeOfBith: ['', Validators.required],
-      martialStatus: ['', Validators.required],
-      salutation: ['', Validators.required],
-      nationality: ['', Validators.required],
-      pensionNo: ['', Validators.required],
-      imageData: [''],
-      crime: [true],
-      crimeDescription: [''],
-      firstSupervisor: ['', Validators.required],
-      secondSupervisor: ['', Validators.required],
+      pId: [0], // You can add any specific validation rule here, like Validators.required 
+      createdBy: ['string', Validators.required], 
+      createdDate: [ "2023-07-25T09:28:33.440Z", Validators.required], 
+      updatedDate: [ "2023-07-25T09:28:33.440Z", Validators.required], 
+      updatedBy: ['string', Validators.required], 
+      empId: ["3fa85f64-5717-4562-b3fc-2c963f66afa6"], // You can add any specific validation rule here, like Validators.required 
+      ecxId: ['ecx/pi',Validators.required], 
+      adId: ['ad/pi', Validators.required], 
+      firstName: ['', Validators.required], 
+      middleName: [''], 
+      lastName: ['', Validators.required], 
+      joinDate: ['', Validators.required], 
+      sex: ['', Validators.required], 
+      dateOfBityh: ['', Validators.required], 
+      placeOfBith: ['', Validators.required], 
+      martialStatus: ['', Validators.required], 
+      salutation: ['', Validators.required], 
+      nationality: ['', Validators.required], 
+      pensionNo: ['', Validators.required], 
+      imageData: [''], 
+      crime: [true], 
+      crimeDescription: [''], 
+      firstSupervisor: ['', Validators.required], 
+      secondSupervisor: ['', Validators.required], 
+      status: [0,] ,
       
     });
 
     this.route.params.subscribe((params) => {
-      this.employeeId = params['empId']; // Updated to use empId as the route parameter
+      this.employeeId = params['empId']; 
       this.employeeService.getEmployee(this.employeeId).subscribe((employee) => {
         this.employee = employee;
         this.populateForm();
-        console.log(employee) // Call the method to populate the form with employee data
+        console.log("Form Value:", this.employeeForm.value);// Call the method to populate the form with employee data
       });
     });
  
   }
 
   populateForm(): void {
+    
     // Set the form values with the employee data
+    console.log(this.employee); 
     this.employeeForm.setValue({
-  
+
+
+      pId: this.employee.pId,
+      createdBy: this.employee.createdBy,
+      createdDate: this.employee.createdDate,
       updatedDate: this.employee.updatedDate,
       updatedBy: this.employee.updatedBy,
+      empId: this.employee.empId,
+      ecxId: this.employee.ecxId,
+      adId: this.employee.adId,
       firstName: this.employee.firstName,
       middleName: this.employee.middleName,
       lastName: this.employee.lastName,
@@ -85,7 +101,7 @@ export class EditEmployeeComponent implements OnInit {
       crimeDescription: this.employee.crimeDescription,
       firstSupervisor: this.employee.firstSupervisor,
       secondSupervisor: this.employee.secondSupervisor,
-    
+      status: this.employee.status
     });
   }
 
@@ -94,7 +110,7 @@ export class EditEmployeeComponent implements OnInit {
       const formData = this.employeeForm.value;
       // Add logic to update the employee using the formData
       // For example:
-      this.employeeService.updateEmployee(formData,this.employeeId, ).subscribe({
+      this.employeeService.updateEmployee(formData,this.employeeId ).subscribe({
         next: () => {
           this.employeeUpdated = true;
           setTimeout(() => {
@@ -105,6 +121,8 @@ export class EditEmployeeComponent implements OnInit {
           console.log(response);
         }
       });
+
+      this.router.navigate(['/employee-registration']); 
     } else {
       this.validateAllFormFields(this.employeeForm);
     }

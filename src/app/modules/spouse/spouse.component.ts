@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Spouse } from 'app/models/spouse.model';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { SpouseService } from 'app/service/spouse.service';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-spouse',
@@ -33,7 +35,8 @@ export class SpouseComponent implements OnInit {
   constructor(
     private spouseService:SpouseService,
     private employeeIdService: EmployeeIdService,
-    private router: Router,) { }
+    private router: Router,
+    private dialog: MatDialog) { }
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
     { label: '  List Employee ', route: '/employee-list' }
@@ -84,17 +87,18 @@ export class SpouseComponent implements OnInit {
     this.router.navigate(['/edit-spouse', Spouse.id]);
   }
   deleteSpouse(Spouse: Spouse): void {
-    // Here, we can show a confirmation dialog/modal to confirm the deletion.
-    const confirmDelete = confirm('Are you sure you want to delete this Spouse?');
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
   
-    if (confirmDelete) {
+    if (result) {
       // If the user confirms the deletion, we can call the service to delete the Spouse.
       this.spouseService.deleteSpouse(this.spouse.id).subscribe(
         () => {
           // Spouse deleted successfully, we can update the list of Spouses after deletion.
           // Here, we are simply filtering out the deleted Spouse from the Spouses array.
           this.spouses = this.spouses.filter((t) => t.id !== this.spouse.id);
-  
+          this.router.navigate(['employee-registration/spouse']);
           // You can also show a success message to the user.
           alert('Spouse deleted successfully!');
         },
@@ -106,4 +110,5 @@ export class SpouseComponent implements OnInit {
       );
     }
   }
+)}
 }

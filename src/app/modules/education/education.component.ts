@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EducationLevel } from 'app/models/job-description.model';
 import { Education } from 'app/models/work-experience.model';
 import { EducationService } from 'app/service/education.service';
 import { EducationLevelService } from 'app/service/educationlevel.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-education',
@@ -51,6 +53,7 @@ export class EducationComponent {
     private router: Router,
     private educationlevelservice:EducationLevelService,
     private employeeIdService: EmployeeIdService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -120,27 +123,27 @@ this.educationservice.getAllEducation()
     this.router.navigate(['/edit-education', education.id]);
   }
   deleteEducation(Education: Education): void {
-    // Here, we can show a confirmation dialog/modal to confirm the deletion.
-    const confirmDelete = confirm('Are you sure you want to delete this Education?');
-  
-    if (confirmDelete) {
-      // If the user confirms the deletion, we can call the service to delete the Education.
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
       this.educationservice.deleteEducation(Education.id).subscribe(
         () => {
-          // Education deleted successfully, we can update the list of Educations after deletion.
-          // Here, we are simply filtering out the deleted Education from the Educations array.
+         
           this.educations = this.educations.filter((t) => t.id !== Education.id);
-  
+
           // You can also show a success message to the user.
-          alert('Education deleted successfully!');
+          //alert('Education deleted successfully!');
+          this.router.navigate(['employee-registration/education']);
         },
         (error) => {
           console.error(error);
           // If there was an error during deletion, you can show an error message.
-          alert('Failed to delete the Education. Please try again later.');
+         // alert('Failed to delete the Education. Please try again later.');
         }
-      );
-    }
+        );
+      }
+    });
   }
 
 

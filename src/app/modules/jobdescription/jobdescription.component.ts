@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 
@@ -11,6 +12,7 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
 import { EmployeePositionService } from 'app/service/employee-position';
 import { PositionService } from 'app/service/position.service';
 import { StepService } from 'app/service/step.service';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-jobdescription',
@@ -65,6 +67,7 @@ constructor(
   private employeepositionservice:EmployeePositionService,
   private positionservice:PositionService ,
   private employeeIdService:EmployeeIdService,
+  private dialog: MatDialog,
 
   private router:Router){}
 ngOnInit(): void{
@@ -169,11 +172,12 @@ addEmployeePosition(){
     // Here, we will navigate to the edit page for the selected EmployeePosition.
     this.router.navigate(["/edit-employeePosition", employeePosition.id]);
   }
+
   deleteEmployeePosition(EmployeePosition: EmployeePosition): void {
-    // Here, we can show a confirmation dialog/modal to confirm the deletion.
-    const confirmDelete = confirm('Are you sure you want to delete this EmployeePosition?');
-  
-    if (confirmDelete) {
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+    if (result) {
       // If the user confirms the deletion, we can call the service to delete the EmployeePosition.
       this.employeepositionservice.deleteEmployeePosition(EmployeePosition.id).subscribe(
         () => {
@@ -181,7 +185,7 @@ addEmployeePosition(){
           // Here, we are simply filtering out the deleted EmployeePosition from the EmployeePositions array.
           this.employeepositions = this.employeepositions.filter((t) => t.id !== EmployeePosition.id);
   
-          // You can also show a success message to the user.
+          this.router.navigate(['employee-registration/job-description']);
           alert('EmployeePosition deleted successfully!');
         },
         (error) => {
@@ -193,4 +197,4 @@ addEmployeePosition(){
     }
   }
   
-}
+)}}

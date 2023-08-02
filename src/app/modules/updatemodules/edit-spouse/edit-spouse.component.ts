@@ -1,7 +1,9 @@
 // edit-spouse.component.ts
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Spouse } from 'app/models/spouse.model';
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { SpouseService } from 'app/service/spouse.service';
 
 @Component({
@@ -21,7 +23,9 @@ export class EditSpouseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private spouseService: SpouseService
+    private spouseService: SpouseService,
+    private dialog: MatDialog
+
   ) {}
 
   ngOnInit(): void {
@@ -70,10 +74,11 @@ export class EditSpouseComponent implements OnInit {
     this.router.navigate(['/edit-spouse', Spouse.id]);
   }
   deleteSpouse(Spouse: Spouse): void {
-    // Here, we can show a confirmation dialog/modal to confirm the deletion.
-    const confirmDelete = confirm('Are you sure you want to delete this Spouse?');
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
   
-    if (confirmDelete) {
+    if (result) {
       // If the user confirms the deletion, we can call the service to delete the Spouse.
       this.spouseService.deleteSpouse(this.spouse.id).subscribe(
         () => {
@@ -92,4 +97,5 @@ export class EditSpouseComponent implements OnInit {
       );
     }
   }
+)}
 }

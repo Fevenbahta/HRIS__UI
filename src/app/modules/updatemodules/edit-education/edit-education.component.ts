@@ -33,7 +33,7 @@ export class EditEducationComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.educationId = params['id'].toString();
+      this.educationId = params['id'];
       
 
       // Get the work experience by ID
@@ -42,14 +42,22 @@ export class EditEducationComponent {
           next: (education) => {
             this.education = education;
         
-            this.selectedEducationLevel = education?.eductionName; // Use safe navigation operator
+            this.selectedEducationLevel = education.eductionName; // Use safe navigation operator
           },
           error: (response) => {
             console.log(response);
           }
         });
       })
-  
+      this.educationlevelservice.getAllEducationLevels()
+      .subscribe({
+        next: (educationlevels) => {
+          this.educationlevels=educationlevels;
+        },
+        error(response){
+          console.log(response)
+        }
+      });
       // Get the work experience by ID if it exists
 
        // Get all educations
@@ -64,14 +72,15 @@ export class EditEducationComponent {
   
 
   }
-  
 
-  updateEducation(): void {
+
+  updateEducation(): void { console.log(this.education)
     this.educationUpdated = true;
     this.education.eductionName = this.selectedEducationLevel;
     this.educationService.updateEducation(this.education, this.educationId).subscribe({
       next: () => {
         this.router.navigate(['/employee-registration/education']); 
+       
       },
       error: (response) => {
         console.log(response);
@@ -79,6 +88,10 @@ export class EditEducationComponent {
     });
   }
 
+  getEducationName(educationLevelId: string): string {
+    const educationLevel = this.educationlevels.find((educationLevel) => educationLevel.id === educationLevelId);
+    return educationLevel ? educationLevel.educationName : '';
+  }
 
 
   editEducation(Education: Education): void {

@@ -57,7 +57,7 @@ export class EditTrainingComponent implements OnInit {
     this.trainingService.updateTraining(this.training,this.trainingId).subscribe(
       () => {
         this.trainingSaved=true;
-                // this.router.navigate(['/training']);
+        this.router.navigate(['/employee-registration/training']); 
       },
       (error) => {
         console.error(error);
@@ -79,7 +79,7 @@ export class EditTrainingComponent implements OnInit {
           // Training deleted successfully, we can update the list of trainings after deletion.
           // Here, we are simply filtering out the deleted training from the trainings array.
           this.trainings = this.trainings.filter((t) => t.id !== training.id);
-  
+          this.router.navigate(['/employee-registration/training']); 
           // You can also show a success message to the user.
           alert('Training deleted successfully!');
         },

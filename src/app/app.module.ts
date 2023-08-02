@@ -16,10 +16,12 @@ import { WorkexperienceComponent } from './modules/workexperience/workexperience
 import { EducationComponent } from './modules/education/education.component';
 import { EditWorkexperienceComponent } from './modules/updatemodules/edit-workexperience/edit-workexperience.component';
 import { EditEducationComponent } from './modules/updatemodules/edit-education/edit-education.component';
+import { DeleteConfirmationComponent } from './modules/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
 
     
 

@@ -5,7 +5,7 @@
 <form (ngSubmit)="addEducationLevel()"> 
     <div class="form-group"> 
       <label for="educationLevel">Education Level Name</label> 
-      <input type="text" class="form-control" id="educationLevelName" placeholder="Enter Education Level name"  name="educationLevel" required> 
+      <input type="text" class="form-control" id="educationLevelName" placeholder="Enter Education Level name" [(ngModel)]="addEducationLevelRequest.educationName" name="educationName" required> 
     </div> 
  
     <button type="submit" class="btn  btn-sm btnsave">Save </button> 

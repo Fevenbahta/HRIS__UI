@@ -65,7 +65,7 @@ supervisorLevel: '',
     this.supervisorservice.addSupervisor(this.addSupervisorRequest)
     .subscribe({
     next:(supervisor)=>{
-    this.router.navigate(["employee-registration/supervisor"])
+    this.router.navigate(["admin/supervisor"])
     },
      error(response){
       console.log(response)

@@ -7,10 +7,10 @@ export interface Contact{
   // updatedDate: string,
   // updatedBy: string,
   // isActive: Boolean
-  status?:number;
-  pId?:number;
-  id?: string,
-  empId?:string, 
+  status:Number,
+  pId:number,
+  id: string,
+  empId:string, 
 createdBy?: String, 
   createdDate?: String, 
   updatedDate: String, 

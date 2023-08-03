@@ -21,7 +21,7 @@ positions:Position[]=[];
   addPositionRequest:Position={
     pId: 0,
     positionId: undefined,
-    divisionId: "",
+    divisionId:"",
     name: '',
     description:'',
     createdBy: '',

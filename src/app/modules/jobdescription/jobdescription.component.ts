@@ -13,6 +13,7 @@ import { EmployeePositionService } from 'app/service/employee-position';
 import { PositionService } from 'app/service/position.service';
 import { StepService } from 'app/service/step.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
+import { BranchService } from 'app/service/branch.service';
 
 @Component({
   selector: 'app-jobdescription',
@@ -43,7 +44,7 @@ employeePosition:EmployeePosition
   addEmployeePositionRequest:EmployeePosition={
     pid:0,
     empId:"",
-    id:  "",
+    id:undefined,
   divisionId:'',
   stepId: '',
   branchId: 'string',
@@ -64,6 +65,7 @@ updatedBy: '',
 constructor(
   private divisionservice: DivisionService,
   private stepservice: StepService,
+  private branchservice: BranchService,
   private employeepositionservice:EmployeePositionService,
   private positionservice:PositionService ,
   private employeeIdService:EmployeeIdService,
@@ -98,6 +100,15 @@ this.stepservice.getAllStep()
     console.log(response)
   }
 });
+this.branchservice.getAllBranch()
+.subscribe({
+  next: (branchs) => {
+    this.branches=branchs;
+  },
+  error(response){
+    console.log(response)
+  }
+});
 
 
 this.employeepositionservice.getAllEmployeePosition() 
@@ -121,6 +132,7 @@ addEmployeePosition(){
   .subscribe({
   next:()=>{
     this.jobdescriptionSaved = true;
+    this.router.navigate(['/employee-registration/education']); 
     setTimeout(() => {
       this.jobdescriptionSaved = false;
     }, 2000);
@@ -130,7 +142,7 @@ addEmployeePosition(){
     this.addEmployeePositionRequest={
       pid:0,
       empId:'',
-      id:  "",
+      id: '',
     divisionId:'',
     stepId: '',
     branchId: 'string',

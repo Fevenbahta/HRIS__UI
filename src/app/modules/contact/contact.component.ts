@@ -23,8 +23,8 @@ export class ContactComponent {
   contact:Contact;
   addContactRequest:Contact={
     pId:0,
-    id:"A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
-   createdBy: '', 
+    id: undefined,
+    createdBy: '', 
      createdDate: "2023-07-20T13:56:00.062Z", 
      updatedDate: "2023-07-20T13:56:00.062Z", 
      updatedBy: '', 
@@ -72,16 +72,16 @@ buttons = [
 addContact(){
   // if (this.contactForm.invalid) {
   //   this.contactForm.markAllAsTouched();
-  //   console.log(error)
-  //   return;
-  // }
+
   this.addContactRequest.pId = this.pIdservice.pId;
   this.addContactRequest.empId = this.employeeIdService.employeeId;
   console.log(this.addContactRequest)
 this.contactservice.addContact(this.addContactRequest)
 .subscribe({
+
 next:(jobdescription)=>{
   this.router.navigate(['/employee-registration/emergency-contact']); 
+
 },
  error(response){
   console.log(response)

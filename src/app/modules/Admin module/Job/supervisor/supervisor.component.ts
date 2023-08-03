@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Employee, Supervisor } from 'app/models/employee.model';
 import { EmployeeService } from 'app/service/employee.service';
 import { SupervisorService } from 'app/service/supervisor.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-supervisor',
@@ -37,7 +40,7 @@ supervisorLevel: '',
 
   ];
 
-  constructor(private employeeservice: EmployeeService , private supervisorservice :SupervisorService ,private router:Router) { }
+  constructor(private employeeservice: EmployeeService ,private dialog:MatDialog, private supervisorservice :SupervisorService ,private router:Router) { }
 
   ngOnInit(): void {
     this.employeeservice.getAllEmployees()
@@ -75,17 +78,22 @@ supervisorLevel: '',
       const employee = this.employees.find((g) => g.empId === empId);
       return employee ? (employee.firstName,employee.middleName, employee.lastName )  : 'Unknown EMPLOYEE';
     }
-    deleteSupervisor(id:string){
-      this.supervisorservice.deleteSupervisor(id)
-      .subscribe({
-        next: (response) => {
-          // Reload the grade list after successful deletion
-          this.supervisorservice.getAllSupervisors().subscribe((supervisors) => {
-            this.supervisors = supervisors;
+    deleteSupervisor(id: string) {
+      const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+    
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // User confirmed deletion, proceed with the delete request
+          this.supervisorservice.deleteSupervisor(id).subscribe({
+            next: () => {
+              // Remove the deleted supervisor from the supervisors array using filter
+              this.supervisors = this.supervisors.filter((supervisor) => supervisor.id !== id);
+            },
+            error(response) {
+              console.log(response);
+            },
           });
-        },
-        error(response) {
-          console.log(response);
         }
-})}
+      });
+    }
 }

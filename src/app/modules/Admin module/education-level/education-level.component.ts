@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EducationLevel } from 'app/models/job-description.model';
 import { EducationLevelService } from 'app/service/educationlevel.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-education-level',
@@ -30,7 +33,7 @@ status:0,
      { label: 'Supervisor', route:"/admin/supervisor" },
 
   ];
-  constructor(private educationLevelService :EducationLevelService,private router:Router ) { }
+  constructor(private educationLevelService :EducationLevelService,private router:Router,private dialog:MatDialog,) { }
 
   ngOnInit(): void {
     this.educationLevelService.getAllEducationLevels()
@@ -54,17 +57,21 @@ status:0,
       console.log(response)
     }
     })}
-    deleteEducationLevel(id:string){
-      this.educationLevelService.deleteEducationLevel(id)
-      .subscribe({
-        next: (response) => {
-          // Reload the grade list after successful deletion
-          this.educationLevelService.getAllEducationLevels().subscribe((educationLevels) => {
-            this.educationLevels = educationLevels;
+    deleteEducationLevel(id: string) {
+      const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+    
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // User confirmed deletion, proceed with the delete request
+          this.educationLevelService.deleteEducationLevel(id).subscribe({
+            next: () => {
+              // Remove the deleted education level from the educationLevels array using filter
+              this.educationLevels = this.educationLevels.filter((educationLevel) => educationLevel.id !== id);
+            },
+            error(response) {
+              console.log(response);
+            },
           });
-        },
-        error(response) {
-          console.log(response);
         }
-  })}
+      });}
 }

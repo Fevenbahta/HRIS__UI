@@ -79,7 +79,10 @@ this.educationservice.getAllEducation()
 
   }
 
-
+  getEducationName(educationLevelId: string): string {
+    const educationLevel = this.educationlevels.find((educationLevel) => educationLevel.id === educationLevelId);
+    return educationLevel ? educationLevel.educationName : '';
+  }
 
   addEducation() {
     this.addEducationRequest.empId = this.employeeIdService.employeeId;

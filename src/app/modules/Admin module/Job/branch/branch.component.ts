@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Branch } from 'app/models/job-description.model';
 import { BranchService } from 'app/service/branch.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 @Component({
   selector: 'app-branch',
   templateUrl: './branch.component.html',
@@ -32,7 +34,9 @@ export class BranchComponent  {
      { label: 'Supervisor', route:"/admin/supervisor" },
 
   ];
-  constructor(private branchservice: BranchService,private router:Router){}
+  constructor(private branchservice: BranchService,private router:Router,
+    private dialog:MatDialog,
+  ){}
   ngOnInit():void {
     this.branchservice.getAllBranch()
     .subscribe({
@@ -55,17 +59,27 @@ export class BranchComponent  {
     console.log(response)
   }
   })}
-  deleteBranch(id:string){
-    this.branchservice.deleteBranch(id)
-    .subscribe({
-      next: (response) => {
-        // Reload the grade list after successful deletion
-        this.branchservice.getAllBranch().subscribe((branchs) => {
-          this.branchs = branchs;
+  deleteBranch(id: string) {
+    const dialogRef: MatDialogRef<DeleteConfirmationComponent> = this.dialog.open(DeleteConfirmationComponent);
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.branchservice.deleteBranch(id).subscribe({
+          next: (response) => {
+            // Reload the branch list after successful deletion
+            this.branchservice.getAllBranch().subscribe((branchs) => {
+              this.branchs = branchs;
+            });
+  
+            // Show a snackbar message to indicate successful deletion
+          
+          },
+          error(response) {
+            console.log(response);
+          },
         });
-      },
-      error(response) {
-        console.log(response);
       }
-})}
+    });
+  }
+  
 }

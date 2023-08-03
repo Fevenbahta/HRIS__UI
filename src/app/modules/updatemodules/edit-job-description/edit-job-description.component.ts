@@ -29,22 +29,7 @@ export class EditJobDescriptionComponent implements OnInit {
  
   steps:Step[]= [];
   selectedStep: string='';
-  addEmployeePositionRequest:EmployeePosition={
-    pid:0,
-    empId:"",
-    id:  "",
-  divisionId:'',
-  stepId: '',
-  branchId: 'string',
-  position: '',
-  status:0,
-  startDate: '',
-  endDate: '2023-07-21T08:09:41.138Z',
-createdBy: '',
-createdDate: '2023-07-21T08:09:41.138Z',
-updatedDate: '2023-07-21T08:09:41.138Z',
-updatedBy: '',
-  }
+
 
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
@@ -115,11 +100,11 @@ updatedBy: '',
   }
   updateEmployeePosition(): void {
     this.employeePositionUpdated=true;
-    this.addEmployeePositionRequest.divisionId = this.selectedDivision;
-    this.addEmployeePositionRequest.position = this.selectedPosition;
-    this.addEmployeePositionRequest.stepId = this.selectedStep;
-    this.addEmployeePositionRequest.branchId = this.selectedBranch;
-    this.employeePositionService.updateEmployeePosition(this.addEmployeePositionRequest, this.employeePositionId).subscribe({
+    this.employeePosition.divisionId = this.selectedDivision;
+    this.employeePosition.position = this.selectedPosition;
+    this.employeePosition.stepId = this.selectedStep;
+    this.employeePosition.branchId = this.selectedBranch;
+    this.employeePositionService.updateEmployeePosition(this.employeePosition, this.employeePositionId).subscribe({
       next: (employeePosition) => {
        
     this.router.navigate(['/employee-registration/job-description']);

@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Grade, Position } from 'app/models/job-description.model';
 import { GradeService } from 'app/service/grade.service';
 import { PositionService } from 'app/service/position.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-grade',
@@ -34,7 +37,7 @@ status:0,
 
   ];
 
-  constructor(private positionservice: PositionService , private gradeservice :GradeService ,private router:Router) { }
+  constructor(private positionservice: PositionService , private gradeservice :GradeService ,private dialog:MatDialog,private router:Router) { }
 
   ngOnInit(): void {
     this.positionservice.getAllPosition()
@@ -72,17 +75,22 @@ status:0,
       const position = this.positions.find((g) => g.positionId === positionId);
       return position ? position.name : 'Unknown Grade';
     }
-    deleteGrade(id:string){
-      this.gradeservice.deleteGrade(id)
-      .subscribe({
-        next: (response) => {
-          // Reload the grade list after successful deletion
-          this.gradeservice.getAllGrade().subscribe((grades) => {
-            this.grades = grades;
+    deleteGrade(id: string) {
+      const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+    
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // User confirmed deletion, proceed with the delete request
+          this.gradeservice.deleteGrade(id).subscribe({
+            next: () => {
+              // Remove the deleted grade from the grades array using filter
+              this.grades = this.grades.filter((grade) => grade.levelId!== id);
+            },
+            error(response) {
+              console.log(response);
+            },
           });
-        },
-        error(response) {
-          console.log(response);
         }
-})}
+      });
+    }
 }

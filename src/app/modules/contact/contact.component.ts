@@ -22,7 +22,7 @@ export class ContactComponent {
   contact:Contact;
   addContactRequest:Contact={
     pId:0,
-    id:  "",
+    id: undefined,
    createdBy: '', 
      createdDate: "2023-07-20T13:56:00.062Z", 
      updatedDate: "2023-07-20T13:56:00.062Z", 
@@ -69,16 +69,17 @@ buttons = [
   { label: '  List Employee ', route: '/employee-list' }
 ];
 addContact(){
-  if (this.contactForm.invalid) {
-    this.contactForm.markAllAsTouched();
-    return;
-  }
+  // if (this.contactForm.invalid) {
+  //   this.contactForm.markAllAsTouched();
+  //   return;
+  // }
+  console.log(this.addContactRequest)
   this.addContactRequest.pId = this.pIdservice.pId;
   this.addContactRequest.empId = this.employeeIdService.employeeId;
 this.contactservice.addContact(this.addContactRequest)
 .subscribe({
-next:(jobdescription)=>{
-this.router.navigate([jobdescription])
+next:()=>{
+this.router.navigate(["employee-registration/job-description"])
 },
  error(response){
   console.log(response)

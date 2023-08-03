@@ -15,4 +15,6 @@ export class MinNavComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  
 }

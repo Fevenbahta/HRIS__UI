@@ -18,3 +18,9 @@
   background-color: rgb(153, 146, 139);
   color:white
 }
+.img {
+  width:50%;
+  height: 90%;
+  margin-left: 25%;
+  border-radius: 50%;
+}

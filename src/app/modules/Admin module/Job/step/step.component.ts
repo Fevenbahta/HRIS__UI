@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Grade, Step} from 'app/models/job-description.model';
 import { GradeService } from 'app/service/grade.service';
 import { StepService } from 'app/service/step.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 
 
 @Component({
@@ -41,7 +44,7 @@ buttons = [
    { label: 'Supervisor', route:"/admin/supervisor" },
 
 ];
-  constructor( private gradeservice: GradeService, private stepservice: StepService,private router:Router) { }
+  constructor( private gradeservice: GradeService,private dialog:MatDialog, private stepservice: StepService,private router:Router) { }
 
   ngOnInit(): void {
     this.gradeservice.getAllGrade()
@@ -80,17 +83,22 @@ buttons = [
       return grade ? grade.description : 'Unknown Grade';
     }
 
-    deleteStep(id:string){
-      this.stepservice.deleteStep(id)
-      .subscribe({
-        next: (response) => {
-          // Reload the grade list after successful deletion
-          this.stepservice.getAllStep().subscribe((steps) => {
-            this.steps = steps;
+    deleteStep(id: string) {
+      const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+    
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // User confirmed deletion, proceed with the delete request
+          this.stepservice.deleteStep(id).subscribe({
+            next: () => {
+              // Remove the deleted step from the steps array using filter
+              this.steps = this.steps.filter((step) => step.id !== id);
+            },
+            error(response) {
+              console.log(response);
+            },
           });
-        },
-        error(response) {
-          console.log(response);
         }
-})}
+      });
+    }
 }

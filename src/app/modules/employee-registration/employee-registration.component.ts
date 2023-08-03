@@ -16,6 +16,7 @@ import { SupervisorService } from 'app/service/supervisor.service';
 }) 
 export class EmployeeRegistrationComponent implements OnInit { 
   employeeForm: FormGroup; 
+   selectedImage: File;
  
  employeeSaved: boolean = false; 
  employees: Employee[] = []; 
@@ -99,12 +100,13 @@ export class EmployeeRegistrationComponent implements OnInit {
   addEmployee(): void { 
     if (this.employeeForm.valid) { 
       const formData = this.employeeForm.value; 
+       formData.imageData = this.employeeForm.get('imageData').value;
       // formData.empId = uuidv4(); 
       this.employeeForm.value.firstSupervisor = this.selectedFirstSupervisor; 
       this.employeeForm.value.secondSupervisor = this.selectedSecondSupervisor; 
       this.employeeservice.addEmployee(formData).subscribe({ 
         next: (contact) => { 
-      
+      console.log(formData)
           this.employeeSaved = true; 
           setTimeout(() => { 
             this.employeeSaved = false; 
@@ -140,6 +142,42 @@ validateAllFormFields(formGroup: FormGroup) {
     const employee = this.employees.find((g) => g.empId === empId); 
     return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
   } 
+
+ 
+  openImageDialog(): void {
+    // Trigger click on the file input element to open the image dialog
+    const fileInput = document.getElementById('image') as HTMLInputElement;
+    fileInput.click();
+  }
+  onImageSelected(event: any): void {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.getBase64(file).then((data) => {
+        this.employeeForm.patchValue({
+          imageData: data
+        });
+      });
+    }
+  }
+    private getBase64(file: File): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
+  // // Helper method to convert selected image to base64
+  // private getBase64(file: File): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = () => resolve(reader.result);
+  //     reader.onerror = (error) => reject(error);
+  //   });
+  // }
+
   } 
  
  

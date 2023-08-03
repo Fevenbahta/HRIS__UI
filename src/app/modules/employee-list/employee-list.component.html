@@ -13,21 +13,16 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table" *ngIf="employees&& employees.length>0">
-                                <thead>
+                            <table class="table table-bordered table-striped" *ngIf="employees&& employees.length>0">
+                               <div> <thead>
                                     <tr>
                                         
                                         <th>First Name</th>
                                         <th>Middle Name</th>
-                                        <th>Last Name</th>
-                                        <th>Sex</th>
+                                          <th>Sex</th>
                                         <th>ECXID</th>
-                                        <th>Date of Birth</th>
                                         <th>Pension Id</th>
-                                        <th>placeOfBirth</th>
-                                        <th>Nationality</th>
-                                        <th>Martial Status</th>
-                                        <th>firstSupervisor</th>
+                                            <th>firstSupervisor</th>
                                         <th>secondSupervisor</th>
                             
                                     </tr>
@@ -36,27 +31,21 @@
                                     <tr *ngFor="let employee of employees">
                                         <td>{{employee.firstName}}</td>
                                         <td>{{employee.middleName}}</td>
-                                        <td>{{employee.lastName}}</td>
                                         <td>{{employee.sex}}</td>
                                             <td>{{employee.ecxId}}</td>
-                                            <td>{{employee.dateOfBityh}}</td>
-                                            
                                         <td>{{employee.pensionNo}}</td>
-                                       
-                                        <td>{{employee.placeOfBith}}</td><!-- <td>{{employee.resegnationDate}}</td> -->
-                                       <td>{{employee.nationality}}</td> 
-                                       <td>{{employee.martialStatus}}</td>
+                                     
                                        <td>{{getFirstSupervisorName(employee.firstSupervisor)}}</td>
                                        <td>{{getSecondSupervisorName(employee.secondSupervisor)}}</td>
                                     
                                      
-                                         <td>   
-                                            <button  class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.empId)">Delete</button>
-                                            <button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button>
+                                          <button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button>
  
-                                        </td> 
+                                            <button  class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.empId)">Delete</button>
+                                           
+                                    
                                     </tr>
-                                </tbody>
+                                </tbody></div>
                             </table>
                             <p *ngIf="!employees || employees.length <= 0">no employees found</p>
                         </div>

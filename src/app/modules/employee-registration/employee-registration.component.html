@@ -24,7 +24,7 @@
             <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
               <div class="row">
          
-              <div class="col-md-4 form-field"> 
+              <div class="col-md-4 form-field floating-label-group"> 
                   <mat-error *ngIf="employeeForm.get('firstName').invalid && employeeForm.get('firstName').touched">
                   First Name is required
                 </mat-error>
@@ -33,7 +33,7 @@
              
              
               </div>
-              <div class="col-md-4" >
+              <div class="col-md-4 floating-label-group" >
                       <mat-error *ngIf="employeeForm.get('middleName').invalid && employeeForm.get('middleName').touched">
               Middle Name is required
                 </mat-error>
@@ -42,7 +42,7 @@
                
           
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4 floating-label-group">
                       <mat-error *ngIf="employeeForm.get('lastName').invalid && employeeForm.get('lastName').touched">
                   Last Name is required
                 </mat-error>

@@ -90,7 +90,7 @@ this.educationservice.getAllEducation()
     this.educationservice.addEducation(this.addEducationRequest).subscribe({
       next: (employee) => {
         
-        this.router.navigate(['/employee-registration/work-experience']); 
+      //  this.router.navigate(['/employee-registration/work-experience']); 
         setTimeout(() => {
           this.educationSaved = false;
         }, 2000);

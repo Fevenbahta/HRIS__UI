@@ -68,7 +68,7 @@ export class WorkexperienceComponent {
       this.addWorkExperienceRequest.empId = this.employeeIdService.employeeId;
       this.workExperienceService.addWorkExperience(this.addWorkExperienceRequest).subscribe({
         next: () => {
-          this.router.navigate(['/employee-registration/training']); 
+        //  this.router.navigate(['/employee-registration/training']); 
           setTimeout(() => {
             this.workExperienceSaved = false;
           }, 2000);

@@ -80,7 +80,7 @@ status:number;
 export interface EducationLevel{
 
 educationName:string;
-pid:string;
+pid:Number;
   id: string,
 createdBy: string,
 createdDate: string,

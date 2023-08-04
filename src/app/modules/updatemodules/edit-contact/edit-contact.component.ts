@@ -16,6 +16,9 @@ export class EditContactComponent implements OnInit {
   contacts:Contact[]=[]
   contactId: string;
   addContactRequest: Contact = {
+    pId:0,
+    id:'',
+    status:0,
     region: '',
     town: '',
     subCity: '',

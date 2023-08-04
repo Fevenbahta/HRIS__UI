@@ -89,7 +89,8 @@ this.educationservice.getAllEducation()
     this.addEducationRequest.eductionName = this.selectedEducationLevel;
     this.educationservice.addEducation(this.addEducationRequest).subscribe({
       next: (employee) => {
-        this.educationSaved = true;
+        
+      //  this.router.navigate(['/employee-registration/work-experience']); 
         setTimeout(() => {
           this.educationSaved = false;
         }, 2000);

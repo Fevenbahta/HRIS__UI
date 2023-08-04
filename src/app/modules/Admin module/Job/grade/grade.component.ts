@@ -18,7 +18,7 @@ export class GradeComponent implements OnInit {
   grades:Grade[]=[];
 
   addGradeRequest: Grade={
-  levelId:'',
+  levelId:undefined,
   positionId: '',
   description: '',
 createdBy: '',

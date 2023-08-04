@@ -57,6 +57,7 @@ export class SpouseComponent implements OnInit {
     this.spouseService.addSpouse(this.addSpouseRequest).subscribe({
       next: (employee) => {
         this.spouseSaved = true;
+      //  this.router.navigate(['employee-registration/job-description']);
         setTimeout(() => {
           this.spouseSaved = false;
         }, 2000);
@@ -98,7 +99,7 @@ export class SpouseComponent implements OnInit {
           // Spouse deleted successfully, we can update the list of Spouses after deletion.
           // Here, we are simply filtering out the deleted Spouse from the Spouses array.
           this.spouses = this.spouses.filter((t) => t.id !== this.spouse.id);
-          this.router.navigate(['employee-registration/spouse']);
+          this.router.navigate(['employee-registration/job-description']);
           // You can also show a success message to the user.
           alert('Spouse deleted successfully!');
         },

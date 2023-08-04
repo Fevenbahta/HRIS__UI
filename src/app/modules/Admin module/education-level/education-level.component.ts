@@ -15,11 +15,11 @@ export class EducationLevelComponent implements OnInit {
   educationLevels:EducationLevel[]=[];
   addEducationLevelRequest: EducationLevel={
     educationName:'',
-pid:'',
-  id: '',
+     pid:0,
+  id: undefined,
 createdBy: '',
-createdDate: '',
-updatedDate: '',
+createdDate: '2023-07-21T13:28:13.132Z',
+updatedDate: '2023-07-21T13:28:13.132Z',
 updatedBy: '',
 status:0,
 
@@ -51,7 +51,7 @@ status:0,
     this.educationLevelService.addEducationLevel(this.addEducationLevelRequest)
     .subscribe({
     next:(educationLevel)=>{
-    this.router.navigate([educationLevel])
+      this.router.navigate(['/employee-registration/education']); 
     },
      error(response){
       console.log(response)

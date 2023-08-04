@@ -8,6 +8,7 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
 import { PidService } from 'app/service/pid.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { error } from 'jquery';
 
 
 
@@ -23,7 +24,7 @@ export class ContactComponent {
   addContactRequest:Contact={
     pId:0,
     id: undefined,
-   createdBy: '', 
+    createdBy: '', 
      createdDate: "2023-07-20T13:56:00.062Z", 
      updatedDate: "2023-07-20T13:56:00.062Z", 
      updatedBy: '', 
@@ -71,15 +72,16 @@ buttons = [
 addContact(){
   // if (this.contactForm.invalid) {
   //   this.contactForm.markAllAsTouched();
-  //   return;
-  // }
-  console.log(this.addContactRequest)
+
   this.addContactRequest.pId = this.pIdservice.pId;
   this.addContactRequest.empId = this.employeeIdService.employeeId;
+  console.log(this.addContactRequest)
 this.contactservice.addContact(this.addContactRequest)
 .subscribe({
-next:()=>{
-this.router.navigate(["employee-registration/job-description"])
+
+next:(jobdescription)=>{
+  this.router.navigate(['/employee-registration/emergency-contact']); 
+
 },
  error(response){
   console.log(response)

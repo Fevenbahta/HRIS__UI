@@ -20,7 +20,7 @@ emergencyContact:EmergencyContact;
 
   addEmergencyContactRequest:EmergencyContact={
     pId:0,
-    id:  "",
+    id:  undefined,
    createdBy: '', 
      createdDate: "2023-07-20T13:56:00.062Z", 
      updatedDate: "2023-07-20T13:56:00.062Z", 
@@ -68,6 +68,7 @@ addEmergencyContact() {
   .subscribe({
     next: (employee) => {
       this.emergencycontactSaved = true;
+     // this.router.navigate(['/employee-registration/spouse']);
       setTimeout(() => {
         this.emergencycontactSaved = false;
       }, 2000);

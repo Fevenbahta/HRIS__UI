@@ -9,6 +9,6 @@ export interface DepositeAuthentication{
   empId: string,
   bank: string,
   bankBranch: string,
-  bankAccount: number,
+  bankAccount: Number,
   tinNumber: string,
 }

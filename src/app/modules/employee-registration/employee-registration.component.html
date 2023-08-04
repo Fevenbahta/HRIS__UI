@@ -22,30 +22,31 @@
           <div class="card-body mt-2">
             <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
               <div class="row">
-<<<<<<< HEAD
-         
-              <div class="col-md-4 form-field"> 
-               
-                  <mat-error *ngIf="employeeForm.get('firstName').invalid && employeeForm.get('firstName').touched">
-                    First Name is required
-                  </mat-error>
-                </div>
-                
+
               
-<<<<<<< HEAD
-                  <input class="form-control "  placeholder="First Name" type="text" name="firstname" formControlName="firstName" required>
+
+              
           
-             
-=======
+                  <div class="col-md-4 form-field">
+                    <div class="form-field">
+                      <input type="text"  name="firstname" formControlName="firstName" required>
+                      <label>First Name</label>
+                          <mat-error *ngIf="employeeForm.get('firstName').invalid && employeeForm.get('firstName').touched">
+                  Middle Name is required
+                    </mat-error>
+    </div>
+    
+                  </div>
+
               <div class="col-md-4 form-field">
                 <div class="form-field">
                   <input type="text"  name="middlename" formControlName="middleName" required>
                   <label>Middle Name</label>
-                  <mat-error *ngIf="employeeForm.get('middleName').invalid && employeeForm.get('middleName').touched">
-                    Middle Name is required
-                      </mat-error>
-                </div>
->>>>>>> 785cf9383290f288025df6ac38f53ab4559962c6
+                      <mat-error *ngIf="employeeForm.get('middleName').invalid && employeeForm.get('middleName').touched">
+              Middle Name is required
+                </mat-error>
+</div>
+
               </div>
 
               <div class="col-md-4 form-field">
@@ -53,14 +54,14 @@
                   <input type="text"  name="lastname" formControlName="lastName" required>
                   <label>Last Name</label>
                 </div>
-                <mat-error *ngIf="employeeForm.get('lastName').invalid && employeeForm.get('lastName').touched">
+                      <mat-error *ngIf="employeeForm.get('lastName').invalid && employeeForm.get('lastName').touched">
                   Last Name is required
                 </mat-error>
               </div>
             </div>
-
+       
             <div class="card-body mt-2 ">
-              <div class="row">
+            <div class="row">
                 <div class="col-md-4 form-field">
                   <mat-select class="custom-mat-select" style="height: 40px; width:180px; padding:right 10%" placeholder="Salutation" name="salutation" formControlName="salutation" required>
                     <mat-option value="mr">Mr.</mat-option>
@@ -90,9 +91,10 @@
                     Place of Birth is required
                   </mat-error>
                 </div>
-             
+               
               </div>
             </div>
+          
           
           <div class="card-body">
           <div class="row">
@@ -160,10 +162,10 @@
                   <div class="row">
                     <div class="col-md-6 form-field" >
                       <mat-select class="form-field custom-mat-select" placeholder="First Supervisor" required formControlName="firstSupervisor" name="selectedFirstSupervisor" [(ngModel)]="selectedFirstSupervisor">
-                        <mat-option *ngFor="let supervisor of firstSupervisors" [value]="supervisor.empId">
-                          {{ getEmployeeName(supervisor.empId) }}
-                        </mat-option>
-                      </mat-select>
+                      <mat-option *ngFor="let supervisor of firstSupervisors" [value]="supervisor.empId"> 
+                        {{ getEmployeeName(supervisor.empId) }} 
+                      </mat-option> 
+                    </mat-select> 
                       <mat-error *ngIf="employeeForm.get('firstSupervisor').invalid && employeeForm.get('firstSupervisor').touched">
                         First Supervisor is required
                       </mat-error>
@@ -172,16 +174,16 @@
                     <div class="col-md-6 form-field" >
                       <mat-select class="form-field custom-mat-select" placeholder="Second Supervisor" required formControlName="secondSupervisor" name="selectedSecondSupervisor" [(ngModel)]="selectedSecondSupervisor">
                         <mat-option  *ngFor="let supervisor of secondSupervisors" [value]="supervisor.empId">
-                          {{ getEmployeeName(supervisor.empId) }}
-                        </mat-option>
-                      </mat-select>
+                        {{ getEmployeeName(supervisor.empId) }} 
+                      </mat-option> 
+                    </mat-select> 
                       <mat-error *ngIf="employeeForm.get('secondSupervisor').invalid && employeeForm.get('secondSupervisor').touched">
                         Second Supervisor is required
                       </mat-error>
-                    </div>
-                  </div>
-                </div>
-                
+              </div>
+              </div>
+             </div> 
+                 
                 <div class="card-body mt-2">
                   <div class="row">
                     <div class="col-md-4 form-field">
@@ -190,8 +192,8 @@
                         <label>Pension Number</label>
                       </div>
                       <mat-error *ngIf="employeeForm.get('pensionNo').invalid && employeeForm.get('pensionNo').touched">
-                        Pension Number is required
-                      </mat-error>
+                    Pension Number is required
+                  </mat-error>
                     </div>
              
                     </div>
@@ -201,21 +203,21 @@
                       <mat-slide-toggle name="crimeStatus" formControlName="crime">Crime</mat-slide-toggle>
                     </div>
                     <div class="col-md-4 form-field">
-                    
+                 
                         <div class="form-field">
                           <input type="text" required name="pensionNo" formControlName="pensionNo">
                           <label>Crime Description</label>
                         </div>
                     </div>
                   </div>
-            
+               
                   </div>
-                    </div>
+                </div>
                 
                    
         
-              
-            </div>
+                   
+                
             
               <button mat-raised-button type="submit" class="btn btn-sm " style="background-color:#76a53b;">Save Profile</button>
               <div *ngIf="employeeSaved" class="alert alert-success mt-3">

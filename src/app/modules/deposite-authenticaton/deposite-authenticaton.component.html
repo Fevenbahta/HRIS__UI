@@ -16,35 +16,30 @@
                     <div class="card-body">
                         <form (ngSubmit)="addDepositeAuthentication()">
                           <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-6">
-                       
-                          <input  class="form-control" placeholder="Bank" type="text" name="bank" [(ngModel)]="addDepositeAuthenticationRequest.bank">
-                       
-                      </div>
-                      <div class="col-md-6">
-                        
-                          <input  class="form-control" placeholder="Bank Branch" type="text" name="bankBranch" [(ngModel)]="addDepositeAuthenticationRequest.bankBranch">
-                      
-                      </div>  
-                    </div>
-               </div>
-               <div class="card-body">
-               <div class="row">
-                       <div class="col-md-6">
-                           
-                              <input  class="form-control"  placeholder="Tin Number" type="text" name="tinNumber" [(ngModel)]="addDepositeAuthenticationRequest.tinNumber">
-                            
+                            <div class="row">
+                              <div class="col-md-6 form-field">
+                                <input placeholder="" type="text" name="bank" [(ngModel)]="addDepositeAuthenticationRequest.bank">
+                                <label>Bank</label>
+                              </div>
+                              <div class="col-md-6 form-field">
+                                <input  placeholder="" type="text" name="bankBranch" [(ngModel)]="addDepositeAuthenticationRequest.bankBranch">
+                                <label>Bank Branch</label>
+                              </div>  
+                            </div>
                           </div>
-                        <div class="col-md-6">
-                         
-                            <input  class="form-control"  placeholder="Bank Account" name="bankAccount" [(ngModel)]="addDepositeAuthenticationRequest.bankAccount "type="text"required>
-                        
-                        </div>
-                     
-                      </div>
-                    
-                      </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6 form-field">
+                                <input placeholder="" type="text" name="tinNumber" [(ngModel)]="addDepositeAuthenticationRequest.tinNumber">
+                                <label>Tin Number</label>
+                              </div>
+                              <div class="col-md-6 form-field">
+                                <input  placeholder=" " name="bankAccount" [(ngModel)]="addDepositeAuthenticationRequest.bankAccount" type="text" required>
+                                <label>Bank Account</label>
+                              </div>
+                            </div>
+                          </div>
+                          
                  
                     <div> <button type="button" class="btn btn-sm btnsave" (click)="addDepositeAuthentication()">Add Emergency Contact</button>
                     </div>

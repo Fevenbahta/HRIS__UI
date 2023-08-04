@@ -20,78 +20,86 @@
             <h4 class="card-title">Profile Information</h4>
             <p class="card-category">Complete your profile</p>
           </div>
-          <div class="card-body">
+          <div class="card-body mt-2">
             <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
               <div class="row">
-         
-              <div class="col-md-4 form-field floating-label-group"> 
+                <div class="col-md-4 form-field">
+                  <div class="form-field">
+                    <input type="text" name="firstname" formControlName="firstName" required>
+                    <label>First Name</label>
+                  </div>
                   <mat-error *ngIf="employeeForm.get('firstName').invalid && employeeForm.get('firstName').touched">
-                  First Name is required
-                </mat-error>
+                    First Name is required
+                  </mat-error>
+                </div>
+                
               
-                  <input class="form-control"  placeholder="First Name" type="text" name="firstname" formControlName="firstName" required>
-             
-             
+              <div class="col-md-4 form-field">
+                <div class="form-field">
+                  <input type="text"  name="middlename" formControlName="middleName" required>
+                  <label>Middle Name</label>
+                  <mat-error *ngIf="employeeForm.get('middleName').invalid && employeeForm.get('middleName').touched">
+                    Middle Name is required
+                      </mat-error>
+                </div>
               </div>
-              <div class="col-md-4 floating-label-group" >
-                      <mat-error *ngIf="employeeForm.get('middleName').invalid && employeeForm.get('middleName').touched">
-              Middle Name is required
-                </mat-error>
-               
-                  <input class="form-control" placeholder="Middle Name" name="middlename" formControlName="middleName" required type="text">
-               
-          
-              </div>
-              <div class="col-md-4 floating-label-group">
-                      <mat-error *ngIf="employeeForm.get('lastName').invalid && employeeForm.get('lastName').touched">
+
+              <div class="col-md-4 form-field">
+                <div class="form-field">
+                  <input type="text"  name="lastname" formControlName="lastName" required>
+                  <label>Last Name</label>
+                </div>
+                <mat-error *ngIf="employeeForm.get('lastName').invalid && employeeForm.get('lastName').touched">
                   Last Name is required
                 </mat-error>
-              
-                  <input class="form-control"  placeholder="Last Name" name="lastname" formControlName="lastName" required type="text">
-                
-          
               </div>
             </div>
-       
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-4">
-                <mat-error *ngIf="employeeForm.get('nationality').invalid && employeeForm.get('nationality').touched">
-                  Nationality is required
-                </mat-error>
-                
-                  <input class="form-control"  placeholder="Nationality" name="nationality" formControlName="nationality" type="text">
-                
-                
-              </div>
-              <div class="col-md-4">
-                <mat-error *ngIf="employeeForm.get('salutation').invalid && employeeForm.get('salutation').touched">
-                  Salutation is required
-                </mat-error>
-             
-                
-                  <mat-select class="form-control"  placeholder="Salutation" name="salutation" formControlName="salutation" required>
+
+            <div class="card-body mt-2 ">
+              <div class="row">
+                <div class="col-md-4 form-field">
+                  <mat-select class="custom-mat-select" style="height: 40px; width:180px; padding:right 10%" placeholder="Salutation" name="salutation" formControlName="salutation" required>
                     <mat-option value="mr">Mr.</mat-option>
                     <mat-option value="mrs">Mrs.</mat-option>
                     <mat-option value="miss">Miss</mat-option>
                     <mat-option value="dr">Dr.</mat-option>
                   </mat-select>
-              
-               
+                  <mat-error *ngIf="employeeForm.get('salutation').invalid && employeeForm.get('salutation').touched">
+                    Salutation is required
+                  </mat-error>
+                </div>
+                <div class="col-md-4 form-field">
+                  <div class="form-field">
+                    <input type="text" name="nationality" formControlName="nationality" required>
+                    <label>Nationality</label>
+                  </div>
+                  <mat-error *ngIf="employeeForm.get('nationality').invalid && employeeForm.get('nationality').touched">
+                    Nationality is required
+                  </mat-error>
+                </div>
+                <div class="col-md-4 form-field">
+                  <div class="form-field">
+                    <input type="text" required name="placeOfBith" formControlName="placeOfBith">
+                    <label>Place of Birth</label>
+                  </div>
+                  <mat-error *ngIf="employeeForm.get('placeOfBith').invalid && employeeForm.get('placeOfBith').touched">
+                    Place of Birth is required
+                  </mat-error>
+                </div>
+             
               </div>
             </div>
-          </div>
           
           <div class="card-body">
           <div class="row">
-              <div class="col-md-6">  
+              <div class="col-md-8">  
                  <mat-error *ngIf="employeeForm.get('sex').invalid && employeeForm.get('sex').touched">
                   Gender is required
                 </mat-error>
                 <mat-radio-group name="sex" formControlName="sex" required>
                   <p>
                    
-                      <span  style="font-size: 18px; ">Gender</span>
+               <mat-label>Gender</mat-label>
                     
                   </p>
                   <mat-radio-button value="male" class="radio-option">Male</mat-radio-button>
@@ -100,7 +108,7 @@
                
               </div>
               
-              <div class="col-md-6">
+              <div class="col-md-6 mt-3">
                 <mat-radio-group name="martialStatus" formControlName="martialStatus" required>  
                     <mat-error *ngIf="employeeForm.get('martialStatus').invalid && employeeForm.get('martialStatus').touched">
                   Marital Status is required
@@ -116,13 +124,13 @@
 
                  
           <div class="card-body">
-              <div class="row">
-              <div class="col-md-6">
-                <mat-form-field><mat-error *ngIf="employeeForm.get('joinDate').invalid && employeeForm.get('joinDate').touched">
+              <div class="row " >
+              <div class="col-md-6 " >
+                <mat-form-field style="height: 65px; width:150px" ><mat-error *ngIf="employeeForm.get('joinDate').invalid && employeeForm.get('joinDate').touched">
                   Joined Date is required
                 </mat-error>
                   <mat-label>Joined Date</mat-label>
-                  <input matInput  [matDatepicker]="jdpicker" placeholder="Choose a date" name="joinDate" required formControlName="joinDate">
+                  <input matInput  [matDatepicker]="jdpicker"  name="joinDate" required formControlName="joinDate">
                   <mat-datepicker-toggle matSuffix [for]="jdpicker"></mat-datepicker-toggle>
                   <mat-datepicker #jdpicker></mat-datepicker>
                 </mat-form-field>
@@ -130,11 +138,11 @@
               </div>
           
               <div class="col-md-6">
-                <mat-form-field> <mat-error *ngIf="employeeForm.get('dateOfBityh').invalid && employeeForm.get('dateOfBityh').touched">
+                <mat-form-field style="height: 65px; width:160px" > <mat-error *ngIf="employeeForm.get('dateOfBityh').invalid && employeeForm.get('dateOfBityh').touched">
                     Date of Birth is required
                   </mat-error>
                   <mat-label>Date of Birth</mat-label>
-                  <input matInput [matDatepicker]="dobPicker" required placeholder="Choose a date" name="dateOfBityh" formControlName="dateOfBityh">
+                  <input matInput [matDatepicker]="dobPicker" required name="dateOfBityh" formControlName="dateOfBityh">
                   <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
                   <mat-datepicker #dobPicker></mat-datepicker>
                   </mat-form-field>
@@ -142,68 +150,66 @@
                </div>
               </div>
               </div>
-              <div class="card-body">
-              <div class="row">
-              <div class="col-md-4">
-                   <mat-error *ngIf="employeeForm.get('placeOfBith').invalid && employeeForm.get('placeOfBith').touched">
-                    Place of Birth is required
-                  </mat-error>
-                    <input  class="form-control" placeholder="Place Of Birth" required type="text" name="placeOfBith" formControlName="placeOfBith">
+          
                
-                </div>
-            
-      
-                <div class="col-md-4"> 
-                  
-                    <mat-error *ngIf="employeeForm.get('firstSupervisor').invalid && employeeForm.get('firstSupervisor').touched"> 
-                      First Supervisor is required 
-                    </mat-error> 
-                  
-                    <mat-select class="form-control" placeholder="First Supervisor" required formControlName="firstSupervisor" name="selectedFirstSupervisor" [(ngModel)]="selectedFirstSupervisor"> 
-                      <mat-option *ngFor="let supervisor of firstSupervisors" [value]="supervisor.empId"> 
-                        {{ getEmployeeName(supervisor.empId) }} 
-                      </mat-option> 
-                    </mat-select> 
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6 form-field" >
+                      <mat-select class="form-field custom-mat-select" placeholder="First Supervisor" required formControlName="firstSupervisor" name="selectedFirstSupervisor" [(ngModel)]="selectedFirstSupervisor">
+                        <mat-option *ngFor="let supervisor of firstSupervisors" [value]="supervisor.empId">
+                          {{ getEmployeeName(supervisor.empId) }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="employeeForm.get('firstSupervisor').invalid && employeeForm.get('firstSupervisor').touched">
+                        First Supervisor is required
+                      </mat-error>
+                    </div>
                 
-                </div> 
-
-                <div class="col-md-4"> 
-                 
-                    <mat-error *ngIf="employeeForm.get('secondSupervisor').invalid && employeeForm.get('secondSupervisor').touched"> 
-                      Second Supervisor is required 
-                    </mat-error> 
-                     
-                    <mat-select  class="form-control" placeholder="Second Supervisor" required formControlName="secondSupervisor" name="selectedSecondSupervisor" [(ngModel)]="selectedSecondSupervisor"> 
-                      <mat-option *ngFor="let supervisor of secondSupervisors" [value]="supervisor.empId"> 
-                        {{ getEmployeeName(supervisor.empId) }} 
-                      </mat-option> 
-                    </mat-select> 
-                  
-              </div>
-              </div>
-             </div> 
-              <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                 
-                      <mat-error *ngIf="employeeForm.get('pensionNo').invalid && employeeForm.get('pensionNo').touched">
-                    Pension Number is required
-                  </mat-error>
-                    <input  class="form-control" placeholder="Pension Number" type="text" name="pensionNo" formControlName="pensionNo">
-                 
-               
-                </div>
-                
-                  <div class="col-md-4">
-                   
-                      <input class="form-control" placeholder="Crime Description" type="text" name="crimeDescription" formControlName="crimeDescription">
-                   
-                  </div>  
-                  <div class="col-md-4">
-                    <mat-slide-toggle name="crimeStatus" formControlName="crime">Crime</mat-slide-toggle>
+                    <div class="col-md-6 form-field" >
+                      <mat-select class="form-field custom-mat-select" placeholder="Second Supervisor" required formControlName="secondSupervisor" name="selectedSecondSupervisor" [(ngModel)]="selectedSecondSupervisor">
+                        <mat-option  *ngFor="let supervisor of secondSupervisors" [value]="supervisor.empId">
+                          {{ getEmployeeName(supervisor.empId) }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="employeeForm.get('secondSupervisor').invalid && employeeForm.get('secondSupervisor').touched">
+                        Second Supervisor is required
+                      </mat-error>
+                    </div>
                   </div>
                 </div>
-              </div>
+                
+                <div class="card-body mt-2">
+                  <div class="row">
+                    <div class="col-md-4 form-field">
+                      <div class="form-field">
+                        <input type="text" required name="pensionNo" formControlName="pensionNo">
+                        <label>Pension Number</label>
+                      </div>
+                      <mat-error *ngIf="employeeForm.get('pensionNo').invalid && employeeForm.get('pensionNo').touched">
+                        Pension Number is required
+                      </mat-error>
+                    </div>
+             
+                    </div>
+                    <div class="card-body mt-3">
+                      <div class="row">
+              <div class="col-md-6 form-field">
+                      <mat-slide-toggle name="crimeStatus" formControlName="crime">Crime</mat-slide-toggle>
+                    </div>
+                    <div class="col-md-6 form-field">
+                    
+                        <div class="form-field">
+                          <input type="text" required name="pensionNo" formControlName="pensionNo">
+                          <label>Crime Description</label>
+                        </div>
+                    </div>
+                  </div>
+            
+                  </div>
+                    </div>
+                
+                   
+            
             
               <button mat-raised-button type="submit" class="btn btn-sm btnsave">Save Profile</button>
               <div *ngIf="employeeSaved" class="alert alert-success mt-3">

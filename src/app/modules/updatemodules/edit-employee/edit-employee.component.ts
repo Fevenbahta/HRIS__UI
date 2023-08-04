@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Employee } from 'app/models/employee.model';
+import { Employee, Supervisor } from 'app/models/employee.model';
 import { EmployeeService } from 'app/service/employee.service';
+import { SupervisorService } from 'app/service/supervisor.service';
 
 @Component({
   selector: 'app-edit-employee',
@@ -14,8 +15,13 @@ export class EditEmployeeComponent implements OnInit {
   employeeId: string;
   employee: Employee;
   employeeUpdated: boolean = false;
-
+supervisors:Supervisor[]=[];
   employees: Employee[] = [];
+  firstSupervisors: Supervisor[] = []; // Array to store first supervisors only 
+  selectedFirstSupervisor: string = ''; 
+  
+  secondSupervisors: Supervisor[] = []; // Array to store first supervisors only 
+  selectedSecondSupervisor: string = ''; 
  
    buttons = [
      { label: ' Add Employee ', route: '/employee-registration' },
@@ -25,7 +31,8 @@ export class EditEmployeeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private employeeService: EmployeeService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private supervisorService:SupervisorService 
   ) {}
 
   ngOnInit(): void {
@@ -63,11 +70,24 @@ export class EditEmployeeComponent implements OnInit {
       this.employeeId = params['empId']; 
       this.employeeService.getEmployee(this.employeeId).subscribe((employee) => {
         this.employee = employee;
+     this.selectedFirstSupervisor =  this.employee.firstSupervisor  ; 
+      this.selectedSecondSupervisor = this.employee.secondSupervisor ; 
         this.populateForm();
         console.log("Form Value:", this.employeeForm.value);// Call the method to populate the form with employee data
       });
     });
- 
+    this.supervisorService.getAllSupervisors() 
+    .subscribe({ 
+      next: (supervisors) => { 
+        this.supervisors = supervisors; 
+        this.firstSupervisors = supervisors.filter((supervisor) => supervisor.supervisorLevel == 'First Supervisor'); 
+        this.secondSupervisors = supervisors.filter((supervisor) => supervisor.supervisorLevel == 'Second Supervisor'); 
+      }, 
+      error(response) { 
+        console.log(response); 
+      }, 
+    }); 
+
   }
 
   populateForm(): void {
@@ -110,6 +130,8 @@ export class EditEmployeeComponent implements OnInit {
       const formData = this.employeeForm.value;
       // Add logic to update the employee using the formData
       // For example:
+      this.employeeForm.value.firstSupervisor = this.selectedFirstSupervisor; 
+      this.employeeForm.value.secondSupervisor = this.selectedSecondSupervisor; 
       this.employeeService.updateEmployee(formData,this.employeeId ).subscribe({
         next: () => {
           this.employeeUpdated = true;
@@ -138,6 +160,10 @@ export class EditEmployeeComponent implements OnInit {
       }
     });
   }
+  getEmployeeName(empId: string): string { 
+    const employee = this.employees.find((g) => g.empId === empId); 
+    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
+  } 
   openImageDialog(): void {
     // Trigger click on the file input element to open the image dialog
     const fileInput = document.getElementById('image') as HTMLInputElement;

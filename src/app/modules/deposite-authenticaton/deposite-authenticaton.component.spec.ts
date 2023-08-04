@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DepositeAuthenticatonComponent } from './deposite-authenticaton.component';
+import { DepositeAuthenticationComponent } from './deposite-authenticaton.component';
 
 describe('DepositeAuthenticatonComponent', () => {
-  let component: DepositeAuthenticatonComponent;
-  let fixture: ComponentFixture<DepositeAuthenticatonComponent>;
+  let component: DepositeAuthenticationComponent;
+  let fixture: ComponentFixture<DepositeAuthenticationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DepositeAuthenticatonComponent ]
+      declarations: [ DepositeAuthenticationComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DepositeAuthenticatonComponent);
+    fixture = TestBed.createComponent(DepositeAuthenticationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

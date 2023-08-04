@@ -11,33 +11,35 @@
           <div class="card">
             <div class="card-header cardhead">
               <h4 class="card-title">Spouse</h4>
-              <p class="card-category">Complete your profile</p>
+              <p class="card-category">Edit your profile</p>
             </div>
             <div class="card-body">
               <form (ngSubmit)="updateSpouse()">
                 <div class="row">
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-md-6">
-                        <input class="form-control" placeholder="Name" type="text" name="name" [(ngModel)]="spouse.name" required>
+                      <div class="col-md-4 form-field">
+                        <input  placeholder=" " type="text" name="name" [(ngModel)]="spouse.name">
+                        <label>Name</label>
                       </div>
-                      <div class="col-md-6">
-                        <input class="form-control" placeholder="Relationship" name="relationship" [(ngModel)]="spouse.relationship" type="text">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <mat-form-field class="example-full-width">
-                          <input matInput [matDatepicker]="dateofbirthPicker" placeholder="Date Of Birth" name="dateOfBirth" [(ngModel)]="spouse.dateOfBirth">
-                          <mat-datepicker-toggle matSuffix [for]="dateofbirthPicker"></mat-datepicker-toggle>
-                          <mat-datepicker #dateofbirthPicker></mat-datepicker>
-                        </mat-form-field>
+                      <div class="col-md-4 form-field">
+                        <input  placeholder=" " type="text" name="relationship" [(ngModel)]="spouse.relationship ">
+                        <label>Relationship</label>
                       </div>
                     </div>
                   </div>
                 </div>
+             
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6 ">
+                      <mat-form-field class="example-full-width" style="height: 65px; width:160px" >
+                        <input matInput [matDatepicker]="dateofbirthPicker" placeholder=" " name="dateOfBirth" [(ngModel)]="spouse.dateOfBirth">
+                        <mat-label>Date Of Birth</mat-label>
+                        <mat-datepicker-toggle matSuffix [for]="dateofbirthPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dateofbirthPicker></mat-datepicker>
+                      </mat-form-field>
+                       </div></div></div>
                 <div>
                   <button type="button" class="btn btn-sm btnupdate" (click)="updateSpouse()">Update Spouse</button>
                 </div>

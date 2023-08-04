@@ -24,3 +24,49 @@
   margin-left: 25%;
   border-radius: 50%;
 }
+.form-field {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-field input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-field label {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  font-size: 14px;
+  color: #747070;
+  pointer-events: none;
+  transition: 0.2s ease all;
+}
+
+.form-field input:focus ~ label,
+.form-field input:valid ~ label {
+  top: -20px;
+  left: 5px;
+  font-size: 14px;
+  color: #333335;
+  background-color: #fff;
+  padding: 0 5px;
+}
+::ng-deep .mat-datepicker-content .mat-calendar {
+  width: 229px!important;
+  height: 300px!important;
+}
+
+/* styles.css or your component-specific style file */
+
+.custom-mat-select {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+}
+

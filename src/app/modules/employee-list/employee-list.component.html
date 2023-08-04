@@ -10,11 +10,14 @@
                     </mat-form-field>
                     <div class="card-header cardhead">
                         <h4 class="card-title ">Employee Table</h4>
-    
+                        <div class=" ">
+                           </div>
                     </div>
+                    
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mat-table"  *ngIf="employees&& employees.length>0 ">
+
                                <div> <thead>
                                     <tr>
                                         
@@ -29,7 +32,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let employee of employees">
+                                    <tr *ngFor="let employee of employees  ">
                                         <td>{{employee.firstName}}</td>
                                         <td>{{employee.middleName}}</td>
                                         <td>{{employee.sex}}</td>
@@ -39,11 +42,11 @@
                                        <td>{{getFirstSupervisorName(employee.firstSupervisor)}}</td>
                                        <td>{{getSecondSupervisorName(employee.secondSupervisor)}}</td>
                                     
-                                     
+                                      <td>
                                           <button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button>
- 
+
                                             <button  class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.empId)">Delete</button>
-                                           
+                                           </td>
                                     
                                     </tr>
                                 </tbody></div>

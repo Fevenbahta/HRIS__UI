@@ -8,68 +8,62 @@
       <div class="card  mb-5">
         <div class="card">
           <div class="card-header cardhead">
-            <h4 class="card-title">Qualification</h4>
-            <p class="card-category">Complete your Qualification</p>
+            <h4 class="card-title">work Experience</h4>
+            <p class="card-category">Complete your work Experience</p>
           </div>
           
             <!-- Work Experience Form -->
             <div class="card-body">
             <form (ngSubmit)="addWorkExperience()">
               <div class="card-body">
-              <div><p>Work Experience</p></div>
-              <div class="row"> 
-            
-                <div class="col-md-4">
-                 
-                    <input  class="form-control" placeholder="Company Name" type="text" name="companyName" [(ngModel)]="addWorkExperienceRequest.companyName">
-                  
-                </div>
-                <div class="col-md-4">
-                  
-                    <input  class="form-control" placeholder="Position Held" type="text" name="postionHeld" [(ngModel)]="addWorkExperienceRequest.postionHeld">
-                  
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-            <div class="row"> 
-                <div class="col-md-4">
-                  
-                    <input class="form-control" placeholder="Description" type="text" name="description" [(ngModel)]="addWorkExperienceRequest.description">
-                  
-                </div>
-                <div class="col-md-4">
-                  
-                    <input class="form-control" placeholder="Salary Amount" type="text" name="salary" [(ngModel)]="addWorkExperienceRequest.salary">
-                  
-                </div>
-                <div class="col-md-4">
-                 
-                    <input class="form-control" placeholder="Reason for termination" type="text" name="reasonTermination" [(ngModel)]="addWorkExperienceRequest.reasonTermination">
-                
-                </div>
-                </div>
-              </div>
-              <div class="card-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field class="example-full-width">
-                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="addWorkExperienceRequest.from">
-                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #fromPicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                  <mat-form-field class="example-full-width">
-                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="addWorkExperienceRequest.to">
-                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #toPicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-              </div>
-              </div>
-                <!-- Add more work experience form fields here... -->
-             
+  <div class="row">
+    <div class="col-md-4 form-field">
+      <input  placeholder="" type="text" name="companyName" [(ngModel)]="addWorkExperienceRequest.companyName">
+      <label>Company Name</label>
+    </div>
+    <div class="col-md-4 form-field">
+      <input  placeholder=" " type="text" name="postionHeld" [(ngModel)]="addWorkExperienceRequest.postionHeld">
+      <label>Position Held</label>
+    </div>
+  </div>
+</div>
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-4 form-field">
+      <input  placeholder="" type="text" name="description" [(ngModel)]="addWorkExperienceRequest.description">
+      <label>Description</label>
+    </div>
+    <div class="col-md-4 form-field">
+      <input  placeholder=" " type="text" name="salary" [(ngModel)]="addWorkExperienceRequest.salary">
+      <label>Salary Amount</label>
+    </div>
+    <div class="col-md-4 form-field">
+      <input  placeholder="" type="text" name="reasonTermination" [(ngModel)]="addWorkExperienceRequest.reasonTermination">
+      <label>Reason for Termination</label>
+    </div>
+  </div>
+</div>
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+        <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="addWorkExperienceRequest.from">
+        <mat-label>Start Date</mat-label>
+        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+        <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="addWorkExperienceRequest.to">
+        <mat-label>End Date</mat-label>
+        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
               <button type="button" class="btn btn-sm btnsave" (click)="addWorkExperience()">Add Work Experience</button>
               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
                -->

@@ -65,7 +65,7 @@ export class EmployeeRegistrationComponent implements OnInit {
       nationality: ['', Validators.required], 
       pensionNo: ['', Validators.required], 
       imageData: [''], 
-      crime: [true], 
+      crime: [false], 
       crimeDescription: [''], 
       firstSupervisor: ['', Validators.required], 
       secondSupervisor: ['', Validators.required], 

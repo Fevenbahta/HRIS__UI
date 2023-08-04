@@ -26,7 +26,7 @@ export class SpouseComponent implements OnInit {
     updatedBy: "",
     status: 0,
     empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
-  dateOfBirth:"2023-07-26T06:33:36.714Z",
+  dateOfBirth:"",
   relationship: '',
 
   };

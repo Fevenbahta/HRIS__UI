@@ -10,74 +10,95 @@
                 <div class="card">
                     <div class="card-header cardhead">
                         <h4 class="card-title">Contacts</h4>
-                        <p class="card-category">Complete your contacts</p>
+                        <p class="card-category">Edit your contacts</p>
                     </div>
                     <div class="card-body">
                         <form (ngSubmit)="updateContact()">
                           <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                          
-                            <input class="form-control" placeholder="Region" name="region" [(ngModel)]="addContactRequest.region "type="text"required>
-                          
-                        </div>
-                        <div class="col-md-6">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input  id="region" placeholder=" " name="region" [(ngModel)]="addContactRequest.region" type="text" required>
+                                  <label for="region">Region</label>
                             
-                              <input class="form-control" placeholder="Town" type="text" name="town" [(ngModel)]="addContactRequest.town">
-                           
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input id="town" placeholder=" " type="text" name="town" [(ngModel)]="addContactRequest.town">
+                                  <label for="town">Town</label>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        </div> 
-                      </div>
-                      <div class="card-body">
-                      <div class="row">
-                        <div class="col-md-6">
                           
-                            <input  class="form-control" placeholder="Subcity" type="text" name="subcity" [(ngModel)]="addContactRequest.subCity">
-                         
-                        </div>
-                        <div class="col-md-6">
-                          
-                            <input  class="form-control" placeholder="Woreda" type="text" name="woreda" [(ngModel)]="addContactRequest.woreda" >
-                          
-                        </div>
-                        </div>
-                        </div>
-                        <div class="card-body">
-                        <div class="row">
-                        <div class="col-md-6">
-                            
-                              <input  class="form-control" placeholder="kebele" type="text" name="town" [(ngModel)]="addContactRequest.town">
-                           
-                          </div>
-                          <div class="col-md-6">
-                           
-                              <input  class="form-control" placeholder="House Number" type="text" name="houseNumber" [(ngModel)]="addContactRequest.houseNo">
-                           
-                          </div>
-                          </div>
-                          </div>
                           <div class="card-body">
-                          <div class="row">
-                          <div class="col-md-6">
-                           P.O.Box
-                              <input  class="form-control" placeholder="" type="text" name="postNumber" [(ngModel)]="addContactRequest.postCode">
-                           
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input  id="subcity" placeholder=" " type="text" name="subcity" [(ngModel)]="addContactRequest.subCity">
+                                  <label for="subcity">Subcity</label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input  id="woreda" placeholder=" " type="text" name="woreda" [(ngModel)]="addContactRequest.woreda">
+                                  <label for="woreda">Woreda</label>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                         
-                          <div class="col-md-6">
-                           
-                              <mat-label>Phone Number</mat-label>
-                              <input  class="form-control" placeholder="+251 XXX XXX XXX" name="phoneNumber" [(ngModel)]="addContactRequest.phoneNumber" required>
-                           
-                            <mat-error *ngIf="!addContactRequest.phoneNumber && contactForm.get('phoneNumber').touched">
-                              Phone Number is required
-                            </mat-error>
+                          
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input id="kebele" placeholder=" " type="text" name="kebele" [(ngModel)]="addContactRequest.Kebele">
+                                  <label for="kebele">Kebele</label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input id="houseNumber" placeholder=" " type="text" name="houseNumber" [(ngModel)]="addContactRequest.houseNo">
+                                  <label for="houseNumber">House Number</label>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-               </div>
+         
                   
                  
                     <button mat-raised-button type="submit" class="btn btn-sm btnupdate">Update contact </button>
+                          
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input id="postNumber" placeholder=" " type="text" name="postNumber" [(ngModel)]="addContactRequest.postCode">
+                                  <label for="postNumber">P.O.Box</label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input id="email" placeholder=" " type="text" name="email" [(ngModel)]="addContactRequest.email">
+                                  <label for="email">Email</label>
+                                </div>
+                              </div>
+                       
+
+                              <div class="col-md-6 ">
+                                <div class="form-field">
+                                  <input type="text" placeholder=" " name="phoneNumber" [(ngModel)]="addContactRequest.phoneNumber">
+                                  <label>Phone Number</label>
+                                </div>
+                                <mat-error *ngIf="!addContactRequest.phoneNumber && contactForm.get('phoneNumber').touched">
+                                  Phone Number is required
+                                </mat-error>
+                              </div>
+                            </div>
+                          </div>
+                          
+                    <button mat-raised-button type="submit" class="btn btn-sm btnsave">Update contact </button>
                     <div class="clearfix"></div>
                 </form>
             </div>

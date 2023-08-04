@@ -20,7 +20,7 @@
                             <div class="col-md-6">
                              
                                 
-                                <mat-select class="form-control" placeholder="Select Division" name="selectedDivision" required [(ngModel)]="selectedDivision">
+                                <mat-select class="form-field custom-mat-select" placeholder="Select Division" name="selectedDivision" required [(ngModel)]="selectedDivision">
                                   <!-- Use *ngFor on mat-option to loop through departments -->
                                   <mat-option *ngFor="let division of divisions" [value]="division.divisionId">
                                     {{division.description}}
@@ -33,7 +33,7 @@
                             <div class="col-md-6">
                               
                                 
-                                <mat-select class="form-control" placeholder="Select Position" required name="selectedPosition" [(ngModel)]="selectedPosition" >
+                                <mat-select class="form-field custom-mat-select" placeholder="Select Position" required name="selectedPosition" [(ngModel)]="selectedPosition" >
                                   <!-- Replace the options below with your actual division options -->
                                   <mat-option *ngFor="let position of positions" [value]="position.positionId">
                                     {{position.name}}
@@ -50,7 +50,7 @@
                                    <div class="col-md-6">
                                     
                                     
-                                      <mat-select class="form-control" placeholder="Select Step" name="selectedStep" required [(ngModel)]="selectedStep" >
+                                      <mat-select class="form-field custom-mat-select" placeholder="Select Step" name="selectedStep" required [(ngModel)]="selectedStep" >
                                         <!-- Replace the options below with your actual division options -->
                                         <mat-option *ngFor="let step of steps" [value]="step.id">
                                           {{step.description}}
@@ -64,7 +64,7 @@
                                   <div class="col-md-6">
                                     
                                      
-                                      <mat-select class="form-control" placeholder="Select Branch" name="selectedBranch" required [(ngModel)]="selectedBranch" >
+                                      <mat-select class="form-field custom-mat-select" placeholder="Select Branch" name="selectedBranch" required [(ngModel)]="selectedBranch" >
                                         <!-- Replace the options below with your actual division options -->
                                         <mat-option *ngFor="let branch of branches" [value]="branch.id">
                                           {{branch.name}}

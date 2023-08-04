@@ -11,69 +11,60 @@
                   <div class="card">
                       <div class="card-header cardhead">
                           <h4 class="card-title">Emergency Contacts</h4>
-                          <p class="card-category">Complete your emergencycontacts</p>
+                          <p class="card-category">Edityour emergencycontacts</p>
                       </div>
                       <div class="card-body">
                           <form (ngSubmit)="updateEmergencyContact()">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-md-4">
-                          
-                            <input  class="form-control" placeholder="name" type="text" name="name" [(ngModel)]="emergencyContact.name">
-                          
-                        </div>
-                        <div class="col-md-4">
-                          
-                            <input  class="form-control" placeholder="Relationship" type="text" name="relationship" [(ngModel)]="emergencyContact.relationship">
-                          
-                        </div>
-                          <div class="col-md-4">
-                           
-                              <input  class="form-control" placeholder="Region" name="region" [(ngModel)]="emergencyContact.region "type="text"required>
-                            
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                      <div class="row">
-                          <div class="col-md-4">
-                             
-                                <input class="form-control" placeholder="Town" type="text" name="town" [(ngModel)]="emergencyContact.town">
-                              
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-4 form-field">
+                                  
+                                 <input placeholder=" " type="text" name="name" [(ngModel)]="emergencyContact.name">
+                               <label for="name">Name</label>  </div>
+                                <div class="col-md-4 form-field">
+                                 
+                                  <input placeholder=" " type="text" name="relationship" id="relationship" [(ngModel)]="emergencyContact.relationship">
+                                 <label for="relationship">Relationship</label></div>
+                                <div class="col-md-4 form-field">
+                                  
+                                  <input placeholder=" " id="region" name="region" [(ngModel)]="emergencyContact.region" type="text" required>
+                                <label for="region">Region</label></div>
+                              </div>
                             </div>
-                          <div class="col-md-4">
-                            
-                              <input class="form-control" placeholder="Subcity" type="text" name="subcity" [(ngModel)]="emergencyContact.subCity">
-                           
-                          </div>
-                          <div class="col-md-4">
-                            
-                              <input class="form-control" placeholder="kebele" type="text" name="kebele" [(ngModel)]="emergencyContact.kebele" >
-                            
-                          </div>
-                         </div>
-                        </div>
-                           
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-md-4">
-                             
-                                <input class="form-control" placeholder="House Number" type="text" name="houseNumber" [(ngModel)]="emergencyContact.houseNo">
-                             
-                            </div>
-                            
-                            <div class="col-md-4">
-                             
+                  
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-4 form-field">
                                 
-                                <input class="form-control" placeholder="+251 XXX XXX XXX" name="phoneNumber" [(ngModel)]="emergencyContact.phoneNumber" required>
-                             
-                              <mat-error *ngIf="!emergencyContact.phoneNumber && emergencycontactForm.get('phoneNumber').touched">
-                                Phone Number is required
-                              </mat-error>
+                                  <input placeholder=" " id="town" type="text" name="town" [(ngModel)]="emergencyContact.town">
+                                  <label for="town">Town</label></div>
+                                <div class="col-md-4 form-field">
+                                  
+                                  <input placeholder=" " id="subcity" type="text" name="subcity" [(ngModel)]="emergencyContact.subCity">
+                              <label for="subcity">Subcity</label>  </div>
+                                <div class="col-md-4 form-field">
+                                  
+                                  <input placeholder=" " type="text" name="kebele" [(ngModel)]="emergencyContact.kebele">
+                                <label for="kebele">Kebele</label></div>
+                              </div>
                             </div>
-                   
-                 </div>
-                    </div>
+                  
+                            <div class="card-body">
+                              <div class="row">
+                             
+                                <div class="col-md-4 form-field">
+                                    
+                               <input id="houseNumber" placeholder=" " type="text" name="houseNumber" [(ngModel)]="emergencyContact.houseNo">
+                               <label for="houseNumber">House Number</label>  </div>
+                                <div class="col-md-4 form-field">
+                                  <input placeholder=" " name="phoneNumber" [(ngModel)]="emergencyContact.phoneNumber" required>
+                                    <label for="phoneNumber">Phone Number</label>
+                                  <mat-error *ngIf="!emergencyContact.phoneNumber && emergencycontactForm.get('phoneNumber').touched">
+                                    Phone Number is required
+                                  </mat-error>
+                                </div>
+                              </div>
+                            </div>
                    
                       <div> <button type="button" class="btn btn-sm btnupdate" (click)="updateEmergencyContact()">Update</button>
                       </div>

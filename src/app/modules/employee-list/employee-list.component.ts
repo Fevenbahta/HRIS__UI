@@ -12,8 +12,12 @@ import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confi
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.scss']
 })
+
+
 export class EmployeeListComponent {
   employees:Employee[]= [];
+  allEmployees:any=[];
+  searchText:string[];
     buttons = [   
       { label: ' Add Employee ', route: '/employee-registration' },
       { label: '  List Employee ', route: '/employee-list' }
@@ -21,7 +25,10 @@ export class EmployeeListComponent {
 constructor(private employeeservice: EmployeeService,
   private dialog: MatDialog,
   // private snackBar: MatSnackBar,
-  private router: Router ){}
+  private router: Router ,
+  ){
+   
+  }
 ngOnInit(): void{
 this.employeeservice.getAllEmployees()
 .subscribe({
@@ -33,6 +40,27 @@ this.employeeservice.getAllEmployees()
   }
 });
 }
+applyFilter(filterValue: string) {
+  let filterValueLower = filterValue.toLowerCase();
+  if(filterValue === '' ) {
+      this.employees=this.allEmployees;
+  } 
+  else {
+    this.employees = this.allEmployees.filter((employee) => employee.name.includes(filterValueLower))
+  }
+}
+
+
+getEmployees() { 
+  this.employeeservice.getAllEmployees().subscribe( 
+    (employees) => { 
+      this.employees = employees; 
+    }, 
+    (error) => { 
+      console.log(error); 
+    } 
+  ); 
+} 
 
 deleteEmployee(id: string) {
   // Open the confirmation dialog
@@ -81,4 +109,6 @@ getSecondSupervisorName(secondSupervisor: string): string {
   const employee = this.employees.find((g) => g.empId === secondSupervisor); 
   return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
 } 
+
+
 }

@@ -133,7 +133,7 @@ addEmployeePosition(){
   .subscribe({
   next:()=>{
     this.jobdescriptionSaved = true;
-    this.router.navigate(['/employee-registration/education']); 
+  
     setTimeout(() => {
       this.jobdescriptionSaved = false;
     }, 2000);

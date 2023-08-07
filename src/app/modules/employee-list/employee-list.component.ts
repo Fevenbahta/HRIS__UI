@@ -63,17 +63,17 @@ getEmployees() {
     } 
   ); 
 } 
-OnChanges(changes: SimpleChanges) {
-  if (changes.searchTerm) {
-    if (this.searchTerm === '') {
-      this.filteredEmployees = this.employees;
-    } else {
-      this.filteredEmployees = this.employees.filter((employees) => {
-        return employees.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1;
+// ngOnChanges(changes: SimpleChanges) {
+//   if (changes.searchTerm) {
+//     if (this.searchTerm === '') {
+//       this.filteredEmployees = this.employees;
+//     } else {
+//       this.filteredEmployees = this.employees.filter((employees) => {
+//         return employees.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1;
        
-      });
-    }
-  }}
+//       });
+//     }
+//   }}
 
 onSearch() {
  this.filteredEmployees = [];

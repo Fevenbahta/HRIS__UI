@@ -11,7 +11,10 @@
 .cardhead{
   background-color: rgb(224, 224, 217);
 }
-.btnsave{
+.btnsave  {
+  background-color: #76a53b;
+}
+.btnupdate {
   background-color: #76a53b;
 }
 .btnedit{

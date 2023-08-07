@@ -2,6 +2,8 @@
     background-color:rgb(153, 146, 139);
     color:white
   }
+  .btnupdate {
+    background-color: #76a53b;
   .cardhead{
     background-color: rgb(224, 224, 217);
   }
@@ -38,4 +40,4 @@
   ::ng-deep .mat-datepicker-content .mat-calendar {
     width: 229px!important;
     height: 300px!important;
-  }
+  }}

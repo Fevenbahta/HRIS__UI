@@ -4,8 +4,7 @@ import { Employee } from 'app/models/employee.model';
 import { EmployeeService } from 'app/service/employee.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
-// import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
 @Component({
   selector: 'app-employee-list',
@@ -15,6 +14,9 @@ import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confi
 
 
 export class EmployeeListComponent {
+  searchTerm: string = '';
+  
+  filteredEmployees: any[] = [];
   employees:Employee[]= [];
   allEmployees:any=[];
   searchText:string[];
@@ -22,8 +24,11 @@ export class EmployeeListComponent {
       { label: ' Add Employee ', route: '/employee-registration' },
       { label: '  List Employee ', route: '/employee-list' }
     ]
+  dataSource: any;
 constructor(private employeeservice: EmployeeService,
   private dialog: MatDialog,
+
+
   // private snackBar: MatSnackBar,
   private router: Router ,
   ){
@@ -62,6 +67,20 @@ getEmployees() {
   ); 
 } 
 
+
+onSearch() {
+ // this.filteredEmployees = [];
+  // this.employees.forEach((employee) => {
+  //   if (employee.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1) {
+  //     this.filteredEmployees.push(employee);
+  //   }
+    this.employees = this.employees.filter((employees) => {
+      return employees.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1;
+    });
+  
+
+  }
+ 
 deleteEmployee(id: string) {
   // Open the confirmation dialog
   const dialogRef = this.dialog.open(DeleteConfirmationComponent, {

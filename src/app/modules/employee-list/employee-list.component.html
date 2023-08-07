@@ -1,12 +1,13 @@
 <app-shared-nav  [buttons]="buttons"></app-shared-nav>
-
-
-
   <div class="main-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card" style="width: 150%;">
+                <div class="card" >
+                    <mat-form-field >
+                        <mat-label>Filter</mat-label>
+                        <input matInput placeholder="Search employees" [(ngModel)]="searchTerm" (keyup)="onSearch()">
+                    </mat-form-field>
                     <div class="card-header cardhead">
                         <h4 class="card-title ">Employee Table</h4>
                         <div class=" ">
@@ -15,16 +16,17 @@
                     
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-responsive table-striped" *ngIf="employees&& employees.length>0">
+                            <table class="table table-bordered table-striped mat-table"  *ngIf="employees&& employees.length>0 ">
+
                                <div> <thead>
                                     <tr>
                                         
                                         <th>First Name</th>
                                         <th>Middle Name</th>
-                                          <th>Sex</th>
+                                        <th>Sex</th>
                                         <th>ECXID</th>
                                         <th>Pension Id</th>
-                                            <th>firstSupervisor</th>
+                                        <th>firstSupervisor</th>
                                         <th>secondSupervisor</th>
                             
                                     </tr>

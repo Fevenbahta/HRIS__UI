@@ -3,23 +3,23 @@
 
       <app-shared-nav [buttons]="buttons"></app-shared-nav> 
       <form (ngSubmit)="addBranch()"> 
-        <div class="row"> 
+        <div class="row" style="margin: 20px; margin-top: 40px; padding: 5px;"> 
           
-          <div class="col-4"> 
-            <div class="form-group"> 
+          <div class="col-md-3"> 
+            <div class="form-field"> 
               
-          <label for="branchName">Branch Name</label> 
-          <input type="text" class="form-control" id="branchName" required placeholder="Enter branch name"  [(ngModel)]="addBranchRequest.name"name="name" required> 
-            </div> 
+          
+          <input type="text"  id="branchName" required placeholder=" "  [(ngModel)]="addBranchRequest.name"name="name" required> 
+            <label for="branchName">Branch Name</label> </div> 
             </div> 
           <div class="col-4"> 
-            <div class="form-group"> 
-              <label for="branchCity">Branch City</label> 
-              <textarea class="form-control" id="branchCity" rows="1" required placeholder="Enter branch City" [(ngModel)]="addBranchRequest.city" name="city" required></textarea> 
-            </div> 
+            <div class="form-field"> 
+       
+              <input id="branchCity" rows="1" required placeholder=" " [(ngModel)]="addBranchRequest.city" name="city" required>
+                  <label for="branchCity">Branch City</label>  </div> 
           </div> 
-        </div> 
-        <button type="submit" class="btn btn-sm btnsave">Save</button> 
+        </div> <div class="col-md-3"> <button type="submit" class="btn btn-sm btnsave">Save</button> </div>
+           
         </form> 
        
         <h6 class="mb-3"> 

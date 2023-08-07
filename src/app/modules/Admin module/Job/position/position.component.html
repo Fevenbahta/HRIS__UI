@@ -5,12 +5,12 @@
   <app-shared-nav [buttons]="buttons"></app-shared-nav> 
  
   <form (ngSubmit)="addposition()"> 
-<div class="row"> 
+<div class="row" style="margin:10px"> 
   
-  <div class="col-4"> 
-    <div class="form-group"> 
-      <label for="selectedDivision">Division</label> 
-      <mat-form-field  class="w-100"> 
+  <div class="col-3"> 
+    <div class="form-field"> 
+ 
+      <mat-form-field  style="width: 180px;height: 65px;"> 
         <mat-label>Select Division 
  
         </mat-label> 
@@ -22,19 +22,18 @@
       </mat-form-field> 
     </div> 
     </div> 
-  <div class="col-4"> 
-    <div class="form-group"> 
-   
-      <label for="positionName">Position Name</label> 
-      <input type="text" class="form-control" id="positionName" placeholder="Enter position name" required [(ngModel)]="addPositionRequest.name"name="name" required> 
-    
-    </div> 
+  <div class="col-3"> 
+    <div class="form-field"> 
+ 
+      
+      <input type="text"  id="positionName" placeholder=" " required [(ngModel)]="addPositionRequest.name"name="name" required> 
+   <label for="positionName">Position Name</label>  </div> 
   </div> 
-  <div class="col-4"> 
-    <div class="form-group"> 
-      <label for="positionDescription">Position Description</label> 
-      <textarea class="form-control" id="positionDescription" rows="1" placeholder="Enter position description" required [(ngModel)]="addPositionRequest.description" name="description" required></textarea> 
-    </div> 
+  <div class="col-3"> 
+    <div class="form-field"> 
+     
+      <input  id="positionDescription" rows="1" placeholder=" " required [(ngModel)]="addPositionRequest.description" name="description" required> 
+    <label for="positionDescription">Position Description</label>  </div> 
   </div> 
  
  

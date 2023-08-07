@@ -5,12 +5,12 @@
  
    
   <form (ngSubmit)="addGrade()"> 
-    <div class="row"> 
+    <div class="row" > 
       
-      <div class="col-4"> 
-        <div class="form-group"> 
-          <label for="selectedPosition">Position</label> 
-          <mat-form-field  class="w-100"> 
+      <div class="col-3"> 
+        <div style="margin-left: 20px;"> 
+      
+          <mat-form-field  style="width: 180px;height: 65px;"> 
             <mat-label>Select Position</mat-label> 
             <mat-select placeholder="Select Position" name="selectedPosition" required [(ngModel)]="selectedPosition"> 
               <mat-option *ngFor="let position of positions" [value]="position.positionId"> 
@@ -20,11 +20,11 @@
           </mat-form-field> 
         </div> 
         </div> 
-      <div class="col-4"> 
-        <div class="form-group"> 
-          <label for="gradeDescription">Grade Description</label> 
-          <textarea class="form-control" id="gradeDescription" rows="1" placeholder="Enter Grade description"  [(ngModel)]="addGradeRequest.description"  name="description" required></textarea> 
-        </div> 
+      <div class="col-4" style="margin-top: 15px;"> 
+        <div class="form-field"> 
+        
+          <input id="gradeDescription" rows="1" placeholder=" "  [(ngModel)]="addGradeRequest.description"  name="description" required>
+        <label for="gradeDescription">Grade Description</label>   </div> 
       </div> 
     </div> 
     <button type="submit" class="btn btn-sm btnsave">Save</button> 

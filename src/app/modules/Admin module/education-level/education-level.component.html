@@ -1,14 +1,15 @@
 
   <app-shared-nav [buttons]="buttons"></app-shared-nav> 
 <div class="form-container"> 
-  <div class="row"><div class="col-md-7"> 
+  <div class="row">
+    <div class="col-md-7"> 
 <form (ngSubmit)="addEducationLevel()"> 
-    <div class="form-group"> 
-      <label for="educationLevel">Education Level Name</label> 
-      <input type="text" class="form-control" id="educationLevelName" placeholder="Enter Education Level name" [(ngModel)]="addEducationLevelRequest.educationName" name="educationName" required> 
-    </div> 
- 
-    <button type="submit" class="btn  btn-sm btnsave">Save </button> 
+    <div class="form-field"> 
+    
+      <input type="text" id="educationLevelName" placeholder=" " [(ngModel)]="addEducationLevelRequest.educationName" name="educationName" required> 
+     <label for="educationLevel">Education Level Name</label>  </div> 
+ <div style="margin-top: 10px;"><button type="submit" class="btn  btn-sm btnsave">Save </button> </div>
+    
   </form></div> 
    
 </div></div> 

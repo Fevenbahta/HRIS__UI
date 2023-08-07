@@ -5,13 +5,12 @@
  
  
   <form (ngSubmit)="addstep()"> 
-    <div class="row"> 
+    <div class="row " style="margin-left: 15px; margin-top:25px;"> 
       
-      <div class="col-4"> 
-        <div class="form-group"> 
-          <label for="selectedGrade">Grade Level</label> 
-          <mat-form-field class="w-100"> 
-            <mat-label>Select Grade Level</mat-label> 
+      <div class="col-md-3"> 
+        <div > 
+          <mat-form-field style="height: 65px; width:160px"  > 
+            <mat-label>Select Grade</mat-label> 
             <mat-select placeholder="Select Grade Level" name="selectedGrade" required [(ngModel)]="selectedGrade"> 
               <mat-option *ngFor="let grade of grades" [value]="grade.levelId"> 
                 {{ grade.description }} 
@@ -20,17 +19,17 @@
           </mat-form-field> 
         </div> 
         </div> 
-      <div class="col-4"> 
-        <div class="form-group"> 
-          <label for="stepDescription">Step Description</label> 
-          <textarea class="form-control" id="stepDescription" rows="1" required placeholder="Enter step description"  name="description" [(ngModel)]="addStepRequest.description" name="description" required></textarea> 
-        </div> 
+      <div class="col-md-3"> 
+        <div class="form-field"> 
+      
+          <input  id="stepDescription" rows="1" required placeholder=" "  name="description" [(ngModel)]="addStepRequest.description" name="description" required>
+            <label for="stepDescription">Step Description</label> </div> 
       </div> 
-      <div class="col-4"> 
-        <div class="form-group"> 
-          <label for="Salary">Salary</label> 
-          <input type="text" class="form-control" id="salary" required placeholder="Enter Salary"  name="name" [(ngModel)]="addStepRequest.salary" name="salary" required> 
-        </div> 
+      <div class="col-md-2"> 
+        <div class="form-field"> 
+         
+          <input type="text"  id="salary" required placeholder=" "  name="name" [(ngModel)]="addStepRequest.salary" name="salary" required> 
+        <label for="Salary">Salary</label>  </div> 
       </div> 
      
      

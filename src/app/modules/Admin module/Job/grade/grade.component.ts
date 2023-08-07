@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Grade, Position } from 'app/models/job-description.model';
 import { GradeService } from 'app/service/grade.service';
@@ -6,6 +6,7 @@ import { PositionService } from 'app/service/position.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-grade',
@@ -64,7 +65,19 @@ status:0,
     this.gradeservice.addGrade(this.addGradeRequest)
     .subscribe({
     next:(grade)=>{
-    this.router.navigate(["grade-registration/grade"])
+      this.grades.push({ ...this.addGradeRequest });
+
+      this.addGradeRequest = {
+        levelId:undefined,
+        positionId: '',
+        description: '',
+      createdBy: '',
+      createdDate: '2023-07-21T13:28:13.132Z',
+      updatedDate: '2023-07-21T13:28:13.132Z',
+      updatedBy: '',
+      status:0,
+    
+      };
     },
      error(response){
       console.log(response)

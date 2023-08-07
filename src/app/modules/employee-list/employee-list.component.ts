@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Employee } from 'app/models/employee.model';
 import { EmployeeService } from 'app/service/employee.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
-import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
+import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-employee-list',
@@ -14,17 +15,17 @@ import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
 
 export class EmployeeListComponent {
-  searchTerm: string = '';
-  
-  filteredEmployees: any[] = [];
+
+
+
   employees:Employee[]= [];
   allEmployees:any=[];
-  searchText:string[];
+
     buttons = [   
       { label: ' Add Employee ', route: '/employee-registration' },
       { label: '  List Employee ', route: '/employee-list' }
     ]
-  dataSource: any;
+ 
 constructor(private employeeservice: EmployeeService,
   private dialog: MatDialog,
 
@@ -44,16 +45,9 @@ this.employeeservice.getAllEmployees()
     console.log(response)
   }
 });
+
 }
-applyFilter(filterValue: string) {
-  let filterValueLower = filterValue.toLowerCase();
-  if(filterValue === '' ) {
-      this.employees=this.allEmployees;
-  } 
-  else {
-    this.employees = this.allEmployees.filter((employee) => employee.name.includes(filterValueLower))
-  }
-}
+
 
 
 getEmployees() { 
@@ -68,18 +62,7 @@ getEmployees() {
 } 
 
 
-onSearch() {
- // this.filteredEmployees = [];
-  // this.employees.forEach((employee) => {
-  //   if (employee.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1) {
-  //     this.filteredEmployees.push(employee);
-  //   }
-    this.employees = this.employees.filter((employees) => {
-      return employees.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1;
-    });
   
-
-  }
  
 deleteEmployee(id: string) {
   // Open the confirmation dialog

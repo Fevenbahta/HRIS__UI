@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeePositionService } from 'app/service/employee-position';
 import { Branch, Division, EmployeePosition, Position, Step } from 'app/models/job-description.model';
@@ -9,6 +9,7 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
 import { BranchService } from 'app/service/branch.service';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-edit-job-description',

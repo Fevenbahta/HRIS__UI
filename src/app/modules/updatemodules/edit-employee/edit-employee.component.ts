@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -65,7 +66,28 @@ supervisors:Supervisor[]=[];
       status: [0,] ,
       
     });
+    this.supervisorService.getAllSupervisors().subscribe({
+      next: (supervisors) => {
+        this.supervisors = supervisors;
+        this.firstSupervisors = supervisors.filter(
+          (supervisor) => supervisor.supervisorLevel == 'First Supervisor'
+        );
+        this.secondSupervisors = supervisors.filter(
+          (supervisor) => supervisor.supervisorLevel == 'Second Supervisor'
+        )}});
+  
 
+
+    this.employeeService.getAllEmployees() 
+    .subscribe({ 
+      next: (employees) => { 
+        this.employees=employees; 
+      }, 
+      error(response){ 
+        console.log(response) 
+      }, 
+       
+    }); 
     this.route.params.subscribe((params) => {
       this.employeeId = params['empId']; 
       this.employeeService.getEmployee(this.employeeId).subscribe((employee) => {
@@ -76,17 +98,7 @@ supervisors:Supervisor[]=[];
         console.log("Form Value:", this.employeeForm.value);// Call the method to populate the form with employee data
       });
     });
-    this.supervisorService.getAllSupervisors() 
-    .subscribe({ 
-      next: (supervisors) => { 
-        this.supervisors = supervisors; 
-        this.firstSupervisors = supervisors.filter((supervisor) => supervisor.supervisorLevel == 'First Supervisor'); 
-        this.secondSupervisors = supervisors.filter((supervisor) => supervisor.supervisorLevel == 'Second Supervisor'); 
-      }, 
-      error(response) { 
-        console.log(response); 
-      }, 
-    }); 
+   
 
   }
 
@@ -162,7 +174,7 @@ supervisors:Supervisor[]=[];
   }
   getEmployeeName(empId: string): string { 
     const employee = this.employees.find((g) => g.empId === empId); 
-    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
+    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:' EMPLOYEE'; 
   } 
   openImageDialog(): void {
     // Trigger click on the file input element to open the image dialog

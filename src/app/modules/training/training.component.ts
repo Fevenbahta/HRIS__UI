@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Training } from 'app/models/training.model';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { TrainingService } from 'app/service/training.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
+import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',

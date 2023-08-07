@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Router } from '@angular/router';
 import { DepositeAuthentication } from 'app/models/deposite-authentication.model';
 import { DepositeAuthenticationService } from 'app/service/deposite-authentcation.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-deposite-authenticaton',
   templateUrl: './deposite-authenticaton.component.html',

@@ -1,6 +1,4 @@
 
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { Contact } from 'app/models/contact.model';
 import { ContactService } from 'app/service/contact.service';
@@ -9,6 +7,8 @@ import { PidService } from 'app/service/pid.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { error } from 'jquery';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 

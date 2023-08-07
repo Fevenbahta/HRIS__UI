@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Employee, Supervisor } from 'app/models/employee.model';
 import { EmployeeService } from 'app/service/employee.service';
@@ -6,6 +6,7 @@ import { SupervisorService } from 'app/service/supervisor.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-supervisor',
@@ -68,7 +69,24 @@ supervisorLevel: '',
     this.supervisorservice.addSupervisor(this.addSupervisorRequest)
     .subscribe({
     next:(supervisor)=>{
-    this.router.navigate(["admin/supervisor"])
+
+      // Add the current work experience to the array
+      this.supervisors.push({ ...this.addSupervisorRequest });
+      // Reset the form fields
+
+
+      this.addSupervisorRequest = {
+       
+  id: undefined,
+  empId: '',
+createdBy: '',
+createdDate: '2023-07-26T11:40:51.509Z',
+updatedDate: '2023-07-26T11:40:51.509Z',
+updatedBy: '',
+status:0,
+pId: 0,
+supervisorLevel: '',
+      };
     },
      error(response){
       console.log(response)
@@ -76,7 +94,7 @@ supervisorLevel: '',
     })}
     getemployeeName(empId: string): string {
       const employee = this.employees.find((g) => g.empId === empId);
-      return employee ? (employee.firstName,employee.middleName, employee.lastName )  : 'Unknown EMPLOYEE';
+      return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`  : 'Unknown EMPLOYEE';
     }
     deleteSupervisor(id: string) {
       const dialogRef = this.dialog.open(DeleteConfirmationComponent);

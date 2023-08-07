@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+
 import { ContactService } from 'app/service/contact.service';
 import { Contact } from 'app/models/contact.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-contact',

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeRegistrationComponent } from './modules/employee-registration/employee-registration.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
@@ -29,6 +29,7 @@ import { WorkexperienceComponent } from './modules/workexperience/workexperience
 import { EducationComponent } from './modules/education/education.component';
 import { EditWorkexperienceComponent } from './modules/updatemodules/edit-workexperience/edit-workexperience.component';
 import { EditEducationComponent } from './modules/updatemodules/edit-education/edit-education.component';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {path: '',

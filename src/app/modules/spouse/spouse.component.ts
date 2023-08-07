@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Spouse } from 'app/models/spouse.model';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { SpouseService } from 'app/service/spouse.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-spouse',

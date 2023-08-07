@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { WorkExperience } from 'app/models/work-experience.model';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { WorkExperienceService } from 'app/service/work-experience.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { Component } from '@angular/core';
 
 
 @Component({

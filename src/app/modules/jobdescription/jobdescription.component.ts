@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ import { PositionService } from 'app/service/position.service';
 import { StepService } from 'app/service/step.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { BranchService } from 'app/service/branch.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-jobdescription',

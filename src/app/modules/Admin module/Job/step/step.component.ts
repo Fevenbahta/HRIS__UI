@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Grade, Step} from 'app/models/job-description.model';
 import { GradeService } from 'app/service/grade.service';
@@ -6,6 +6,7 @@ import { StepService } from 'app/service/step.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -72,7 +73,23 @@ buttons = [
     this.stepservice.addStep(this.addStepRequest)
     .subscribe({
     next:(step)=>{
-    this.router.navigate(["employee-registration/step"])
+      this.steps.push({ ...this.addStepRequest });
+
+      this.addStepRequest={
+        pId: 0,
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
+        salary:0,
+       salaryTypeId: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
+       levelId: '',
+        description:'',
+        createdBy: '',
+        createdDate: "2023-07-21T13:28:13.132Z",
+      updatedDate: "2023-07-21T13:28:13.132Z",
+        updatedBy: '',
+        status:0,
+       
+    
+      }
     },
      error(response){
       console.log(response)

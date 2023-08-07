@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { Branch } from 'app/models/job-description.model';
 import { BranchService } from 'app/service/branch.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { Component } from '@angular/core';
 @Component({
   selector: 'app-branch',
   templateUrl: './branch.component.html',
@@ -53,7 +54,21 @@ export class BranchComponent  {
   this.branchservice.addBranch(this.addBranchRequest)
   .subscribe({
   next:(branch)=>{
-  this.router.navigate(["employee-registration/branch"])
+    this.branchs.push({ ...this.addBranchRequest });
+
+    this.addBranchRequest = {
+      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      pid:0,
+      name: "",
+      city:  "",
+      createdBy: '',
+      createdDate: "2023-07-21T13:28:13.132Z",
+    updatedDate: "2023-07-21T13:28:13.132Z",
+      updatedBy: '',
+      status:0,
+     
+  
+    };
   },
    error(response){
     console.log(response)

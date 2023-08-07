@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { EducationLevel } from 'app/models/job-description.model';
 import { EducationLevelService } from 'app/service/educationlevel.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-education-level',
@@ -51,7 +52,20 @@ status:0,
     this.educationLevelService.addEducationLevel(this.addEducationLevelRequest)
     .subscribe({
     next:(educationLevel)=>{
-      this.router.navigate(['/employee-registration/education']); 
+      this.educationLevels.push({ ...this.addEducationLevelRequest });
+
+      this.addEducationLevelRequest = {
+        educationName:'',
+        pid:0,
+     id: undefined,
+   createdBy: '',
+   createdDate: '2023-07-21T13:28:13.132Z',
+   updatedDate: '2023-07-21T13:28:13.132Z',
+   updatedBy: '',
+   status:0,
+       
+    
+      };
     },
      error(response){
       console.log(response)

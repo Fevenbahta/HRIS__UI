@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 
 import { Division, Position } from 'app/models/job-description.model';
@@ -7,6 +7,7 @@ import { DivisionService } from 'app/service/division.service';
 import { MatDialog } from '@angular/material/dialog';
 
 import { PositionService } from 'app/service/position.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-position',
@@ -72,7 +73,21 @@ addposition(){
 this.positionservice.addPosition(this.addPositionRequest)
 .subscribe({
 next:(position)=>{
-this.router.navigate(["employee-registration/position"])
+  this.positions.push({ ...this.addPositionRequest });
+
+  this.addPositionRequest = {
+    pId: 0,
+    positionId: undefined,
+    divisionId:"",
+    name: '',
+    description:'',
+    createdBy: '',
+    createdDate: "2023-07-21T13:28:13.132Z",
+  updatedDate: "2023-07-21T13:28:13.132Z",
+    updatedBy: '',
+    status:0,
+
+  };
 },
  error(response){
   console.log(response)

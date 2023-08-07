@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 
 
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule, MatPseudoCheckbox, MatPseudoCheckboxModule, MatRippleModule} from '@angular/material/core';
@@ -52,7 +52,6 @@ import { EditContactComponent } from 'app/modules/updatemodules/edit-contact/edi
 import { EditSpouseComponent } from 'app/modules/updatemodules/edit-spouse/edit-spouse.component';
 import { EditJobDescriptionComponent } from 'app/modules/updatemodules/edit-job-description/edit-job-description.component';
 import { EditTrainingComponent } from 'app/modules/updatemodules/edit-training/edit-training.component';
-import { EditEmergencyContactComponent } from 'app/modules/updatemodules/edit-emergencycontact/edit-emergencycontact.component';
 import { EditDepositeAuthenticationComponent } from 'app/modules/updatemodules/edit-depositeauthentication/edit-depositeauthentication.component';
 import { EditQualificationComponent } from 'app/modules/updatemodules/edit-qualification/edit-qualification.component';
 import { WorkexperienceComponent } from 'app/modules/workexperience/workexperience.component';
@@ -61,6 +60,11 @@ import { EditWorkexperienceComponent } from 'app/modules/updatemodules/edit-work
 import { EditEducationComponent } from 'app/modules/updatemodules/edit-education/edit-education.component';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditEmergencyContactComponent } from 'app/modules/updatemodules/edit-emergencycontact/edit-emergencycontact.component';
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -68,7 +72,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [
     DefaultComponent,
      DashboardComponent,
-    EmployeeRegistrationComponent,
+   EmployeeRegistrationComponent,
    ContactComponent,
    JobdescriptionComponent,
     MinNavComponent,
@@ -100,7 +104,8 @@ WorkexperienceComponent,
     EducationComponent,
     EditWorkexperienceComponent,
     EditEducationComponent,
-    DeleteConfirmationComponent
+    DeleteConfirmationComponent,
+ 
 
   ],
 
@@ -130,7 +135,8 @@ WorkexperienceComponent,
  MatPaginatorModule,
  MatTableModule,
  SharedModule,
- MatDialogModule
+ MatDialogModule,
+
 
   ],
 

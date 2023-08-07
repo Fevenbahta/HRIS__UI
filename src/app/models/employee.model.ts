@@ -36,6 +36,7 @@ export interface Supervisor{
   empId: string,
   supervisorLevel: string;
   status:number;
+
 }
 
   

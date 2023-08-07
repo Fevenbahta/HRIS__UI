@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee } from 'app/models/employee.model';
 import { EmployeeService } from 'app/service/employee.service';
@@ -25,6 +25,7 @@ export class EmployeeListComponent {
       { label: '  List Employee ', route: '/employee-list' }
     ]
   dataSource: any;
+
 constructor(private employeeservice: EmployeeService,
   private dialog: MatDialog,
 
@@ -39,21 +40,17 @@ this.employeeservice.getAllEmployees()
 .subscribe({
   next: (employees) => {
     this.employees=employees;
+    const lastEmployee = this.employees.pop();
+    this.employees.unshift(lastEmployee);
+    this.employees.sort((a, b) => new Date(a.createdDate).getTime() - new Date(b.createdDate).getTime());
   },
+    
   error(response){
     console.log(response)
   }
 });
 }
-applyFilter(filterValue: string) {
-  let filterValueLower = filterValue.toLowerCase();
-  if(filterValue === '' ) {
-      this.employees=this.allEmployees;
-  } 
-  else {
-    this.employees = this.allEmployees.filter((employee) => employee.name.includes(filterValueLower))
-  }
-}
+
 
 
 getEmployees() { 
@@ -66,18 +63,30 @@ getEmployees() {
     } 
   ); 
 } 
-
+OnChanges(changes: SimpleChanges) {
+  if (changes.searchTerm) {
+    if (this.searchTerm === '') {
+      this.filteredEmployees = this.employees;
+    } else {
+      this.filteredEmployees = this.employees.filter((employees) => {
+        return employees.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1;
+       
+      });
+    }
+  }}
 
 onSearch() {
- // this.filteredEmployees = [];
-  // this.employees.forEach((employee) => {
-  //   if (employee.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1) {
-  //     this.filteredEmployees.push(employee);
-  //   }
+ this.filteredEmployees = [];
+ this.filteredEmployees = this.employees;
     this.employees = this.employees.filter((employees) => {
       return employees.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1;
+     
     });
-  
+    
+    if (this.searchTerm === '') {
+     this.filteredEmployees = this.employees;
+    }
+    
 
   }
  

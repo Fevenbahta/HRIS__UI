@@ -24,6 +24,7 @@ status:0,
 
 }
 export interface Position{
+
   pId: number,
   divisionId: string;
   status:number;

@@ -23,16 +23,16 @@ positions:Position[]=[];
   addPositionRequest:Position={
     pId: 0,
     positionId: undefined,
-    divisionId:"",
+    divisionId: "",
     name: '',
-    description:'',
+    description: '',
     createdBy: '',
     createdDate: "2023-07-21T13:28:13.132Z",
-  updatedDate: "2023-07-21T13:28:13.132Z",
+    updatedDate: "2023-07-21T13:28:13.132Z",
     updatedBy: '',
-    status:0,
-   
-}
+    status: 0,
+
+  }
 
 buttons = [
     { label: 'Position' , route:"/admin/position" },

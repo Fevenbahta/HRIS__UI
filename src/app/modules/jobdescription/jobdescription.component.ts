@@ -146,7 +146,7 @@ addEmployeePosition(){
       id: '',
     divisionId:'',
     stepId: '',
-    branchId: 'string',
+    branchId: '',
     position: '',
     status:0,
     startDate: '',

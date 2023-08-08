@@ -84,23 +84,23 @@ export class SpouseComponent implements OnInit {
       }
     });
   }
-  editSpouse(Spouse: Spouse): void {
+  editSpouse(spouse: Spouse): void {
     // Here, we will navigate to the edit page for the selected Spouse.
-    this.router.navigate(['/edit-spouse', Spouse.id]);
+    this.router.navigate(['/edit-spouse', spouse.id]);
   }
-  deleteSpouse(Spouse: Spouse): void {
+  deleteSpouse(spouse: Spouse): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
   
-    if (result) {
+    if (result===true) {
       // If the user confirms the deletion, we can call the service to delete the Spouse.
-      this.spouseService.deleteSpouse(this.spouse.id).subscribe(
+      this.spouseService.deleteSpouse(spouse.id).subscribe(
         () => {
           // Spouse deleted successfully, we can update the list of Spouses after deletion.
           // Here, we are simply filtering out the deleted Spouse from the Spouses array.
-          this.spouses = this.spouses.filter((t) => t.id !== this.spouse.id);
-          this.router.navigate(['employee-registration/job-description']);
+          this.spouses = this.spouses.filter((t) => t.id !== spouse.id);
+     
           // You can also show a success message to the user.
           alert('Spouse deleted successfully!');
         },

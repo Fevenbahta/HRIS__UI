@@ -3,18 +3,19 @@
     color:white
   }
   .btnupdate {
-    background-color: #76a53b;
+    background-color: #76a53b;}
   .cardhead{
     background-color: rgb(224, 224, 217);
   }
   .form-field {
     position: relative;
   }
-  
+
   .form-field input:not(:placeholder-shown) + label,
-  .form-field input:focus + label {
+  .form-field input:focus + label,
+  .form-field mat-form-field input {
     transform: translateY(-120%) scale(0.8);
-    color: #4f5152;
+    color: #007bff;
   }
   
   .form-field input,
@@ -27,17 +28,20 @@
     width: 100%;
   }
   
+  .form-field mat-select {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+  }
+  
   .form-field label {
     position: absolute;
     pointer-events: none;
     left: 0;
-    top: 5px;
+    top: -10px;
     transition: 0.2s ease all;
     font-size: 14px;
-  color: #696666;
+    color: #007bff;
   }
-  
-  ::ng-deep .mat-datepicker-content .mat-calendar {
-    width: 229px!important;
-    height: 300px!important;
-  }}

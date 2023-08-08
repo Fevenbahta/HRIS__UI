@@ -145,6 +145,7 @@ supervisors:Supervisor[]=[];
       const formData = this.employeeForm.value;
       // Add logic to update the employee using the formData
       // For example:
+      console.log(formData)
       this.employeeForm.value.firstSupervisor = this.selectedFirstSupervisor; 
       this.employeeForm.value.secondSupervisor = this.selectedSecondSupervisor; 
       this.employeeService.updateEmployee(formData,this.employeeId ).subscribe({

@@ -1,10 +1,11 @@
 import { Component, SimpleChanges } from '@angular/core'; 
 import { Router } from '@angular/router'; 
-import { Employee } from 'app/models/employee.model'; 
+import { Employee, Supervisor } from 'app/models/employee.model'; 
 import { EmployeeService } from 'app/service/employee.service'; 
 import { MatDialog } from '@angular/material/dialog'; 
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component'; 
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe'; 
+import { SupervisorService } from 'app/service/supervisor.service';
  
 @Component({ 
   selector: 'app-employee-list', 
@@ -15,7 +16,7 @@ import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
  
 export class EmployeeListComponent { 
   searchTerm: string = ''; 
-   
+  supervisors:Supervisor[]=[];
   filteredEmployees: any[] = []; 
   employees:Employee[]= []; 
   allEmployees:any=[]; 
@@ -29,7 +30,7 @@ export class EmployeeListComponent {
 constructor(private employeeservice: EmployeeService, 
   private dialog: MatDialog, 
  
- 
+ private supervisorService:SupervisorService,
   // private snackBar: MatSnackBar, 
   private router: Router , 
   ){ 
@@ -49,6 +50,16 @@ this.employeeservice.getAllEmployees()
     console.log(response) 
   } 
 }); 
+
+this.supervisorService.getAllSupervisors()
+.subscribe({
+  next: (supervisors) => {
+    this.supervisors=supervisors;
+  },
+  error(response){
+    console.log(response)
+  }
+});
 } 
  
  

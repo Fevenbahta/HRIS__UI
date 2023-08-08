@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card" >
                     <mat-form-field >
-                        <mat-label>Filter</mat-label>
+                        <mat-label>search</mat-label>
                         <input matInput placeholder="Search employees" [(ngModel)]="searchTerm" (keyup)="onSearch()">
                     </mat-form-field>
                     <div class="card-header cardhead">
@@ -14,9 +14,9 @@
                            </div>
                     </div>
                     
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped mat-table"  *ngIf="filteredEmployees || employees ">
+                    <div >
+                        <div class="col-md-6" >
+                            <table class="table  table-striped "  *ngIf="filteredEmployees || employees ">
 
                                <div> <thead>
                                     <tr>
@@ -42,14 +42,17 @@
                                        <td>{{getFirstSupervisorName(employee.firstSupervisor)}}</td>
                                        <td>{{getSecondSupervisorName(employee.secondSupervisor)}}</td>
                                     
-                                      <td>
-                                          <button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button>
+                                      
+                                  <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button></td>
 
-                                            <button  class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.empId)">Delete</button>
-                                           </td>
+                                  <td> <button  class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.empId)">Delete</button>
+                        </td> 
+                                   
+                                         
                                     
                                     </tr>
-                                </tbody></div>
+                                        </tbody>
+                            </div>
                             </table>
                             <p *ngIf="!filteredEmployees && !employees">no employees found</p>
                         </div>

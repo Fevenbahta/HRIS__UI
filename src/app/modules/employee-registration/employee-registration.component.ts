@@ -12,7 +12,7 @@ import { SupervisorService } from 'app/service/supervisor.service';
 @Component({ 
   selector: 'app-employee-registration', 
   templateUrl: './employee-registration.component.html', 
-  styleUrls: ['./employee-registration.component.css'] 
+  styleUrls: ['./employee-registration.component.scss'] 
 }) 
 export class EmployeeRegistrationComponent implements OnInit { 
   employeeForm: FormGroup; 

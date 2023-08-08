@@ -63,10 +63,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditEmergencyContactComponent } from 'app/modules/updatemodules/edit-emergencycontact/edit-emergencycontact.component';
-import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
+import { Ng2FilterPipe } from 'ng2-filter-pipe';
 
 @NgModule({
   declarations: [
@@ -105,6 +104,7 @@ WorkexperienceComponent,
     EditWorkexperienceComponent,
     EditEducationComponent,
     DeleteConfirmationComponent,
+
  
 
   ],

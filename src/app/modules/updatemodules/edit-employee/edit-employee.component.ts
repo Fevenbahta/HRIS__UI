@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee, Supervisor } from 'app/models/employee.model';
+import { EmployeeIdService } from 'app/service/employee-id.service';
 import { EmployeeService } from 'app/service/employee.service';
 import { SupervisorService } from 'app/service/supervisor.service';
 
@@ -33,7 +34,8 @@ supervisors:Supervisor[]=[];
     private employeeService: EmployeeService,
     private route: ActivatedRoute,
     private router: Router,
-    private supervisorService:SupervisorService 
+    private supervisorService:SupervisorService ,
+    private employeeIdService: EmployeeIdService
   ) {}
 
   ngOnInit(): void {
@@ -90,6 +92,7 @@ supervisors:Supervisor[]=[];
     }); 
     this.route.params.subscribe((params) => {
       this.employeeId = params['empId']; 
+      this.employeeIdService.employeeId= this.employeeId;
       this.employeeService.getEmployee(this.employeeId).subscribe((employee) => {
         this.employee = employee;
      this.selectedFirstSupervisor =  this.employee.firstSupervisor  ; 

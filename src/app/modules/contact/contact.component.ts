@@ -10,9 +10,6 @@ import { error } from 'jquery';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
-
-
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -49,17 +46,7 @@ constructor(
   private employeeIdService: EmployeeIdService,
   private dialog:MatDialog,
   private router:Router){}
-ngOnInit():void {
-  this.contactservice.getAllContacts() 
-  .subscribe({ 
-    next: (contacts) => { 
-      this.contacts = contacts; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
-}
+
 contactForm: FormGroup = this.formBuilder.group({
   phoneNumber: ['', Validators.required],
   
@@ -87,7 +74,20 @@ next:(jobdescription)=>{
   console.log(response)
 }
 })}
-
+ngOnInit():void {
+  this.contactservice.getAllContacts() 
+  //this.contactservice.getContact( this.employeeIdService.employeeId)
+ 
+  .subscribe({ 
+    next: (contacts) => {  
+     this.contacts=contacts;
+     // console.log(this.employeeIdService.employeeId);
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
+}
 editContact(contact: Contact): void {
   // Here, we will navigate to the edit page for the selected Contact.
   this.router.navigate(["/edit-contact", contact.id]);

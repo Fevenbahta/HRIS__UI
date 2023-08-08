@@ -18,6 +18,10 @@ import { EditWorkexperienceComponent } from './modules/updatemodules/edit-workex
 import { EditEducationComponent } from './modules/updatemodules/edit-education/edit-education.component';
 import { DeleteConfirmationComponent } from './modules/delete-confirmation/delete-confirmation.component';
 
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,8 +40,9 @@ import { DeleteConfirmationComponent } from './modules/delete-confirmation/delet
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-       DefaultModule,
+    DefaultModule,
        HttpClientModule,
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

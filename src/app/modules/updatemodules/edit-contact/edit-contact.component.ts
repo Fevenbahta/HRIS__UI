@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmployeeIdService } from 'app/service/employee-id.service';
 
 @Component({
   selector: 'app-edit-contact',
@@ -45,9 +46,11 @@ export class EditContactComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
+    private employeeIdService:EmployeeIdService
   ) {}
 
   ngOnInit(): void {
+    this.addContactRequest.empId = this.employeeIdService.employeeId;
     this.route.paramMap.subscribe(params => {
       const contactId = params.get('id');
       if (contactId) {

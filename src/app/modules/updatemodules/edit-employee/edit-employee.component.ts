@@ -1,10 +1,12 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contact } from 'app/models/contact.model';
 import { Employee, Supervisor } from 'app/models/employee.model';
 import { ContactComponent } from 'app/modules/contact/contact.component';
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { ContactService } from 'app/service/contact.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { EmployeeService } from 'app/service/employee.service';
@@ -24,7 +26,7 @@ supervisors:Supervisor[]=[];
   employees: Employee[] = [];
   firstSupervisors: Supervisor[] = []; // Array to store first supervisors only 
   selectedFirstSupervisor: string = ''; 
-  
+  filteredEmployees: any[] = []; 
   secondSupervisors: Supervisor[] = []; // Array to store first supervisors only 
   selectedSecondSupervisor: string = ''; 
   
@@ -39,6 +41,7 @@ supervisors:Supervisor[]=[];
     private router: Router,
     private supervisorService:SupervisorService ,
     private employeeIdService: EmployeeIdService,
+    private dialog: MatDialog
 
   ) {}
 
@@ -84,10 +87,10 @@ supervisors:Supervisor[]=[];
   
 
 
-    this.employeeService.getAllEmployees() 
+    this.employeeService.getEmployee(this.employeeIdService.employeeId) 
     .subscribe({ 
       next: (employees) => { 
-        this.employees=employees; 
+        this.employee=employees; 
       }, 
       error(response){ 
         console.log(response) 
@@ -97,7 +100,7 @@ supervisors:Supervisor[]=[];
     this.route.params.subscribe((params) => {
       this.employeeId = params['empId']; 
       this.employeeIdService.employeeId= this.employeeId;
-      this.employeeService.getEmployee(this.employeeId).subscribe((employee) => {
+      this.employeeService.getEmployee(this.employeeIdService.employeeId).subscribe((employee) => {
         this.employee = employee;
      this.selectedFirstSupervisor =  this.employee.firstSupervisor  ; 
       this.selectedSecondSupervisor = this.employee.secondSupervisor ; 
@@ -205,4 +208,53 @@ supervisors:Supervisor[]=[];
       reader.onerror = (error) => reject(error);
     });
   }
+
+  getFirstSupervisorName(firstSupervisor: string): string { 
+    const employee = this.employees.find((g) => g.empId === firstSupervisor); 
+    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
+  } 
+  getSecondSupervisorName(secondSupervisor: string): string { 
+    const employee = this.employees.find((g) => g.empId === secondSupervisor); 
+    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
+  } 
+  
+  deleteEmployee(id: string) { 
+    // Open the confirmation dialog 
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, { 
+      width: '400px', 
+    }); 
+   
+    // After the dialog is closed (by clicking Confirm or Cancel button) 
+    dialogRef.afterClosed().subscribe((result) => { 
+      // If the user confirms the deletion, proceed with the deletion 
+      if (result === true) { 
+        this.employeeService.deleteEmployee(id).subscribe( 
+          () => { 
+            // Update the employee list by filtering out the deleted employee 
+            this.employees = this.employees.filter((employee) => employee.empId !== id); 
+            // Show a success message 
+            // this.showSnackBar('Employee deleted successfully!'); 
+            this.router.navigate(["/edit-employee"]); 
+          }, 
+          (error) => { 
+            console.log(error); 
+            // Show an error message 
+            // this.showSnackBar('Failed to delete the employee. Please try again later.', 'mat-warn'); 
+          } 
+        ); 
+      } 
+    }); 
+  } 
+   
+  // private showSnackBar(message: string, panelClass: string = 'mat-toolbar') { 
+  //   this.snackBar.open(message, 'Close', { 
+  //     duration: 3000, 
+  //     panelClass: ['mat-toolbar', panelClass], 
+  //   }); 
+  // } 
+  editEmployee(employee: Employee): void { 
+    // Here, we will navigate to the edit page for the selected EmergencyContact. 
+    this.router.navigate(["/edit-employee", employee.empId]); 
+  } 
+    
 }

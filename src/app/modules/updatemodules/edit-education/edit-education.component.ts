@@ -6,6 +6,7 @@ import { Education } from 'app/models/work-experience.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { EducationService } from 'app/service/education.service';
 import { EducationLevelService } from 'app/service/educationlevel.service';
+import { EmployeeIdService } from 'app/service/employee-id.service';
 
 @Component({
   selector: 'app-edit-education',
@@ -31,7 +32,9 @@ export class EditEducationComponent {
 
     private route: ActivatedRoute,
     private router: Router,
-    private educationlevelservice: EducationLevelService
+    private educationlevelservice: EducationLevelService,
+    private employeeIdService:EmployeeIdService
+
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +44,7 @@ export class EditEducationComponent {
 
       // Get the work experience by ID
 
-        this.educationService.getEducation(this.educationId).subscribe({
+        this.educationService.getEducation(this.employeeIdService.employeeId).subscribe({
           next: (education) => {
             this.education = education;
         

@@ -14,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class TrainingComponent implements OnInit {
   trainingSaved: boolean = false;
   trainings: Training[] = [];
+  training:Training
 
   addTrainingRequest: Training = {
     pId: 0,
@@ -42,10 +43,10 @@ export class TrainingComponent implements OnInit {
     private router: Router,) { }
 
   ngOnInit(): void {
-    this.trainingService.getAllTraining() 
+    this.trainingService.getTraining(this.employeeIdService.employeeId) 
   .subscribe({ 
     next: (trainings) => { 
-      this.trainings = trainings; 
+      this.training = trainings; 
           }, 
     error(response) { 
       console.log(response); 

@@ -4,6 +4,7 @@ import { WorkExperience } from 'app/models/work-experience.model';
 import { WorkExperienceService } from 'app/service/work-experience.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { EmployeeIdService } from 'app/service/employee-id.service';
 @Component({
   selector: 'app-edit-workexperience',
   templateUrl: './edit-workexperience.component.html',
@@ -28,7 +29,9 @@ export class EditWorkexperienceComponent {
     private workExperienceService: WorkExperienceService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private employeeIdService:EmployeeIdService
+
 
   ) { }
 

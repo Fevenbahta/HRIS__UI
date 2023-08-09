@@ -112,10 +112,10 @@ this.branchservice.getAllBranch()
 });
 
 
-this.employeepositionservice.getAllEmployeePosition() 
+this.employeepositionservice.getEmployeePosition(this.employeeIdService.employeeId) 
   .subscribe({ 
     next: (employeepositions) => { 
-      this.employeepositions = employeepositions; 
+      this.employeePosition = employeepositions; 
           }, 
     error(response) { 
       console.log(response); 

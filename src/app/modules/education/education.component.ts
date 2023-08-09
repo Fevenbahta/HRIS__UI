@@ -67,10 +67,10 @@ export class EducationComponent {
     console.log(response)
   }
 });
-this.educationservice.getAllEducation() 
+this.educationservice.getEducation(this.employeeIdService.employeeId) 
   .subscribe({ 
     next: (education) => { 
-      this.educations = education; 
+      this.education = education; 
           }, 
     error(response) { 
       console.log(response); 

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Spouse } from 'app/models/spouse.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { EmployeeIdService } from 'app/service/employee-id.service';
 import { SpouseService } from 'app/service/spouse.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class EditSpouseComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private spouseService: SpouseService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private employeeIdService:EmployeeIdService
 
   ) {}
 
@@ -47,7 +49,7 @@ export class EditSpouseComponent implements OnInit {
   }
 
   getSpouseById(): void {
-    this.spouseService.getSpouse(this.spouseId).subscribe(
+    this.spouseService.getSpouse(this.employeeIdService.employeeId).subscribe(
       (spouse) => {
         this.spouse = spouse;
       },

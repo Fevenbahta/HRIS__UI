@@ -65,7 +65,7 @@ export class EditContactComponent implements OnInit {
         });
       }
     });
-    const empid= this.employeeIdService.employeeId;
+
  
     this.contactService.getContact(this.employeeIdService.employeeId)
     

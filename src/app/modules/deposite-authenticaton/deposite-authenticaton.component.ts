@@ -45,10 +45,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
   ngOnInit():void {
-    this.depositeauthenticationservice.getAllDepositeAuthentication() 
+    this.depositeauthenticationservice.getDepositeAuthentication(this.employeeIdService.employeeId) 
     .subscribe({ 
       next: (depositeauthentications) => { 
-        this.depositeauthentications = depositeauthentications; 
+        this.depositeAuthentication = depositeauthentications; 
             }, 
       error(response) { 
         console.log(response); 

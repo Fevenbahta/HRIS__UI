@@ -43,10 +43,10 @@ export class SpouseComponent implements OnInit {
     { label: '  List Employee ', route: '/employee-list' }
   ];
   ngOnInit(): void {
-    this.spouseService.getAllSpouse() 
+    this.spouseService.getSpouse(this.employeeIdService.employeeId) 
   .subscribe({ 
     next: (spouses) => { 
-      this.spouses = spouses; 
+      this.spouse = spouses; 
           }, 
     error(response) { 
       console.log(response); 

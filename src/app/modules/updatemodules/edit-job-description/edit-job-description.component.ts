@@ -55,7 +55,7 @@ export class EditJobDescriptionComponent implements OnInit {
       // this.getemployeePositionById()
 
 
-      this.employeePositionService.getEmployeePosition(this.employeePositionId).subscribe((employeePosition) => {
+      this.employeePositionService.getEmployeePosition(this.employeeIdService.employeeId).subscribe((employeePosition) => {
         this.employeePosition = employeePosition;
 
         this.selectedDivision = employeePosition.divisionId;

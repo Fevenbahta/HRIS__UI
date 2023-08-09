@@ -85,13 +85,13 @@
     </thead>
     <tbody>
       <!-- Use *ngFor to loop through the emergencycontacts array and display each emergency contact record -->
-      <tr *ngFor="let contact of emergencycontacts">
-        <td>{{ contact.name }}</td>
-        <td>{{ contact.phoneNumber }}</td>
-        <td>{{ contact.relationship }}</td>
+      <tr >
+        <td>{{ emergencycontact.name }}</td>
+        <td>{{ emergencycontact.phoneNumber }}</td>
+        <td>{{ emergencycontact.relationship }}</td>
         <td>
-          <button class="btn btn-sm btnedit" (click)="editEmergencyContact(contact)">Edit</button>
-    <button class="btn btn-sm btn-danger" (click)="deleteEmergencyContact(contact)">Delete</button>
+          <button class="btn btn-sm btnedit" (click)="editEmergencyContact(emergencycontact)">Edit</button>
+    <button class="btn btn-sm btn-danger" (click)="deleteEmergencyContact(emergencycontact)">Delete</button>
   </td>
       </tr>
     </tbody>

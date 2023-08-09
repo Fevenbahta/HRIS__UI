@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Training } from 'app/models/training.model';
+import { EmployeeIdService } from 'app/service/employee-id.service';
 import { TrainingService } from 'app/service/training.service';
 
 @Component({
@@ -22,7 +23,9 @@ export class EditTrainingComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private trainingService: TrainingService
+    private trainingService: TrainingService,
+    private employeeIdService:EmployeeIdService
+
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +46,7 @@ export class EditTrainingComponent implements OnInit {
   }
 
   getTrainingById(): void {
-    this.trainingService.getTraining(this.trainingId).subscribe(
+    this.trainingService.getTraining(this.employeeIdService.employeeId).subscribe(
       (training) => {
         this.training = training;
       },

@@ -54,10 +54,10 @@ export class WorkexperienceComponent {
     ngOnInit(): void {
   
 
-  this.workExperienceService.getAllWorkExperience() 
+  this.workExperienceService.getWorkExperience(this.employeeIdService.employeeId) 
     .subscribe({ 
       next: (workExperience) => { 
-        this.workExperiences = workExperience; 
+        this.workExperience = workExperience; 
             }, 
       error(response) { 
         console.log(response); 

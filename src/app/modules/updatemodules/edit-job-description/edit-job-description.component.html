@@ -112,7 +112,7 @@
       </thead>
       <tbody>
         <!-- Use *ngFor to loop through the employeepositions array and display each employee position -->
-        <tr *ngFor="let employeePosition of employeePositions">
+        <tr >
           <td>{{ employeePosition.id }}</td>
           <td>{{ getDivisionName(employeePosition.divisionId) }}</td>
           <td>{{ getPositionName(employeePosition.position) }}</td>

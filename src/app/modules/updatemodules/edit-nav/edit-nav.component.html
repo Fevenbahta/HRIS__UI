@@ -10,22 +10,22 @@
                    <div><button type="button" class=" btn btn-gray  btn-sm" routerLinkActive="btn-green" [routerLink]="'/edit-employee/'+empId">Personal Information</button>
                    </div> 
                    <div><button type="button" class="btn btn-gray btn-sm" routerLinkActive="btn-green" [routerLink]="'/edit-contact/'+ empId">contact</button>
-                    <div><button type="button" class="btn btn-gray   btn-sm" routerLinkActive="btn-green" routerLink="edit-emergencyContact:id">Emergency contact</button>
+                    <div><button type="button" class="btn btn-gray   btn-sm" routerLinkActive="btn-green" [routerLink]="'edit-emergencyContact'+empId">Emergency contact</button>
                  </div>     
-                 <div><button type="button" class="btn btn-gray  btn-sm" routerLinkActive="btn-green" routerLink="edit-spouse:id">Spouse</button>
+                 <div><button type="button" class="btn btn-gray  btn-sm" routerLinkActive="btn-green" [routerLink]="'edit-spouse' +empId">Spouse</button>
                  </div> 
-             <div><button type="button" class="btn btn-gray  btn-sm" routerLinkActive="btn-green" routerLink="edit-jobDescription:id">Job description</button>
+             <div><button type="button" class="btn btn-gray  btn-sm" routerLinkActive="btn-green" [routerLink]="'edit-jobDescription' +empId">Job description</button>
                   </div>   
-                  <div><button type="button" class="btn btn-gray   btn-sm" routerLinkActive="btn-green" routerLink="edit-education:id">Education</button>
+                  <div><button type="button" class="btn btn-gray   btn-sm" routerLinkActive="btn-green" [routerLink]="'edit-education'+empId">Education</button>
                    </div> 
-                   <div><button type="button" class="btn btn-gray   btn-sm" routerLinkActive="btn-green" routerLink="edit-workExperience:id">Work Experience</button>
+                   <div><button type="button" class="btn btn-gray   btn-sm" routerLinkActive="btn-green" [routerLink]="'edit-workExperience' +empId">Work Experience</button>
                    </div>   
                   
-                  <div><button type="button" class="btn btn-gray  btn-sm" routerLinkActive="btn-green"routerLink="edit-training:id">Training</button>
+                  <div><button type="button" class="btn btn-gray  btn-sm" routerLinkActive="btn-green" [routerLink]="'edit-training' +empId">Training</button>
                    </div> 
   
                
-               <div><button type="button" class="btn btn-gray  btn-sm" routerLinkActive="btn-green" routerLink="edit-depositeAuthentication:id">Deposite Authentication</button>
+               <div><button type="button" class="btn btn-gray  btn-sm" routerLinkActive="btn-green" [routerLink]="'edit-depositeAuthentication' +empId">Deposite Authentication</button>
                 </div>    
 
                </div>  

@@ -17,7 +17,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EmergencycontactComponent implements OnInit {
   emergencycontactSaved: boolean = false;
   emergencycontacts: EmergencyContact[] = []; 
-emergencyContact:EmergencyContact;
+emergencycontact:EmergencyContact;
 
   addEmergencyContactRequest:EmergencyContact={
     pId:0,
@@ -45,10 +45,10 @@ constructor(
   private dialog: MatDialog,
   private router:Router){}
 ngOnInit():void {
-  this.emergencycontactservice.getAllEmergencyContact() 
+  this.emergencycontactservice.getEmergencyContact(this.employeeIdService.employeeId)
   .subscribe({ 
     next: (emergencycontacts) => { 
-      this.emergencycontacts = emergencycontacts; 
+      this.emergencycontact = emergencycontacts; 
           }, 
     error(response) { 
       console.log(response); 

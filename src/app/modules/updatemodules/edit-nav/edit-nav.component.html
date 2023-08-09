@@ -7,10 +7,9 @@
                
                 <div class="card-body">
                  
-  
-                   <div><button type="button" class=" btn btn-gray  btn-sm" routerLinkActive="btn-green" routerLink="edit-employee:empId">Personal Information</button>
+                   <div><button type="button" class=" btn btn-gray  btn-sm" routerLinkActive="btn-green" [routerLink]="'/edit-employee/'+empId">Personal Information</button>
                    </div> 
-                   <div><button type="button" class="btn btn-gray btn-sm" routerLinkActive="btn-green" routerLink="edit-contact:id">contact</button>
+                   <div><button type="button" class="btn btn-gray btn-sm" routerLinkActive="btn-green" [routerLink]="'/edit-contact/'+ empId">contact</button>
                     <div><button type="button" class="btn btn-gray   btn-sm" routerLinkActive="btn-green" routerLink="edit-emergencyContact:id">Emergency contact</button>
                  </div>     
                  <div><button type="button" class="btn btn-gray  btn-sm" routerLinkActive="btn-green" routerLink="edit-spouse:id">Spouse</button>

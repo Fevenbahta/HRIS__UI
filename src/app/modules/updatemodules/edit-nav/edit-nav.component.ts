@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { EmployeeIdService } from 'app/service/employee-id.service';
 
 @Component({
   selector: 'app-edit-nav',
@@ -12,12 +13,14 @@ export class EditNavComponent {
     { label: 'Add Employee' }
     
   ];
+  empId:string;
   employeeForm: FormGroup; 
   selectedImage: File;
-  constructor() { }
+  constructor( private employeeIdService:EmployeeIdService) { 
+    }
 
   ngOnInit(): void {
-    
+   this.empId=this.employeeIdService.employeeId
   }
 
  

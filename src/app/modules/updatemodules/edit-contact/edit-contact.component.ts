@@ -53,7 +53,7 @@ export class EditContactComponent implements OnInit {
     this.addContactRequest.empId = this.employeeIdService.employeeId;
     console.log( this.addContactRequest.empId);
     this.route.paramMap.subscribe(params => {
-      const contactId = params.get('id');
+      const contactId = params.get('empId');
       if (contactId) {
         this.contactService.getContact(contactId).subscribe({
           next: (contact) => {

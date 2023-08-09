@@ -18,8 +18,8 @@ export class ContactService {
   getAllContacts(): Observable<Contact[]> {
     return this.http.get<Contact[]>(this.apiUrl + 'api/Address');
   }
-  getContact(id:string): Observable<Contact> {
-    return this.http.get<Contact>(this.apiUrl + 'api/Address/'+id);
+  getContact(empid:string): Observable<Contact> {
+    return this.http.get<Contact>(this.apiUrl + 'api/Address/'+empid);
   }
   getContactByEmpId(empId:string): Observable<Contact> {
     return this.http.get<Contact>(this.apiUrl + 'api/Address/'+empId);

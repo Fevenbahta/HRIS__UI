@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { error } from 'jquery';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription, filter } from 'rxjs';
+import { EmployeeService } from 'app/service/employee.service';
 
 @Component({
   selector: 'app-contact',
@@ -44,8 +46,10 @@ constructor(
   private pIdservice: PidService, 
   private contactservice: ContactService,
   private employeeIdService: EmployeeIdService,
+  //private employeeService: EmployeeService,
   private dialog:MatDialog,
   private router:Router){}
+  subscription: Subscription;
 
 contactForm: FormGroup = this.formBuilder.group({
   phoneNumber: ['', Validators.required],
@@ -56,6 +60,18 @@ buttons = [
   { label: ' Add Employee ', route: '/employee-registration' },
   { label: '  List Employee ', route: '/employee-list' }
 ];
+ngOnInit():void {
+
+  const empid= this.employeeIdService.employeeId;
+ 
+this.contactservice.getContact(this.employeeIdService.employeeId)
+
+  
+  .subscribe((contacts) => {
+    this.contact = contacts;
+  }); 
+  
+ }
 addContact(){
   // if (this.contactForm.invalid) {
   //   this.contactForm.markAllAsTouched();
@@ -64,9 +80,12 @@ addContact(){
   this.addContactRequest.empId = this.employeeIdService.employeeId;
   console.log(this.addContactRequest)
 this.contactservice.addContact(this.addContactRequest)
-.subscribe({
 
-next:(jobdescription)=>{
+.subscribe({
+  
+next:(contacts)=>{
+ 
+this.contacts.push({...this.addContactRequest});
   this.router.navigate(['/employee-registration/emergency-contact']); 
 
 },
@@ -74,20 +93,7 @@ next:(jobdescription)=>{
   console.log(response)
 }
 })}
-ngOnInit():void {
-  this.contactservice.getAllContacts() 
-  //this.contactservice.getContact( this.employeeIdService.employeeId)
- 
-  .subscribe({ 
-    next: (contacts) => {  
-     this.contacts=contacts;
-     // console.log(this.employeeIdService.employeeId);
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
-}
+
 editContact(contact: Contact): void {
   // Here, we will navigate to the edit page for the selected Contact.
   this.router.navigate(["/edit-contact", contact.id]);

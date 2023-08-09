@@ -18,8 +18,22 @@
   background-color: #76a53b;
 }
 .btnedit{
-  background-color: rgb(153, 146, 139);
-  color:white
+  background-color: #76a53b;;
+  color:rgb(22, 20, 20);
+  font-weight: 600;
+font-size:small;
+border-style:groove;
+
+border-radius: 10%;
+}  .btndanger{
+color: rgb(22, 21, 21);
+font-weight: 600;
+font-size:small;
+border-style:groove;
+
+border-radius: 10%;
+background-color:#fcc034 ;
+
 }
 .img {
   width:50%;

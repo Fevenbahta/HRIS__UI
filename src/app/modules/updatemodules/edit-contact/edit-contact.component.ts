@@ -51,6 +51,7 @@ export class EditContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.addContactRequest.empId = this.employeeIdService.employeeId;
+    console.log( this.addContactRequest.empId);
     this.route.paramMap.subscribe(params => {
       const contactId = params.get('id');
       if (contactId) {
@@ -64,17 +65,23 @@ export class EditContactComponent implements OnInit {
         });
       }
     });
-
-    this.contactService.getAllContacts() 
-    .subscribe({ 
-      next: (contacts) => { 
-        this.contacts = contacts; 
-            }, 
-      error(response) { 
-        console.log(response); 
-      }, 
-  });
-  }
+    const empid= this.employeeIdService.employeeId;
+ 
+    this.contactService.getContact(this.employeeIdService.employeeId)
+    
+      
+      .subscribe((contacts) => {
+        this.contact = contacts;
+      }); 
+    // this.contactService.getAllContacts() 
+    // .subscribe({ 
+    //   next: (contacts) => { 
+    //     this.contacts = contacts; 
+    //         }, 
+    //   error(response) { 
+    //     console.log(response); 
+    //   }, 
+    }
   contactForm: FormGroup = this.formBuilder.group({
     phoneNumber: ['', Validators.required],
     

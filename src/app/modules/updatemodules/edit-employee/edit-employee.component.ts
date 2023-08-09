@@ -2,7 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Contact } from 'app/models/contact.model';
 import { Employee, Supervisor } from 'app/models/employee.model';
+import { ContactComponent } from 'app/modules/contact/contact.component';
+import { ContactService } from 'app/service/contact.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { EmployeeService } from 'app/service/employee.service';
 import { SupervisorService } from 'app/service/supervisor.service';
@@ -24,7 +27,7 @@ supervisors:Supervisor[]=[];
   
   secondSupervisors: Supervisor[] = []; // Array to store first supervisors only 
   selectedSecondSupervisor: string = ''; 
- 
+  
    buttons = [
      { label: ' Add Employee ', route: '/employee-registration' },
      { label: '  List Employee ', route: '/employee-list' }
@@ -35,7 +38,8 @@ supervisors:Supervisor[]=[];
     private route: ActivatedRoute,
     private router: Router,
     private supervisorService:SupervisorService ,
-    private employeeIdService: EmployeeIdService
+    private employeeIdService: EmployeeIdService,
+
   ) {}
 
   ngOnInit(): void {
@@ -101,7 +105,6 @@ supervisors:Supervisor[]=[];
         console.log("Form Value:", this.employeeForm.value);// Call the method to populate the form with employee data
       });
     });
-   
 
   }
 
@@ -160,7 +163,6 @@ supervisors:Supervisor[]=[];
         }
       });
 
-      this.router.navigate(['/employee-registration']); 
     } else {
       this.validateAllFormFields(this.employeeForm);
     }

@@ -21,7 +21,9 @@ export class ContactService {
   getContact(id:string): Observable<Contact> {
     return this.http.get<Contact>(this.apiUrl + 'api/Address/'+id);
   }
-
+  getContactByEmpId(empId:string): Observable<Contact> {
+    return this.http.get<Contact>(this.apiUrl + 'api/Address/'+empId);
+  }
   addContact(addContactRequest:Contact): Observable<Contact> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

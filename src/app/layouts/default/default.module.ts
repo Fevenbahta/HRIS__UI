@@ -66,6 +66,7 @@ import { EditEmergencyContactComponent } from 'app/modules/updatemodules/edit-em
 
 
 import { Ng2FilterPipe } from 'ng2-filter-pipe';
+import { EditNavComponent } from 'app/modules/updatemodules/edit-nav/edit-nav.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,7 @@ WorkexperienceComponent,
     EditWorkexperienceComponent,
     EditEducationComponent,
     DeleteConfirmationComponent,
-
+EditNavComponent
  
 
   ],

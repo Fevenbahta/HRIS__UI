@@ -10,6 +10,9 @@
           <div class="card-header cardhead">
             <h4 class="card-title">Work Experience</h4>
             <p class="card-category">Edit  your Work Experience</p>
+            <div *ngIf="workExperienceUpdated" class="alert alert-success mt-3">
+              Work Experience added successfully!
+            </div>
           </div>
             <!-- Work Experience Form -->
             <div class="card-body">

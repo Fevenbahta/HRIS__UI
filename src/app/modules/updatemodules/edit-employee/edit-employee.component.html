@@ -89,7 +89,7 @@
         
         <div class="card-body">
         <div class="row">
-            <div class="col-md-8">  
+            <div class="col-md-6">  
                <mat-error *ngIf="employeeForm.get('sex').invalid && employeeForm.get('sex').touched">
                 Gender is required
               </mat-error>
@@ -105,7 +105,7 @@
              
             </div>
             
-            <div class="col-md-6 mt-3">
+            <div class="col-md-6">
               <mat-radio-group name="martialStatus" formControlName="martialStatus" required>  
                   <mat-error *ngIf="employeeForm.get('martialStatus').invalid && employeeForm.get('martialStatus').touched">
                 Marital Status is required
@@ -175,9 +175,9 @@
                 </div>
               </div>
               
-              <div class="card-body mt-2">
+              <div class="card-body mt-3">
                 <div class="row">
-                  <div class="col-md-4 form-field">
+                  <div class="col-md-5 form-field">
                     <div class="form-field">
                       <input type="text" required name="pensionNo" formControlName="pensionNo">
                       <label>Pension Number</label>
@@ -186,26 +186,24 @@
                       Pension Number is required
                     </mat-error>
                   </div>
-           
-                  </div>
-                  <div class="card-body mt-3">
-                    <div class="row">
-            <div class="col-md-6 form-field">
+          
+                   
+            <div class="col-md-2 form-field">
                     <mat-slide-toggle name="crimeStatus" formControlName="crime">Crime</mat-slide-toggle>
                   </div>
-                  <div class="col-md-6 form-field">
+                  <div class="col-md-5 form-field">
                   
                       <div class="form-field">
                         <input type="text" required name="pensionNo" formControlName="pensionNo">
                         <label>Crime Description</label>
                       </div>
                   </div>
-                </div>
-          
+               
+       
                 </div>
                   </div>
                   
-              <button mat-raised-button type="submit" class="btn btn-sm pull-right" style="background-color:#76a53b;">update</button>
+              <button  type="submit" class="btn btn-sm pull-right btnsave" >update</button>
               <div *ngIf="employeeUpdated" class="alert alert-success mt-3">
                 Employee updated successfully!
                </div><div class="clearfix"></div>

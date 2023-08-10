@@ -6,7 +6,7 @@
   </div>
 
 
-          <div class="col-md-8">
+          <div class="col-md-9">
             <div class="card mt-5 mb-5">
                 <div class="card">
                     <div class="card-header cardhead">
@@ -67,8 +67,10 @@
         <td>{{ depositeAuthentication.bankAccount }}</td>
         <td>{{ depositeAuthentication.tinNumber }}</td>
         <td>
-          <button class="btn btn-sm btnedit" (click)="editDepositeAuthentication(depositeAuthentication)">Edit</button>
-          <button class="btn btn-sm btndanger" (click)="deleteDepositeAuthentication(depositeAuthentication)">Delete</button></td>
+          <button class="btn btn-sm btnedit" (click)="editDepositeAuthentication(depositeAuthentication)">
+            <mat-icon>edit</mat-icon>Edit</button>
+          <button class="btn btn-sm btndanger" (click)="deleteDepositeAuthentication(depositeAuthentication)">
+            <mat-icon>delete</mat-icon>Delete</button></td>
       </tr>
     </tbody>
   </table>

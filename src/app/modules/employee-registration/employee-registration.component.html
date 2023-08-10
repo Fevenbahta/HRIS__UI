@@ -207,7 +207,8 @@
                     </div>
                   </div>
   
-              <button type="button" class="btn btn-sm btnsave" (click)="addEmployee()" >Save Profile</button>
+              <button type="button" class="btn btn-sm btnsave" (click)="addEmployee()" >
+                <mat-icon>add</mat-icon>Save Profile</button>
               <div *ngIf="employeeSaved" class="alert alert-success mt-3">
                 Employee added successfully!
                </div><div class="clearfix"></div>
@@ -238,7 +239,7 @@
      
             <tbody>
               <!-- Use *ngFor to loop through the contacts and display each contact's information -->
-              <tr  >
+              <tr>
              
                 <td>{{ employee.firstName }}</td>
                 <td>{{ employee.lastName }}</td>
@@ -247,9 +248,12 @@
                 <td>{{ employee.pensionNo }}</td>
                 <td>{{getFirstSupervisorName(employee.firstSupervisor)}}</td>
                 <td>{{getSecondSupervisorName(employee.secondSupervisor)}}</td>
-                <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button></td>
+                <td>
+                <button class="btn btn-sm btnedit" (click)="editEmployee(employee)">
+                  <mat-icon>edit</mat-icon>Edit</button></td>
 
-          <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)">Delete</button>
+          <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)">
+            <mat-icon>delete</mat-icon>Delete</button>
               </tr>
             </tbody>
         </table>

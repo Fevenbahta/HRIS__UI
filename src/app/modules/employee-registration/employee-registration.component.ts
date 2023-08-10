@@ -125,7 +125,7 @@ getEmployees() {
     (error) => {  
       console.log(error);  
     }  
-  );  
+  );  ;
 }     
    
  

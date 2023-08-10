@@ -31,6 +31,7 @@ export class EditSpouseComponent implements OnInit {
 
   spouses:Spouse[]=[]
  spouseUpdated: boolean = false;
+ spouseSaved:boolean = false;
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
     { label: '  List Employee ', route: '/employee-list' }
@@ -67,9 +68,12 @@ export class EditSpouseComponent implements OnInit {
     this.spouseService.updateSpouse(this.spouse, this.spouse.id).subscribe(
       () => {
    
-        setTimeout(() => {
-          this.spouseUpdated=true; 
-        }, 2000);
+        this.spouseUpdated = true;
+        //  this.router.navigate(['employee-registration/job-description']);
+          setTimeout(() => {
+            this.spouseUpdated= false;
+          }, 2000);
+          this.spouses.push({ ...this.spouse });
       },
       (error) => {
         console.error(error);
@@ -121,4 +125,37 @@ export class EditSpouseComponent implements OnInit {
     }
   }
 )}
+
+
+addSpouse() {
+  this.spouse.empId = this.employeeIdService.employeeId
+  this.spouseService.addSpouse(this.spouse).subscribe({
+    next: (employee) => {
+      this.spouseSaved = true;
+    //  this.router.navigate(['employee-registration/job-description']);
+      setTimeout(() => {
+        this.spouseSaved = false;
+      }, 2000);
+      this.spouses.push({ ...this.spouse });
+
+      this.spouse = {
+        pId: 0,
+        id: undefined,
+        name: "",
+        createdBy: "",
+        createdDate: "2023-07-26T06:13:52.512Z",
+        updatedDate: "2023-07-26T06:13:52.512Z",
+        updatedBy: "",
+        status: 0,
+        empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
+       dateOfBirth:"2023-07-26T06:33:36.714Z",
+      relationship: '',
+    
+      };
+    },
+    error(response) {
+      console.log(response)
+    }
+  });
+}
 }

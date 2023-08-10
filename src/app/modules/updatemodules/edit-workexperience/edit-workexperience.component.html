@@ -10,6 +10,9 @@
           <div class="card-header cardhead">
             <h4 class="card-title">Work Experience</h4>
             <p class="card-category">Edit  your Work Experience</p>
+            <div *ngIf="workExperienceUpdated" class="alert alert-success mt-3">
+              Work Experience added successfully!
+            </div>
           </div>
             <!-- Work Experience Form -->
             <div class="card-body">
@@ -64,13 +67,19 @@
               </div>
                 <!-- Add more work experience form fields here... -->
              
-              <button type="button" class="btn btn-sm btnsave" (click)="updateWorkExperience()">update Work Experience</button>
+              
+              <button type="button" class="btn btn-sm btnsave"  *ngIf="workExperience.id!=undefined" (click)="updateWorkExperience()">Update</button>
               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
                -->
               <div *ngIf="workExperienceUpdated" class="alert alert-success mt-3">
                 Work Experience added successfully!
               </div>
-              <div class="clearfix"></div></form>
+              <button type="button" class="btn btn-sm btnsave"  *ngIf="workExperience.id===undefined" (click)="addWorkExperience()">Add</button>
+                     
+              <div *ngIf="workExperienceSaved" class="alert alert-success mt-3">
+         workexperience added successfully!
+            </div>
+          </form>
           </div>
         </div>
         <!-- qualification.component.html -->

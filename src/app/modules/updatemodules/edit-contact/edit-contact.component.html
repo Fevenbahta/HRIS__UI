@@ -98,12 +98,16 @@
                             </div>
                           </div>
                           
-                    <button mat-raised-button type="submit" class="btn btn-sm btnsave" style="background-color:#76a53b;">Update contact </button>
-                    <div class="clearfix"></div>
-                    <div *ngIf="contactUpdate" class="alert alert-success mt-3">
-                      spouse added successfully!
-                     </div>
+                    <button mat-raised-button type="submit" class="btn btn-sm btnsave" *ngIf="contact.id!=undefined" style="background-color:#76a53b;">Update  </button>
                   
+                    <div *ngIf="contactUpdate" class="alert alert-success mt-3">
+                      contact updated successfully!
+                     </div>
+                    <button type="button" class="btn btn-sm btnsave"  *ngIf="contact.id===undefined" (click)="addContact()">Add</button>
+                 
+                          <div *ngIf="contactSaved" class="alert alert-success mt-3">
+                        contact added successfully!
+                        </div>
                 </form>
             </div>
         </div>

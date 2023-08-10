@@ -15,6 +15,7 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
 })
 export class EditEducationComponent {
   educationUpdated: boolean = false;
+  educationSaved:boolean = false;
   educationId: string; 
   education: Education = {
     pId: 0,
@@ -146,6 +147,40 @@ export class EditEducationComponent {
          // alert('Failed to delete the Education. Please try again later.');
         }
         );
+      }
+    });
+  }
+  addEducation() {
+    this.education.empId = this.employeeIdService.employeeId;
+    this.education.eductionName = this.selectedEducationLevel;
+    this.educationService.addEducation(this.education).subscribe({
+      next: (employee) => {
+        
+      //  this.router.navigate(['/employee-registration/work-experience']); 
+        setTimeout(() => {
+          this.educationSaved = false;
+        }, 2000);
+        // Add the current education to the array
+        this.educations.push({ ...this.education });
+        // Reset the form fields
+        this.education = {
+          pId: 0,
+          id: undefined,
+          createdBy: "",
+          createdDate: "2023-07-25T14:10:21.467Z",
+          updatedDate: "2023-07-25T14:10:21.467Z",
+          updatedBy: "",
+          status: 0,
+          empId: "EED0DACB-73D6-4CC9-9526-269A2921106E",
+          from: '',
+          to: "",
+          nameOfInstitute: '',
+          fieldOfStudy: '',
+          eductionName: '',
+        };
+      },
+      error(response) {
+        console.log(response)
       }
     });
   }

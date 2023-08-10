@@ -47,6 +47,7 @@ updatedBy: '',
  
   steps:Step[]= [];
   selectedStep: string='';
+  employeePositionSaved:boolean = false;
 
 
   buttons = [
@@ -129,7 +130,7 @@ updatedBy: '',
          this.selectedBranch ="" ;
         this.employeePosition = {
             pid:0,
-            empId:"A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+            empId:"",
             id:undefined,
           divisionId:'',
           stepId: '',
@@ -205,4 +206,44 @@ updatedBy: '',
     return position ? position.name : '';
   }
   
+  addEmployeePosition(){
+    this.employeePosition.empId = this.employeeIdService.employeeId;
+    this.employeePosition.divisionId = this.selectedDivision;
+    this.employeePosition.position = this.selectedPosition;
+    this.employeePosition.stepId = this.selectedStep;
+    this.employeePosition.branchId = this.selectedBranch;
+    this.employeePositionService.addEmployeePosition(this.employeePosition)
+    .subscribe({
+    next:()=>{
+      this.employeePositionSaved = true;
+    
+      setTimeout(() => {
+        this.employeePositionSaved = false;
+      }, 2000);
+      // Add the
+       this.employeePositions.push({ ...this.employeePosition });
+  
+      this.employeePosition={
+        pid:0,
+        empId:'',
+        id: undefined,
+      divisionId:'',
+      stepId: '',
+      branchId: '',
+      position: '',
+      status:0,
+      startDate: '',
+      endDate: '2023-07-21T08:09:41.138Z',
+    createdBy: '',
+    createdDate: '2023-07-21T08:09:41.138Z',
+    updatedDate: '2023-07-21T08:09:41.138Z',
+    updatedBy: '',
+    
+      }
+    },
+     error(response){
+      console.log(response)
+    }
+  
+    })}
 }

@@ -19,6 +19,7 @@ export class EditContactComponent implements OnInit {
   contacts:Contact[]=[]
   contactId: string;
   contactUpdate: boolean =false
+  contactSaved:boolean=false
 
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
@@ -89,7 +90,7 @@ export class EditContactComponent implements OnInit {
 
             this.contact = {
               pId:0,
-              id:'',
+              id:undefined,
               status:0,
               region: '',
               town: '',
@@ -141,5 +142,48 @@ export class EditContactComponent implements OnInit {
         }
       );
     }
+  })}
+
+  addContact(){
+    // if (this.contactForm.invalid) {
+    //   this.contactForm.markAllAsTouched();
+  
+    
+    this.contact.empId = this.employeeIdService.employeeId;
+    console.log(this.contact)
+  this.contactService.addContact(this.contact)  
+  .subscribe({ 
+  next:(contacts)=>{
+   
+    this.contactSaved = true;
+        setTimeout(() => {
+          this.contactSaved = false;
+        }, 2000);
+        // Add the current work experience to the array
+        this.contacts.push({ ...this.contact });
+        // Reset the form fields
+        this.contact = {
+          pId:0,
+              id:undefined,
+              status:0,
+              region: '',
+              town: '',
+              subCity: '',
+              woreda: '',
+              Kebele: '',
+              houseNo: '',
+              postCode: 0,
+              phoneNumber: '',
+               updatedDate: "2023-07-20T13:56:00.062Z", 
+               updatedBy: '', 
+               empId: " ",
+               email: '',
+        };
+  
+  
+  },
+   error(response){
+    console.log(response)
+  }
   })}
 }

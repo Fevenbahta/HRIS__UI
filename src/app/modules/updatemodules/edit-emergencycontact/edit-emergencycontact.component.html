@@ -66,11 +66,17 @@
                               </div>
                             </div>
                    
-                      <div> <button type="button" class="btn btn-sm btnsave" (click)="updateEmergencyContact()">Update</button>
+                      
+                      <div> <button type="button" class="btn btn-sm btnsave" *ngIf="emergencyContact.id!=undefined"  (click)="updateEmergencyContact()">Update</button>
                       </div>
                            <div *ngIf="emergencyContactUpdated" class="alert alert-success mt-3">
                           emergencycontact update successfully!
-                         </div> <div class="clearfix"></div>
+                         </div>
+                         <button type="button" class="btn btn-sm btnsave" *ngIf="emergencyContact.id===undefined" (click)="addEmergencyContact()">Add</button>
+                     
+                              <div *ngIf="emergencycontactSaved" class="alert alert-success mt-3">
+                             emergencyContact added successfully!
+                            </div>
                   </form>
               </div>
           </div>

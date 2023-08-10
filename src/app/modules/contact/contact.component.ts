@@ -85,8 +85,8 @@ this.contactservice.addContact(this.addContactRequest)
   
 next:(contacts)=>{
  
-this.contacts.push({...this.addContactRequest});
-  this.router.navigate(['/employee-registration/emergency-contact']); 
+
+
 
 },
  error(response){

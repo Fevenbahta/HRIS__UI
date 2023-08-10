@@ -83,6 +83,15 @@ this.divisionservice.getAllDivisions()
     console.log(response)
   }
 });
+this.employeepositionservice.getAllEmployeePosition()
+.subscribe({
+  next: (divisions) => {
+    this.employeepositions=divisions;
+  },
+  error(response){
+    console.log(response)
+  }
+});
 this.positionservice.getAllPosition()
 .subscribe({
   next: (positions) => {

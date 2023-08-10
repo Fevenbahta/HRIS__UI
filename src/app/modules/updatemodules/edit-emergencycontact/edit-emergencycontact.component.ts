@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmergencyContact } from 'app/models/emergency-contact.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { EmergencyContactService } from 'app/service/emergency-contact.service';
+import { EmployeeIdService } from 'app/service/employee-id.service';
 
 @Component({
   selector: 'app-edit-emergencycontact',
@@ -27,13 +28,14 @@ export class EditEmergencyContactComponent implements OnInit {
     private emergencyContactService: EmergencyContactService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private employeeIdService:EmployeeIdService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.emergencyContactId = params['id'];
-      this.emergencyContactService.getEmergencyContact(this.emergencyContactId).subscribe((emergencyContact) => {
+      this.emergencyContactService.getEmergencyContact(this.employeeIdService.employeeId).subscribe((emergencyContact) => {
         this.emergencyContact = emergencyContact;
       });
     });
@@ -49,7 +51,7 @@ export class EditEmergencyContactComponent implements OnInit {
   });
   }
   getEmergencyContactById(): void {
-    this.emergencyContactService.getEmergencyContact(this.emergencyContactId).subscribe(
+    this.emergencyContactService.getEmergencyContact(this.employeeIdService.employeeId).subscribe(
       (emergencyContact) => {
         this.emergencyContact = emergencyContact;
       },

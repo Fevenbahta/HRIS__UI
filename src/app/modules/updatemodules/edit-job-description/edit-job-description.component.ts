@@ -40,11 +40,11 @@ export class EditJobDescriptionComponent implements OnInit {
     private employeePositionService: EmployeePositionService,
     private route: ActivatedRoute,
     private router: Router,
-    private divisionservice: DivisionService,
-    private stepservice: StepService,
-    private positionservice:PositionService ,
+    private divisionService: DivisionService,
+    private stepService: StepService,
+    private positionService:PositionService ,
     private employeeIdService:EmployeeIdService,
-    private branchservice:BranchService,
+    private branchService:BranchService,
     private dialog: MatDialog
 
   ) {}
@@ -55,7 +55,8 @@ export class EditJobDescriptionComponent implements OnInit {
       // this.getemployeePositionById()
 
 
-      this.employeePositionService.getEmployeePosition(this.employeeIdService.employeeId).subscribe((employeePosition) => {
+      this.employeePositionService.getEmployeePosition(this.employeePosition.id)
+      .subscribe((employeePosition) => {
         this.employeePosition = employeePosition;
 
         this.selectedDivision = employeePosition.divisionId;
@@ -68,29 +69,29 @@ export class EditJobDescriptionComponent implements OnInit {
         });
       
         // Fetch the available divisions and populate the divisions array
-        this.divisionservice.getAllDivisions().subscribe((divisions) => {
+        this.divisionService.getAllDivisions().subscribe((divisions) => {
           this.divisions = divisions;
         });
       
         // Fetch the available positions and populate the positions array
-        this.positionservice.getAllPosition().subscribe((positions) => {
+        this.positionService.getAllPosition().subscribe((positions) => {
           this.positions = positions;
         });
       
         // Fetch the available branches and populate the branches array
-        this.branchservice.getAllBranch().subscribe((branches) => {
+        this.branchService.getAllBranch().subscribe((branches) => {
           this.branches = branches;
         });
       
         // Fetch the available steps and populate the steps array
-        this.stepservice.getAllStep().subscribe((steps) => {
+        this.stepService.getAllStep().subscribe((steps) => {
           this.steps = steps;
         });
       });
     });
   }
   getemployeePositionById(): void {
-    this.employeePositionService.getEmployeePosition(this.employeePositionId).subscribe(
+    this.employeePositionService.getEmployeePosition(this.employeeIdService.employeeId).subscribe(
       (employeePosition) => {
         this.employeePosition = employeePosition;
       },

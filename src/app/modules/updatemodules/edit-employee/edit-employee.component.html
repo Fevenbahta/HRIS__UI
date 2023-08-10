@@ -10,7 +10,7 @@
    
         <app-edit-nav></app-edit-nav>
   </div> </div>   </div> 
-  <div class="col-md-8 mt-2">
+  <div class="col-md-9 mt-2">
     <div class="card mt-5 mb-5">
       <div class="card">
         <div class="card-header">
@@ -212,52 +212,47 @@
             </form>
           </div>
         </div>
-      </div>
+    
       <div >
-        <!-- <div class="col-md-10" >
-            <table class="table  table-striped col-md-8"   >
-
-               <div> <thead>
-                    <tr>
-                        
-                        <th>First Name</th>
-                        <th>Middle Name</th>
-                        <th>Sex</th>
-                        <th>ECXID</th>
-                        <th>Pension Id</th>
-                        <th>First Supervisor</th>
-                        <th>Second Supervisor</th>
-            
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr >
-                        <td>{{employeeForm.get('firstName')}}</td>
-                        <td>{{employee.middleName}}</td>
-                        <td>{{employee.sex}}</td>
-                            <td>{{employee.ecxId}}</td>
-                        <td>{{employee.pensionNo}}</td>
-                     
-                       <td>{{getFirstSupervisorName(employee.firstSupervisor)}}</td>
-                       <td>{{getSecondSupervisorName(employee.secondSupervisor)}}</td>
+ 
+        <h6>Profile info </h6>
+        <table class="table table-bordered table-striped">
+          <thead>
+                <tr>
                     
-                      
-                  <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button></td>
-
-                  <td> <button  class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.empId)">Delete</button>
-        </td> 
+                    <th>First Name</th>
+                    <th>last Name</th>
+                    <th>Sex</th>
+                    <th>ECXID</th>
+                    <th>Pension Id</th>
+                    <th>First Supervisor</th>
+                    <th>Second Supervisor</th>
                    
-                         
-                    
-                    </tr>
-                        </tbody>
-            </div>
-            </table>
         
+                </tr>
+            </thead>
+     
+            <tbody>
+              <!-- Use *ngFor to loop through the contacts and display each contact's information -->
+              <tr  >
+             
+                <td>{{ employee.firstName }}</td>
+                <td>{{ employee.lastName }}</td>
+                 <td>{{ employee.sex }}</td>
+                <td>{{ employee.ecxId }}</td>
+                <td>{{ employee.pensionNo }}</td>
+                <td>{{getFirstSupervisorName(employee.firstSupervisor)}}</td>
+                <td>{{getSecondSupervisorName(employee.secondSupervisor)}}</td>
+                <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button></td>
+
+          <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)">Delete</button>
+              </tr>
+            </tbody>
+        </table>
         </div>
     </div>
 </div>
 
     </div>
-  </div> -->
+    </div>
   

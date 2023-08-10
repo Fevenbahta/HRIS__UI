@@ -4,9 +4,9 @@ import { Employee, Supervisor } from 'app/models/employee.model';
 import { EmployeeService } from 'app/service/employee.service'; 
 import { MatDialog } from '@angular/material/dialog'; 
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component'; 
-import { Ng2FilterPipeModule } from 'ng2-filter-pipe'; 
+
 import { SupervisorService } from 'app/service/supervisor.service';
- 
+
 @Component({ 
   selector: 'app-employee-list', 
   templateUrl: './employee-list.component.html', 

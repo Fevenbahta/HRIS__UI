@@ -101,11 +101,24 @@ export class EmployeeRegistrationComponent implements OnInit {
       }, 
        
     }); 
+
+    
+    this.employeeservice.getEmployee(this.employeeIdService.employeeId) 
+    .subscribe({ 
+      next: (employees) => { 
+        this.employee=employees; 
+      }, 
+      error(response){ 
+        console.log(response) 
+      }, 
+       
+    }); 
 } 
   
  
 getEmployees() {  
-  this.employeeservice.getEmployee(this.employeeIdService.employeeId).subscribe(  
+  this.employeeservice.getEmployee(this.employeeIdService.employeeId)
+  .subscribe(  
     (employees) => {  
       this.employee = employees;  
     },  
@@ -123,7 +136,8 @@ getEmployees() {
       // formData.empId = uuidv4(); 
       this.employeeForm.value.firstSupervisor = this.selectedFirstSupervisor; 
       this.employeeForm.value.secondSupervisor = this.selectedSecondSupervisor; 
-      this.employeeservice.addEmployee(formData).subscribe({ 
+      this.employeeservice.addEmployee(formData)
+      .subscribe({ 
         next: (contact) => { 
       console.log(formData)
           this.employeeSaved = true; 
@@ -162,6 +176,7 @@ validateAllFormFields(formGroup: FormGroup) {
     return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
   } 
 
+
  
   openImageDialog(): void {
     // Trigger click on the file input element to open the image dialog
@@ -198,13 +213,18 @@ validateAllFormFields(formGroup: FormGroup) {
   // }
   getFirstSupervisorName(firstSupervisor: string): string { 
     const employee = this.employees.find((g) => g.empId === firstSupervisor); 
-    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
+    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:''; 
   } 
   getSecondSupervisorName(secondSupervisor: string): string { 
     const employee = this.employees.find((g) => g.empId === secondSupervisor); 
-    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
+    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:''; 
   } 
-  
+  getConcatenatedData() {
+    let employee ='';
+     employee =this.employee.firstName +''+ this.employee.lastName
+    return employee ? employee : '';
+    
+  }
   deleteEmployee(id: string) { 
     // Open the confirmation dialog 
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, { 

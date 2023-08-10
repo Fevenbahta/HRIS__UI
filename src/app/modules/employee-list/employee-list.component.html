@@ -1,13 +1,15 @@
+
 <app-shared-nav  [buttons]="buttons"></app-shared-nav>
   <div class="main-content">
     <div class="container-fluid">
+        <input  class="search" type="search" placeholder="Search..." [(ngModel)]="searchTerm" (keyup)="onSearch()">
         <div class="row">
             <div class="col-md-12">
                 <div class="card" >
-                    <mat-form-field >
-                        <mat-label>search</mat-label>
-                        <input matInput placeholder="Search employees" [(ngModel)]="searchTerm" (keyup)="onSearch()">
-                    </mat-form-field>
+             
+                       
+                     
+                   
                     <div class="card-header cardhead">
                         <h4 class="card-title ">Employee Table</h4>
                         <div class=" ">

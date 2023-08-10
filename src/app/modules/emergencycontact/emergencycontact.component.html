@@ -76,7 +76,7 @@
             </div>
         </div>
         <h6>Emergency Contact List</h6>
-  <table class="table table-bordered table-striped">
+  <table  *ngIf="emergencycontacts.length>=1"  class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>Name</th>

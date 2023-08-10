@@ -50,7 +50,7 @@
             </div>
         </div>
         <h6>Deposit Authentication List</h6>
-  <table class="table table-bordered table-striped">
+  <table  *ngIf="depositeauthentications.length>=1" class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>Bank</th>

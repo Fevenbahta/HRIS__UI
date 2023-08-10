@@ -61,8 +61,12 @@ buttons = [
   { label: '  List Employee ', route: '/employee-list' }
 ];
 ngOnInit():void {
+// this.contactservice.getAllContacts()
+// .subscribe((contacts) => {
+//   this.contacts = contacts;
+// }); 
 
-  const empid= this.employeeIdService.employeeId;
+
  
 this.contactservice.getContact(this.employeeIdService.employeeId)
 

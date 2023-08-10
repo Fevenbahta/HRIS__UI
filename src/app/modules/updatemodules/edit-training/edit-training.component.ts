@@ -63,15 +63,31 @@ export class EditTrainingComponent implements OnInit {
 
 
   updateTraining(): void {
-    this.trainingService.updateTraining(this.training,this.trainingId).subscribe(
+    this.trainingService.updateTraining(this.training,this.training.id).subscribe(
       () => {
-        this.trainingSaved=true;
-        this.router.navigate(['/employee-registration/training']); 
+        setTimeout(() => {
+          this.trainingSaved=true; 
+        }, 2000);
+ 
       },
       (error) => {
         console.error(error);
       }
     );
+    this.training = {
+      pId: 0,
+      id: undefined,
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+      empId: " ",
+      typeOfTraining: "",
+      from: "",
+      to: "",
+    
+    };
   }
   editTraining(training: Training): void {
     const contactToEdit = this.trainings.find(training => training.id === training.id);

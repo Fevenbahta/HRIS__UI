@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-edit-job-description',
   templateUrl: './edit-job-description.component.html',
-  styleUrls: ['./edit-job-description.component.css']
+  styleUrls: ['./edit-job-description.component.scss']
 })
 export class EditJobDescriptionComponent implements OnInit {
   employeePositionId: string;
@@ -110,23 +110,51 @@ updatedBy: '',
   }
   updateEmployeePosition(): void {
     this.employeePositionUpdated=true;
-
-    this.employeePositionService.updateEmployeePosition(this.employeePosition, this.employeePositionId).subscribe({
+  
+    this.employeePosition.divisionId = this.selectedDivision;
+    this.employeePosition.position = this.selectedPosition;
+    this.employeePosition.stepId = this.selectedStep;
+    this.employeePosition.branchId = this.selectedBranch;
+    this.employeePositionService.updateEmployeePosition
+    (this.employeePosition, this.employeePosition.id)
+    .subscribe({
+    
       next: (employeePosition) => {
-       
-    this.router.navigate(['/employee-registration/job-description']);
-  },
+        setTimeout(() => {
+          this.employeePositionUpdated = false;
+        }, 2000);
+        this.selectedDivision =  "";
+        this.selectedPosition  ="" ;
+         this.selectedStep= "" ;
+         this.selectedBranch ="" ;
+        this.employeePosition = {
+            pid:0,
+            empId:"A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+            id:undefined,
+          divisionId:'',
+          stepId: '',
+          branchId: 'string',
+          position: '',
+          status:0,
+          startDate: '',
+          endDate: '2023-07-21T08:09:41.138Z',
+        createdBy: '',
+        createdDate: '2023-07-21T08:09:41.138Z',
+        updatedDate: '2023-07-21T08:09:41.138Z',
+        updatedBy: '',
+        };
+      },
       error: (response) => {
         console.log(response);
       }
- 
     });
- 
+
   }
   editEmployeePosition(EmployeePosition: EmployeePosition): void {
  
     const contactToEdit = this.employeePositions.find(employeePosition => employeePosition.id === EmployeePosition.id);
     this.employeePosition = contactToEdit;
+
      this.selectedDivision =  this.employeePosition.divisionId;
   this.selectedPosition  =this.employeePosition.position ;
    this.selectedStep= this.employeePosition.stepId ;

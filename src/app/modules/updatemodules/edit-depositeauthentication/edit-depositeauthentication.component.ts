@@ -63,10 +63,10 @@ export class EditDepositeAuthenticationComponent implements OnInit {
   
   updateDepositeAuthentication(): void {
     this. depositeAuthenticationUpdated=true;
-    this.depositeAuthenticationService.updateDepositeAuthentication(this.depositeAuthentication, this.depositeAuthenticationId).subscribe({
+    this.depositeAuthenticationService.updateDepositeAuthentication(this.depositeAuthentication, this.depositeAuthentication.id).subscribe({
       next: () => {
         this.depositeAuthenticationUpdated = true;
-        this.router.navigate(['/employee-registration/deposite-authentication']); 
+
         setTimeout(() => {
           this.depositeAuthenticationUpdated = false;
         }, 2000);
@@ -75,7 +75,21 @@ export class EditDepositeAuthenticationComponent implements OnInit {
         console.log(response);
       }
     });
+this.depositeAuthentication ={
+  pId:0,
+  id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+ createdBy: '', 
+   createdDate: "2023-07-20T13:56:00.062Z", 
+   updatedDate: "2023-07-20T13:56:00.062Z", 
+   updatedBy: '', 
+   empId: "",
+   status:0,
+ bank: '',
+ bankBranch: '',
+ bankAccount:0,
+ tinNumber: '',
 
+};
   }
   editDepositeAuthentication(DepositeAuthentication: DepositeAuthentication): void {
     const depositeAuthenticationToEdit = this.depositeAuthentications.find(depositeAuthentication => depositeAuthentication.id === DepositeAuthentication.id);

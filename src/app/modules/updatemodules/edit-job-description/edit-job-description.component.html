@@ -85,7 +85,7 @@
               </mat-form-field>
               
             </div>
-                          <button  mat-raised-button type="submit" class="btn btn-sm btnupdate" >update</button>
+                          <button  mat-raised-button type="submit" class="btn btn-sm btnupdate">update</button>
                           <div class="clearfix"></div>
                           <!-- <div *ngIf="employeePositionUpdated" class="alert alert-success mt-3">
                            Job Description added successfully!
@@ -100,27 +100,23 @@
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>ID</th>
+      
           <th>Division</th>
           <th>Position</th>
           <th>Step</th>
           <th>Branch</th>
-          <th>Status</th>
-          <th>Start Date</th>
-          <th>End Date</th>
+     
         </tr>
       </thead>
       <tbody>
         <!-- Use *ngFor to loop through the employeepositions array and display each employee position -->
         <tr *ngFor=" let employeePosition of employeePositions">
-          <td>{{ employeePosition.id }}</td>
+        
           <td>{{ getDivisionName(employeePosition.divisionId) }}</td>
           <td>{{ getPositionName(employeePosition.position) }}</td>
           <td>{{ getStepName(employeePosition.stepId) }}</td>
           <td>{{ getBranchName(employeePosition.branchId) }}</td>
-          <td>{{ employeePosition.status }}</td>
-          <td>{{ employeePosition.startDate }}</td>
-          <td>{{ employeePosition.endDate }}</td>
+      
           <td>
             <button class="btn btn-sm btnedit" (click)="editEmployeePosition(employeePosition)">Edit</button>
             <button class="btn btn-sm btndanger" (click)="deleteEmployeePosition(employeePosition)">Delete</button>

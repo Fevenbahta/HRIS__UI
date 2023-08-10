@@ -64,16 +64,32 @@ export class EditSpouseComponent implements OnInit {
 
 
   updateSpouse(): void {
-    this.spouseService.updateSpouse(this.spouse, this.spouseId ).subscribe(
+    this.spouseService.updateSpouse(this.spouse, this.spouse.id).subscribe(
       () => {
-        // Spouse updated successfully, you can redirect to the spouse list or show a success message.
-        // this.router.navigate(['/spouse']);
-        this.spouseUpdated=true;
+   
+        setTimeout(() => {
+          this.spouseUpdated=true; 
+        }, 2000);
       },
       (error) => {
         console.error(error);
       }
     );
+    this.spouse= {
+      pId: 0,
+      id: undefined,
+      name: "",
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+      empId: " ",
+     dateOfBirth:" ",
+    relationship: '',
+  
+    };
+  
   }
   editSpouse(spouse: Spouse): void {
     // Here, we will navigate to the edit page for the selected Spouse.

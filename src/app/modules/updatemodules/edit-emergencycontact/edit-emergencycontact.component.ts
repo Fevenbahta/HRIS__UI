@@ -56,7 +56,8 @@ export class EditEmergencyContactComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.emergencyContactId = params['id'];
    
-      this.emergencyContactService.getAllEmergencyContact().subscribe({
+      this.emergencyContactService.getAllEmergencyContact()
+      .subscribe({
         next: (emergencycontacts) => {
           // Filter emergency contacts for the current employee
           this.emergencyContacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
@@ -68,21 +69,37 @@ export class EditEmergencyContactComponent implements OnInit {
     });
   }
   
-  getEmergencyContactById(): void {
-    this.emergencyContactService.getEmergencyContact(this.employeeIdService.employeeId).subscribe(
-      (emergencyContact) => {
-        this.emergencyContact = emergencyContact;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
+
   updateEmergencyContact(): void {
     this.emergencyContactUpdated=true;
-    this.emergencyContactService.updateEmergencyContact(this.emergencyContact, this.emergencyContactId).subscribe({
+    this.emergencyContactService.updateEmergencyContact
+    (this.emergencyContact, this.emergencyContact.id)
+    .subscribe({
+    
       next: (emergencyContact) => {
-        this.router.navigate(['/employee-registration/emergency-contact']); 
+        setTimeout(() => {
+          this.emergencyContactUpdated = false;
+        }, 2000);
+
+
+        this.emergencyContact = {
+          pId:0,
+          id:  undefined,
+         createdBy: '', 
+           createdDate: "2023-07-20T13:56:00.062Z", 
+           updatedDate: "2023-07-20T13:56:00.062Z", 
+           updatedBy: '', 
+           empId: "",
+          region: '', 
+           town: '', 
+           phoneNumber: '', 
+           houseNo:'',
+           subCity:'',
+           status:0,
+           name: "",
+           kebele: "",
+           relationship: "",
+        };
       },
       error: (response) => {
         console.log(response);

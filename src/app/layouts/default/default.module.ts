@@ -63,7 +63,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditEmergencyContactComponent } from 'app/modules/updatemodules/edit-emergencycontact/edit-emergencycontact.component';
-
+import { MatIconModule } from '@angular/material/icon';
 import { Ng2FilterPipe } from 'ng2-filter-pipe';
 import { EditNavComponent } from 'app/modules/updatemodules/edit-nav/edit-nav.component';
 
@@ -136,7 +136,7 @@ EditNavComponent,
  MatTableModule,
  SharedModule,
  MatDialogModule,
-
+ MatIconModule
 
   ],
 

@@ -26,6 +26,7 @@ export class EmployeeListComponent {
       { label: '  List Employee ', route: '/employee-list' } 
     ] 
   dataSource: any; 
+  changeDetectorRef: any;
  
 constructor(private employeeservice: EmployeeService, 
   private dialog: MatDialog, 
@@ -94,13 +95,16 @@ onSearch() {
       
     }); 
      
-    if (this.searchTerm === '') { 
+    if (this.searchTerm.length === 0) { 
      this.filteredEmployees = this.employees; 
+    
+    this.changeDetectorRef.detectChanges();
     } 
      
  
   } 
   
+ 
 deleteEmployee(id: string) { 
   // Open the confirmation dialog 
   const dialogRef = this.dialog.open(DeleteConfirmationComponent, { 

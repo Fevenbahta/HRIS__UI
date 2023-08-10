@@ -3,21 +3,23 @@
 
 .btnsave{
     background-color: #76a53b;
+    font-weight: bold;
   }
       
   .btnedit{
-    background-color: #76a53b;;
+    background-color: #76a53b;
     color:rgb(22, 20, 20);
-    font-weight: 600;
-font-size:small;
+    font-weight: bold;
+font-size:large;
 border-style:groove;
 
 border-radius: 10%;
   } 
    .btndanger{
 color: rgb(22, 21, 21);
-font-weight: 600;
-font-size:small;
+font-weight: bold;
+font-size:large;
+
 border-style:groove;
 
 border-radius: 10%;

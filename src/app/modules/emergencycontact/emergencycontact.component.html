@@ -6,7 +6,7 @@
   </div>
 
 
-          <div class="col-md-8">
+          <div class="col-md-9">
             <div class="card mt-5 mb-5">
                 <div class="card">
                     <div class="card-header cardhead">
@@ -66,7 +66,8 @@
                             </div>
                           </div>
                  
-                    <div> <button type="button" class="btn btn-sm btnsave" (click)="addEmergencyContact()">Add Emergency Contact</button>
+                    <div> <button type="button" class="btn btn-sm btnsave" (click)="addEmergencyContact()">
+                      <mat-icon>add</mat-icon>Add Emergency Contact</button>
                     </div>
                          <div *ngIf="emergencycontactSaved" class="alert alert-success mt-3">
                         emergencycontact added successfully!
@@ -90,8 +91,10 @@
         <td>{{ emergencycontact.phoneNumber }}</td>
         <td>{{ emergencycontact.relationship }}</td>
         <td>
-          <button class="btn btn-sm btnedit" (click)="editEmergencyContact(emergencycontact)">Edit</button>
-    <button class="btn btn-sm btndanger" (click)="deleteEmergencyContact(emergencycontact)">Delete</button>
+          <button class="btn btn-sm btnedit" (click)="editEmergencyContact(emergencycontact)">
+            <mat-icon>edit</mat-icon>Edit</button>
+    <button class="btn btn-sm btndanger" (click)="deleteEmergencyContact(emergencycontact)">
+      <mat-icon>delete</mat-icon>Delete</button>
   </td>
       </tr>
     </tbody>

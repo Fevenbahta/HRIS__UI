@@ -56,14 +56,15 @@
                     </div>
                     </div>
                   </div> 
+              
               <div>
-              <button type="button" class="btn btn-sm btnupdate"  *ngIf="education.id!=undefined"  (click)="updateEducation()">Update</button>
+              <button type="button" class="btn btn-sm btnsave"  *ngIf="education.id!=undefined"  (click)="updateEducation()">Update</button>
               </div>        
            
            <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
               -->
               <div *ngIf="educationUpdated" class="alert alert-success mt-3">
-                Education added successfully!
+                Education updated successfully!
               </div>
               <button type="button" class="btn btn-sm btnsave" *ngIf="education.id===undefined" (click)="addEducation()">Add</button>
                      

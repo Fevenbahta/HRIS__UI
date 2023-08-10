@@ -4,7 +4,7 @@
     <div class="col-md-3 pt-5 ">
       <app-min-nav></app-min-nav>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <div class="card  mb-5">
         <div class="card">
           <div class="card-header cardhead">
@@ -55,7 +55,8 @@
                   </div>
                   </div>
                 </div> 
-              <button type="button" class="btn btn-sm btnsave" (click)="addEducation()">Add Education</button>
+              <button type="button" class="btn btn-sm btnsave" (click)="addEducation()">
+                <mat-icon>add</mat-icon>Add Education</button>
              
               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
               -->
@@ -93,8 +94,10 @@
           <td>{{ education.from }}</td>
           <td>{{ education.to }}</td>
           <td>
-            <button class="btn btn-sm btnedit" (click)="editEducation(education)">Edit</button>
-            <button class="btn btn-sm btndanger" (click)="deleteEducation(education)">Delete</button>
+            <button class="btn btn-sm btnedit" (click)="editEducation(education)">
+              <mat-icon>edit</mat-icon>Edit</button>
+            <button class="btn btn-sm btndanger" (click)="deleteEducation(education)">
+              <mat-icon>delete</mat-icon>Delete</button>
           </td>
         </tr>
       </tbody>

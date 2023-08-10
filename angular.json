@@ -28,7 +28,8 @@
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/assets/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles.css"
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",

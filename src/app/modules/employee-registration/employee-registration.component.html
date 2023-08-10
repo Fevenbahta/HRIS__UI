@@ -216,59 +216,16 @@
                 
                    
         
-                   
-                
+                    
             
-              <button mat-raised-button type="submit" class="btn btn-sm " style="background-color:#76a53b;">Save Profile</button>
+              <button type="button" class="btn btn-sm btnsave" >Save Profile</button>
               <div *ngIf="employeeSaved" class="alert alert-success mt-3">
                 Employee added successfully!
                </div><div class="clearfix"></div>
             </form>
           </div>
         </div>
-       <div class="col-md-10" >
-        <table class="table  table-striped col-md-8"   *ngIf="filteredEmployees || employees ">
-
-           <div> <thead>
-                <tr>
-                    
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Sex</th>
-                    <th>ECXID</th>
-                    <th>Pension Id</th>
-                    <th>First Supervisor</th>
-                    <th>Second Supervisor</th>
-        
-                </tr>
-            </thead>
-            <tbody>
-                <tr >
-                    <td>{{employee.firstName}}</td>
-                    <td>{{employee.middleName}}</td>
-                    <td>{{employee.sex}}</td>
-                        <td>{{employee.ecxId}}</td>
-                    <td>{{employee.pensionNo}}</td>
-                 
-                   <td>{{getFirstSupervisorName(employee.firstSupervisor)}}</td>
-                   <td>{{getSecondSupervisorName(employee.secondSupervisor)}}</td>
-                
-                  
-              <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button></td>
-
-              <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)">Delete</button>
-    </td> 
-               
-                     
-                
-                </tr>
-                    </tbody>
-        </div>
-        </table>
     
-    </div>
-</div>
-</div>
 
 </div></div>
 

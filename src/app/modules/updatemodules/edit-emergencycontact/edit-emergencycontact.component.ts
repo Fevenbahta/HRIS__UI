@@ -38,18 +38,19 @@ export class EditEmergencyContactComponent implements OnInit {
       this.emergencyContactService.getEmergencyContact(this.employeeIdService.employeeId).subscribe((emergencyContact) => {
         this.emergencyContact = emergencyContact;
       });
+  
+      this.emergencyContactService.getAllEmergencyContact().subscribe({
+        next: (emergencycontacts) => {
+          // Filter emergency contacts for the current employee
+          this.emergencyContacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+        },
+        error(response) {
+          console.log(response);
+        },
+      });
     });
-
-    this.emergencyContactService.getAllEmergencyContact() 
-    .subscribe({ 
-      next: (emergencycontacts) => { 
-        this.emergencyContacts = emergencycontacts; 
-            }, 
-      error(response) { 
-        console.log(response); 
-      }, 
-  });
   }
+  
   getEmergencyContactById(): void {
     this.emergencyContactService.getEmergencyContact(this.employeeIdService.employeeId).subscribe(
       (emergencyContact) => {
@@ -80,9 +81,9 @@ export class EditEmergencyContactComponent implements OnInit {
     { label: ' Add Employee ', route: '/employee-registration' },
     { label: '  List Employee ', route: '/employee-list' }
   ];
-  editEmergencyContact(EmergencyContact: EmergencyContact): void {
+  editEmergencyContact(emergencyContact: EmergencyContact): void {
     // Here, we will navigate to the edit page for the selected EmergencyContact.
-    this.router.navigate(["/edit-emergencyContact", EmergencyContact.id]);
+    this.router.navigate(["/edit-emergencyContact", emergencyContact.id]);
   }
   deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);

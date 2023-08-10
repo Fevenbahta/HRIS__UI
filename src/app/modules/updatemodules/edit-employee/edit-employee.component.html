@@ -232,7 +232,7 @@
      
             <tbody>
               <!-- Use *ngFor to loop through the contacts and display each contact's information -->
-              <tr  >
+              <tr *ngFor=" let employee of employees"  >
              
                 <td>{{ employee.firstName }}</td>
                 <td>{{ employee.lastName }}</td>

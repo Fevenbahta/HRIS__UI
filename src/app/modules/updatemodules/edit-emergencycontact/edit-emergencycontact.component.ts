@@ -71,7 +71,7 @@ export class EditEmergencyContactComponent implements OnInit {
   
 
   updateEmergencyContact(): void {
-    
+    this.emergencyContactUpdated=true;
     this.emergencyContactService.updateEmergencyContact
     (this.emergencyContact, this.emergencyContact.id)
     .subscribe({

@@ -103,7 +103,7 @@
                     <div *ngIf="contactUpdate" class="alert alert-success mt-3">
                       contact updated successfully!
                      </div>
-                    <button type="button" class="btn btn-sm btnsave"  *ngIf="contact.id===undefined" (click)="addContact()">Add</button>
+                    <button type="button" class="btn btn-sm btnsave"  *ngIf="contacts.length === 0" (click)="addContact()">Add</button>
                  
                           <div *ngIf="contactSaved" class="alert alert-success mt-3">
                         contact added successfully!

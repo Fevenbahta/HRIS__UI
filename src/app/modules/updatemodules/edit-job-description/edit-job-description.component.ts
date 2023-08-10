@@ -110,7 +110,7 @@ updatedBy: '',
     );
   }
   updateEmployeePosition(): void {
-    this.employeePositionUpdated=true;
+ 
   
     this.employeePosition.divisionId = this.selectedDivision;
     this.employeePosition.position = this.selectedPosition;
@@ -120,7 +120,8 @@ updatedBy: '',
     (this.employeePosition, this.employeePosition.id)
     .subscribe({
     
-      next: (employeePosition) => {
+      next: (employeePosition) => { 
+          this.employeePositionUpdated=true;
         setTimeout(() => {
           this.employeePositionUpdated = false;
         }, 2000);

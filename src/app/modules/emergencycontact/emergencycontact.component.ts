@@ -47,8 +47,8 @@ constructor(
 ngOnInit():void {
   this.emergencycontactservice.getEmergencyContact(this.employeeIdService.employeeId)
   .subscribe({ 
-    next: (emergencycontacts) => { 
-      this.emergencycontact = emergencycontacts; 
+    next: (emergencycontact) => { 
+      this.emergencycontact = emergencycontact; 
           }, 
     error(response) { 
       console.log(response); 

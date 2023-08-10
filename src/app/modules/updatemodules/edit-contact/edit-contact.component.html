@@ -100,6 +100,10 @@
                           
                     <button mat-raised-button type="submit" class="btn btn-sm btnsave" style="background-color:#76a53b;">Update contact </button>
                     <div class="clearfix"></div>
+                    <div *ngIf="contactUpdate" class="alert alert-success mt-3">
+                      spouse added successfully!
+                     </div>
+                  
                 </form>
             </div>
         </div>

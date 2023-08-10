@@ -160,6 +160,11 @@ supervisors:Supervisor[]=[];
           setTimeout(() => {
             this.employeeUpdated = false;
           }, 2000);
+
+        
+            this.employees.push({ ...this.employeeForm.value});
+
+            
         },
         error: (response) => {
           console.log(response);

@@ -18,6 +18,7 @@ export class EditContactComponent implements OnInit {
   contact:Contact;
   contacts:Contact[]=[]
   contactId: string;
+  contactUpdate: boolean =false
   addContactRequest: Contact = {
     pId:0,
     id:'',
@@ -89,11 +90,33 @@ export class EditContactComponent implements OnInit {
   updateContact(): void {
     if (this.addContactRequest.id) {
       
-      this.contactService.updateContact(this.addContactRequest,this.addContactRequest.id ).subscribe({
+      this.contactService.updateContact(this.addContactRequest,this.contactId ).subscribe({
         next: (contact) => {
          
-          this.router.navigate(['/employee-registration/contact']); 
-          
+          this.contactUpdate = true;
+          //  this.router.navigate(['employee-registration/job-description']);
+            setTimeout(() => {
+              this.contactUpdate = false;
+            }, 2000);
+            this.contacts.push({ ...this.addContactRequest });
+
+            this.addContactRequest = {
+              pId:0,
+              id:'',
+              status:0,
+              region: '',
+              town: '',
+              subCity: '',
+              woreda: '',
+              Kebele: '',
+              houseNo: '',
+              postCode: 0,
+              phoneNumber: '',
+               updatedDate: "2023-07-20T13:56:00.062Z", 
+               updatedBy: '', 
+               empId: " ",
+               email: '',
+            };
         },
         error: (response) => {
           console.log(response);

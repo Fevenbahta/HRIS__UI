@@ -64,7 +64,7 @@
   </div>
 </div>
 
-              <button type="button" class="btn btn-sm btnsave" (click)="addWorkExperience()">Add Work Experience</button>
+              <button type="button" class="btn btn-sm btnsave" *ngIf="workExperience.id===undefined" (click)="addWorkExperience()">Add Work Experience</button>
               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
                -->
               <div *ngIf="workExperienceSaved" class="alert alert-success mt-3">

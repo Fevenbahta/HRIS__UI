@@ -16,7 +16,7 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
 })
 export class EditEmergencyContactComponent implements OnInit {
   emergencyContactId: string;
-
+  emergencycontactSaved: boolean = false;
   emergencyContactUpdated: boolean = false;
   emergencyContacts:EmergencyContact[]=[];
   
@@ -71,7 +71,7 @@ export class EditEmergencyContactComponent implements OnInit {
   
 
   updateEmergencyContact(): void {
-    this.emergencyContactUpdated=true;
+    
     this.emergencyContactService.updateEmergencyContact
     (this.emergencyContact, this.emergencyContact.id)
     .subscribe({
@@ -146,4 +146,40 @@ export class EditEmergencyContactComponent implements OnInit {
  }
  )}
   
+ addEmergencyContact() {
+  this.emergencyContact.empId = this.employeeIdService.employeeId;
+  this.emergencyContactService.addEmergencyContact(this.emergencyContact)
+  .subscribe({
+    next: (employee) => {
+      this.emergencycontactSaved = true;
+     // this.router.navigate(['/employee-registration/spouse']);
+      setTimeout(() => {
+        this.emergencycontactSaved = false;
+      }, 2000);
+      // Add the current work experience to the array
+      this.emergencyContacts.push({ ...this.emergencyContact });
+      // Reset the form fields
+      this.emergencyContact = {
+        pId:0,
+        id:  undefined,
+       createdBy: '', 
+         createdDate: "2023-07-20T13:56:00.062Z", 
+         updatedDate: "2023-07-20T13:56:00.062Z", 
+         updatedBy: '', 
+         empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+        region: '', 
+         town: '', 
+         phoneNumber: '', 
+         houseNo:'',
+         subCity:'',
+         status:0,
+         name: "",
+         kebele: "",
+         relationship: "",
+      };
+    },
+ error(response){
+  console.log(response)
+}
+})}
 }

@@ -85,11 +85,16 @@
               </mat-form-field>
               
             </div>
-                          <button  mat-raised-button type="submit" class="btn btn-sm btnupdate">update</button>
+                          <button  mat-raised-button type="submit" *ngIf="employeePosition.id!=undefined" class="btn btn-sm btnupdate">update</button>
                           <div class="clearfix"></div>
-                          <!-- <div *ngIf="employeePositionUpdated" class="alert alert-success mt-3">
+                          <div *ngIf="employeePositionUpdated" class="alert alert-success mt-3">
                            Job Description added successfully!
-                          </div> -->
+                          </div>
+                          <button type="button" class="btn btn-sm btnsave" *ngIf="employeePosition.id===undefined"(click)="addEmployeePosition()">Add</button>
+                     
+              <div *ngIf="employeePositionSaved" class="alert alert-success mt-3">
+         employeePosition added successfully!
+            </div>
                       </form>
                   </div>
               </div>

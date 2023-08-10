@@ -40,11 +40,16 @@
                               </div>
                             </div>
                    
-                      <div> <button type="button" class="btn btn-sm btnupdate" (click)="updateDepositeAuthentication()">update Emergency Contact</button>
+                      <div> <button type="button" class="btn btn-sm btnupdate" *ngIf="depositeAuthentication.id!=undefined" (click)="updateDepositeAuthentication()">Update </button>
                       </div>
                            <div *ngIf="depositeAuthenticationUpdated" class="alert alert-success mt-3">
-                          depositeauthentication added successfully!
-                         </div> <div class="clearfix"></div>
+                          depositeauthentication updated successfully!
+                         </div> 
+                          <button type="button" class="btn btn-sm btnsave" *ngIf="depositeAuthentication.id===undefined" (click)="addDepositeAuthentication()">Add</button>
+                     
+                              <div *ngIf="depositeauthenticationSaved" class="alert alert-success mt-3">
+                             depositeauthentication added successfully!
+                            </div>
                   </form>
               </div>
           </div>

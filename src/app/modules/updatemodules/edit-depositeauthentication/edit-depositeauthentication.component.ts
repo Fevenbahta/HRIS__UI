@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepositeAuthentication } from 'app/models/deposite-authentication.model';
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { DepositeAuthenticationService } from 'app/service/deposite-authentcation.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 
@@ -13,7 +15,7 @@ export class EditDepositeAuthenticationComponent implements OnInit {
   depositeAuthenticationId: string;
   depositeAuthentication: DepositeAuthentication ={
     pId:0,
-    id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    id:undefined,
    createdBy: '', 
      createdDate: "2023-07-20T13:56:00.062Z", 
      updatedDate: "2023-07-20T13:56:00.062Z", 
@@ -27,6 +29,7 @@ export class EditDepositeAuthenticationComponent implements OnInit {
 
 };
   depositeAuthenticationUpdated: boolean = false;
+  depositeauthenticationSaved: boolean = false;
   depositeAuthentications:DepositeAuthentication[]=[];
 
   
@@ -35,7 +38,7 @@ export class EditDepositeAuthenticationComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private employeeIdService: EmployeeIdService,
-    
+    private dialog: MatDialog,
   ) {}
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
@@ -77,7 +80,7 @@ export class EditDepositeAuthenticationComponent implements OnInit {
     });
 this.depositeAuthentication ={
   pId:0,
-  id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  id:  undefined,
  createdBy: '', 
    createdDate: "2023-07-20T13:56:00.062Z", 
    updatedDate: "2023-07-20T13:56:00.062Z", 
@@ -95,29 +98,57 @@ this.depositeAuthentication ={
     const depositeAuthenticationToEdit = this.depositeAuthentications.find(depositeAuthentication => depositeAuthentication.id === DepositeAuthentication.id);
     this.depositeAuthentication = depositeAuthenticationToEdit;
   }
-  deleteDepositeAuthentication(DepositeAuthentication: DepositeAuthentication): void {
-    // Here, we can show a confirmation dialog/modal to confirm the deletion.
-    const confirmDelete = confirm('Are you sure you want to delete this DepositeAuthentication?');
-  
-    if (confirmDelete) {
-      // If the user confirms the deletion, we can call the service to delete the DepositeAuthentication.
-      this.depositeAuthenticationService.deleteDepositeAuthentication(DepositeAuthentication.id).subscribe(
+
+  deleteDepositeAuthentication(deositeAuthentication: DepositeAuthentication): void {
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+      this.depositeAuthenticationService.deleteDepositeAuthentication(deositeAuthentication.id).subscribe(
         () => {
-          // DepositeAuthentication deleted successfully, we can update the list of DepositeAuthentications after deletion.
-          // Here, we are simply filtering out the deleted DepositeAuthentication from the DepositeAuthentications array.
-          this.depositeAuthentications = this.depositeAuthentications.filter((t) => t.id !== DepositeAuthentication.id);
-          this.router.navigate(['/employee-registration/deposite-authentication']); 
-          // You can also show a success message to the user.
-          alert('DepositeAuthentication deleted successfully!');
+         
+          this.depositeAuthentications = this.depositeAuthentications.filter((t) => t.id !== deositeAuthentication.id);
+          this.router.navigate(['employee-registration/deositeAuthentication']);
         },
         (error) => {
           console.error(error);
           // If there was an error during deletion, you can show an error message.
-          alert('Failed to delete the DepositeAuthentication. Please try again later.');
+         // alert('Failed to delete the deositeAuthentication. Please try again later.');
         }
-      );
-    }
+        );
+      }
+    });
   }
   
-  
+  addDepositeAuthentication() {
+    this.depositeAuthentication.empId = this.employeeIdService.employeeId;
+    this.depositeAuthenticationService.addDepositeAuthentication(this.depositeAuthentication)
+    .subscribe({
+      next: (employee) => {
+        this.depositeauthenticationSaved = true;
+        setTimeout(() => {
+          this.depositeauthenticationSaved = false;
+        }, 2000);
+        // Add the current work experience to the array
+        this.depositeAuthentications.push({ ...this.depositeAuthentication });
+        // Reset the form fields
+        this.depositeAuthentication = {
+          pId:0,
+          id: undefined,
+         createdBy: '', 
+           createdDate: "2023-07-20T13:56:00.062Z",   
+           updatedDate: "2023-07-20T13:56:00.062Z", 
+           updatedBy: '', 
+           empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+           status:0,
+         bank: '',
+         bankBranch: '',
+         bankAccount:0,
+         tinNumber: '',
+        };
+      },
+   error(response){
+    console.log(response)
+  }
+  })}
 }

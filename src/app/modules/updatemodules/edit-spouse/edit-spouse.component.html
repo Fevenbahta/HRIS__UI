@@ -40,13 +40,16 @@
                         <mat-datepicker #dateofbirthPicker></mat-datepicker>
                       </mat-form-field>
                        </div></div>
-                  <button type="button" class="btn btn-sm btnupdate" (click)="updateSpouse()">Update Spouse</button>
-                </div>
+                  <button type="button" class="btn btn-sm btnupdate" *ngIf="spouse.id!=undefined"  (click)="updateSpouse()">Update</button>
+             
                 <div *ngIf="spouseUpdated" class="alert alert-success mt-3">
                   Spouse updated successfully!
                 </div>
-                <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">save Profile</button> -->
-                <div class="clearfix"></div>
+                <button type="button" class="btn btn-sm btnsave" *ngIf="spouse.id===undefined" (click)="addSpouse()">Add</button>
+                     
+                <div *ngIf="spouseSaved" class="alert alert-success mt-3">
+              spouse added successfully!
+              </div>   </div>
               </form>
             </div>
           </div>

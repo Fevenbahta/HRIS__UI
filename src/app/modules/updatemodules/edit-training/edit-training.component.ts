@@ -28,6 +28,7 @@ export class EditTrainingComponent implements OnInit {
   };
  ;
   trainingSaved: boolean = false;
+  trainingAdded: boolean = false;
   trainings:Training[]=[]
 
   buttons = [
@@ -117,5 +118,37 @@ export class EditTrainingComponent implements OnInit {
     }
   }
   
+  addTraining() {
+    this.training.empId = this.employeeIdService.employeeId;
+    this.trainingService.addTraining(this.training)
+    .subscribe({
+      next: (employee) => {
+      //  this.router.navigate(['/employee-registration/deposite-authentication']); 
+          setTimeout(() => {
+        this.trainingAdded = false;
+      }, 2000);
+        // Add the current work experience to the array
+        this.trainings.push({ ...this.training });
+        // Reset the form fields
+        this.training = {
+          pId: 0,
+          id: undefined,
+          createdBy: "",
+          createdDate: "2023-07-26T06:13:52.512Z",
+          updatedDate: "2023-07-26T06:13:52.512Z",
+          updatedBy: "",
+          status: 0,
+          empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
+          typeOfTraining: "",
+          from: "",
+          to: "",
+        };
+      },
+      error(response) {
+        console.log(response)
+      }
+    });
+  }
+
 }
 

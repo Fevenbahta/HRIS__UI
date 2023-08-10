@@ -91,6 +91,7 @@ component: EditWorkexperienceComponent},
 component: EditJobDescriptionComponent},
 {path:'edit-emergencyContact/:empId',
 component: EditEmergencyContactComponent},
+
 {path:'edit-spouse/:empId',
 component: EditSpouseComponent},
 {path:'edit-training/:empId',

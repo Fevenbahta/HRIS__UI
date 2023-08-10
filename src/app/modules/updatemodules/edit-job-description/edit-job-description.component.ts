@@ -18,7 +18,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditJobDescriptionComponent implements OnInit {
   employeePositionId: string;
-  employeePosition: EmployeePosition;
+  employeePosition: EmployeePosition ={
+    pid:0,
+    empId:"",
+    id:undefined,
+  divisionId:'',
+  stepId: '',
+  branchId: 'string',
+  position: '',
+  status:0,
+  startDate: '',
+  endDate: '2023-07-21T08:09:41.138Z',
+createdBy: '',
+createdDate: '2023-07-21T08:09:41.138Z',
+updatedDate: '2023-07-21T08:09:41.138Z',
+updatedBy: '',
+
+  }
+  ;
   employeePositionUpdated: boolean = false;
   employeePositions:EmployeePosition[]=[];
   divisions:Division[]= [];
@@ -53,19 +70,10 @@ export class EditJobDescriptionComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.employeePositionId = params['id'].toString();
       // this.getemployeePositionById()
-
-
-      this.employeePositionService.getEmployeePosition(this.employeePosition.id)
-      .subscribe((employeePosition) => {
-        this.employeePosition = employeePosition;
-
-        this.selectedDivision = employeePosition.divisionId;
-        this.selectedPosition = employeePosition.position;
-        this.selectedBranch = employeePosition.branchId;
-        this.selectedStep = employeePosition.stepId;
-
+    });
         this.employeePositionService.getAllEmployeePosition().subscribe((employeePositions) => {
-          this.employeePositions = employeePositions;
+          this.employeePositions = employeePositions.filter(employeePositions => employeePositions.empId === this.employeeIdService.employeeId);
+          ;
         });
       
         // Fetch the available divisions and populate the divisions array
@@ -87,9 +95,9 @@ export class EditJobDescriptionComponent implements OnInit {
         this.stepService.getAllStep().subscribe((steps) => {
           this.steps = steps;
         });
-      });
-    });
-  }
+      
+    }
+  
   getemployeePositionById(): void {
     this.employeePositionService.getEmployeePosition(this.employeeIdService.employeeId).subscribe(
       (employeePosition) => {
@@ -102,10 +110,7 @@ export class EditJobDescriptionComponent implements OnInit {
   }
   updateEmployeePosition(): void {
     this.employeePositionUpdated=true;
-    this.employeePosition.divisionId = this.selectedDivision;
-    this.employeePosition.position = this.selectedPosition;
-    this.employeePosition.stepId = this.selectedStep;
-    this.employeePosition.branchId = this.selectedBranch;
+
     this.employeePositionService.updateEmployeePosition(this.employeePosition, this.employeePositionId).subscribe({
       next: (employeePosition) => {
        
@@ -119,8 +124,13 @@ export class EditJobDescriptionComponent implements OnInit {
  
   }
   editEmployeePosition(EmployeePosition: EmployeePosition): void {
-    // Here, we will navigate to the edit page for the selected EmployeePosition.
-    this.router.navigate(["/edit-employeePosition", EmployeePosition.id]);
+ 
+    const contactToEdit = this.employeePositions.find(employeePosition => employeePosition.id === EmployeePosition.id);
+    this.employeePosition = contactToEdit;
+     this.selectedDivision =  this.employeePosition.divisionId;
+  this.selectedPosition  =this.employeePosition.position ;
+   this.selectedStep= this.employeePosition.stepId ;
+   this.selectedBranch =this.employeePosition.branchId ;
   }
   deleteEmployeePosition(EmployeePosition: EmployeePosition): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);

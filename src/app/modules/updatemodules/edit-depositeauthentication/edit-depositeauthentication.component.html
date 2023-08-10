@@ -60,7 +60,7 @@
       </thead>
       <tbody>
         <!-- Use *ngFor to loop through the depositeauthentications array and display each deposit authentication record -->
-        <tr >
+        <tr *ngFor="let depositeAuthentication of depositeAuthentications" >
           <td>{{depositeAuthentication.bank }}</td>
           <td>{{ depositeAuthentication.bankBranch }}</td>
           <td>{{depositeAuthentication.bankAccount }}</td>

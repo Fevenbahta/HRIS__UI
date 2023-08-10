@@ -16,18 +16,15 @@
             <div class="card-body">
 
               <form (ngSubmit)="updateTraining()">
-
-   
                 <div class="row"> 
                   <div class="card-body">
-                    <div class="col-md-4 form-field"> 
+                    
+                    <div class="col-md-4 form-field">
+                      <input  placeholder=" " type="text" name="typeOfTraining" [(ngModel)]="training.typeOfTraining" >
                       <label>Description</label>
-                      <input  placeholder=" " type="text" name="typeOfTraining" [(ngModel)]="training.typeOfTraining">
-                     
                     </div>
-                </div>
+                  </div>
                   <div class="card-body">
-              
                     <div class="row">
                       <div class="col-md-6 ">
                         <mat-form-field style="height: 65px; width:160px" class="example-full-width">
@@ -70,7 +67,7 @@
             </thead>
             <tbody>
               <!-- Use *ngFor to loop through the trainings array and display each training record -->
-              <tr >
+              <tr *ngFor="let training of trainings" >
                 <td>{{ training.typeOfTraining }}</td>
                 <td>{{ training.from }}</td>
                 <td>{{ training.to }}</td>

@@ -16,7 +16,21 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
 export class EditEducationComponent {
   educationUpdated: boolean = false;
   educationId: string; 
-  education: Education;
+  education: Education = {
+    pId: 0,
+    id:undefined,
+    createdBy: "",
+    createdDate: "2023-07-26T06:13:52.512Z",
+    updatedDate: "2023-07-26T06:13:52.512Z",
+    updatedBy: "",
+    status: 0,
+    empId: undefined,
+    from: '',
+    to: "",
+    nameOfInstitute: '',
+    fieldOfStudy: '',
+    eductionName: '',
+  };
   educations: Education[] = [];
   educationlevels: EducationLevel[] = [];
   selectedEducationLevel: string = '';
@@ -44,16 +58,7 @@ export class EditEducationComponent {
 
       // Get the work experience by ID
 
-        this.educationService.getEducation(this.employeeIdService.employeeId).subscribe({
-          next: (education) => {
-            this.education = education;
-        
-            this.selectedEducationLevel = education.eductionName; // Use safe navigation operator
-          },
-          error: (response) => {
-            console.log(response);
-          }
-        });
+    
       })
       this.educationlevelservice.getAllEducationLevels()
       .subscribe({
@@ -69,7 +74,8 @@ export class EditEducationComponent {
        // Get all educations
        this.educationService.getAllEducation().subscribe({
         next: (educations) => {
-          this.educations = educations;
+          this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+          ;
         },
         error: (response) => {
           console.log(response);
@@ -99,9 +105,9 @@ export class EditEducationComponent {
   }
 
 
-  editEducation(Education: Education): void {
-    // Here, we will navigate to the edit page for the selected Education.
-    this.router.navigate(['/edit-education', Education.id]);
+  editEducation(education: Education): void {
+    const educationToEdit = this.educations.find(education => education.id === education.id);
+    this.education = educationToEdit;
   }
 
   deleteEducation(Education: Education): void {

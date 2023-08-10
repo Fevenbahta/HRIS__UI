@@ -11,7 +11,21 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
 })
 export class EditDepositeAuthenticationComponent implements OnInit {
   depositeAuthenticationId: string;
-  depositeAuthentication: DepositeAuthentication;
+  depositeAuthentication: DepositeAuthentication ={
+    pId:0,
+    id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+   createdBy: '', 
+     createdDate: "2023-07-20T13:56:00.062Z", 
+     updatedDate: "2023-07-20T13:56:00.062Z", 
+     updatedBy: '', 
+     empId: "",
+     status:0,
+   bank: '',
+   bankBranch: '',
+   bankAccount:0,
+   tinNumber: '',
+
+};
   depositeAuthenticationUpdated: boolean = false;
   depositeAuthentications:DepositeAuthentication[]=[];
 
@@ -33,34 +47,20 @@ export class EditDepositeAuthenticationComponent implements OnInit {
     
     
   })
-  this.depositeAuthenticationService.getDepositeAuthentication(this.employeeIdService.employeeId) 
+
+  this.depositeAuthenticationService.getAllDepositeAuthentication() 
   .subscribe({ 
     next: (depositeauthentications) => { 
-      this.depositeAuthentication = depositeauthentications; 
+      this.depositeAuthentications = depositeauthentications.filter(deposite => deposite.empId === this.employeeIdService.employeeId);
+      ; 
           }, 
     error(response) { 
       console.log(response); 
     }, 
 });
-//   this.depositeAuthenticationService.getAllDepositeAuthentication() 
-//   .subscribe({ 
-//     next: (depositeauthentications) => { 
-//       this.depositeAuthentications = depositeauthentications; 
-//           }, 
-//     error(response) { 
-//       console.log(response); 
-//     }, 
-// });}
-//   getDepositeAuthenticationById(): void {
-//     this.depositeAuthenticationService.getDepositeAuthentication(this.depositeAuthenticationId).subscribe(
-//       (depositeAuthentication) => {
-//         this.depositeAuthentication = depositeAuthentication;
-//       },
-//       (error) => {
-//         console.error(error);
-//       }
-//     );
-  }
+}
+
+  
   updateDepositeAuthentication(): void {
     this. depositeAuthenticationUpdated=true;
     this.depositeAuthenticationService.updateDepositeAuthentication(this.depositeAuthentication, this.depositeAuthenticationId).subscribe({
@@ -78,8 +78,8 @@ export class EditDepositeAuthenticationComponent implements OnInit {
 
   }
   editDepositeAuthentication(DepositeAuthentication: DepositeAuthentication): void {
-    // Here, we will navigate to the edit page for the selected DepositeAuthentication.
-    this.router.navigate(["/edit-depositeAuthentication", DepositeAuthentication.id]);
+    const depositeAuthenticationToEdit = this.depositeAuthentications.find(depositeAuthentication => depositeAuthentication.id === DepositeAuthentication.id);
+    this.depositeAuthentication = depositeAuthenticationToEdit;
   }
   deleteDepositeAuthentication(DepositeAuthentication: DepositeAuthentication): void {
     // Here, we can show a confirmation dialog/modal to confirm the deletion.

@@ -16,7 +16,7 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
 })
 export class EditEmergencyContactComponent implements OnInit {
   emergencyContactId: string;
-  emergencyContact: EmergencyContact;
+
   emergencyContactUpdated: boolean = false;
   emergencyContacts:EmergencyContact[]=[];
   
@@ -31,14 +31,31 @@ export class EditEmergencyContactComponent implements OnInit {
     private dialog: MatDialog,
     private employeeIdService:EmployeeIdService
   ) {}
+    emergencyContact: EmergencyContact ={
+        pId:0,
+        id:  undefined,
+       createdBy: '', 
+         createdDate: "2023-07-20T13:56:00.062Z", 
+         updatedDate: "2023-07-20T13:56:00.062Z", 
+         updatedBy: '', 
+         empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+        region: '', 
+         town: '', 
+         phoneNumber: '', 
+         houseNo:'',
+         subCity:'',
+         status:0,
+         name: "",
+         kebele: "",
+         relationship: "",
+    
+    }
 
+  
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.emergencyContactId = params['id'];
-      this.emergencyContactService.getEmergencyContact(this.employeeIdService.employeeId).subscribe((emergencyContact) => {
-        this.emergencyContact = emergencyContact;
-      });
-  
+   
       this.emergencyContactService.getAllEmergencyContact().subscribe({
         next: (emergencycontacts) => {
           // Filter emergency contacts for the current employee
@@ -83,7 +100,9 @@ export class EditEmergencyContactComponent implements OnInit {
   ];
   editEmergencyContact(emergencyContact: EmergencyContact): void {
     // Here, we will navigate to the edit page for the selected EmergencyContact.
-    this.router.navigate(["/edit-emergencyContact", emergencyContact.id]);
+ 
+    const contactToEdit = this.emergencyContacts.find(contact => contact.id === emergencyContact.id);
+    this.emergencyContact = contactToEdit;
   }
   deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);

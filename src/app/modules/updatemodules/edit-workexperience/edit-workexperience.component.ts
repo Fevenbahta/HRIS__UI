@@ -16,7 +16,24 @@ export class EditWorkexperienceComponent {
 
   workExperienceId: string;
 
-  workExperience: WorkExperience;
+  workExperience: WorkExperience = {
+    pId: 0,
+    id: undefined,
+    description: "",
+    createdBy: "",
+    createdDate: "2023-07-26T06:13:52.512Z",
+    updatedDate: "2023-07-26T06:13:52.512Z",
+    updatedBy: "",
+    status: 0,
+    empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
+    companyName: "",
+    postionHeld: "",
+    from: "",
+    to: "",
+    salary: 0,
+    reasonTermination: "",
+  };
+;
   workExperiences: WorkExperience[] = [];
   selectedEducationLevel: string = '';
 
@@ -42,28 +59,15 @@ export class EditWorkexperienceComponent {
       // Get all work experiences
       this.workExperienceService.getAllWorkExperience().subscribe({
         next: (workExperience) => {
-          this.workExperiences = workExperience;
+          this.workExperiences = workExperience.filter(workexperience => workexperience.empId === this.employeeIdService.employeeId);
+
         },
         error: (response) => {
           console.log(response);
         }
       });
-    
-      // Get all educations
 
- 
-  
-      // Get the work experience by ID if it exists
-
-        this.workExperienceService.getWorkExperience(this.workExperienceId).subscribe({
-          next: (workExperience) => {
-            this.workExperience = workExperience;
         
-          },
-          error: (response) => {
-            console.log(response);
-          }
-        });
       })
     
   }
@@ -83,8 +87,8 @@ export class EditWorkexperienceComponent {
   }
 
   editWorkExperience(WorkExperience: WorkExperience): void {
-    // Here, we will navigate to the edit page for the selected WorkExperience.
-    this.router.navigate(['/edit-workExperience', WorkExperience.id]);
+    const contactToEdit = this.workExperiences.find(workExperience => workExperience.id === workExperience.id);
+    this.workExperience = contactToEdit;
   }
 
   deleteWorkExperience(workExperience: WorkExperience): void {

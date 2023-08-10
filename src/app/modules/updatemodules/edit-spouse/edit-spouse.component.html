@@ -18,17 +18,13 @@
                 <div class="row">
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-md-4 form-field"> 
-                        
-                        <label>Name</label>
+                      <div class="col-md-4 form-field">
                         <input  placeholder=" " type="text" name="name" [(ngModel)]="spouse.name">
-                       
+                        <label>Name</label>
                       </div>
-
-                      <div class="col-md-4 form-field">             
-                                   <label>Relationship</label>
+                      <div class="col-md-4 form-field">
                         <input  placeholder=" " type="text" name="relationship" [(ngModel)]="spouse.relationship ">
-
+                        <label>Relationship</label>
                       </div>
                     </div>
                   </div>
@@ -43,8 +39,7 @@
                         <mat-datepicker-toggle matSuffix [for]="dateofbirthPicker"></mat-datepicker-toggle>
                         <mat-datepicker #dateofbirthPicker></mat-datepicker>
                       </mat-form-field>
-                       </div></div></div>
-                <div>
+                       </div></div>
                   <button type="button" class="btn btn-sm btnupdate" (click)="updateSpouse()">Update Spouse</button>
                 </div>
                 <div *ngIf="spouseUpdated" class="alert alert-success mt-3">
@@ -68,7 +63,7 @@
           </thead>
           <tbody>
             <!-- Use *ngFor to loop through the spouses array and display each spouse's information -->
-            <tr >
+            <tr *ngFor="let spouse of spouses" >
               <td>{{ spouse.name }}</td>
               <td>{{ spouse.dateOfBirth }}</td>
               <td>{{ spouse.relationship }}</td>

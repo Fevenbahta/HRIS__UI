@@ -14,7 +14,21 @@ import { SpouseService } from 'app/service/spouse.service';
 })
 export class EditSpouseComponent implements OnInit {
   spouseId: string;
-  spouse: Spouse;
+  spouse: Spouse= {
+    pId: 0,
+    id: undefined,
+    name: "",
+    createdBy: "",
+    createdDate: "2023-07-26T06:13:52.512Z",
+    updatedDate: "2023-07-26T06:13:52.512Z",
+    updatedBy: "",
+    status: 0,
+    empId: " ",
+   dateOfBirth:" ",
+  relationship: '',
+
+  };
+
   spouses:Spouse[]=[]
  spouseUpdated: boolean = false;
   buttons = [
@@ -33,14 +47,13 @@ export class EditSpouseComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.spouseId = params['id'],toString();
-      this.getSpouseById();
-      
     });
 
     this.spouseService.getAllSpouse() 
     .subscribe({ 
-      next: (spouses) => { 
-        this.spouses = spouses; 
+      next: (spouse) => { 
+        this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+
             }, 
       error(response) { 
         console.log(response); 
@@ -48,32 +61,40 @@ export class EditSpouseComponent implements OnInit {
     
   }
 
-  getSpouseById(): void {
-    this.spouseService.getSpouse(this.employeeIdService.employeeId).subscribe(
-      (spouse) => {
-        this.spouse = spouse;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
+
 
   updateSpouse(): void {
-    this.spouseService.updateSpouse(this.spouse, this.spouseId ).subscribe(
+    this.spouseService.updateSpouse(this.spouse, this.spouse.id).subscribe(
       () => {
-        // Spouse updated successfully, you can redirect to the spouse list or show a success message.
-        // this.router.navigate(['/spouse']);
-        this.spouseUpdated=true;
+   
+        setTimeout(() => {
+          this.spouseUpdated=true; 
+        }, 2000);
       },
       (error) => {
         console.error(error);
       }
     );
+    this.spouse= {
+      pId: 0,
+      id: undefined,
+      name: "",
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+      empId: " ",
+     dateOfBirth:" ",
+    relationship: '',
+  
+    };
+  
   }
-  editSpouse(Spouse: Spouse): void {
+  editSpouse(spouse: Spouse): void {
     // Here, we will navigate to the edit page for the selected Spouse.
-    this.router.navigate(['/edit-spouse', Spouse.id]);
+    const contactToEdit = this.spouses.find(contact => contact.id === spouse.id);
+    this.spouse = contactToEdit;
   }
   deleteSpouse(Spouse: Spouse): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);

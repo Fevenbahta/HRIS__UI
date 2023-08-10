@@ -78,7 +78,7 @@
     <h6>Education History</h6>
     <table class="table table-bordered table-striped">
       <thead>
-        <tr>
+        <tr >
           <th>Education Level</th>
           <th>Name of Institute</th>
           <th>Field of Study</th>
@@ -89,6 +89,7 @@
       <tbody>
         <!-- Use *ngFor to loop through the educations array and display each education record -->
         <tr >
+          <tr *ngFor="let education of educations" >
           <td>{{ getEducationName(education.eductionName)}}</td>
           <td>{{ education.nameOfInstitute }}</td>
           <td>{{ education.fieldOfStudy }}</td>

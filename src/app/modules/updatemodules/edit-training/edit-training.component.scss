@@ -23,14 +23,12 @@ background-color:#fcc034 ;
     }
     
     .form-field input:not(:placeholder-shown) + label,
-    .form-field input:focus + label,
-    .form-field mat-form-field input {
+    .form-field input:focus + label {
       transform: translateY(-120%) scale(0.8);
-      color: #007bff;
+    color: #007bff;
     }
     
-    .form-field input,
-    .form-field mat-form-field {
+    .form-field input {
       border: none;
       border-bottom: 1px solid #ccc;
       outline: none;
@@ -39,22 +37,12 @@ background-color:#fcc034 ;
       width: 100%;
     }
     
-    .form-field mat-select {
-      border: none;
-      border-bottom: 1px solid #ccc;
-      outline: none;
-      font-size: 16px;
-      width: 100%;
-    }
-    
     .form-field label {
       position: absolute;
       pointer-events: none;
       left: 0;
-      top: -10px;
+      top: 5px;
       transition: 0.2s ease all;
       font-size: 14px;
-      color: #007bff;
+    color: #696666;
     }
-    
-  

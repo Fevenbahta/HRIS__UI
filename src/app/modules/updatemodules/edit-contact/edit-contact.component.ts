@@ -15,27 +15,11 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
   styleUrls: ['./edit-contact.component.css']
 })
 export class EditContactComponent implements OnInit {
-  contact:Contact;
+  
   contacts:Contact[]=[]
   contactId: string;
   contactUpdate: boolean =false
-  addContactRequest: Contact = {
-    pId:0,
-    id:'',
-    status:0,
-    region: '',
-    town: '',
-    subCity: '',
-    woreda: '',
-    Kebele: '',
-    houseNo: '',
-    postCode: 0,
-    phoneNumber: '',
-     updatedDate: "2023-07-20T13:56:00.062Z", 
-     updatedBy: '', 
-     empId: "3fa85d64-5717-4562-b3fc-2c963f66afa6",
-     email: '',
-  };
+
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
     { label: '  List Employee ', route: '/employee-list' }
@@ -49,58 +33,61 @@ export class EditContactComponent implements OnInit {
     private dialog: MatDialog,
     private employeeIdService:EmployeeIdService
   ) {}
-
-  ngOnInit(): void {
-    this.addContactRequest.empId = this.employeeIdService.employeeId;
-    console.log( this.addContactRequest.empId);
-    this.route.paramMap.subscribe(params => {
-      const contactId = params.get('empId');
-      if (contactId) {
-        this.contactService.getContact(contactId).subscribe({
-          next: (contact) => {
-            this.addContactRequest = contact;
-          },
-          error: (response) => {
-            console.log(response);
-          }
-        });
-      }
-    });
-
- 
-    this.contactService.getContact(this.employeeIdService.employeeId)
+  contact:Contact={
+    pId:0,
+    id: undefined,
+    createdBy: '', 
+     createdDate: "2023-07-20T13:56:00.062Z", 
+     updatedDate: "2023-07-20T13:56:00.062Z", 
+     updatedBy: '', 
+     empId: "",
+    region: '', 
+     town: '', 
+     phoneNumber: '', 
+     email: '',
+     postCode: 0,
+     houseNo:'',
+     Kebele:'',
+     woreda:'',
+     subCity:'',
+     status:0,
     
-      
-      .subscribe((contacts) => {
-        this.contact = contacts;
-      }); 
-    // this.contactService.getAllContacts() 
-    // .subscribe({ 
-    //   next: (contacts) => { 
-    //     this.contacts = contacts; 
-    //         }, 
-    //   error(response) { 
-    //     console.log(response); 
-    //   }, 
-    }
+
+}
+  ngOnInit(): void {
+ 
+   
+    this.route.params.subscribe((params) => {
+      this.contactId = params['id'];
+   
+    this.contactService.getAllContacts() 
+    .subscribe({ 
+      next: (contacts) => { 
+        this.contacts =contacts.filter(con => con.empId === this.employeeIdService.employeeId);
+
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, })
+    });
+  }
   contactForm: FormGroup = this.formBuilder.group({
     phoneNumber: ['', Validators.required],
     
   });
   updateContact(): void {
-    if (this.addContactRequest.id) {
-      
-      this.contactService.updateContact(this.addContactRequest,this.contactId ).subscribe({
-        next: (contact) => {
-         
-          this.contactUpdate = true;
-          //  this.router.navigate(['employee-registration/job-description']);
-            setTimeout(() => {
-              this.contactUpdate = false;
-            }, 2000);
-            this.contacts.push({ ...this.addContactRequest });
 
-            this.addContactRequest = {
+    this.contactUpdate=true;
+    this.contactService.updateContact(this.contact, this.contact.id)
+    .subscribe({
+    
+      next: (contact) => {
+        setTimeout(() => {
+          this.contactUpdate= false;
+        }, 2000);
+
+
+            this.contact = {
               pId:0,
               id:'',
               status:0,
@@ -122,12 +109,13 @@ export class EditContactComponent implements OnInit {
           console.log(response);
         }
       });
-    }
+    
   }
 
   editContact(Contact: Contact): void {
     // Here, we will navigate to the edit page for the selected Contact.
-    this.router.navigate(["/edit-contact", this.contact.id]);
+    const contactToEdit = this.contacts.find(contact => contact.id === contact.id);
+    this.contact = contactToEdit;
   }
   deleteContact(Contact: Contact): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);

@@ -12,7 +12,21 @@ import { TrainingService } from 'app/service/training.service';
 })
 export class EditTrainingComponent implements OnInit {
   trainingId: string;
-  training: Training;
+  training: Training = {
+    pId: 0,
+    id: undefined,
+    createdBy: "",
+    createdDate: "2023-07-26T06:13:52.512Z",
+    updatedDate: "2023-07-26T06:13:52.512Z",
+    updatedBy: "",
+    status: 0,
+    empId: " ",
+    typeOfTraining: "",
+    from: "",
+    to: "",
+  
+  };
+ ;
   trainingSaved: boolean = false;
   trainings:Training[]=[]
 
@@ -31,13 +45,14 @@ export class EditTrainingComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.trainingId = params['id'].toString();
-      this.getTrainingById();
+    
       
     });
     this.trainingService.getAllTraining() 
     .subscribe({ 
-      next: (trainings) => { 
-        this.trainings = trainings; 
+      next: (training) => { 
+        this.trainings = training.filter(training => training.empId === this.employeeIdService.employeeId);
+
             }, 
       error(response) { 
         console.log(response); 
@@ -45,31 +60,38 @@ export class EditTrainingComponent implements OnInit {
   });
   }
 
-  getTrainingById(): void {
-    this.trainingService.getTraining(this.employeeIdService.employeeId).subscribe(
-      (training) => {
-        this.training = training;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
+
 
   updateTraining(): void {
-    this.trainingService.updateTraining(this.training,this.trainingId).subscribe(
+    this.trainingService.updateTraining(this.training,this.training.id).subscribe(
       () => {
-        this.trainingSaved=true;
-        this.router.navigate(['/employee-registration/training']); 
+        setTimeout(() => {
+          this.trainingSaved=true; 
+        }, 2000);
+ 
       },
       (error) => {
         console.error(error);
       }
     );
+    this.training = {
+      pId: 0,
+      id: undefined,
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+      empId: " ",
+      typeOfTraining: "",
+      from: "",
+      to: "",
+    
+    };
   }
   editTraining(training: Training): void {
-    // Here, we will navigate to the edit page for the selected training.
-    this.router.navigate(["/edit-training", training.id]);
+    const contactToEdit = this.trainings.find(training => training.id === training.id);
+    this.training = contactToEdit;
   }
   deleteTraining(training: Training): void {
     // Here, we can show a confirmation dialog/modal to confirm the deletion.

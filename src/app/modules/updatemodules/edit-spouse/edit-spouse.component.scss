@@ -23,39 +23,36 @@ background-color:#fcc034 ;
   }
   .form-field {
     position: relative;
-  }
-
-  .form-field input:not(:placeholder-shown) + label,
-  .form-field input:focus + label,
-  .form-field mat-form-field input {
-    transform: translateY(-120%) scale(0.8);
-    color: #007bff;
+    margin-bottom: 20px;
   }
   
-  .form-field input,
-  .form-field mat-form-field {
+  .form-field input {
     border: none;
     border-bottom: 1px solid #ccc;
     outline: none;
+    padding: 5px;
     font-size: 16px;
-    padding: 5px 0;
-    width: 100%;
-  }
-  
-  .form-field mat-select {
-    border: none;
-    border-bottom: 1px solid #ccc;
-    outline: none;
-    font-size: 16px;
-    width: 100%;
   }
   
   .form-field label {
     position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 14px;
+    color: #696666;
     pointer-events: none;
-    left: 0;
-    top: -10px;
     transition: 0.2s ease all;
+
+  }
+  
+  .form-field input:focus ~ label,
+  .form-field input:not(:placeholder-shown) ~ label {
+    top: -20px;
+    left: 5px;
     font-size: 14px;
     color: #007bff;
+    background-color: #fff;
+    padding: 0 5px;
   }
+  
+  

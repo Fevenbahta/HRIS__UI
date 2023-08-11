@@ -62,20 +62,30 @@ export class SpouseComponent implements OnInit {
         setTimeout(() => {
           this.spouseSaved = false;
         }, 2000);
-        this.spouseService.getAllSpouse() 
-    .subscribe({ 
-      next: (spouse) => { 
-        this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+        
+        this.spouseService.getSpouse(this.employeeIdService.employeeId)
+  .subscribe({ 
+    next: (spouses) => { 
+      this.spouse = spouses; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
+    //     this.spouseService.getAllSpouse() 
+    // .subscribe({ 
+    //   next: (spouse) => { 
+    //     this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
 
-            }, 
-      error(response) { 
-        console.log(response); 
-      }, })
-        this.spouses.push({ ...this.addSpouseRequest });
-
+    //         }, 
+    //   error(response) { 
+    //     console.log(response); 
+    //   }, })
+    //     this.spouses.push({ ...this.addSpouseRequest });
+    this.spouses.push({ ...this.addSpouseRequest });
         this.addSpouseRequest = {
           pId: 0,
-          id: undefined,
+          id: this.spouse.id,
           name: "",
           createdBy: "",
           createdDate: "2023-07-26T06:13:52.512Z",

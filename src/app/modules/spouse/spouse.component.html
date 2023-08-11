@@ -61,7 +61,7 @@
 
 
   <h6>Spouse List</h6>
-  <table  *ngIf="spouse.empId!=undefined" class="table table-bordered table-striped">
+  <table   class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>Name</th>
@@ -71,14 +71,14 @@
     </thead>
     <tbody>
       <!-- Use *ngFor to loop through the spouses array and display each spouse's information -->
-      <tr *ngFor="let spous of spouses">
-        <td>{{ spous.name }}</td>
-        <td>{{ spous.dateOfBirth }}</td>
-        <td>{{ spous.relationship }}</td>
+      <tr *ngFor="let spouse of spouses">
+        <td>{{ spouse.name }}</td>
+        <td>{{ spouse.dateOfBirth }}</td>
+        <td>{{ spouse.relationship }}</td>
         <td>
-          <button class="btn btn-sm btnedit" (click)="editSpouse(spous)">
+          <button class="btn btn-sm btnedit" (click)="editSpouse(spouse)">
              <mat-icon>edit</mat-icon>Edit</button>
-          <button class="btn btn-sm btndanger" (click)="deleteSpouse(spous)">
+          <button class="btn btn-sm btndanger" (click)="deleteSpouse(spouse)">
             <mat-icon>delete</mat-icon>Delete</button>
         </td>
       </tr>

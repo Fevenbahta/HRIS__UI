@@ -24,6 +24,7 @@ export class EditEmployeeComponent implements OnInit {
   employeeUpdated: boolean = false;
 supervisors:Supervisor[]=[];
   employees: Employee[] = [];
+  allemployees: Employee[] = [];
   firstSupervisors: Supervisor[] = []; // Array to store first supervisors only 
   selectedFirstSupervisor: string = ''; 
   filteredEmployees: any[] = []; 
@@ -75,16 +76,27 @@ supervisors:Supervisor[]=[];
       status: [0,] ,
       
     });
-    this.supervisorService.getAllSupervisors().subscribe({
-      next: (supervisors) => {
-        this.supervisors = supervisors;
-        this.firstSupervisors = supervisors.filter(
-          (supervisor) => supervisor.supervisorLevel == 'First Supervisor'
-        );
-        this.secondSupervisors = supervisors.filter(
-          (supervisor) => supervisor.supervisorLevel == 'Second Supervisor'
-        )}});
-  
+    this.supervisorService.getAllSupervisors() 
+    .subscribe({ 
+      next: (supervisors) => { 
+        this.supervisors = supervisors; 
+        this.firstSupervisors = supervisors.filter((supervisor) => supervisor.supervisorLevel == 'First Supervisor'); 
+        this.secondSupervisors = supervisors.filter((supervisor) => supervisor.supervisorLevel == 'Second Supervisor'); 
+      }, 
+      error(response) { 
+        console.log(response); 
+      }, 
+    }); 
+    this.employeeService.getAllEmployees() 
+    .subscribe({ 
+      next: (employees) => { 
+        this.allemployees=employees; 
+      }, 
+      error(response){ 
+        console.log(response) 
+      }, 
+       
+    }); 
 
 
 
@@ -183,9 +195,10 @@ this.employeeService.getAllEmployees()
       }
     });
   }
+ 
   getEmployeeName(empId: string): string { 
-    const employee = this.employees.find((g) => g.empId === empId); 
-    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:' EMPLOYEE'; 
+    const employee = this.allemployees.find((g) => g.empId === empId); 
+    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
   } 
   openImageDialog(): void {
     // Trigger click on the file input element to open the image dialog
@@ -212,11 +225,11 @@ this.employeeService.getAllEmployees()
   }
 
   getFirstSupervisorName(firstSupervisor: string): string { 
-    const employee = this.employees.find((g) => g.empId === firstSupervisor); 
+    const employee = this.allemployees.find((g) => g.empId === firstSupervisor); 
     return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
   } 
   getSecondSupervisorName(secondSupervisor: string): string { 
-    const employee = this.employees.find((g) => g.empId === secondSupervisor); 
+    const employee = this.allemployees.find((g) => g.empId === secondSupervisor); 
     return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
   } 
   

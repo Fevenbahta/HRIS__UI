@@ -74,14 +74,25 @@ export class EditWorkexperienceComponent {
   }
   
   updateWorkExperience(): void {
-    this.workExperienceUpdated = true;
+
     // Assuming the WorkExperienceService has a method to update work experience
     this.workExperienceService.updateWorkExperience(this.workExperience, this.workExperience.id).subscribe({
-      next: () => {
+      next: () => {    this.workExperienceUpdated = true;
         setTimeout(() => {
-          this.workExperienceUpdated = true;
+          this.workExperienceUpdated = false;
         }, 2000);
+        this.workExperienceService.getAllWorkExperience().subscribe({
+          next: (workExperience) => {
+            this.workExperiences = workExperience.filter(workexperience => workexperience.empId === this.employeeIdService.employeeId);
+  
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
       },
+
+      
       error: (response) => {
         console.log(response);
       }
@@ -136,10 +147,19 @@ export class EditWorkexperienceComponent {
     this.workExperience.empId = this.employeeIdService.employeeId;
     this.workExperienceService.addWorkExperience(this.workExperience).subscribe({
       next: () => {
-      //  this.router.navigate(['/employee-registration/training']); 
+        this.workExperienceSaved = true;
         setTimeout(() => {
           this.workExperienceSaved = false;
         }, 2000);
+        this.workExperienceService.getAllWorkExperience().subscribe({
+          next: (workExperience) => {
+            this.workExperiences = workExperience.filter(workexperience => workexperience.empId === this.employeeIdService.employeeId);
+  
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
         // Add the current work experience to the array
         this.workExperiences.push({ ...this.workExperience });
         // Reset the form fields

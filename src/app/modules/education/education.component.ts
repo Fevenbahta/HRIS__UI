@@ -14,7 +14,7 @@ import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confi
   styleUrls: ['./education.component.css']
 })
 export class EducationComponent {
-  education: Education;
+ 
 
   educationlevels:EducationLevel[]= [];
   selectedEducationLevel: string='';
@@ -31,7 +31,7 @@ export class EducationComponent {
   ];
 
 
-  addEducationRequest: Education = {
+  education: Education = {
     pId: 0,
     id:undefined,
     createdBy: "",
@@ -58,24 +58,16 @@ export class EducationComponent {
 
   ngOnInit(): void {
 
-    this.educationlevelservice.getAllEducationLevels()
-.subscribe({
-  next: (educationlevels) => {
-    this.educationlevels=educationlevels;
-  },
-  error(response){
-    console.log(response)
-  }
-});
-this.educationservice.getEducation(this.employeeIdService.employeeId) 
-  .subscribe({ 
-    next: (education) => { 
-      this.education = education; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
+    this.educationservice.getAllEducation().subscribe({
+      next: (educations) => {
+        this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+        ;
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
+
 
   }
 
@@ -85,28 +77,28 @@ this.educationservice.getEducation(this.employeeIdService.employeeId)
   }
 
   addEducation() {
-    this.addEducationRequest.empId = this.employeeIdService.employeeId;
-    this.addEducationRequest.eductionName = this.selectedEducationLevel;
-    this.educationservice.addEducation(this.addEducationRequest).subscribe({
+    this.education.empId = this.employeeIdService.employeeId;
+    this.education.eductionName = this.selectedEducationLevel;
+    this.educationservice.addEducation(this.education).subscribe({
       next: (employee) => {
         
       //  this.router.navigate(['/employee-registration/work-experience']); 
         setTimeout(() => {
           this.educationSaved = false;
         }, 2000);
-        this.educationservice.getEducation(this.employeeIdService.employeeId) 
-  .subscribe({ 
-    next: (educations) => { 
-      this.education = educations; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
+        this.educationservice.getAllEducation().subscribe({
+          next: (educations) => {
+            this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+            ;
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
         // Add the current education to the array
-        this.educations.push({ ...this.addEducationRequest });
+        this.educations.push({ ...this.education });
         // Reset the form fields
-        this.addEducationRequest = {
+        this.education = {
           pId: 0,
           id: undefined,
           createdBy: "",

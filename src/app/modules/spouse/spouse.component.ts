@@ -16,8 +16,8 @@ export class SpouseComponent implements OnInit {
 
   spouseSaved: boolean = false;
   spouses: Spouse[] = []; 
- spouse : Spouse;
-  addSpouseRequest: Spouse = {
+
+  spouse: Spouse = {
     pId: 0,
     id: undefined,
     name: "",
@@ -54,8 +54,8 @@ export class SpouseComponent implements OnInit {
       }, })
   }
   addSpouse() {
-    this.addSpouseRequest.empId = this.employeeIdService.employeeId
-    this.spouseService.addSpouse(this.addSpouseRequest).subscribe({
+    this.spouse.empId = this.employeeIdService.employeeId
+    this.spouseService.addSpouse(this.spouse).subscribe({
       next: (employee) => {
         this.spouseSaved = true;
       //  this.router.navigate(['employee-registration/job-description']);
@@ -71,9 +71,9 @@ export class SpouseComponent implements OnInit {
       error(response) { 
         console.log(response); 
       }, })
-        this.spouses.push({ ...this.addSpouseRequest });
+        this.spouses.push({ ...this.spouse });
 
-        this.addSpouseRequest = {
+        this.spouse = {
           pId: 0,
           id: undefined,
           name: "",

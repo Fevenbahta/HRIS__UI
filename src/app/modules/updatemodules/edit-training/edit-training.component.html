@@ -46,17 +46,17 @@
                   </div>
                 </div>
                 <div>
-                  <button type="button" class="btn btn-sm btnupdate" *ngIf="training.id!=undefined"(click)="updateTraining()">Update</button>
+                  <button type="button" class="btn btn-sm btnsave" *ngIf="training.id!=undefined"(click)="updateTraining()">Update</button>
                 </div>
                 <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Training</button> -->
               </form>
-              <div *ngIf="trainingSaved" class="alert alert-success mt-3">
-                Training updated successfully!
+              <div *ngIf="trainingSaved" class="alert btndanger btn-sm pull-right">
+                Updated successfully!
               </div>
               <button type="button" class="btn btn-sm btnsave" *ngIf="training.id===undefined" (click)="addTraining()">Add</button>
                      
-              <div *ngIf="trainingAdded" class="alert alert-success mt-3">
-         training added successfully!
+              <div *ngIf="trainingAdded" class="alert btndanger btn-sm pull-right">
+           Added successfully!
             </div>
             </div>
           </div>

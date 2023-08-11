@@ -67,11 +67,13 @@
                           </div>
                  
                     <div> <button type="button" class="btn btn-sm btnsave" (click)="addEmergencyContact()">
-                      <mat-icon>add</mat-icon>Add Emergency Contact</button>
+                      <mat-icon>add</mat-icon>Add</button>
                     </div>
-                         <div *ngIf="emergencycontactSaved" class="alert alert-success mt-3">
-                        emergencycontact added successfully!
+                         <div *ngIf="emergencycontactSaved" class="alert btndanger btn-sm pull-right">
+                        Added successfully!
                        </div> <div class="clearfix"></div>
+                         
+                         
                 </form>
             </div>
         </div>

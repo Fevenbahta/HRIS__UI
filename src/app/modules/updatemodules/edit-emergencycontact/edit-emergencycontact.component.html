@@ -69,13 +69,15 @@
                       
                       <div> <button type="button" class="btn btn-sm btnsave" *ngIf="emergencyContact.id!=undefined"  (click)="updateEmergencyContact()">Update</button>
                       </div>
-                           <div *ngIf="emergencyContactUpdated" class="alert alert-success mt-3">
-                          emergencycontact update successfully!
+                           <div *ngIf="emergencyContactUpdated" class="alert btndanger btn-sm pull-right">
+                          Update successfully!
                          </div>
+                       
+                         
                          <button type="button" class="btn btn-sm btnsave" *ngIf="emergencyContact.id===undefined" (click)="addEmergencyContact()">Add</button>
                      
-                              <div *ngIf="emergencycontactSaved" class="alert alert-success mt-3">
-                             emergencyContact added successfully!
+                              <div *ngIf="emergencycontactSaved" class="alert btndanger btn-sm pull-right">
+                             Added successfully!
                             </div>
                   </form>
               </div>

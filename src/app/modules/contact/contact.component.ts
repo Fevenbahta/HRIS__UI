@@ -65,9 +65,6 @@ ngOnInit():void {
 // .subscribe((contacts) => {
 //   this.contacts = contacts;
 // }); 
-
-
- 
 this.contactservice.getContact(this.employeeIdService.employeeId)
 
   
@@ -89,7 +86,7 @@ this.contactservice.addContact(this.addContactRequest)
   
 next:(contacts)=>{
  
-
+  this.router.navigate(['/employee-registration/emergency-contact']); 
 
 
 },

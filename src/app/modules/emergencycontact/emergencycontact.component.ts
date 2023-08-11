@@ -26,7 +26,7 @@ emergencycontact:EmergencyContact;
      createdDate: "2023-07-20T13:56:00.062Z", 
      updatedDate: "2023-07-20T13:56:00.062Z", 
      updatedBy: '', 
-     empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+     empId: "",
     region: '', 
      town: '', 
      phoneNumber: '', 
@@ -47,8 +47,8 @@ constructor(
 ngOnInit():void {
   this.emergencycontactservice.getEmergencyContact(this.employeeIdService.employeeId)
   .subscribe({ 
-    next: (emergencycontact) => { 
-      this.emergencycontact = emergencycontact; 
+    next: (emergencycontacts) => { 
+      this.emergencycontact = emergencycontacts; 
           }, 
     error(response) { 
       console.log(response); 
@@ -67,7 +67,7 @@ addEmergencyContact() {
   this.addEmergencyContactRequest.empId = this.employeeIdService.employeeId;
   this.emergencycontactservice.addEmergencyContact(this.addEmergencyContactRequest)
   .subscribe({
-    next: (employee) => {
+    next: (emergencycontacts) => {
       this.emergencycontactSaved = true;
      // this.router.navigate(['/employee-registration/spouse']);
       setTimeout(() => {
@@ -83,7 +83,7 @@ addEmergencyContact() {
          createdDate: "2023-07-20T13:56:00.062Z", 
          updatedDate: "2023-07-20T13:56:00.062Z", 
          updatedBy: '', 
-         empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+         empId: "",
         region: '', 
          town: '', 
          phoneNumber: '', 

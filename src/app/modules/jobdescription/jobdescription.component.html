@@ -79,7 +79,7 @@
            <div class="col-md-6">
             <mat-form-field>
               <mat-label>Start Date</mat-label>
-              <input matInput [matDatepicker]="picker" placeholder="Choose a date" required name="joinedDate" [(ngModel)]="addEmployeePositionRequest.startDate" >
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date" required name="joinedDate" [(ngModel)]="employeePosition.startDate" >
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -119,7 +119,7 @@
     </thead>
     <tbody>
       <!-- Use *ngFor to loop through the employeepositions array and display each employee position -->
-      <tr  >
+      <tr *ngFor="let employeePosition of employeepositions"  >
 
         <td>{{ getDivisionName(employeePosition.divisionId) }}</td>
         <td>{{ getPositionName(employeePosition.position) }}</td>

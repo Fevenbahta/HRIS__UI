@@ -58,7 +58,7 @@ export class SpouseComponent implements OnInit {
     this.spouseService.addSpouse(this.spouse).subscribe({
       next: (employee) => {
         this.spouseSaved = true;
-      //  this.router.navigate(['employee-registration/job-description']);
+      
         setTimeout(() => {
           this.spouseSaved = false;
         }, 2000);

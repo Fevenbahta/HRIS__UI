@@ -83,6 +83,8 @@ export class EducationComponent {
       next: (employee) => {
         
       //  this.router.navigate(['/employee-registration/work-experience']); 
+
+      this.educationSaved=true
         setTimeout(() => {
           this.educationSaved = false;
         }, 2000);

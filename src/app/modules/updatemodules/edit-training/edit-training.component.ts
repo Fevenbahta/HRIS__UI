@@ -134,6 +134,7 @@ export class EditTrainingComponent implements OnInit {
     .subscribe({
       next: (employee) => {
       //  this.router.navigate(['/employee-registration/deposite-authentication']); 
+      this.trainingAdded = true;
           setTimeout(() => {
         this.trainingAdded = false;
       }, 2000);

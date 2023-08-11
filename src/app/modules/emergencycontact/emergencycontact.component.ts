@@ -69,8 +69,8 @@ addEmergencyContact() {
   this.emergencycontactservice.addEmergencyContact(this.emergencycontact)
   .subscribe({
     next: (emergencycontacts) => {
-      this.emergencycontactSaved = true;
-     // this.router.navigate(['/employee-registration/spouse']);
+
+     this.emergencycontactSaved=true
       setTimeout(() => {
         this.emergencycontactSaved = false;
       }, 2000);

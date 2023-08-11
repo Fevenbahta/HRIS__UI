@@ -70,6 +70,7 @@ export class WorkexperienceComponent {
       this.workExperienceService.addWorkExperience(this.addWorkExperienceRequest).subscribe({
         next: () => {
         //  this.router.navigate(['/employee-registration/training']); 
+        this.workExperienceSaved = true;
           setTimeout(() => {
             this.workExperienceSaved = false;
           }, 2000);

@@ -122,6 +122,7 @@ deleteEmployee(id: string) {
           // Show a success message 
           // this.showSnackBar('Employee deleted successfully!'); 
           this.router.navigate(["/edit-employee"]); 
+          alert('Contact deleted successfully!');
         }, 
         (error) => { 
           console.log(error); 

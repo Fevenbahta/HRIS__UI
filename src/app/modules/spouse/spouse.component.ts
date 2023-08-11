@@ -16,8 +16,8 @@ export class SpouseComponent implements OnInit {
 
   spouseSaved: boolean = false;
   spouses: Spouse[] = []; 
- spouse : Spouse;
-  addSpouseRequest: Spouse = {
+
+  spouse: Spouse = {
     pId: 0,
     id: undefined,
     name: "",
@@ -43,36 +43,17 @@ export class SpouseComponent implements OnInit {
     { label: '  List Employee ', route: '/employee-list' }
   ];
   ngOnInit(): void {
-    this.spouseService.getAllSpouse() 
+            
+    this.spouseService.getSpouse(this.employeeIdService.employeeId)
     .subscribe({ 
-      next: (spouse) => { 
-        this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
-
+      next: (spouses) => { 
+        this.spouse = spouses; 
             }, 
       error(response) { 
         console.log(response); 
-      }, })
-  }
-  addSpouse() {
-    this.addSpouseRequest.empId = this.employeeIdService.employeeId
-    this.spouseService.addSpouse(this.addSpouseRequest).subscribe({
-      next: (employee) => {
-        this.spouseSaved = true;
-      //  this.router.navigate(['employee-registration/job-description']);
-        setTimeout(() => {
-          this.spouseSaved = false;
-        }, 2000);
-        
-        this.spouseService.getSpouse(this.employeeIdService.employeeId)
-  .subscribe({ 
-    next: (spouses) => { 
-      this.spouse = spouses; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
-    //     this.spouseService.getAllSpouse() 
+      }, 
+  });
+    // this.spouseService.getAllSpouse() 
     // .subscribe({ 
     //   next: (spouse) => { 
     //     this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
@@ -81,9 +62,28 @@ export class SpouseComponent implements OnInit {
     //   error(response) { 
     //     console.log(response); 
     //   }, })
-    //     this.spouses.push({ ...this.addSpouseRequest });
-    this.spouses.push({ ...this.addSpouseRequest });
-        this.addSpouseRequest = {
+  }
+  addSpouse() {
+    this.spouse.empId = this.employeeIdService.employeeId
+    this.spouseService.addSpouse(this.spouse).subscribe({
+      next: (employee) => {
+        this.spouseSaved = true;
+      //  this.router.navigate(['employee-registration/job-description']);
+        setTimeout(() => {
+          this.spouseSaved = false;
+        }, 2000);
+        this.spouseService.getAllSpouse() 
+    .subscribe({ 
+      next: (spouse) => { 
+        this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, })
+        this.spouses.push({ ...this.spouse });
+
+        this.spouse = {
           pId: 0,
           id: this.spouse.id,
           name: "",

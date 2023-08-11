@@ -18,11 +18,11 @@
                         <div class="card-body">
                           <div class="row">
                             <div class="col-md-4 form-field">
-                              <input  placeholder=" " type="text" name="name" [(ngModel)]="addSpouseRequest.name">
+                              <input  placeholder=" " type="text" name="name" [(ngModel)]="spouse.name">
                               <label>Name</label>
                             </div>
                             <div class="col-md-4 form-field">
-                              <input  placeholder=" " type="text" name="relationship" [(ngModel)]="addSpouseRequest.relationship ">
+                              <input  placeholder=" " type="text" name="relationship" [(ngModel)]="spouse.relationship ">
                               <label>Relationship</label>
                             </div>
                           </div>
@@ -33,7 +33,7 @@
                         <div class="row">
                           <div class="col-md-6 ">
                             <mat-form-field class="example-full-width" style="height: 65px; width:160px" >
-                              <input matInput [matDatepicker]="dateofbirthPicker" placeholder=" " name="dateOfBirth" [(ngModel)]="addSpouseRequest.dateOfBirth">
+                              <input matInput [matDatepicker]="dateofbirthPicker" placeholder=" " name="dateOfBirth" [(ngModel)]="spouse.dateOfBirth">
                               <mat-label>Date Of Birth</mat-label>
                               <mat-datepicker-toggle matSuffix [for]="dateofbirthPicker"></mat-datepicker-toggle>
                               <mat-datepicker #dateofbirthPicker></mat-datepicker>

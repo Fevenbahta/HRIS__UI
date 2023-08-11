@@ -96,6 +96,15 @@ export class EditEducationComponent {
   this.educationUpdated = true;
         }, 
         )
+        this.educationService.getAllEducation().subscribe({
+          next: (educations) => {
+            this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+            ;
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
       },
       error: (response) => {
         console.log(response);
@@ -160,6 +169,15 @@ export class EditEducationComponent {
         setTimeout(() => {
           this.educationSaved = false;
         }, 2000);
+        this.educationService.getAllEducation().subscribe({
+          next: (educations) => {
+            this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+            ;
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
         // Add the current education to the array
         this.educations.push({ ...this.education });
         // Reset the form fields

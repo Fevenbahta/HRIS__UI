@@ -73,6 +73,17 @@ export class EditSpouseComponent implements OnInit {
           setTimeout(() => {
             this.spouseUpdated= false;
           }, 2000);
+
+          this.spouseService.getAllSpouse() 
+          .subscribe({ 
+            next: (spouse) => { 
+              this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+      
+                  }, 
+            error(response) { 
+              console.log(response); 
+            }, })
+
           this.spouses.push({ ...this.spouse });
       },
       (error) => {

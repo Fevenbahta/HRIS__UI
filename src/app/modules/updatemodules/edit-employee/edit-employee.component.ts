@@ -107,6 +107,7 @@ supervisors:Supervisor[]=[];
         this.employee = employee;
      this.selectedFirstSupervisor =  this.employee.firstSupervisor  ; 
       this.selectedSecondSupervisor = this.employee.secondSupervisor ; 
+      
         this.populateForm();
         console.log("Form Value:", this.employeeForm.value);// Call the method to populate the form with employee data
       });

@@ -19,15 +19,15 @@
                             <div class="row">
                               <div class="col-md-4 form-field">
                                 
-                               <input placeholder="" type="text" name="name" [(ngModel)]="addEmergencyContactRequest.name">
+                               <input placeholder="" type="text" name="name" [(ngModel)]="emergencycontact.name">
                              <label for="name">Name</label>  </div>
                               <div class="col-md-4 form-field">
                                
-                                <input placeholder=" " type="text" name="relationship" id="relationship" [(ngModel)]="addEmergencyContactRequest.relationship">
+                                <input placeholder=" " type="text" name="relationship" id="relationship" [(ngModel)]="emergencycontact.relationship">
                                <label for="relationship">Relationship</label></div>
                               <div class="col-md-4 form-field">
                                 
-                                <input placeholder=" " id="region" name="region" [(ngModel)]="addEmergencyContactRequest.region" type="text" required>
+                                <input placeholder=" " id="region" name="region" [(ngModel)]="emergencycontact.region" type="text" required>
                               <label for="region">Region</label></div>
                             </div>
                           </div>
@@ -36,15 +36,15 @@
                             <div class="row">
                               <div class="col-md-4 form-field">
                               
-                                <input placeholder=" " id="town" type="text" name="town" [(ngModel)]="addEmergencyContactRequest.town">
+                                <input placeholder=" " id="town" type="text" name="town" [(ngModel)]="emergencycontact.town">
                                 <label for="town">Town</label></div>
                               <div class="col-md-4 form-field">
                                
-                                <input placeholder=" " id="subcity" type="text" name="subcity" [(ngModel)]="addEmergencyContactRequest.subCity">
+                                <input placeholder=" " id="subcity" type="text" name="subcity" [(ngModel)]="emergencycontact.subCity">
                               <label for="subcity">Subcity</label> </div>
                               <div class="col-md-4 form-field">
                                 
-                                <input placeholder="" type="text" name="kebele" [(ngModel)]="addEmergencyContactRequest.kebele">
+                                <input placeholder="" type="text" name="kebele" [(ngModel)]="emergencycontact.kebele">
                               <label for="kebele">Kebele</label></div>
                             </div>
                           </div>
@@ -54,12 +54,12 @@
                            
                               <div class="col-md-4 form-field">
                                   
-                             <input placeholder="" type="text" name="houseNumber" [(ngModel)]="addEmergencyContactRequest.houseNo">
+                             <input placeholder="" type="text" name="houseNumber" [(ngModel)]="emergencycontact.houseNo">
                              <label for="houseNumber">House Number</label>  </div>
                               <div class="col-md-4 form-field">
-                                <input placeholder="" name="phoneNumber" [(ngModel)]="addEmergencyContactRequest.phoneNumber" required>
+                                <input placeholder="" name="phoneNumber" [(ngModel)]="emergencycontact.phoneNumber" required>
                                   <label for="phoneNumber">Phone Number</label>
-                              <mat-error *ngIf="!addEmergencyContactRequest.phoneNumber && emergencycontactForm.get('phoneNumber').touched">
+                              <mat-error *ngIf="!emergencycontact.phoneNumber && emergencycontactForm.get('phoneNumber').touched">
                                   Phone Number is required
                                 </mat-error>
                               </div>

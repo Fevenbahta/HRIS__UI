@@ -17,9 +17,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EmergencycontactComponent implements OnInit {
   emergencycontactSaved: boolean = false;
   emergencycontacts: EmergencyContact[] = []; 
-emergencycontact:EmergencyContact;
 
-  addEmergencyContactRequest:EmergencyContact={
+  emergencycontact:EmergencyContact={
     pId:0,
     id:  undefined,
    createdBy: '', 
@@ -66,8 +65,8 @@ buttons = [
   { label: '  List Employee ', route: '/employee-list' }
 ];
 addEmergencyContact() {
-  this.addEmergencyContactRequest.empId = this.employeeIdService.employeeId;
-  this.emergencycontactservice.addEmergencyContact(this.addEmergencyContactRequest)
+  this.emergencycontact.empId = this.employeeIdService.employeeId;
+  this.emergencycontactservice.addEmergencyContact(this.emergencycontact)
   .subscribe({
     next: (emergencycontacts) => {
       this.emergencycontactSaved = true;
@@ -75,19 +74,21 @@ addEmergencyContact() {
       setTimeout(() => {
         this.emergencycontactSaved = false;
       }, 2000);
-      this.emergencycontactservice.getEmergencyContact(this.employeeIdService.employeeId)
-  .subscribe({ 
-    next: (emergencycontact) => { 
-      this.emergencycontact = emergencycontact; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
+      this.emergencycontactservice.getAllEmergencyContact()
+      .subscribe({
+        next: (emergencycontacts) => {
+          // Filter emergency contacts for the current employee
+          this.emergencycontacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+        },
+        error(response) {
+          console.log(response);
+        },
+      });
+    
       // Add the current work experience to the array
-      this.emergencycontacts.push({ ...this.addEmergencyContactRequest });
+      this.emergencycontacts.push({ ...this.emergencycontact });
       // Reset the form fields
-      this.addEmergencyContactRequest = {
+      this.emergencycontact = {
         pId:0,
         id:  undefined,
        createdBy: '', 

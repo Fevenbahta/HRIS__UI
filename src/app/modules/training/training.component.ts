@@ -14,9 +14,9 @@ import { Component, OnInit } from '@angular/core';
 export class TrainingComponent implements OnInit {
   trainingSaved: boolean = false;
   trainings: Training[] = [];
-  training:Training
 
-  addTrainingRequest: Training = {
+
+  training: Training = {
     pId: 0,
     id: undefined,
     createdBy: "",
@@ -43,40 +43,41 @@ export class TrainingComponent implements OnInit {
     private router: Router,) { }
 
   ngOnInit(): void {
-    this.trainingService.getTraining(this.employeeIdService.employeeId) 
-  .subscribe({ 
-    next: (trainings) => { 
-      this.training = trainings; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
+    this.trainingService.getAllTraining() 
+    .subscribe({ 
+      next: (training) => { 
+        this.trainings = training.filter(training => training.empId === this.employeeIdService.employeeId);
+
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, 
+  });
 
   }
   addTraining() {
-    this.addTrainingRequest.empId = this.employeeIdService.employeeId;
-    this.trainingService.addTraining(this.addTrainingRequest)
+    this.training.empId = this.employeeIdService.employeeId;
+    this.trainingService.addTraining(this.training)
     .subscribe({
       next: (employee) => {
       //  this.router.navigate(['/employee-registration/deposite-authentication']); 
           setTimeout(() => {
         this.trainingSaved = false;
       }, 2000);
-
-      this.trainingService.getTraining(this.employeeIdService.employeeId) 
+      this.trainingService.getAllTraining() 
       .subscribe({ 
-        next: (trainings) => { 
-          this.training = trainings; 
+        next: (training) => { 
+          this.trainings = training.filter(training => training.empId === this.employeeIdService.employeeId);
+  
               }, 
         error(response) { 
           console.log(response); 
         }, 
     });
         // Add the current work experience to the array
-        this.trainings.push({ ...this.addTrainingRequest });
+        this.trainings.push({ ...this.training });
         // Reset the form fields
-        this.addTrainingRequest = {
+        this.training = {
           pId: 0,
           id: undefined,
           createdBy: "",
@@ -97,7 +98,7 @@ export class TrainingComponent implements OnInit {
   }
 
   editTraining(training: Training): void {
-       console.log("hhhhhhhhh") // Here, we will navigate to the edit page for the selected training.
+    // Here, we will navigate to the edit page for the selected training.
     this.router.navigate(['/edit-training', training.id]);
 
   }

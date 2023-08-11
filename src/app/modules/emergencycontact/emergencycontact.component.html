@@ -78,10 +78,10 @@
         <h6>Emergency Contact List</h6>
   <table   *ngIf="emergencycontact.empId!=undefined"  class="table table-bordered table-striped">
     <thead>
-      <tr>
-        <th>Name</th>
-        <th>Phone Number</th>
-        <th>Relationship</th>
+      <tr >
+        <td>Name</td>
+        <td>Phone Number</td>
+        <td>Relationship</td>
       </tr>
     </thead>
     <tbody>
@@ -93,9 +93,9 @@
         <td>
           <button class="btn btn-sm btnedit" (click)="editEmergencyContact(emergencycontact)">
             <mat-icon>edit</mat-icon>Edit</button>
-    <button class="btn btn-sm btndanger" (click)="deleteEmergencyContact(emergencycontact)">
+          <button class="btn btn-sm btndanger" (click)="deleteEmergencyContact(emergencycontact)">
       <mat-icon>delete</mat-icon>Delete</button>
-  </td>
+       </td>
       </tr>
     </tbody>
   </table>

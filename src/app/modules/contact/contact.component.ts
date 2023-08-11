@@ -65,9 +65,6 @@ ngOnInit():void {
 // .subscribe((contacts) => {
 //   this.contacts = contacts;
 // }); 
-
-
- 
 this.contactservice.getContact(this.employeeIdService.employeeId)
 
   

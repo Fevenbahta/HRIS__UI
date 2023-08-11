@@ -15,7 +15,7 @@ import { SupervisorService } from 'app/service/supervisor.service';
 @Component({
   selector: 'app-edit-employee',
   templateUrl: './edit-employee.component.html',
-  styleUrls: ['./edit-employee.component.css']
+  styleUrls: ['./edit-employee.component.scss']
 })
 export class EditEmployeeComponent implements OnInit {
   employeeForm: FormGroup;

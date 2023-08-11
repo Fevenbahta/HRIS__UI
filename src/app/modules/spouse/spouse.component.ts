@@ -43,15 +43,25 @@ export class SpouseComponent implements OnInit {
     { label: '  List Employee ', route: '/employee-list' }
   ];
   ngOnInit(): void {
-    this.spouseService.getAllSpouse() 
+            
+    this.spouseService.getSpouse(this.employeeIdService.employeeId)
     .subscribe({ 
-      next: (spouse) => { 
-        this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
-
+      next: (spouses) => { 
+        this.spouse = spouses; 
             }, 
       error(response) { 
         console.log(response); 
-      }, })
+      }, 
+  });
+    // this.spouseService.getAllSpouse() 
+    // .subscribe({ 
+    //   next: (spouse) => { 
+    //     this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+
+    //         }, 
+    //   error(response) { 
+    //     console.log(response); 
+    //   }, })
   }
   addSpouse() {
     this.spouse.empId = this.employeeIdService.employeeId
@@ -75,7 +85,7 @@ export class SpouseComponent implements OnInit {
 
         this.spouse = {
           pId: 0,
-          id: undefined,
+          id: this.spouse.id,
           name: "",
           createdBy: "",
           createdDate: "2023-07-26T06:13:52.512Z",

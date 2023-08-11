@@ -90,7 +90,6 @@ next:(contacts)=>{
   }, 2000);
   this.contactservice.getContact(this.employeeIdService.employeeId)
 
-  
   .subscribe((contacts) => {
     this.contact = contacts;
   }); 

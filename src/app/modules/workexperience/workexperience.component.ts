@@ -70,10 +70,20 @@ export class WorkexperienceComponent {
       this.workExperienceService.addWorkExperience(this.addWorkExperienceRequest).subscribe({
         next: () => {
         //  this.router.navigate(['/employee-registration/training']); 
+        this.workExperienceSaved = true;
           setTimeout(() => {
             this.workExperienceSaved = false;
           }, 2000);
           // Add the current work experience to the array
+          this.workExperienceService.getWorkExperience(this.employeeIdService.employeeId) 
+          .subscribe({ 
+            next: (workExperience) => { 
+              this.workExperience = workExperience; 
+                  }, 
+            error(response) { 
+              console.log(response); 
+            }, 
+        });
           this.workExperiences.push({ ...this.addWorkExperienceRequest });
           // Reset the form fields
           this.addWorkExperienceRequest = {

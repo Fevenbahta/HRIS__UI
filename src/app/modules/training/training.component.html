@@ -19,7 +19,7 @@
             <div class="row"> 
               <div class="card-body">
                 <div class="col-md-4 form-field">
-                  <input  placeholder="" type="text" name="typeOfTraining" [(ngModel)]="addTrainingRequest.typeOfTraining">
+                  <input  placeholder="" type="text" name="typeOfTraining" [(ngModel)]="training.typeOfTraining">
                   <label>Description</label>
                 </div>
               </div>
@@ -27,7 +27,7 @@
                 <div class="row">
                   <div class="col-md-6 ">
                     <mat-form-field style="height: 65px; width:160px" class="example-full-width">
-                      <mat-label>Start Date</mat-label> <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="addTrainingRequest.from">
+                      <mat-label>Start Date</mat-label> <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="training.from">
                      
                       <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
                       <mat-datepicker #fromPicker></mat-datepicker>
@@ -35,7 +35,7 @@
                   </div>
                   <div class="col-md-6 ">
                     <mat-form-field style="height: 65px; width:160px" class="example-full-width">
-                         <mat-label>End Date</mat-label>  <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="addTrainingRequest.to">
+                         <mat-label>End Date</mat-label>  <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="training.to">
                  
                       <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
                       <mat-datepicker #toPicker></mat-datepicker>
@@ -46,18 +46,18 @@
             </div>
             
             <div><button type="button" class="btn btn-sm btnsave" (click)="addTraining()">
-              <mat-icon>add</mat-icon>Add Training</button>
+              <mat-icon>add</mat-icon>Add</button>
        </div>
                  <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Training</button>
              -->
-            <div *ngIf="trainingSaved" class="alert alert-success mt-3">
-              Training added successfully!
+            <div *ngIf="trainingSaved" class="alert btndanger btn-sm pull-right">
+              Added successfully!
             </div>
             <div class="clearfix"></div></form>
         </div>
       </div>
       <h6>Training Records</h6>
-      <table class="table table-bordered table-striped">
+      <table  *ngIf="training.empId!=undefined" class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>Type of Training</th>
@@ -67,7 +67,7 @@
         </thead>
         <tbody>
           <!-- Use *ngFor to loop through the trainings array and display each training record -->
-          <tr >
+          <tr *ngFor="let training of trainings">
             <td>{{ training.typeOfTraining }}</td>
             <td>{{ training.from }}</td>
             <td>{{ training.to }}</td>

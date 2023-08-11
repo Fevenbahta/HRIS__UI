@@ -92,10 +92,20 @@ export class EditEducationComponent {
     this.education.eductionName = this.selectedEducationLevel;
     this.educationService.updateEducation(this.education, this.education.id).subscribe({
       next: () => {
+        this.educationUpdated = true;
         setTimeout(() => {
-  this.educationUpdated = true;
+  this.educationUpdated = false;
         }, 
         )
+        this.educationService.getAllEducation().subscribe({
+          next: (educations) => {
+            this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+            ;
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
       },
       error: (response) => {
         console.log(response);
@@ -155,11 +165,20 @@ export class EditEducationComponent {
     this.education.eductionName = this.selectedEducationLevel;
     this.educationService.addEducation(this.education).subscribe({
       next: (employee) => {
-        
+        this.educationSaved = true;
       //  this.router.navigate(['/employee-registration/work-experience']); 
         setTimeout(() => {
           this.educationSaved = false;
         }, 2000);
+        this.educationService.getAllEducation().subscribe({
+          next: (educations) => {
+            this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+            ;
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
         // Add the current education to the array
         this.educations.push({ ...this.education });
         // Reset the form fields

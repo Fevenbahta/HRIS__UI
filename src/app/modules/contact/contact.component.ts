@@ -20,6 +20,7 @@ import { EmployeeService } from 'app/service/employee.service';
 export class ContactComponent {
   contacts:Contact[]=[];
   contact:Contact;
+  contactSaved:boolean=false;
   addContactRequest:Contact={
     pId:0,
     id: undefined,
@@ -65,9 +66,6 @@ ngOnInit():void {
 // .subscribe((contacts) => {
 //   this.contacts = contacts;
 // }); 
-
-
- 
 this.contactservice.getContact(this.employeeIdService.employeeId)
 
   
@@ -84,13 +82,17 @@ addContact(){
   this.addContactRequest.empId = this.employeeIdService.employeeId;
   console.log(this.addContactRequest)
 this.contactservice.addContact(this.addContactRequest)
-
-.subscribe({
-  
+.subscribe({ 
 next:(contacts)=>{
- 
+  this.contactSaved = true;
+  setTimeout(() => {
+    this.contactSaved = false;
+  }, 2000);
+  this.contactservice.getContact(this.employeeIdService.employeeId)
 
-
+  .subscribe((contacts) => {
+    this.contact = contacts;
+  }); 
 
 },
  error(response){

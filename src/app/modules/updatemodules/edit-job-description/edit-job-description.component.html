@@ -86,15 +86,15 @@
               
             </div>
                           
-                          <button  mat-raised-button type="submit" *ngIf="employeePosition.id!=undefined" class="btn btn-sm btnsave">update</button>
+                          <button  mat-raised-button type="submit" *ngIf="employeePosition.id!=undefined" class="btn btn-sm btnedit">Update</button>
                           <div class="clearfix"></div>
-                          <div *ngIf="employeePositionUpdated" class="alert alert-success mt-3">
-                           Job Description added successfully!
+                          <div *ngIf="employeePositionUpdated" class="alert btndanger btn-sm pull-right">
+                            Updated successfully!
                           </div>
-                          <button type="button" class="btn btn-sm btnsave" *ngIf="employeePosition.id===undefined"(click)="addEmployeePosition()">Add</button>
+                          <button type="button" class="btn btn-sm btnsave"*ngIf="employeePositions.length === 0" (click)="addEmployeePosition()">Add</button>
                      
-              <div *ngIf="employeePositionSaved" class="alert alert-success mt-3">
-         employeePosition added successfully!
+              <div *ngIf="employeePositionSaved" class="alert btndanger btn-sm pull-right">
+       Added successfully!
             </div>
                       </form>
                   </div>

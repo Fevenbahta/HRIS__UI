@@ -38,7 +38,7 @@ export class EditEmergencyContactComponent implements OnInit {
          createdDate: "2023-07-20T13:56:00.062Z", 
          updatedDate: "2023-07-20T13:56:00.062Z", 
          updatedBy: '', 
-         empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+         empId: "",
         region: '', 
          town: '', 
          phoneNumber: '', 
@@ -80,8 +80,17 @@ export class EditEmergencyContactComponent implements OnInit {
         setTimeout(() => {
           this.emergencyContactUpdated = false;
         }, 2000);
-
-
+        this.emergencyContactService.getAllEmergencyContact()
+        .subscribe({
+          next: (emergencycontacts) => {
+            // Filter emergency contacts for the current employee
+            this.emergencyContacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+          },
+          error(response) {
+            console.log(response);
+          },
+        });
+      
         this.emergencyContact = {
           pId:0,
           id:  undefined,
@@ -156,9 +165,21 @@ export class EditEmergencyContactComponent implements OnInit {
       setTimeout(() => {
         this.emergencycontactSaved = false;
       }, 2000);
+      this.emergencyContactService.getAllEmergencyContact()
+      .subscribe({
+        next: (emergencycontacts) => {
+          // Filter emergency contacts for the current employee
+          this.emergencyContacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+        },
+        error(response) {
+          console.log(response);
+        },
+      });
+    
       // Add the current work experience to the array
       this.emergencyContacts.push({ ...this.emergencyContact });
       // Reset the form fields
+
       this.emergencyContact = {
         pId:0,
         id:  undefined,
@@ -166,7 +187,7 @@ export class EditEmergencyContactComponent implements OnInit {
          createdDate: "2023-07-20T13:56:00.062Z", 
          updatedDate: "2023-07-20T13:56:00.062Z", 
          updatedBy: '', 
-         empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+         empId: "",
         region: '', 
          town: '', 
          phoneNumber: '', 
@@ -177,6 +198,7 @@ export class EditEmergencyContactComponent implements OnInit {
          kebele: "",
          relationship: "",
       };
+      
     },
  error(response){
   console.log(response)

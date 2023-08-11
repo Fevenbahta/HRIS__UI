@@ -21,11 +21,11 @@
                 </div>
                 <div class="row">
                   <div class="col-md-4 form-field">
-                    <input  placeholder="" type="text" name="nameOfInstitute" [(ngModel)]="addEducationRequest.nameOfInstitute" required>
+                    <input  placeholder="" type="text" name="nameOfInstitute" [(ngModel)]="education.nameOfInstitute" required>
                     <label>Institution Name</label>
                   </div>
                   <div class="col-md-4 form-field">
-                    <input  placeholder="" type="text" name="fieldOfStudy" [(ngModel)]="addEducationRequest.fieldOfStudy">
+                    <input  placeholder="" type="text" name="fieldOfStudy" [(ngModel)]="education.fieldOfStudy">
                     <label>Field Of Study</label>
                   </div>
                   <div class="col-md-4 form-field">
@@ -41,14 +41,14 @@
                 <div class="row">
                   <div class="col-md-6">
                     <mat-form-field style="height: 65px; width:160px"  class="example-full-width">
-                      <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="addEducationRequest.from">
+                      <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="education.from">
                       <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
                       <mat-datepicker #fromPicker></mat-datepicker>
                     </mat-form-field>
                   </div>
                   <div class="col-md-6">
                     <mat-form-field style="height: 65px; width:160px" class="example-full-width">
-                      <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="addEducationRequest.to">
+                      <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="education.to">
                       <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
                       <mat-datepicker #toPicker></mat-datepicker>
                     </mat-form-field>
@@ -56,12 +56,12 @@
                   </div>
                 </div> 
               <button type="button" class="btn btn-sm btnsave" (click)="addEducation()">
-                <mat-icon>add</mat-icon>Add Education</button>
+                <mat-icon>add</mat-icon>Add</button>
              
               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
               -->
-              <div *ngIf="educationSaved" class="alert alert-success mt-3">
-                Education added successfully!
+              <div *ngIf="educationSaved" class="alert btndanger btn-sm pull-right">
+                Added successfully!
               </div>
             </form>
   </div>
@@ -75,7 +75,7 @@
   
     <!-- Education Table -->
     <h6>Education History</h6>
-    <table  *ngIf="educations.length>=1"  class="table table-bordered table-striped">
+    <table   *ngIf="education" class="table table-bordered table-striped">
       <thead>
         <tr>
           <th>Education Level</th>
@@ -87,7 +87,7 @@
       </thead>
       <tbody>
         <!-- Use *ngFor to loop through the educations array and display each education record -->
-        <tr >
+        <tr *ngFor="let education of educations" >
           <td>{{ getEducationName(education.eductionName)}}</td>
           <td>{{ education.nameOfInstitute }}</td>
           <td>{{ education.fieldOfStudy }}</td>

@@ -70,6 +70,16 @@ export class EditTrainingComponent implements OnInit {
           this.trainingSaved=true; 
         }, 2000);
  
+        this.trainingService.getAllTraining() 
+        .subscribe({ 
+          next: (training) => { 
+            this.trainings = training.filter(training => training.empId === this.employeeIdService.employeeId);
+    
+                }, 
+          error(response) { 
+            console.log(response); 
+          }, 
+      });
       },
       (error) => {
         console.error(error);
@@ -124,9 +134,20 @@ export class EditTrainingComponent implements OnInit {
     .subscribe({
       next: (employee) => {
       //  this.router.navigate(['/employee-registration/deposite-authentication']); 
+      this.trainingAdded = true;
           setTimeout(() => {
         this.trainingAdded = false;
       }, 2000);
+      this.trainingService.getAllTraining() 
+      .subscribe({ 
+        next: (training) => { 
+          this.trainings = training.filter(training => training.empId === this.employeeIdService.employeeId);
+  
+              }, 
+        error(response) { 
+          console.log(response); 
+        }, 
+    });
         // Add the current work experience to the array
         this.trainings.push({ ...this.training });
         // Reset the form fields

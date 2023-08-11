@@ -17,16 +17,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EmergencycontactComponent implements OnInit {
   emergencycontactSaved: boolean = false;
   emergencycontacts: EmergencyContact[] = []; 
-emergencycontact:EmergencyContact;
 
-  addEmergencyContactRequest:EmergencyContact={
+  emergencycontact:EmergencyContact={
     pId:0,
     id:  undefined,
    createdBy: '', 
      createdDate: "2023-07-20T13:56:00.062Z", 
      updatedDate: "2023-07-20T13:56:00.062Z", 
      updatedBy: '', 
-     empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+     empId: "",
     region: '', 
      town: '', 
      phoneNumber: '', 
@@ -45,16 +44,18 @@ constructor(
   private dialog: MatDialog,
   private router:Router){}
 ngOnInit():void {
-  this.emergencycontactservice.getEmergencyContact(this.employeeIdService.employeeId)
-  .subscribe({ 
-    next: (emergencycontact) => { 
-      this.emergencycontact = emergencycontact; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
-}
+  this.emergencycontactservice.getAllEmergencyContact()
+      .subscribe({
+        next: (emergencycontacts) => {
+          // Filter emergency contacts for the current employee
+          this.emergencycontacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+        },
+        error(response) {
+          console.log(response);
+        },
+      });
+    }
+
 emergencycontactForm: FormGroup = this.formBuilder.group({
   phoneNumber: ['', Validators.required],
 });
@@ -64,26 +65,37 @@ buttons = [
   { label: '  List Employee ', route: '/employee-list' }
 ];
 addEmergencyContact() {
-  this.addEmergencyContactRequest.empId = this.employeeIdService.employeeId;
-  this.emergencycontactservice.addEmergencyContact(this.addEmergencyContactRequest)
+  this.emergencycontact.empId = this.employeeIdService.employeeId;
+  this.emergencycontactservice.addEmergencyContact(this.emergencycontact)
   .subscribe({
-    next: (employee) => {
-      this.emergencycontactSaved = true;
-     // this.router.navigate(['/employee-registration/spouse']);
+    next: (emergencycontacts) => {
+
+     this.emergencycontactSaved=true
       setTimeout(() => {
         this.emergencycontactSaved = false;
       }, 2000);
+      this.emergencycontactservice.getAllEmergencyContact()
+      .subscribe({
+        next: (emergencycontacts) => {
+          // Filter emergency contacts for the current employee
+          this.emergencycontacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+        },
+        error(response) {
+          console.log(response);
+        },
+      });
+    
       // Add the current work experience to the array
-      this.emergencycontacts.push({ ...this.addEmergencyContactRequest });
+      this.emergencycontacts.push({ ...this.emergencycontact });
       // Reset the form fields
-      this.addEmergencyContactRequest = {
+      this.emergencycontact = {
         pId:0,
         id:  undefined,
        createdBy: '', 
          createdDate: "2023-07-20T13:56:00.062Z", 
          updatedDate: "2023-07-20T13:56:00.062Z", 
          updatedBy: '', 
-         empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
+         empId: "",
         region: '', 
          town: '', 
          phoneNumber: '', 

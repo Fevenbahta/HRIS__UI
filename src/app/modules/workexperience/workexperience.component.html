@@ -65,11 +65,11 @@
 </div>
 
               <button type="button" class="btn btn-sm btnsave" (click)="addWorkExperience()">
-                <mat-icon>add</mat-icon>Add Work Experience</button>
+                <mat-icon>add</mat-icon>Add</button>
               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
                -->
-              <div *ngIf="workExperienceSaved" class="alert alert-success mt-3">
-                Work Experience added successfully!
+              <div *ngIf="workExperienceSaved" class="alert btndanger btn-sm pull-right">
+              Added successfully!
               </div>
               <div class="clearfix"></div></form>
           </div>
@@ -85,7 +85,7 @@
    
     <!-- Work Experience Table -->
     <h6>Work Experience History</h6>
-    <table class="table table-bordered table-striped">
+    <table *ngIf="workExperience" class="table table-bordered table-striped">
       <thead>
         <tr>
           <th>Company Name</th>

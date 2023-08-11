@@ -101,9 +101,13 @@
                           </div>
                           
                           <button  type="button" class="btn btn-sm btnsave" (click)="addContact()">
-                            <mat-icon>add</mat-icon>Save Contact</button>
+                            
+                            <mat-icon>add</mat-icon>Add</button>
+                            <div *ngIf="contactSaved" class="alert btndanger btn-sm pull-right">
+                        Added successfully!
+                             </div> 
                          
-                          
+                           
 
                 </form>
             </div>
@@ -123,17 +127,18 @@
   </thead>
   <tbody>
     <!-- Use *ngFor to loop through the contacts and display each contact's information -->
-    <tr  *ngIf="contacts.length>=1" >
+    <tr  *ngIf="contact.empId!=undefined" >
    
       <td>{{ contact.region }}</td>
       <td>{{ contact.town }}</td>
       <td>{{ contact.phoneNumber }}</td>
       <td>{{ contact.email }}</td>
       <td>{{ contact.postCode }}</td>
-      <td>
+      <td >
         <button class="btn btn-sm btnedit" (click)="editContact(contact)">
           <mat-icon>edit</mat-icon>Edit</button>
-        <button class="btn btn-sm btndanger" (click)="deleteContact(contact)"> <mat-icon>delete</mat-icon>
+        <button class="btn btn-sm btndanger" (click)="deleteContact(contact)"> 
+          <mat-icon>delete</mat-icon>
           Delete</button>
       </td>
     </tr>

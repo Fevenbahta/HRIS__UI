@@ -43,13 +43,14 @@
                     
                       <div> <button type="button" class="btn btn-sm btnsave" *ngIf="depositeAuthentication.id!=undefined" (click)="updateDepositeAuthentication()">Update </button>
                       </div>
-                           <div *ngIf="depositeAuthenticationUpdated" class="alert alert-success mt-3">
-                          depositeauthentication updated successfully!
+                           <div *ngIf="depositeAuthenticationUpdated"  class="alert btndanger btn-sm pull-right">
+                          Updated successfully!
                          </div> 
-                          <button type="button" class="btn btn-sm btnsave" *ngIf="depositeAuthentication.id===undefined" (click)="addDepositeAuthentication()">Add</button>
+                       
+                          <button type="button" class="btn btn-sm btnsave"  *ngIf="depositeAuthentications.length === 0" (click)="addDepositeAuthentication()">Add</button>
                      
-                              <div *ngIf="depositeauthenticationSaved" class="alert alert-success mt-3">
-                             depositeauthentication added successfully!
+                              <div *ngIf="depositeauthenticationSaved" class="alert btndanger btn-sm pull-right">
+                            Added successfully!
                             </div>
                   </form>
               </div>

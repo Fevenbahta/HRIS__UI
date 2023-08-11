@@ -22,7 +22,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./jobdescription.component.scss']
 })
 export class JobdescriptionComponent implements OnInit {
-  jobdescriptionSaved: boolean = false;
+  employeePositionSaved: boolean = false;
+  employeePositionUpdated: boolean = false;
 employeepositions:EmployeePosition[]=[]
 employeePosition:EmployeePosition
   divisions:Division[]= [];
@@ -85,8 +86,9 @@ this.divisionservice.getAllDivisions()
 });
 this.employeepositionservice.getAllEmployeePosition()
 .subscribe({
-  next: (divisions) => {
-    this.employeepositions=divisions;
+  next: (employeePositions) => {
+    this.employeepositions = employeePositions.filter(employeePositions => employeePositions.empId === this.employeeIdService.employeeId);
+         
   },
   error(response){
     console.log(response)
@@ -131,7 +133,51 @@ this.employeepositionservice.getEmployeePosition(this.employeeIdService.employee
     }, 
 });
 }
+updateEmployeePosition(): void {
+ 
+  
+  this.employeePosition.divisionId = this.selectedDivision;
+  this.employeePosition.position = this.selectedPosition;
+  this.employeePosition.stepId = this.selectedStep;
+  this.employeePosition.branchId = this.selectedBranch;
+  this.employeepositionservice.updateEmployeePosition
+  (this.employeePosition, this.employeePosition.id)
+  .subscribe({
+  
+    next: (employeePosition) => { 
+        this.employeePositionUpdated=true;
+      setTimeout(() => {
+        this.employeePositionUpdated = false;
+      }, 2000);
+      this.employeepositionservice.getAllEmployeePosition().subscribe((employeePositions) => {
+        this.employeepositions = employeePositions.filter(employeePositions => employeePositions.empId === this.employeeIdService.employeeId);})
+      this.selectedDivision =  "";
+      this.selectedPosition  ="" ;
+       this.selectedStep= "" ;
+       this.selectedBranch ="" ;
+      this.employeePosition = {
+          pid:0,
+          empId:"",
+          id:undefined,
+        divisionId:'',
+        stepId: '',
+        branchId: 'string',
+        position: '',
+        status:0,
+        startDate: '',
+        endDate: '2023-07-21T08:09:41.138Z',
+      createdBy: '',
+      createdDate: '2023-07-21T08:09:41.138Z',
+      updatedDate: '2023-07-21T08:09:41.138Z',
+      updatedBy: '',
+      };
+    },
+    error: (response) => {
+      console.log(response);
+    }
+  });
 
+}
 addEmployeePosition(){
   this.addEmployeePositionRequest.empId = this.employeeIdService.employeeId;
   this.addEmployeePositionRequest.divisionId = this.selectedDivision;
@@ -141,18 +187,27 @@ addEmployeePosition(){
   this.employeepositionservice.addEmployeePosition(this.addEmployeePositionRequest)
   .subscribe({
   next:()=>{
-    this.jobdescriptionSaved = true;
+    this.employeePositionSaved = true;
   
     setTimeout(() => {
-      this.jobdescriptionSaved = false;
+      this.employeePositionSaved = false;
     }, 2000);
+    this.employeepositionservice.getEmployeePosition(this.employeeIdService.employeeId) 
+  .subscribe({ 
+    next: (employeepositions) => { 
+      this.employeePosition = employeepositions; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
     // Add the
      this.employeepositions.push({ ...this.addEmployeePositionRequest });
 
     this.addEmployeePositionRequest={
       pid:0,
       empId:'',
-      id: '',
+      id: undefined,
     divisionId:'',
     stepId: '',
     branchId: '',
@@ -191,8 +246,14 @@ addEmployeePosition(){
     return position ? position.name : '';
   }
   editEmployeePosition(employeePosition: EmployeePosition): void {
-    // Here, we will navigate to the edit page for the selected EmployeePosition.
-    this.router.navigate(["/edit-employeePosition", employeePosition.id]);
+ 
+    const contactToEdit = this.employeepositions.find(employeePosition => employeePosition.id === employeePosition.id);
+    this.employeePosition = contactToEdit;
+
+     this.selectedDivision =  this.employeePosition.divisionId;
+  this.selectedPosition  =this.employeePosition.position ;
+   this.selectedStep= this.employeePosition.stepId ;
+   this.selectedBranch =this.employeePosition.branchId ;
   }
 
   deleteEmployeePosition(EmployeePosition: EmployeePosition): void {

@@ -76,6 +76,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
         // Add the current work experience to the array
         this.depositeauthentications.push({ ...this.addDepositeAuthenticationRequest });
         // Reset the form fields
+        this.depositeauthenticationservice.getDepositeAuthentication(this.employeeIdService.employeeId) 
+    .subscribe({ 
+      next: (depositeauthentications) => { 
+        this.depositeAuthentication = depositeauthentications; 
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, 
+  });
+
         this.addDepositeAuthenticationRequest = {
           pId:0,
           id:  "",

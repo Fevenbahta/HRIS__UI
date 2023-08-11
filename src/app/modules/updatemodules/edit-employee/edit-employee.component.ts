@@ -87,16 +87,7 @@ supervisors:Supervisor[]=[];
   
 
 
-    this.employeeService.getEmployee(this.employeeIdService.employeeId) 
-    .subscribe({ 
-      next: (employees) => { 
-        this.employee=employees; 
-      }, 
-      error(response){ 
-        console.log(response) 
-      }, 
-       
-    }); 
+
     this.route.params.subscribe((params) => {
       this.employeeId = params['empId']; 
       this.employeeIdService.employeeId= this.employeeId;
@@ -108,7 +99,10 @@ supervisors:Supervisor[]=[];
         console.log("Form Value:", this.employeeForm.value);// Call the method to populate the form with employee data
       });
     });
-
+this.employeeService.getAllEmployees()
+.subscribe((employees) => {
+  this.employees = employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
+})
   }
 
   populateForm(): void {
@@ -148,21 +142,24 @@ supervisors:Supervisor[]=[];
 
   updateEmployee(): void {
     if (this.employeeForm.valid) {
-      const formData = this.employeeForm.value;
+ 
       // Add logic to update the employee using the formData
       // For example:
-      console.log(formData)
+  
       this.employeeForm.value.firstSupervisor = this.selectedFirstSupervisor; 
-      this.employeeForm.value.secondSupervisor = this.selectedSecondSupervisor; 
-      this.employeeService.updateEmployee(formData,this.employeeId ).subscribe({
+      this.employeeForm.value.secondSupervisor = this.selectedSecondSupervisor;   
+         const formData = this.employeeForm.value;
+      this.employeeService.updateEmployee(formData,this.employee.empId ).subscribe({
         next: () => {
           this.employeeUpdated = true;
           setTimeout(() => {
             this.employeeUpdated = false;
           }, 2000);
 
-        
-            this.employees.push({ ...this.employeeForm.value});
+          this.employeeService.getAllEmployees()
+          .subscribe((employees) => {
+            this.employees = employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
+          })
 
             
         },
@@ -258,8 +255,12 @@ supervisors:Supervisor[]=[];
   //   }); 
   // } 
   editEmployee(employee: Employee): void { 
-    // Here, we will navigate to the edit page for the selected EmergencyContact. 
-    this.router.navigate(["/edit-employee", employee.empId]); 
+    const employeeToEdit = this.employees.find(employee => employee.empId === this.employeeId);
+    this.employee = employeeToEdit;
+
+     this.selectedFirstSupervisor =  this.employee.firstSupervisor;
+  this.selectedSecondSupervisor  =this.employee.secondSupervisor;
+ 
   } 
     
 }

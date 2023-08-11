@@ -74,7 +74,11 @@ updatedBy: '',
     });
         this.employeePositionService.getAllEmployeePosition().subscribe((employeePositions) => {
           this.employeePositions = employeePositions.filter(employeePositions => employeePositions.empId === this.employeeIdService.employeeId);
-          ;
+         
+          // this.selectedDivision =  this.employeePosition.divisionId;
+          // this.selectedPosition  =this.employeePosition.position ;
+          //  this.selectedStep= this.employeePosition.stepId ;
+          //  this.selectedBranch =this.employeePosition.branchId ;;
         });
       
         // Fetch the available divisions and populate the divisions array
@@ -110,7 +114,7 @@ updatedBy: '',
     );
   }
   updateEmployeePosition(): void {
-    this.employeePositionUpdated=true;
+ 
   
     this.employeePosition.divisionId = this.selectedDivision;
     this.employeePosition.position = this.selectedPosition;
@@ -120,10 +124,14 @@ updatedBy: '',
     (this.employeePosition, this.employeePosition.id)
     .subscribe({
     
-      next: (employeePosition) => {
+      next: (employeePosition) => { 
+          this.employeePositionUpdated=true;
         setTimeout(() => {
           this.employeePositionUpdated = false;
         }, 2000);
+        this.employeePositionService.getAllEmployeePosition().subscribe((employeePositions) => {
+          this.employeePositions = employeePositions.filter(employeePositions => employeePositions.empId === this.employeeIdService.employeeId);})
+         
         this.selectedDivision =  "";
         this.selectedPosition  ="" ;
          this.selectedStep= "" ;

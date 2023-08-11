@@ -45,16 +45,18 @@ constructor(
   private dialog: MatDialog,
   private router:Router){}
 ngOnInit():void {
-  this.emergencycontactservice.getEmergencyContact(this.employeeIdService.employeeId)
-  .subscribe({ 
-    next: (emergencycontacts) => { 
-      this.emergencycontact = emergencycontacts; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
-}
+  this.emergencycontactservice.getAllEmergencyContact()
+      .subscribe({
+        next: (emergencycontacts) => {
+          // Filter emergency contacts for the current employee
+          this.emergencycontacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+        },
+        error(response) {
+          console.log(response);
+        },
+      });
+    }
+
 emergencycontactForm: FormGroup = this.formBuilder.group({
   phoneNumber: ['', Validators.required],
 });
@@ -73,6 +75,15 @@ addEmergencyContact() {
       setTimeout(() => {
         this.emergencycontactSaved = false;
       }, 2000);
+      this.emergencycontactservice.getEmergencyContact(this.employeeIdService.employeeId)
+  .subscribe({ 
+    next: (emergencycontact) => { 
+      this.emergencycontact = emergencycontact; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
       // Add the current work experience to the array
       this.emergencycontacts.push({ ...this.addEmergencyContactRequest });
       // Reset the form fields

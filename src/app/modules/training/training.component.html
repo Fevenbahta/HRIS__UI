@@ -57,7 +57,7 @@
         </div>
       </div>
       <h6>Training Records</h6>
-      <table class="table table-bordered table-striped">
+      <table  *ngIf="training.empId!=undefined" class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>Type of Training</th>

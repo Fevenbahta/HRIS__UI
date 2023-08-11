@@ -63,6 +63,16 @@ export class TrainingComponent implements OnInit {
           setTimeout(() => {
         this.trainingSaved = false;
       }, 2000);
+
+      this.trainingService.getTraining(this.employeeIdService.employeeId) 
+      .subscribe({ 
+        next: (trainings) => { 
+          this.training = trainings; 
+              }, 
+        error(response) { 
+          console.log(response); 
+        }, 
+    });
         // Add the current work experience to the array
         this.trainings.push({ ...this.addTrainingRequest });
         // Reset the form fields

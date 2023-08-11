@@ -147,10 +147,7 @@ export class EditContactComponent implements OnInit {
   addContact(){
     // if (this.contactForm.invalid) {
     //   this.contactForm.markAllAsTouched();
-  
-    
     this.contact.empId = this.employeeIdService.employeeId;
-    console.log(this.contact)
   this.contactService.addContact(this.contact)  
   .subscribe({ 
   next:(contacts)=>{
@@ -176,7 +173,7 @@ export class EditContactComponent implements OnInit {
               phoneNumber: '',
                updatedDate: "2023-07-20T13:56:00.062Z", 
                updatedBy: '', 
-               empId: " ",
+               empId: "",
                email: '',
         };
   

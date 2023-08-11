@@ -81,13 +81,15 @@ addContact(){
   this.addContactRequest.empId = this.employeeIdService.employeeId;
   console.log(this.addContactRequest)
 this.contactservice.addContact(this.addContactRequest)
-
-.subscribe({
-  
+.subscribe({ 
 next:(contacts)=>{
  
-  this.router.navigate(['/employee-registration/emergency-contact']); 
+  this.contactservice.getContact(this.employeeIdService.employeeId)
 
+  
+  .subscribe((contacts) => {
+    this.contact = contacts;
+  }); 
 
 },
  error(response){

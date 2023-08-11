@@ -43,15 +43,15 @@ export class SpouseComponent implements OnInit {
     { label: '  List Employee ', route: '/employee-list' }
   ];
   ngOnInit(): void {
-    this.spouseService.getSpouse(this.employeeIdService.employeeId) 
-  .subscribe({ 
-    next: (spouses) => { 
-      this.spouse = spouses; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
+    this.spouseService.getAllSpouse() 
+    .subscribe({ 
+      next: (spouse) => { 
+        this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, })
   }
   addSpouse() {
     this.addSpouseRequest.empId = this.employeeIdService.employeeId
@@ -62,6 +62,15 @@ export class SpouseComponent implements OnInit {
         setTimeout(() => {
           this.spouseSaved = false;
         }, 2000);
+        this.spouseService.getAllSpouse() 
+    .subscribe({ 
+      next: (spouse) => { 
+        this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, })
         this.spouses.push({ ...this.addSpouseRequest });
 
         this.addSpouseRequest = {

@@ -78,11 +78,13 @@ export class EditContactComponent implements OnInit {
   });
   updateContact(): void {
 
-    this.contactUpdate=true;
+   
     this.contactService.updateContact(this.contact, this.contact.id)
     .subscribe({
     
-      next: (contact) => {
+      next: (contact) => { 
+        
+        this.contactUpdate=true;
         setTimeout(() => {
           this.contactUpdate= false;
         }, 2000);

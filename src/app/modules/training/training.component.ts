@@ -60,7 +60,7 @@ export class TrainingComponent implements OnInit {
     this.trainingService.addTraining(this.training)
     .subscribe({
       next: (employee) => {
-      //  this.router.navigate(['/employee-registration/deposite-authentication']); 
+        this.trainingSaved = true;
           setTimeout(() => {
         this.trainingSaved = false;
       }, 2000);

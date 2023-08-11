@@ -92,8 +92,9 @@ export class EditEducationComponent {
     this.education.eductionName = this.selectedEducationLevel;
     this.educationService.updateEducation(this.education, this.education.id).subscribe({
       next: () => {
+        this.educationUpdated = true;
         setTimeout(() => {
-  this.educationUpdated = true;
+  this.educationUpdated = false;
         }, 
         )
         this.educationService.getAllEducation().subscribe({
@@ -164,7 +165,7 @@ export class EditEducationComponent {
     this.education.eductionName = this.selectedEducationLevel;
     this.educationService.addEducation(this.education).subscribe({
       next: (employee) => {
-        
+        this.educationSaved = true;
       //  this.router.navigate(['/employee-registration/work-experience']); 
         setTimeout(() => {
           this.educationSaved = false;

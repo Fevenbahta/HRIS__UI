@@ -20,6 +20,7 @@ import { EmployeeService } from 'app/service/employee.service';
 export class ContactComponent {
   contacts:Contact[]=[];
   contact:Contact;
+  contactSaved:boolean=false;
   addContactRequest:Contact={
     pId:0,
     id: undefined,
@@ -83,7 +84,10 @@ addContact(){
 this.contactservice.addContact(this.addContactRequest)
 .subscribe({ 
 next:(contacts)=>{
- 
+  this.contactSaved = true;
+  setTimeout(() => {
+    this.contactSaved = false;
+  }, 2000);
   this.contactservice.getContact(this.employeeIdService.employeeId)
 
   .subscribe((contacts) => {

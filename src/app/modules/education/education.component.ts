@@ -94,6 +94,15 @@ this.educationservice.getEducation(this.employeeIdService.employeeId)
         setTimeout(() => {
           this.educationSaved = false;
         }, 2000);
+        this.educationservice.getEducation(this.employeeIdService.employeeId) 
+  .subscribe({ 
+    next: (educations) => { 
+      this.education = educations; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
         // Add the current education to the array
         this.educations.push({ ...this.addEducationRequest });
         // Reset the form fields

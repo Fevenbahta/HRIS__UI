@@ -76,7 +76,7 @@
             </div>
         </div>
         <h6>Emergency Contact List</h6>
-  <table  *ngIf="emergencycontacts.length>=1"  class="table table-bordered table-striped">
+  <table   *ngIf="emergencycontact.empId!=undefined"  class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>Name</th>
@@ -86,7 +86,7 @@
     </thead>
     <tbody>
       <!-- Use *ngFor to loop through the emergencycontacts array and display each emergency contact record -->
-      <tr >
+      <tr *ngFor="let emergencycontact of emergencycontacts" >
         <td>{{ emergencycontact.name }}</td>
         <td>{{ emergencycontact.phoneNumber }}</td>
         <td>{{ emergencycontact.relationship }}</td>

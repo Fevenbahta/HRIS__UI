@@ -147,8 +147,18 @@ getEmployees() {
           // Add the current work experience to the array 
           this.employees.push({ ...this.employeeForm.value }); 
           // Reset the form fields 
-      
-            this.router.navigate(['/employee-registration/contact']); 
+          
+    this.employeeservice.getEmployee(this.employeeIdService.employeeId) 
+    .subscribe({ 
+      next: (employees) => { 
+        this.employee=employees; 
+      }, 
+      error(response){ 
+        console.log(response) 
+      }, 
+       
+    }); 
+           
         }, 
         error: (response) => { 
           console.log(response); 

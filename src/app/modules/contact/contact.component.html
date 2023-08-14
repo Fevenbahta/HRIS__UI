@@ -127,7 +127,7 @@
   </thead>
   <tbody>
     <!-- Use *ngFor to loop through the contacts and display each contact's information -->
-    <tr  *ngIf="contact.empId!=undefined" >
+    <tr  *ngFor="let contact of contacts">
    
       <td>{{ contact.region }}</td>
       <td>{{ contact.town }}</td>

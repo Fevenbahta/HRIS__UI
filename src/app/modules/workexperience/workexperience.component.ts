@@ -54,15 +54,16 @@ export class WorkexperienceComponent {
     ngOnInit(): void {
   
 
-  this.workExperienceService.getWorkExperience(this.employeeIdService.employeeId) 
-    .subscribe({ 
-      next: (workExperience) => { 
-        this.workExperience = workExperience; 
-            }, 
-      error(response) { 
-        console.log(response); 
-      }, 
-  });
+  this.workExperienceService.getAllWorkExperience()
+.subscribe({
+  next: (workexperience) => {
+    // Filter emergency contacts for the current employee
+    this.workExperiences = workexperience.filter(workExperience => workExperience.empId === this.employeeIdService.employeeId);
+  },
+  error(response) {
+    console.log(response);
+  },
+});
     }
   
     addWorkExperience() {
@@ -75,15 +76,17 @@ export class WorkexperienceComponent {
             this.workExperienceSaved = false;
           }, 2000);
           // Add the current work experience to the array
-          this.workExperienceService.getWorkExperience(this.employeeIdService.employeeId) 
-          .subscribe({ 
-            next: (workExperience) => { 
-              this.workExperience = workExperience; 
-                  }, 
-            error(response) { 
-              console.log(response); 
-            }, 
-        });
+        
+  this.workExperienceService.getAllWorkExperience()
+  .subscribe({
+    next: (workexperience) => {
+      // Filter emergency contacts for the current employee
+      this.workExperiences = workexperience.filter(workExperience => workExperience.empId === this.employeeIdService.employeeId);
+    },
+    error(response) {
+      console.log(response);
+    },
+  });
           this.workExperiences.push({ ...this.addWorkExperienceRequest });
           // Reset the form fields
           this.addWorkExperienceRequest = {

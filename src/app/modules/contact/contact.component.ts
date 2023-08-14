@@ -62,16 +62,17 @@ buttons = [
   { label: '  List Employee ', route: '/employee-list' }
 ];
 ngOnInit():void {
-// this.contactservice.getAllContacts()
-// .subscribe((contacts) => {
-//   this.contacts = contacts;
-// }); 
-this.contactservice.getContact(this.employeeIdService.employeeId)
 
-  
-  .subscribe((contacts) => {
-    this.contact = contacts;
-  }); 
+this.contactservice.getAllContacts()
+.subscribe({
+  next: (contacts) => {
+    // Filter emergency contacts for the current employee
+    this.contacts = contacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+  },
+  error(response) {
+    console.log(response);
+  },
+});
   
  }
 addContact(){
@@ -88,11 +89,16 @@ next:(contacts)=>{
   setTimeout(() => {
     this.contactSaved = false;
   }, 2000);
-  this.contactservice.getContact(this.employeeIdService.employeeId)
-
-  .subscribe((contacts) => {
-    this.contact = contacts;
-  }); 
+  this.contactservice.getAllContacts()
+  .subscribe({
+    next: (contacts) => {
+      // Filter emergency contacts for the current employee
+      this.contacts = contacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+    },
+    error(response) {
+      console.log(response);
+    },
+  });
 
 },
  error(response){

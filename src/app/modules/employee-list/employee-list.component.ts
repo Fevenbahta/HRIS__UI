@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core'; 
+import { ChangeDetectorRef, Component, SimpleChanges } from '@angular/core'; 
 import { Router } from '@angular/router'; 
 import { Employee, Supervisor } from 'app/models/employee.model'; 
 import { EmployeeService } from 'app/service/employee.service'; 
@@ -17,7 +17,7 @@ import { SupervisorService } from 'app/service/supervisor.service';
 export class EmployeeListComponent { 
   searchTerm: string = ''; 
   supervisors:Supervisor[]=[];
-  filteredEmployees: any[] = []; 
+  filteredEmployees: Employee[] = []; 
   employees:Employee[]= []; 
   allEmployees:any=[]; 
   searchText:string[]; 
@@ -26,10 +26,11 @@ export class EmployeeListComponent {
       { label: '  List Employee ', route: '/employee-list' } 
     ] 
   dataSource: any; 
-  changeDetectorRef: any;
+
  
 constructor(private employeeservice: EmployeeService, 
   private dialog: MatDialog, 
+  private changeDetectorRef: ChangeDetectorRef, 
  
  private supervisorService:SupervisorService,
   // private snackBar: MatSnackBar, 
@@ -38,10 +39,12 @@ constructor(private employeeservice: EmployeeService,
     
   } 
 ngOnInit(): void{ 
+
 this.employeeservice.getAllEmployees() 
 .subscribe({ 
   next: (employees) => { 
     this.employees=employees; 
+    this.filteredEmployees = employees;
     const lastEmployee = this.employees.pop(); 
     this.employees.unshift(lastEmployee); 
     this.employees.sort((a, b) => new Date(a.createdDate).getTime() - new Date(b.createdDate).getTime()); 
@@ -51,7 +54,7 @@ this.employeeservice.getAllEmployees()
     console.log(response) 
   } 
 }); 
-
+ 
 this.supervisorService.getAllSupervisors()
 .subscribe({
   next: (supervisors) => {
@@ -75,34 +78,30 @@ getEmployees() {
     }  
   );  
 }  
-// ngOnChanges(changes: SimpleChanges) { 
-//   if (changes.searchTerm) { 
-//     if (this.searchTerm === '') { 
-//       this.filteredEmployees = this.employees; 
-//     } else { 
-//       this.filteredEmployees = this.employees.filter((employees) => { 
-//         return employees.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1; 
-        
-//       }); 
-//     } 
-//   }} 
+
+onSearch() {
+  this.filteredEmployees = this.employees; 
+  if (this.searchTerm.trim() === '') {
  
-onSearch() { 
- this.filteredEmployees = []; 
- this.filteredEmployees = this.employees; 
-    this.employees = this.employees.filter((employees) => { 
-      return employees.firstName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1; 
+    this.filteredEmployees = this.employees;
+  } else {
+ 
+    this.filteredEmployees = this.employees.filter(employee => {
       
-    }); 
-     
-    if (this.searchTerm.length === 0) { 
-     this.filteredEmployees = this.employees; 
-    
-    this.changeDetectorRef.detectChanges();
-    } 
-     
- 
-  } 
+      return (
+        employee.firstName.toLowerCase().startsWith(this.searchTerm.toLowerCase()) ||
+        employee.middleName.toLowerCase().startsWith(this.searchTerm.toLowerCase()) ||
+        employee.sex.toLowerCase().startsWith(this.searchTerm.toLowerCase()) ||
+        employee.ecxId.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        employee.pensionNo.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+  }
+
+
+  
   
  
 deleteEmployee(id: string) { 

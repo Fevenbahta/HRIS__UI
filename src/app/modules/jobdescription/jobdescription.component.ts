@@ -25,7 +25,7 @@ export class JobdescriptionComponent implements OnInit {
   employeePositionSaved: boolean = false;
   employeePositionUpdated: boolean = false;
 employeepositions:EmployeePosition[]=[]
-employeePosition:EmployeePosition
+
   divisions:Division[]= [];
   selectedDivision: string='';
 
@@ -43,7 +43,7 @@ employeePosition:EmployeePosition
          { label: '  List Employee ', route:"/employee-list" },
   
   ];
-  addEmployeePositionRequest:EmployeePosition={
+  employeePosition:EmployeePosition={
     pid:0,
     empId:"",
     id:undefined,
@@ -179,12 +179,12 @@ updateEmployeePosition(): void {
 
 }
 addEmployeePosition(){
-  this.addEmployeePositionRequest.empId = this.employeeIdService.employeeId;
-  this.addEmployeePositionRequest.divisionId = this.selectedDivision;
-  this.addEmployeePositionRequest.position = this.selectedPosition;
-  this.addEmployeePositionRequest.stepId = this.selectedStep;
-  this.addEmployeePositionRequest.branchId = this.selectedBranch;
-  this.employeepositionservice.addEmployeePosition(this.addEmployeePositionRequest)
+  this.employeePosition.empId = this.employeeIdService.employeeId;
+  this.employeePosition.divisionId = this.selectedDivision;
+  this.employeePosition.position = this.selectedPosition;
+  this.employeePosition.stepId = this.selectedStep;
+  this.employeePosition.branchId = this.selectedBranch;
+  this.employeepositionservice.addEmployeePosition(this.employeePosition)
   .subscribe({
   next:()=>{
     this.employeePositionSaved = true;
@@ -202,9 +202,12 @@ addEmployeePosition(){
     }, 
 });
     // Add the
-     this.employeepositions.push({ ...this.addEmployeePositionRequest });
-
-    this.addEmployeePositionRequest={
+     this.employeepositions.push({ ...this.employeePosition });
+     this.selectedDivision =  "";
+     this.selectedPosition  ="" ;
+      this.selectedStep= "" ;
+      this.selectedBranch ="" ;
+    this.employeePosition={
       pid:0,
       empId:'',
       id: undefined,

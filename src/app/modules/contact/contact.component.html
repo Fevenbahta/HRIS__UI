@@ -101,12 +101,13 @@
                           </div>
                           
                           <button  type="button" class="btn btn-sm btnsave" (click)="addContact()">
-                            <mat-icon>add</mat-icon>Add Contact</button>
-                            <div *ngIf="contactSaved" class="alert alert-success mt-3">
-                              depositeauthentication added successfully!
+                            
+                            <mat-icon>add</mat-icon>Add</button>
+                            <div *ngIf="contactSaved" class="alert btndanger btn-sm pull-right">
+                        Added successfully!
                              </div> 
                          
-                          
+                           
 
                 </form>
             </div>

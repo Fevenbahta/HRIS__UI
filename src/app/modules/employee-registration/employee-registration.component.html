@@ -208,10 +208,11 @@
                   </div>
   
               <button type="button" class="btn btn-sm btnsave" (click)="addEmployee()" >
-                <mat-icon>add</mat-icon>Save Profile</button>
-              <div *ngIf="employeeSaved" class="alert alert-success mt-3">
-                Employee added successfully!
-               </div><div class="clearfix"></div>
+                <mat-icon>add</mat-icon>Add</button>
+              <div *ngIf="employeeSaved" class="alert btndanger btn-sm pull-right">
+                Successfully Added!
+              </div>
+              <div class="clearfix"></div>
             </form>
           </div>
         </div>
@@ -221,7 +222,7 @@
        
         <!-- contact.component.html -->
         <h6>Profile info </h6>
-        <table   *ngIf="employee.empId!=undefined"class="table table-bordered table-striped">
+        <table   class="table table-bordered table-striped">
           <thead>
                 <tr>
                     
@@ -239,7 +240,7 @@
      
             <tbody>
               <!-- Use *ngFor to loop through the contacts and display each contact's information -->
-              <tr>
+              <tr *ngIf="employee.empId!=undefined">
              
                 <td>{{ employee.firstName }}</td>
                 <td>{{ employee.lastName }}</td>

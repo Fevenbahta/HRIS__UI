@@ -41,16 +41,16 @@
                           </div>
                           
                  
-                    <div> <button type="button" class="btn btn-sm btnsave" (click)="addDepositeAuthentication()"> Add </button>
+                    <div> <button type="button" class="btn btn-sm btnsave" (click)="addDepositeAuthentication()">Add</button>
                     </div>
-                         <div *ngIf="depositeauthenticationSaved" class="alert alert-success mt-3">
-                        depositeauthentication added successfully!
+                         <div *ngIf="depositeauthenticationSaved" class="alert btndanger btn-sm pull-right">
+                        Added successfully!
                        </div> <div class="clearfix"></div>
                 </form>
             </div>
         </div>
         <h6>Deposit Authentication List</h6>
-  <table  *ngIf="depositeAuthentication.empId!=undefined" class="table table-bordered table-striped">
+  <table   class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>Bank</th>
@@ -61,7 +61,7 @@
     </thead>
     <tbody>
       <!-- Use *ngFor to loop through the depositeauthentications array and display each deposit authentication record -->
-      <tr >
+      <tr *ngIf="depositeAuthentication.empId!=undefined">
         <td>{{ depositeAuthentication.bank }}</td>
         <td>{{ depositeAuthentication.bankBranch }}</td>
         <td>{{ depositeAuthentication.bankAccount }}</td>

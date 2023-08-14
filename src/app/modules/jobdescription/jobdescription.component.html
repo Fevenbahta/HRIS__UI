@@ -79,7 +79,7 @@
            <div class="col-md-6">
             <mat-form-field>
               <mat-label>Start Date</mat-label>
-              <input matInput [matDatepicker]="picker" placeholder="Choose a date" required name="joinedDate" [(ngModel)]="addEmployeePositionRequest.startDate" >
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date" required name="joinedDate" [(ngModel)]="employeePosition.startDate" >
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -88,13 +88,14 @@
                                      
           <button  mat-raised-button type="submit" *ngIf="employeePosition.id!=undefined" class="btn btn-sm btnsave">update</button>
           <div class="clearfix"></div>
-          <div *ngIf="employeePositionUpdated" class="alert alert-success mt-3">
-           Job Description updated successfully!
+          <div *ngIf="employeePositionUpdated" class="alert btndanger btn-sm pull-right">
+           Updated successfully!
           </div>
-          <button type="button" class="btn btn-sm btnsave"  *ngIf="employeePosition.id===undefined" (click)="addEmployeePosition()">Add</button>
+          <button type="button" class="btn btn-sm btnsave"  *ngIf="employeePosition.id===undefined" (click)="addEmployeePosition()">
+            Add</button>
      
-<div *ngIf="employeePositionSaved" class="alert alert-success mt-3">
-employeePosition added successfully!
+<div *ngIf="employeePositionSaved" class="alert btndanger btn-sm pull-right">
+  Added successfully!
 </div>
                     </form>
                 </div>
@@ -118,7 +119,7 @@ employeePosition added successfully!
     </thead>
     <tbody>
       <!-- Use *ngFor to loop through the employeepositions array and display each employee position -->
-      <tr  >
+      <tr *ngFor="let employeePosition of employeepositions"  >
 
         <td>{{ getDivisionName(employeePosition.divisionId) }}</td>
         <td>{{ getPositionName(employeePosition.position) }}</td>

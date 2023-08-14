@@ -2,7 +2,7 @@
 <app-shared-nav  [buttons]="buttons"></app-shared-nav>
   <div class="main-content">
     <div class="container-fluid">
-        <input  class="search" type="search" placeholder="Search..." [(ngModel)]="searchTerm" (keyup)="onSearch()">
+        <input  class="search" type="search" placeholder="Search..." [(ngModel)]="searchTerm" (input)="onSearch()">
         <div class="row">
             <div class="col-md-12">
                 <div class="card" >
@@ -18,7 +18,7 @@
                     
                     <div >
                         <div class="col-md-12" >
-                            <table class="table  table-striped col-md-8"   *ngIf="filteredEmployees || employees ">
+                            <table class="table  table-striped col-md-8"   *ngIf="filteredEmployees.length || employees.length ">
 
                                <div> <thead>
                                     <tr>
@@ -34,11 +34,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let employee of employees || filteredEmployees">
+                                    <tr *ngFor="let employee of filteredEmployees || employees  " >
                                         <td>{{employee.firstName}}</td>
                                         <td>{{employee.middleName}}</td>
                                         <td>{{employee.sex}}</td>
-                                            <td>{{employee.ecxId}}</td>
+                                        <td>{{employee.ecxId}}</td>
                                         <td>{{employee.pensionNo}}</td>
                                      
                                        <td>{{getFirstSupervisorName(employee.firstSupervisor)}}</td>
@@ -58,7 +58,8 @@
                                         </tbody>
                             </div>
                             </table>
-                            <p *ngIf="!filteredEmployees && !employees">no employees found</p>
+                            <p *ngIf="!(filteredEmployees.length || employees.length)">No employees found</p>
+
                         </div>
                     </div>
                 </div>

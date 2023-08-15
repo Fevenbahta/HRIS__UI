@@ -35,6 +35,7 @@ status:0,
      { label: 'grade', route:"/admin/grade" },
      { label: 'Branch', route:"/admin/branch" },
      { label: 'Supervisor', route:"/admin/supervisor" },
+     { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
 
   ];
 

@@ -32,6 +32,7 @@ status:0,
      { label: 'Grade', route:"/admin/grade" },
      { label: 'Branch', route:"/admin/branch" },
      { label: 'Supervisor', route:"/admin/supervisor" },
+     { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
 
   ];
   constructor(private educationLevelService :EducationLevelService,private router:Router,private dialog:MatDialog,) { }

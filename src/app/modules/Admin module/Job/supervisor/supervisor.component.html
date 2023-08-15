@@ -2,7 +2,9 @@
 
 
   <app-shared-nav [buttons]="buttons"></app-shared-nav> 
- 
+  <div class="row" > 
+      
+    <div class="col-md-12" > 
  
   <form (ngSubmit)="addSupervisor()"> 
     <div class="row" > 
@@ -11,10 +13,10 @@
         <div class="form-group"> 
         
           <mat-form-field style="height: 65px; width:200px"  > 
-            <mat-label>Select Employee</mat-label> 
-            <mat-select placeholder="Select Employee" name="selectedEmployee" required [(ngModel)]="selectedEmployee"> 
-              <mat-option *ngFor="let employee of employees" [value]="employee.empId"> 
-                {{ employee.firstName }}   {{ employee.middleName }}   {{ employee.lastName }} 
+            <mat-label>Select position</mat-label> 
+            <mat-select placeholder="Select position" name="selectedposition" required [(ngModel)]="selectedPosition"> 
+              <mat-option *ngFor="let position of positions" [value]="position.positionId"> 
+                {{ position.name }}  
               </mat-option> 
             </mat-select> 
           </mat-form-field> 
@@ -28,6 +30,9 @@
       <mat-select [(ngModel)]="addSupervisorRequest.supervisorLevel" name="supervisorLevel" required> 
         <mat-option value="First Supervisor">First Supervisor</mat-option> 
         <mat-option value="Second Supervisor">Second Supervisor</mat-option> 
+        <mat-option value="Third Supervisor">Third Supervisor</mat-option> 
+        <mat-option value="Fourth Supervisor">Fourth Supervisor</mat-option> 
+        <mat-option value="Fifth Supervisor">Fifth Supervisor</mat-option> 
       </mat-select> 
     </mat-form-field> 
         </div> 
@@ -45,28 +50,31 @@
     <h6 class="mb-3"> 
         Supervisor 
     </h6> 
-    
+    <div class="row" > 
+      
+      <div class="col-md-6" style="margin-left: 10px;"> 
 <table id="example1" class="table table-bordered table-striped" *ngIf="supervisors&& supervisors.length>0"> 
     <thead> 
         <tr> 
-            <th>Employee Name</th> 
+            <th>position Name</th> 
          
-            <th>Level</th> 
+            <th> supervisor Level</th> 
             
  
         </tr> 
     </thead> 
     <tbody> 
         <tr *ngFor="let supervisor of supervisors"> 
-          <td>{{ getemployeeName(supervisor.empId) }}</td>
+          <td>{{ getpositionName(supervisor.positionId) }}</td>
             <td>{{supervisor.supervisorLevel}}</td>
          
             <td>   
               <button  class="btn btn-sm btndanger" (click)="deleteSupervisor(supervisor.id)">
                 <mat-icon>delete</mat-icon></button>
-          </td> 
+              </td>
        
         </tr> 
     </tbody> 
 </table> 
 <p *ngIf="!supervisors || supervisors.length <= 0">no supervisors found</p>
+</div></div></div>

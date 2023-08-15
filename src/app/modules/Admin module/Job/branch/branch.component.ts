@@ -33,6 +33,7 @@ export class BranchComponent  {
      { label: 'Grade', route:"/admin/grade" },
      { label: 'Branch', route:"/admin/branch" },
      { label: 'Supervisor', route:"/admin/supervisor" },
+     { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
 
   ];
   constructor(private branchservice: BranchService,private router:Router,

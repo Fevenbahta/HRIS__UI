@@ -43,6 +43,7 @@ buttons = [
    { label: 'Branch', route:"/admin/branch" },
 
    { label: 'Supervisor', route:"/admin/supervisor" },
+   { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
 
 ];
   constructor( private gradeservice: GradeService,private dialog:MatDialog, private stepservice: StepService,private router:Router) { }

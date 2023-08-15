@@ -33,7 +33,7 @@ export interface Supervisor{
     updatedBy: String, 
     id: string, 
     pId: number;
-  empId: string,
+  positionId: string,
   supervisorLevel: string;
   status:number;
 

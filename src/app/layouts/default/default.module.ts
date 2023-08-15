@@ -65,6 +65,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditEmergencyContactComponent } from 'app/modules/updatemodules/edit-emergencycontact/edit-emergencycontact.component';
 import { MatIconModule } from '@angular/material/icon';
 import { EditNavComponent } from 'app/modules/updatemodules/edit-nav/edit-nav.component';
+import { AssignSupervisorComponent } from 'app/modules/Admin module/Job/assign-supervisor/assign-supervisor.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ WorkexperienceComponent,
     EditEducationComponent,
     DeleteConfirmationComponent,
 EditNavComponent,
+AssignSupervisorComponent
 
 
   ],

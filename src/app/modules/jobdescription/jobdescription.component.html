@@ -17,23 +17,12 @@
                     
                             <div class="card-body">
                             <div class="row">
-                            <div class="col-md-6">
-                             
-                                
-                                <mat-select class="form-field custom-mat-select" placeholder="Select Division" name="selectedDivision" required [(ngModel)]="selectedDivision">
-                                  <!-- Use *ngFor on mat-option to loop through departments -->
-                                  <mat-option *ngFor="let division of divisions" [value]="division.divisionId">
-                                    {{division.description}}
-                                  </mat-option>
-                                </mat-select>
-                             
-                            </div>
-                            
                            
-                            <div class="col-md-6">
+                           
+                            <div class="col-md-4">
                               
                                 
-                                <mat-select class="form-field custom-mat-select" placeholder="Select Position" required name="selectedPosition" [(ngModel)]="selectedPosition" >
+                                <mat-select class="form-field custom-mat-select" placeholder="Select Position" required name="selectedPosition" [(ngModel)]="selectedPosition" (ngModelChange)="onPositionSelected()">
                                   <!-- Replace the options below with your actual division options -->
                                   <mat-option *ngFor="let position of positions" [value]="position.positionId">
                                     {{position.name}}
@@ -42,15 +31,30 @@
                                 </mat-select>
                              
                             </div>
-                            
+                            <div class="col-md-4">
+                             
+                                
+                              <input class="form-field custom-mat-select" placeholder="Division" name="selectedDivision"
+                              required [(ngModel)]="selectedDivision" [disabled]="true">
+                                <!-- Use *ngFor on mat-option to loop through departments -->
+                              
+                                
+                           
+                          </div>
+                          
+                          <div class="col-md-4">
+                            <input class="form-field custom-mat-select" placeholder="Department" name="selectedDepartment"
+                            required [(ngModel)]="selectedDepartment" [disabled]="true">
+                          </div>
                           </div>
                         </div>
                         <div class="card-body">
                         <div class="row">
-                                   <div class="col-md-6">
+                                   <div class="col-md-4">
                                     
                                     
-                                      <mat-select class="form-field custom-mat-select" placeholder="Select Step" name="selectedStep" required [(ngModel)]="selectedStep" >
+                                      <mat-select class="form-field custom-mat-select" placeholder="Select Step" name="selectedStep" required [(ngModel)]="selectedStep" 
+                                      (ngModelChange)="onStepSelected()">
                                         <!-- Replace the options below with your actual division options -->
                                         <mat-option *ngFor="let step of steps" [value]="step.id">
                                           {{step.description}}
@@ -60,8 +64,11 @@
                                       </mat-select>
                                    
                                   </div>
-                                  
-                                  <div class="col-md-6">
+                                  <div class="col-md-4">
+                                    <input class="form-field custom-mat-select" placeholder="Level" name="selectedLevel"
+                                    required [(ngModel)]="selectedLevel" [disabled]="true">
+                                  </div>
+                                  <div class="col-md-4">
                                     
                                      
                                       <mat-select class="form-field custom-mat-select" placeholder="Select Branch" name="selectedBranch" required [(ngModel)]="selectedBranch" >

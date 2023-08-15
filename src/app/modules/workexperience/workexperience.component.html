@@ -96,7 +96,7 @@
       </thead>
       <tbody>
         <!-- Use *ngFor to loop through the workExperiences array and display each work experience record -->
-        <tr >
+        <tr *ngFor="let workExperience of workExperiences">
           <td>{{ workExperience.companyName }}</td>
           <td>{{ workExperience.postionHeld }}</td>
           <td>{{ workExperience.from }}</td>

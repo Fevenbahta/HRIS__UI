@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 
 import { Employee } from 'app/models/employee.model';
-import { Branch, Division, EducationLevel, EmployeePosition, Position, Step } from 'app/models/job-description.model';
+import { Branch, Division, EducationLevel, EmployeePosition, Grade, Position, Step } from 'app/models/job-description.model';
 import { DivisionService } from 'app/service/division.service';
 import { EducationLevelService } from 'app/service/educationlevel.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
@@ -15,6 +15,9 @@ import { StepService } from 'app/service/step.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { BranchService } from 'app/service/branch.service';
 import { Component, OnInit } from '@angular/core';
+import { DepartmentService } from 'app/service/department.service';
+import { Department } from 'app/models/education.model';
+import { GradeService } from 'app/service/grade.service';
 
 @Component({
   selector: 'app-jobdescription',
@@ -29,7 +32,8 @@ employeepositions:EmployeePosition[]=[]
   divisions:Division[]= [];
   selectedDivision: string='';
 
-
+  departments:Department[]=[];
+  selectedDepartment:string='';
    positions:Position[]= [];
   selectedPosition: string='';
   branches:Branch[]= [];
@@ -38,6 +42,9 @@ employeepositions:EmployeePosition[]=[]
   steps:Step[]= [];
   selectedStep: string='';
   
+  levels: Grade[]=[];
+  selectedLevel:string='';
+
   buttons = [
     { label: ' Add Employee ' , route:"/employee-registration" },
          { label: '  List Employee ', route:"/employee-list" },
@@ -60,25 +67,45 @@ updatedDate: '2023-07-21T08:09:41.138Z',
 updatedBy: '',
 
   }
-  
+ 
 
 
 
 constructor(
   private divisionservice: DivisionService,
+  private departmentservice: DepartmentService,
   private stepservice: StepService,
   private branchservice: BranchService,
   private employeepositionservice:EmployeePositionService,
   private positionservice:PositionService ,
   private employeeIdService:EmployeeIdService,
+  private levelService: GradeService,
   private dialog: MatDialog,
 
   private router:Router){}
 ngOnInit(): void{
 this.divisionservice.getAllDivisions()
 .subscribe({
-  next: (divisions) => {
-    this.divisions=divisions;
+  next: (division) => {
+    this.divisions=division;
+  },
+  error(response){
+    console.log(response)
+  }
+});
+this.departmentservice.getAllDepartment()
+.subscribe({
+  next: (department) => {
+    this.departments=department;
+  },
+  error(response){
+    console.log(response)
+  }
+});
+this.levelService.getAllGrade()
+.subscribe({
+  next: (level) => {
+    this.levels=level;
   },
   error(response){
     console.log(response)
@@ -98,11 +125,13 @@ this.positionservice.getAllPosition()
 .subscribe({
   next: (positions) => {
     this.positions=positions;
+    
   },
   error(response){
     console.log(response)
   }
 });
+
 this.stepservice.getAllStep()
 .subscribe({
   next: (steps) => {
@@ -230,6 +259,42 @@ addEmployeePosition(){
   }
 
   })}
+  
+  onPositionSelected(): void {
+   
+    const selectedPosition = this.positions.find(position => position.positionId === this.selectedPosition);
+   
+    //console.log( this.positions.find(position => position.positionId))
+    if (selectedPosition ) {
+      
+      const selectedDivision = this.divisions.find(division => division.divisionId === selectedPosition.divisionId);
+//console.log(this.divisions.find(division => division.divisionId))
+    const selectedDepartment = this.departments.find(department => department.departmentId === selectedDivision.departmentId);
+      if (selectedDivision) {
+        this.selectedDivision = selectedDivision.description;
+        this.selectedDepartment = selectedDepartment.description;
+        
+      } else {
+        this.selectedDivision = 'not'; 
+        this.selectedDepartment = 'not'; 
+      }
+    }
+  }
+  onStepSelected(): void {
+   // const selectedPosition = this.positions.find(position => position.positionId === this.selectedPosition);
+     const selectedStep = this.steps.find(step => step.id === this.selectedStep);
+    console.log(this.divisions.find(division => division.divisionId))
+    if (selectedStep) {
+    
+      const selectedLevel= this.levels.find(level => level.levelId === selectedStep.levelId );
+       console.log(this.departments.find(department => department.departmentId))
+      if (selectedLevel) {
+        this.selectedLevel = selectedLevel.description;
+      } else {
+        this.selectedLevel = 'not'; 
+      }
+    }
+  }
   getDivisionName(divisionId: string): string {
     const division = this.divisions.find((division) => division.divisionId === divisionId);
     return division ? division.description : '';

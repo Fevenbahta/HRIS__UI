@@ -23,7 +23,7 @@
     </div> 
     </div> 
   <div class="col-3"> 
-    <div class="form-field"> 
+    <div class="form-field "> 
  
       
       <input type="text"  id="positionName" placeholder=" " required [(ngModel)]="addPositionRequest.name"name="name" required> 
@@ -42,7 +42,8 @@
 </div> 
 <button type="submit" class="btn btn-sm btnsave">Save</button> 
 </form> 
-<table id="example1" class="table table-bordered table-striped"> 
+<input  class="search" type="search" placeholder="Search By Position Name..." [(ngModel)]="searchTerm" (input)="onSearch()">
+<table class="table  table-striped col-md-8" > 
   <thead> 
   <tr> 
     <th>Division </th>
@@ -51,7 +52,7 @@
   </tr> 
 </thead> 
  <tbody> 
-      <tr *ngFor="let position of positions"> 
+      <tr *ngFor="let position of filteredPosition || positions"> 
         <td>{{ getDivisionName(position.divisionId) }}</td>
         <td>{{position.name}}</td>
         <td>{{position.description}}</td>

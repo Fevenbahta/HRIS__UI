@@ -36,7 +36,7 @@ positions:Position[]=[];
 
 assignSupervisor:AssignSupervisor={
     pId: 0,
-    Id:undefined,
+    id:undefined,
     positionId: "",
     createdBy: '',
     createdDate: "2023-07-21T13:28:13.132Z",
@@ -143,8 +143,8 @@ next:()=>{
 
   this.assignSupervisor = {
     pId: 0,
-    positionId: undefined,
-         Id:"",
+    positionId: "",
+         id:undefined,
     createdBy: '',
     createdDate: "2023-07-21T13:28:13.132Z",
   updatedDate: "2023-07-21T13:28:13.132Z",
@@ -188,16 +188,17 @@ getFifthPositionName(fifthSupervisor: string): string {
 }
 
 
-deletePosition(id: string) {
+deleteAssignSupervisor(Id: string) {
   const dialogRef = this.dialog.open(DeleteConfirmationComponent);
 
   dialogRef.afterClosed().subscribe((result) => {
     if (result) {
       // User confirmed deletion, proceed with the delete request
-      this.AssignSupervisorservice.deleteAssignSupervisor(id).subscribe({
+      console.log(Id)
+      this.AssignSupervisorservice.deleteAssignSupervisor(Id).subscribe({
         next: () => {
           // Remove the deleted position from the positions array using filter
-          this.assignSupervisors = this.assignSupervisors.filter((assignSupervisor) => assignSupervisor.Id !== id);
+          this.assignSupervisors = this.assignSupervisors.filter((assignSupervisor) => assignSupervisor.id !== Id);
         },
         error(response) {
           console.log(response);

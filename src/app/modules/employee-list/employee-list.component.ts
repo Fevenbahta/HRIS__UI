@@ -47,7 +47,7 @@ this.employeeservice.getAllEmployees()
     this.filteredEmployees = employees;
     const lastEmployee = this.employees.pop(); 
     this.employees.unshift(lastEmployee); 
-    this.employees.sort((a, b) => new Date(a.createdDate).getTime() - new Date(b.createdDate).getTime()); 
+    this.employees.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()); 
   }, 
      
   error(response){ 

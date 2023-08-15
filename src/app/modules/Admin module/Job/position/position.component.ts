@@ -43,6 +43,9 @@ buttons = [
      { label: 'Supervisor', route:"/admin/supervisor" },
 
   ];
+  
+  filteredPosition: Position[] = []; 
+  searchTerm: string = ''; 
  
 constructor(private divisionservice: DivisionService,private positionservice: PositionService,private dialog:MatDialog,private router:Router){}
 ngOnInit():void {
@@ -55,10 +58,13 @@ ngOnInit():void {
     console.log(response)
   }
 });
+
   this.positionservice.getAllPosition()
+ 
   .subscribe({
     next: (positions) => {
       this.positions=positions;
+      this.filteredPosition=this.positions;
     },
     error(response){
       console.log(response)
@@ -97,6 +103,22 @@ getDivisionName(divisionId: string): string {
   const division = this.divisions.find((g) => g.divisionId === divisionId);
   return division ? (division.description )  : 'Unknown division';
 }
+onSearch() {
+  this.filteredPosition = this.positions;
+  if (this.searchTerm.trim() === '') {
+ 
+    this.filteredPosition = this.positions;
+  } else {
+ 
+    this.filteredPosition = this.positions.filter(postion => {
+      
+      return (
+        postion.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()) 
+       
+      );
+    });
+  }
+  }
 deletePosition(id: string) {
   const dialogRef = this.dialog.open(DeleteConfirmationComponent);
 

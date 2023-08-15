@@ -148,7 +148,7 @@
             </div>
             </div>
         
-             
+<!--              
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6 form-field" >
@@ -160,9 +160,9 @@
                     <mat-error *ngIf="employeeForm.get('firstSupervisor').invalid && employeeForm.get('firstSupervisor').touched">
                       First Supervisor is required
                     </mat-error>
-                  </div>
+                  </div> -->
               
-                  <div class="col-md-6 form-field" >
+                  <!-- <div class="col-md-6 form-field" >
                     <mat-select class="form-field custom-mat-select" placeholder="Second Supervisor" required formControlName="secondSupervisor" name="selectedSecondSupervisor" [(ngModel)]="selectedSecondSupervisor">
                       <mat-option  *ngFor="let supervisor of secondSupervisors" [value]="supervisor.empId">
                         {{ getEmployeeName(supervisor.empId) }}
@@ -173,7 +173,7 @@
                     </mat-error>
                   </div>
                 </div>
-              </div>
+              </div> -->
               
               <div class="card-body mt-3">
                 <div class="row">
@@ -220,12 +220,12 @@
                 <tr>
                     
                     <th>First Name</th>
-                    <th>last Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
                     <th>Sex</th>
                     <th>ECXID</th>
                     <th>Pension Id</th>
-                    <th>First Supervisor</th>
-                    <th>Second Supervisor</th>
+               
                    
         
                 </tr>
@@ -236,12 +236,12 @@
               <tr *ngFor=" let employee of employees"  >
              
                 <td>{{ employee.firstName }}</td>
+                <td>{{ employee.middleName }}</td>
                 <td>{{ employee.lastName }}</td>
                  <td>{{ employee.sex }}</td>
                 <td>{{ employee.ecxId }}</td>
                 <td>{{ employee.pensionNo }}</td>
-                <td>{{getFirstSupervisorName(employee.firstSupervisor)}}</td>
-                <td>{{getSecondSupervisorName(employee.secondSupervisor)}}</td>
+         
                 <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button></td>
 
           <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)">Delete</button>

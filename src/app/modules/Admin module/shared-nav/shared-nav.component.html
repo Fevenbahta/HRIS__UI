@@ -1,8 +1,8 @@
 <!-- navbar.component.html -->
 <div class="mt-5 ">
   <nav class="navbar navbar-expand navbar-light bg-light header">
-    <div class="container-fluid mt-2 p-2 ">
-      <ul class="horizontal-list d-flex align-items-center ml-5 list-unstyled ">
+    <div class="container-fluid mt-2 ">
+      <ul class="horizontal-list d-flex align-items-center  list-unstyled ">
         <li *ngFor="let button of buttons">
           <a *ngIf="!button.dropdownOptions" routerLink="{{ button.route }}" class="btn btn-gray btn-sm ml-5">{{ button.label }}</a>
        

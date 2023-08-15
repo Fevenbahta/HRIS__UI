@@ -33,7 +33,7 @@ export class PositionService {
         })
       );
   }
-  updatePosition(positionDetails: Position, Id:number): Observable<Position> {
+  updatePosition(positionDetails: Position, Id:string): Observable<Position> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<Position>(this.apiUrl + 'api/Position/'+Id, positionDetails,httpOptions);
   }

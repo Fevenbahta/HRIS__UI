@@ -16,7 +16,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PositionComponent implements OnInit {
   divisions:Division[]= [];
-  selectedDivision: string='';
+selectedDivision:string;
+
 
 positions:Position[]=[];
 
@@ -31,6 +32,11 @@ positions:Position[]=[];
     updatedDate: "2023-07-21T13:28:13.132Z",
     updatedBy: '',
     status: 0,
+  firstSupervisor:"",
+secondSupervisor:"",
+thirdSupervisor:"",
+forthSupervisor:"",
+fifthSupervisor:"",
 
   }
 
@@ -41,6 +47,8 @@ buttons = [
      { label: 'grade', route:"/admin/grade" },
      { label: 'branch', route:"/admin/branch" },
      { label: 'Supervisor', route:"/admin/supervisor" },
+     { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
+
 
   ];
  
@@ -86,6 +94,11 @@ next:(position)=>{
   updatedDate: "2023-07-21T13:28:13.132Z",
     updatedBy: '',
     status:0,
+    firstSupervisor:"",
+    secondSupervisor:"",
+    thirdSupervisor:"",
+    forthSupervisor:"",
+    fifthSupervisor:"",
 
   };
 },

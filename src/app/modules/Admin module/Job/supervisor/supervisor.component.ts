@@ -1,12 +1,12 @@
-
 import { Router } from '@angular/router';
-import { Employee, Supervisor } from 'app/models/employee.model';
-import { EmployeeService } from 'app/service/employee.service';
 import { SupervisorService } from 'app/service/supervisor.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component } from '@angular/core';
+import { Position } from 'app/models/job-description.model';
+import { Supervisor } from 'app/models/employee.model';
+import { PositionService } from 'app/service/position.service';
 
 @Component({
   selector: 'app-supervisor',
@@ -14,14 +14,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./supervisor.component.css']
 })
 export class SupervisorComponent {
-  employees:Employee[]= [];
-  selectedEmployee: string='';
+  positions:Position[]= [];
+  selectedPosition: string='';
   supervisors:Supervisor[]=[];
 
   addSupervisorRequest: Supervisor={
 
   id: undefined,
-  empId: '',
+  positionId: '',
 createdBy: '',
 createdDate: '2023-07-26T11:40:51.509Z',
 updatedDate: '2023-07-26T11:40:51.509Z',
@@ -33,21 +33,22 @@ supervisorLevel: '',
 }
   buttons = [
     { label: 'Position' , route:"/admin/position" },
-    { label: 'Supervisor', route:"/admin/Supervisor" },
+    { label: 'Step', route:"/admin/Step" },
 { label: 'EducationLevel' , route:"/admin/education-level"},
 { label: 'Grade', route:"/admin/grade" },
 { label: 'Branch', route:"/admin/branch" },
      { label: 'Supervisor', route:"/admin/supervisor" },
+     { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
 
   ];
 
-  constructor(private employeeservice: EmployeeService ,private dialog:MatDialog, private supervisorservice :SupervisorService ,private router:Router) { }
+  constructor(private positionservice: PositionService ,private dialog:MatDialog, private supervisorservice :SupervisorService ,private router:Router) { }
 
   ngOnInit(): void {
-    this.employeeservice.getAllEmployees()
+    this.positionservice.getAllPosition()
     .subscribe({
-      next: (employees) => {
-        this.employees=employees;
+      next: (positions) => {
+        this.positions=positions;
       },
       error(response){
         console.log(response)
@@ -65,7 +66,7 @@ supervisorLevel: '',
     });
   }
   addSupervisor(){
-    this.addSupervisorRequest.empId = this.selectedEmployee;
+    this.addSupervisorRequest.positionId = this.selectedPosition;
     this.supervisorservice.addSupervisor(this.addSupervisorRequest)
     .subscribe({
     next:(supervisor)=>{
@@ -78,7 +79,7 @@ supervisorLevel: '',
       this.addSupervisorRequest = {
        
   id: undefined,
-  empId: '',
+  positionId: '',
 createdBy: '',
 createdDate: '2023-07-26T11:40:51.509Z',
 updatedDate: '2023-07-26T11:40:51.509Z',
@@ -92,9 +93,9 @@ supervisorLevel: '',
       console.log(response)
     }
     })}
-    getemployeeName(empId: string): string {
-      const employee = this.employees.find((g) => g.empId === empId);
-      return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`  : 'Unknown EMPLOYEE';
+    getpositionName(positionId: string): string {
+      const position = this.positions.find((g) => g.positionId === positionId);
+      return position ? `${position.name}`  : 'Unknown position';
     }
     deleteSupervisor(id: string) {
       const dialogRef = this.dialog.open(DeleteConfirmationComponent);

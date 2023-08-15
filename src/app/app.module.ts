@@ -19,7 +19,7 @@ import { EditEducationComponent } from './modules/updatemodules/edit-education/e
 import { DeleteConfirmationComponent } from './modules/delete-confirmation/delete-confirmation.component';
 import { EditNavComponent } from './modules/updatemodules/edit-nav/edit-nav.component';
 
-import {MatIcon, MatIconModule} from '@angular/material/icon'
+import {MatIcon, MatIconModule} from '@angular/material/icon';
 
 
 
@@ -27,6 +27,7 @@ import {MatIcon, MatIconModule} from '@angular/material/icon'
 @NgModule({
   declarations: [
     AppComponent,
+
 
 
 

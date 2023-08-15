@@ -23,6 +23,24 @@ updatedBy: string,
 status:0,
 
 }
+export interface AssignSupervisor{
+
+  pId: number,
+  Id:string,
+  status:number;
+positionId: string,
+createdBy: string,
+createdDate: string,
+updatedDate: string,
+updatedBy: string,
+firstSupervisor:string;
+secondSupervisor:string;
+thirdSupervisor:string;
+fourthSupervisor:string;
+fifthSupervisor:string;
+
+
+}
 export interface Position{
 
   pId: number,
@@ -35,6 +53,12 @@ createdBy: string,
 createdDate: string,
 updatedDate: string,
 updatedBy: string,
+firstSupervisor:string;
+secondSupervisor:string;
+thirdSupervisor:string;
+forthSupervisor:string;
+fifthSupervisor:string;
+
 
 }
 export interface EmployeePosition{

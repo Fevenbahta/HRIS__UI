@@ -16,7 +16,7 @@ import { SupervisorService } from 'app/service/supervisor.service';
  
 export class EmployeeListComponent { 
   searchTerm: string = ''; 
-  supervisors:Supervisor[]=[];
+
   filteredEmployees: Employee[] = []; 
   employees:Employee[]= []; 
   allEmployees:any=[]; 
@@ -55,15 +55,7 @@ this.employeeservice.getAllEmployees()
   } 
 }); 
  
-this.supervisorService.getAllSupervisors()
-.subscribe({
-  next: (supervisors) => {
-    this.supervisors=supervisors;
-  },
-  error(response){
-    console.log(response)
-  }
-});
+
 } 
  
  

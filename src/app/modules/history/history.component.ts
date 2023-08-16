@@ -63,7 +63,7 @@ getEmployees() {
   );  
 }  
 
-onSearch() {
+onSearch()
   this.filteredEmployees = this.employees.filter(employee => {
     return (
       employee.ecxId.toLowerCase() === this.searchTerm.toLowerCase() &&

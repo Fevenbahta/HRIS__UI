@@ -21,8 +21,7 @@ export interface Employee{
     imageData: String, 
     crime: Boolean, 
     crimeDescription: String ,
-    firstSupervisor:string,
-    secondSupervisor:string,
+  
     status:number;
 }
 export interface Supervisor{

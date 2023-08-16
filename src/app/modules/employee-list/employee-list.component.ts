@@ -16,6 +16,8 @@ import { SupervisorService } from 'app/service/supervisor.service';
  
 export class EmployeeListComponent { 
   searchTerm: string = ''; 
+  pageSize: number = 10; 
+  currentPage: number = 1; 
 
   filteredEmployees: Employee[] = []; 
   employees:Employee[]= []; 
@@ -38,16 +40,21 @@ constructor(private employeeservice: EmployeeService,
   ){ 
     
   } 
+
 ngOnInit(): void{ 
 
 this.employeeservice.getAllEmployees() 
 .subscribe({ 
   next: (employees) => { 
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+  
     this.employees=employees; 
     this.filteredEmployees = employees;
     const lastEmployee = this.employees.pop(); 
     this.employees.unshift(lastEmployee); 
     this.employees.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()); 
+    this.filteredEmployees = this.employees.slice(startIndex, endIndex);
   }, 
      
   error(response){ 
@@ -58,7 +65,19 @@ this.employeeservice.getAllEmployees()
 
 } 
  
- 
+
+onNextPage() {
+  this.currentPage++;
+  this.updateFilteredEmployees();
+}
+
+// Function to handle the "Previous" button click
+onPreviousPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+    this.updateFilteredEmployees();
+  }}
+  
  
 getEmployees() {  
   this.employeeservice.getAllEmployees().subscribe(  
@@ -70,9 +89,18 @@ getEmployees() {
     }  
   );  
 }  
+private updateFilteredEmployees() {
+  const startIndex = (this.currentPage - 1) * this.pageSize;
+  const endIndex = startIndex + this.pageSize;
+
+  this.filteredEmployees = this.employees.slice(startIndex, endIndex);
+  
+}
 
 onSearch() {
-  this.filteredEmployees = this.employees; 
+
+
+ // this.filteredEmployees = this.employees; 
   if (this.searchTerm.trim() === '') {
  
     this.filteredEmployees = this.employees;
@@ -87,9 +115,11 @@ onSearch() {
         employee.ecxId.toLowerCase().includes(this.searchTerm.toLowerCase()) 
        
       );
+      
       this.changeDetectorRef.detectChanges();
     });
   }
+ 
   }
 
 

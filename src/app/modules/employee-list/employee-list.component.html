@@ -2,13 +2,22 @@
 <app-shared-nav  [buttons]="buttons"></app-shared-nav>
   <div class="main-content">
     <div class="container-fluid">
+        <div class="pagination">
+           
         <input  class="search" type="search" placeholder="Search..." [(ngModel)]="searchTerm" (input)="onSearch()">
+    
+            <button mat-button (click)="onPreviousPage()" [disabled]="currentPage === 1">
+                <mat-icon class="custom-icon">keyboard_arrow_left</mat-icon></button>
+            <span>Page {{ currentPage }}</span>
+            <button mat-button (click)="onNextPage()"  [disabled]="(currentPage * pageSize) >= employees.length">
+                <mat-icon class="custom-icon">keyboard_arrow_right</mat-icon>
+            </button>
+        <p>{{pageSize * currentPage}} of {{ employees.length }}</p>
+          </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card" >
              
-                       
-                     
                    
                     <div class="card-header cardhead">
                         <h4 class="card-title ">Employee Table</h4>

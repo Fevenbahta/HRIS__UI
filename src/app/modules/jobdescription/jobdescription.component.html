@@ -21,7 +21,7 @@
                            
                             <div class="col-md-4">
                               
-                                
+                              <label>Position</label>
                                 <mat-select class="form-field custom-mat-select" placeholder="Select Position" required name="selectedPosition" [(ngModel)]="selectedPosition" (ngModelChange)="onPositionSelected()">
                                   <!-- Replace the options below with your actual division options -->
                                   <mat-option *ngFor="let position of positions" [value]="position.positionId">
@@ -49,46 +49,41 @@
                           </div>
                           <div class="card-body ">
                             <div class="row ">
-                              <div class="col-md-4 ">
-                                        </div>
-                          <div class="col-md-4 p-2">
+                              
+                          <div class="col-md-4 ">
                             <label>First Supervisor</label>
                             <input class="form-field custom-mat-select" placeholder="" name="selectedFirstSupervisor"
                             required [(ngModel)]="selectedFirstSupervisor" [disabled]="true">
                         </div>
-                        <div class="col-md-4 p-2" *ngIf="selectedSecondSupervisor !== null">
+                        <div class="col-md-4 " *ngIf="selectedSecondSupervisor !== null">
                           <label>Second Supervisor</label>
                           <input class="form-field custom-mat-select" placeholder="" name="selectedSecondSupervisor"
                           required [(ngModel)]="selectedSecondSupervisor" [disabled]="true">
                       </div>
-                      <div class="col-md-4 p-2">
-                      </div>
-                      <div class="col-md-4 p-2" *ngIf="selectedThirdSupervisor !== ''">
+                     
+                      <div class="col-md-4 " *ngIf="selectedThirdSupervisor !== ''">
                         <label>Third Supervisor</label>
                         <input class="form-field custom-mat-select" placeholder="" name="selectedThirdSupervisor"
                         required [(ngModel)]="selectedThirdSupervisor" [disabled]="true">
                     </div>
-                    <div class="col-md-4 p-2" *ngIf="selectedFourthSupervisor !== ''">
+                    <div class="col-md-4 " *ngIf="selectedFourthSupervisor !== ''">
                       <label>FourthSupervisor</label>
                       <input class="form-field custom-mat-select" placeholder="" name="selectedFourthSupervisor"
                       required [(ngModel)]="selectedFourthSupervisor" [disabled]="true">
                   </div>
-                  <div class="col-md-4 ">
-                  </div>
-                      <div class="col-md-4 ">
-                                        </div>
-                  <div class="col-md-4 p-2" *ngIf="selectedFifthSupervisor !== ''">
+                 
+                  <div class="col-md-4 " *ngIf="selectedFifthSupervisor !== ''">
                     <label>Fifth Supervisor</label>
                     <input class="form-field custom-mat-select" placeholder=" " name="selectedFifthSupervisor"
                     required [(ngModel)]="selectedFifthSupervisor" [disabled]="true">
                 </div></div></div>
                           </div>
-                        </div>
-                        <div class="card-body">
+                       
+                       
                         <div class="row">
-                                   <div class="col-md-4">
+                              <div class="col-md-4">
                                     
-                                    
+                                <label>Step</label>
                                       <mat-select class="form-field custom-mat-select" placeholder="Select Step" name="selectedStep" required [(ngModel)]="selectedStep" 
                                       (ngModelChange)="onStepSelected()">
                                         <!-- Replace the options below with your actual division options -->
@@ -100,19 +95,14 @@
                                       </mat-select>
                                    
                                   </div>
-                                  <div class="col-md-4 ">
-                                    
-                                    <label> Level</label>
-
-                                    <input class="form-field custom-mat-select p-2" placeholder="Level" name="selectedLevel"
+           
+                                  <div class="col-md-4">
+                                  <label>Department</label>
+                                    <input class="form-field custom-mat-select" placeholder="Level" name="selectedLevel"
                                     required [(ngModel)]="selectedLevel" [disabled]="true">
                                   </div>
-                                  <div class="col-md-4">
-                              
-                                  </div>
-                                  <div class="col-md-4 pt-3">
-                                    
-                                     
+                                  <div class="col-md-4 ">
+                                    <label>Branch</label>
                                       <mat-select class="form-field custom-mat-select" placeholder="Select Branch" name="selectedBranch" required [(ngModel)]="selectedBranch" >
                                         <!-- Replace the options below with your actual division options -->
                                         <mat-option *ngFor="let branch of branches" [value]="branch.id">
@@ -124,8 +114,8 @@
                                   
                                   </div>
                            </div>       
-           </div>
-           <div class="col-md-6">
+                          </div> 
+           <div class="col-md-6 pt-3">
             <mat-form-field>
               <mat-label>Start Date</mat-label>
               <input matInput [matDatepicker]="picker" placeholder="Choose a date" required name="joinedDate" [(ngModel)]="employeePosition.startDate" >
@@ -134,7 +124,7 @@
             </mat-form-field>
             
           </div>
-                                     
+                      
           <button  mat-raised-button type="submit" *ngIf="employeePosition.id!=undefined" class="btn btn-sm btnsave">update</button>
           <div class="clearfix"></div>
           <div *ngIf="employeePositionUpdated" class="alert btndanger btn-sm pull-right">

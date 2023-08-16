@@ -1,7 +1,7 @@
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeePositionService } from 'app/service/employee-position';
-import { Branch, Division, EmployeePosition, Position, Step } from 'app/models/job-description.model';
+import { AssignSupervisor, Branch, Division, EmployeePosition, Grade, Position, Step } from 'app/models/job-description.model';
 import { DivisionService } from 'app/service/division.service';
 import { StepService } from 'app/service/step.service';
 import { PositionService } from 'app/service/position.service';
@@ -10,6 +10,10 @@ import { BranchService } from 'app/service/branch.service';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
+import { Department } from 'app/models/education.model';
+import { AssignSupervisorService } from 'app/service/AssignSupervisor';
+import { DepartmentService } from 'app/service/department.service';
+import { GradeService } from 'app/service/grade.service';
 
 @Component({
   selector: 'app-edit-job-description',
@@ -40,6 +44,9 @@ updatedBy: '',
   employeePositions:EmployeePosition[]=[];
   divisions:Division[]= [];
   selectedDivision: string='';
+
+  departments:Department[]=[];
+  selectedDepartment:string='';
    positions:Position[]= [];
   selectedPosition: string='';
   branches:Branch[]= [];
@@ -47,6 +54,17 @@ updatedBy: '',
  
   steps:Step[]= [];
   selectedStep: string='';
+  
+  levels: Grade[]=[];
+  selectedLevel:string='';
+
+  selectedFirstSupervisor:string='';
+  selectedSecondSupervisor:string='';
+  selectedThirdSupervisor:string='';
+  selectedFourthSupervisor:string='';
+  selectedFifthSupervisor:string='';
+  assignedSupervisors:AssignSupervisor[]=[];
+
   employeePositionSaved:boolean = false;
 
 
@@ -63,7 +81,10 @@ updatedBy: '',
     private positionService:PositionService ,
     private employeeIdService:EmployeeIdService,
     private branchService:BranchService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private assignSupervisorService:AssignSupervisorService,
+    private departmentservice:DepartmentService,
+    private levelService:GradeService
 
   ) {}
 
@@ -72,6 +93,41 @@ updatedBy: '',
       this.employeePositionId = params['id'].toString();
       // this.getemployeePositionById()
     });
+
+
+this.departmentservice.getAllDepartment()
+.subscribe({
+  next: (department) => {
+    this.departments=department;
+  },
+  error(response){
+    console.log(response)
+  }
+});
+this.levelService.getAllGrade()
+.subscribe({
+  next: (level) => {
+    this.levels=level;
+  },
+  error(response){
+    console.log(response)
+  }
+});
+
+
+this.assignSupervisorService.getAllAssignSupervisor()
+.subscribe({
+  next: (assignedSupervisors) => {
+    this.assignedSupervisors=assignedSupervisors;
+    
+  },
+  error(response){
+    console.log(response)
+  }
+});
+
+
+
         this.employeePositionService.getAllEmployeePosition().subscribe((employeePositions) => {
           this.employeePositions = employeePositions.filter(employeePositions => employeePositions.empId === this.employeeIdService.employeeId);
          
@@ -158,6 +214,60 @@ updatedBy: '',
       }
     });
 
+  }
+    
+  onPositionSelected(): void {
+   
+    const selectedPosition = this.positions.find(position => position.positionId === this.selectedPosition);
+   
+    //console.log( this.positions.find(position => position.positionId))
+    if (selectedPosition ) {
+      
+      const selectedDivision = this.divisions.find(division => division.divisionId === selectedPosition.divisionId);
+//console.log(this.divisions.find(division => division.divisionId))
+console.log(this.assignedSupervisors)
+const selectedassignedSupervisor= this.assignedSupervisors.find(assignedSupervisor => assignedSupervisor.positionId === selectedPosition.positionId);
+console.log("Selected Position:", selectedPosition);
+console.log("Selected Assigned Supervisor:", selectedassignedSupervisor);
+
+if(selectedassignedSupervisor){
+  this.selectedFirstSupervisor=this.getSupervisorName(selectedassignedSupervisor.firstSupervisor);
+  this.selectedSecondSupervisor=this.getSupervisorName(selectedassignedSupervisor.secondSupervisor);
+  this.selectedThirdSupervisor=this.getSupervisorName(selectedassignedSupervisor.thirdSupervisor);
+  this.selectedFourthSupervisor=this.getSupervisorName(selectedassignedSupervisor.fourthSupervisor);
+  this.selectedFifthSupervisor=this.getSupervisorName(selectedassignedSupervisor.fifthSupervisor);
+}
+//con
+    const selectedDepartment = this.departments.find(department => department.departmentId === selectedDivision.departmentId);
+      if (selectedDivision) {
+        this.selectedDivision = selectedDivision.description;
+        this.selectedDepartment = selectedDepartment.description;
+        
+      } else {
+        this.selectedDivision = 'not'; 
+        this.selectedDepartment = 'not'; 
+      }
+    }
+  }
+  onStepSelected(): void {
+   // const selectedPosition = this.positions.find(position => position.positionId === this.selectedPosition);
+     const selectedStep = this.steps.find(step => step.id === this.selectedStep);
+    console.log(this.divisions.find(division => division.divisionId))
+    if (selectedStep) {
+    
+      const selectedLevel= this.levels.find(level => level.levelId === selectedStep.levelId );
+       console.log(this.departments.find(department => department.departmentId))
+      if (selectedLevel) {
+        this.selectedLevel = selectedLevel.description;
+      } else {
+        this.selectedLevel = 'not'; 
+      }
+    }
+  } 
+  
+  getSupervisorName(positionId: string): string {
+    const position = this.positions.find((position) => position.positionId === positionId);
+    return position ? position.name : '';
   }
   editEmployeePosition(EmployeePosition: EmployeePosition): void {
  

@@ -327,15 +327,15 @@ if(selectedassignedSupervisor){
         this.selectedLevel = 'not'; 
       }
     }
+  }  getSupervisorName(positionId: string): string {
+    const position = this.positions.find((position) => position.positionId === positionId);
+    return position ? position.name : '';
   }
   getDivisionName(divisionId: string): string {
     const division = this.divisions.find((division) => division.divisionId === divisionId);
     return division ? division.description : '';
   }
-  getSupervisorName(positionId: string): string {
-    const position = this.positions.find((position) => position.positionId === positionId);
-    return position ? position.name : '';
-  }
+
   getStepName(stepId: string): string {
     const step = this.steps.find((step) => step.id === stepId);
     return step ? step.description : '';

@@ -85,7 +85,7 @@ onSearch() {
         employee.middleName.toLowerCase().startsWith(this.searchTerm.toLowerCase()) ||
         employee.sex.toLowerCase().startsWith(this.searchTerm.toLowerCase()) ||
         employee.ecxId.toLowerCase().includes(this.searchTerm.toLowerCase()) 
-    
+       
       );
       this.changeDetectorRef.detectChanges();
     });

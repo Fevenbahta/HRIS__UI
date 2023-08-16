@@ -17,41 +17,50 @@ background-color:#fcc034 ;
 
 }
   .btnupdate {
-    background-color: #76a53b;
+    background-color: #76a53b;}
   .cardhead{
     background-color: rgb(224, 224, 217);
   }
-  .form-field {
+  
+  form-field {
     position: relative;
+    margin-bottom: 20px;
   }
   
-  .form-field input:not(:placeholder-shown) + label,
-  .form-field input:focus + label {
-    transform: translateY(-120%) scale(0.8);
-    color: #4f5152;
-  }
-  
-  .form-field input,
-  .form-field mat-form-field {
+  .form-field input {
     border: none;
     border-bottom: 1px solid #ccc;
-    outline: none;
-    font-size: 16px;
-    padding: 5px 0;
     width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
   }
   
   .form-field label {
     position: absolute;
-    pointer-events: none;
-    left: 0;
-    top: 5px;
-    transition: 0.2s ease all;
+    top: 0;
+    left: 5px;
     font-size: 14px;
-    color: #696666;
+  color: #696666;
+    pointer-events: none;
+    transition: 0.2s ease all;
   }
   
+  .form-field input:focus ~ label,
+  .form-field input:valid ~ label {
+    top: -20px;
+    left: 5px;
+    font-size: 14px;
+    color: #007bff;
+    background-color: #fff;
+    padding: 0 5px;
+  }
   ::ng-deep .mat-datepicker-content .mat-calendar {
     width: 229px!important;
     height: 300px!important;
-  }}
+  }
+  .custom-mat-select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+  }

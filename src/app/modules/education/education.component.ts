@@ -67,7 +67,16 @@ export class EducationComponent {
         console.log(response);
       }
     });
-
+this.educationlevelservice.getAllEducationLevels().
+subscribe({
+  next: (educationlevels) => {
+    this.educationlevels = educationlevels
+    ;
+  },
+  error: (response) => {
+    console.log(response);
+  }
+});
 
   }
 

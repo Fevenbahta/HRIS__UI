@@ -22,6 +22,7 @@ export class WorkexperienceComponent {
     buttons = [
       { label: ' Add Employee ', route: "/employee-registration" },
       { label: '  List Employee ', route: "/employee-list" },
+      {label:'Employee History', route:'/history'}
     ];
   
     addWorkExperienceRequest: WorkExperience = {

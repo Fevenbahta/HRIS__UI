@@ -34,7 +34,8 @@ export class TrainingComponent implements OnInit {
 
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
-    { label: '  List Employee ', route: '/employee-list' }
+    { label: '  List Employee ', route: '/employee-list' },
+    {label:'Employee History', route:'/history'}
   ];
   constructor(
     private dialog: MatDialog ,

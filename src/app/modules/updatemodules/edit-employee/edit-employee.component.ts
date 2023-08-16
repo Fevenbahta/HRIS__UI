@@ -33,7 +33,8 @@ supervisors:Supervisor[]=[];
   
    buttons = [
      { label: ' Add Employee ', route: '/employee-registration' },
-     { label: '  List Employee ', route: '/employee-list' }
+     { label: '  List Employee ', route: '/employee-list' },
+     {label:'Employee History', route:'/history'}
    ];
   constructor(
     private formBuilder: FormBuilder,
@@ -71,8 +72,6 @@ supervisors:Supervisor[]=[];
       imageData: [''], 
       crime: [true], 
       crimeDescription: [''], 
-      firstSupervisor: ['', Validators.required], 
-      secondSupervisor: ['', Validators.required], 
       status: [0,] ,
       
     });

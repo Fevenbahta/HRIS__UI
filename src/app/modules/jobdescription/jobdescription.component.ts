@@ -57,6 +57,7 @@ employeepositions:EmployeePosition[]=[]
   buttons = [
     { label: ' Add Employee ' , route:"/employee-registration" },
          { label: '  List Employee ', route:"/employee-list" },
+         {label:'Employee History', route:'/history'}
   
   ];
   employeePosition:EmployeePosition={

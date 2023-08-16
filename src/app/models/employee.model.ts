@@ -1,7 +1,7 @@
 export interface Employee{
      pId: Number;
      createdBy: string;
-     createdDate: string | null; // Make createdDate nullable
+     createdDate: string | null; // Make createdDate nullabel
      updatedDate: string| null;
     updatedBy: String, 
     empId: string, 

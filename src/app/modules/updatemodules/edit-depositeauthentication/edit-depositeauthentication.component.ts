@@ -42,7 +42,8 @@ export class EditDepositeAuthenticationComponent implements OnInit {
   ) {}
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
-    { label: '  List Employee ', route: '/employee-list' }
+    { label: '  List Employee ', route: '/employee-list' },
+    {label:'Employee History', route:'/history'}
   ];
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

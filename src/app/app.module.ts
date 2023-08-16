@@ -20,6 +20,7 @@ import { DeleteConfirmationComponent } from './modules/delete-confirmation/delet
 import { EditNavComponent } from './modules/updatemodules/edit-nav/edit-nav.component';
 
 import {MatIcon, MatIconModule} from '@angular/material/icon';
+import { HistoryComponent } from './modules/history/history.component';
 
 
 
@@ -27,6 +28,7 @@ import {MatIcon, MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
+  
 
 
 

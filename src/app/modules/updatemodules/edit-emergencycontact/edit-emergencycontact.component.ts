@@ -122,7 +122,8 @@ export class EditEmergencyContactComponent implements OnInit {
   
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
-    { label: '  List Employee ', route: '/employee-list' }
+    { label: '  List Employee ', route: '/employee-list' },
+    {label:'Employee History', route:'/history'}
   ];
   editEmergencyContact(emergencyContact: EmergencyContact): void {
     // Here, we will navigate to the edit page for the selected EmergencyContact.

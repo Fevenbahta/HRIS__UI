@@ -62,7 +62,8 @@ emergencycontactForm: FormGroup = this.formBuilder.group({
 
 buttons = [
   { label: ' Add Employee ', route: '/employee-registration' },
-  { label: '  List Employee ', route: '/employee-list' }
+  { label: '  List Employee ', route: '/employee-list' }, 
+    {label:'Employee History', route:'/history'}
 ];
 addEmergencyContact() {
   this.emergencycontact.empId = this.employeeIdService.employeeId;

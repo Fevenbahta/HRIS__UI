@@ -31,6 +31,7 @@ import { EditWorkexperienceComponent } from './modules/updatemodules/edit-workex
 import { EditEducationComponent } from './modules/updatemodules/edit-education/edit-education.component';
 import { NgModule } from '@angular/core';
 import { AssignSupervisorComponent } from './modules/Admin module/Job/assign-supervisor/assign-supervisor.component';
+import { HistoryComponent } from './modules/history/history.component';
 
 const routes: Routes = [
   {path: '',
@@ -82,6 +83,8 @@ component: BranchComponent},
 component: SupervisorComponent},
 {path:'employee-list',
 component: EmployeeListComponent},
+{path:'history',
+component: HistoryComponent},
 {path:'edit-employee/:empId',
 component: EditEmployeeComponent},
 {path:'edit-contact/:empId',

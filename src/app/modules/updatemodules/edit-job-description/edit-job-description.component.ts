@@ -70,7 +70,8 @@ updatedBy: '',
 
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
-    { label: '  List Employee ', route: '/employee-list' }
+    { label: '  List Employee ', route: '/employee-list' },
+    {label:'Employee History', route:'/history'}
   ];
   constructor(
     private employeePositionService: EmployeePositionService,
@@ -137,22 +138,22 @@ this.assignSupervisorService.getAllAssignSupervisor()
           //  this.selectedBranch =this.employeePosition.branchId ;;
         });
       
-        // Fetch the available divisions and populate the divisions array
+        // Fetch the availabel divisions and populate the divisions array
         this.divisionService.getAllDivisions().subscribe((divisions) => {
           this.divisions = divisions;
         });
       
-        // Fetch the available positions and populate the positions array
+        // Fetch the availabel positions and populate the positions array
         this.positionService.getAllPosition().subscribe((positions) => {
           this.positions = positions;
         });
       
-        // Fetch the available branches and populate the branches array
+        // Fetch the availabel branches and populate the branches array
         this.branchService.getAllBranch().subscribe((branches) => {
           this.branches = branches;
         });
       
-        // Fetch the available steps and populate the steps array
+        // Fetch the availabel steps and populate the steps array
         this.stepService.getAllStep().subscribe((steps) => {
           this.steps = steps;
         });

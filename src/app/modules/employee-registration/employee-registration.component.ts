@@ -76,8 +76,7 @@ export class EmployeeRegistrationComponent implements OnInit {
       imageData: [''], 
       crime: [false], 
       crimeDescription: [''], 
-      firstSupervisor: ['', Validators.required], 
-      secondSupervisor: ['', Validators.required], 
+     
       status: [0,] 
     }); 
  

@@ -26,7 +26,7 @@ status:0,
 export interface AssignSupervisor{
 
   pId: number,
-  Id:string,
+  id:string,
   status:number;
 positionId: string,
 createdBy: string,

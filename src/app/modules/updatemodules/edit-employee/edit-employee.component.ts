@@ -105,8 +105,6 @@ supervisors:Supervisor[]=[];
       this.employeeIdService.employeeId= this.employeeId;
       this.employeeService.getEmployee(this.employeeIdService.employeeId).subscribe((employee) => {
         this.employee = employee;
-     this.selectedFirstSupervisor =  this.employee.firstSupervisor  ; 
-      this.selectedSecondSupervisor = this.employee.secondSupervisor ; 
       
         this.populateForm();
         console.log("Form Value:", this.employeeForm.value);// Call the method to populate the form with employee data
@@ -147,8 +145,7 @@ this.employeeService.getAllEmployees()
       imageData: this.employee.imageData,
       crime: this.employee.crime,
       crimeDescription: this.employee.crimeDescription,
-      firstSupervisor: this.employee.firstSupervisor,
-      secondSupervisor: this.employee.secondSupervisor,
+  
       status: this.employee.status
     });
   }
@@ -272,8 +269,6 @@ this.employeeService.getAllEmployees()
     const employeeToEdit = this.employees.find(employee => employee.empId === this.employeeId);
     this.employee = employeeToEdit;
 
-     this.selectedFirstSupervisor =  this.employee.firstSupervisor;
-  this.selectedSecondSupervisor  =this.employee.secondSupervisor;
  
   } 
     

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 
 import { Employee } from 'app/models/employee.model';
-import { Branch, Division, EducationLevel, EmployeePosition, Grade, Position, Step } from 'app/models/job-description.model';
+import { AssignSupervisor, Branch, Division, EducationLevel, EmployeePosition, Grade, Position, Step } from 'app/models/job-description.model';
 import { DivisionService } from 'app/service/division.service';
 import { EducationLevelService } from 'app/service/educationlevel.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
@@ -18,6 +18,7 @@ import { Component, OnInit } from '@angular/core';
 import { DepartmentService } from 'app/service/department.service';
 import { Department } from 'app/models/education.model';
 import { GradeService } from 'app/service/grade.service';
+import { AssignSupervisorService } from 'app/service/AssignSupervisor';
 
 @Component({
   selector: 'app-jobdescription',
@@ -44,6 +45,14 @@ employeepositions:EmployeePosition[]=[]
   
   levels: Grade[]=[];
   selectedLevel:string='';
+
+  selectedFirstSupervisor:string='';
+  selectedSecondSupervisor:string='';
+  selectedThirdSupervisor:string='';
+  selectedFourthSupervisor:string='';
+  selectedFifthSupervisor:string='';
+  assignedSupervisors:AssignSupervisor[]=[];
+
 
   buttons = [
     { label: ' Add Employee ' , route:"/employee-registration" },
@@ -81,6 +90,7 @@ constructor(
   private employeeIdService:EmployeeIdService,
   private levelService: GradeService,
   private dialog: MatDialog,
+  private assignSupervisorService:AssignSupervisorService,
 
   private router:Router){}
 ngOnInit(): void{
@@ -125,6 +135,16 @@ this.positionservice.getAllPosition()
 .subscribe({
   next: (positions) => {
     this.positions=positions;
+    
+  },
+  error(response){
+    console.log(response)
+  }
+});
+this.assignSupervisorService.getAllAssignSupervisor()
+.subscribe({
+  next: (assignedSupervisors) => {
+    this.assignedSupervisors=assignedSupervisors;
     
   },
   error(response){
@@ -269,6 +289,19 @@ addEmployeePosition(){
       
       const selectedDivision = this.divisions.find(division => division.divisionId === selectedPosition.divisionId);
 //console.log(this.divisions.find(division => division.divisionId))
+console.log(this.assignedSupervisors)
+const selectedassignedSupervisor= this.assignedSupervisors.find(assignedSupervisor => assignedSupervisor.positionId === selectedPosition.positionId);
+console.log("Selected Position:", selectedPosition);
+console.log("Selected Assigned Supervisor:", selectedassignedSupervisor);
+
+if(selectedassignedSupervisor){
+  this.selectedFirstSupervisor=this.getSupervisorName(selectedassignedSupervisor.firstSupervisor);
+  this.selectedSecondSupervisor=this.getSupervisorName(selectedassignedSupervisor.secondSupervisor);
+  this.selectedThirdSupervisor=this.getSupervisorName(selectedassignedSupervisor.thirdSupervisor);
+  this.selectedFourthSupervisor=this.getSupervisorName(selectedassignedSupervisor.fourthSupervisor);
+  this.selectedFifthSupervisor=this.getSupervisorName(selectedassignedSupervisor.fifthSupervisor);
+}
+//con
     const selectedDepartment = this.departments.find(department => department.departmentId === selectedDivision.departmentId);
       if (selectedDivision) {
         this.selectedDivision = selectedDivision.description;
@@ -299,7 +332,10 @@ addEmployeePosition(){
     const division = this.divisions.find((division) => division.divisionId === divisionId);
     return division ? division.description : '';
   }
-
+  getSupervisorName(positionId: string): string {
+    const position = this.positions.find((position) => position.positionId === positionId);
+    return position ? position.name : '';
+  }
   getStepName(stepId: string): string {
     const step = this.steps.find((step) => step.id === stepId);
     return step ? step.description : '';

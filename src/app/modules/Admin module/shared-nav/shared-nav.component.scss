@@ -98,7 +98,7 @@
     display: flex;
     align-items: center;
     font-weight: 400;
-    color: #212529;
+    color: #424649;
     text-align: inherit;
     white-space: nowrap;
     background-color: transparent;
@@ -107,7 +107,8 @@
     cursor: pointer;
   }
   .mat-dropdown-button {
-    color: #333;
+    color: #615f5f;
+    
     background-color: #eee;
     border: 1px solid #ccc;
     display: flex;
@@ -119,8 +120,12 @@
   .dropdown-icon {
     margin-left: 10px; 
     vertical-align: middle; 
+    color: #6d6969;
 /* Push the icon to the right */
 
+  }
+  .lable{
+    color:#6d6969
   }
 
   

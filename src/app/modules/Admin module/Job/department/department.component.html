@@ -1,34 +1,55 @@
-<!-- <div class="row">
-    <div class="col-md-12 ">
-      <app-shared-nav [buttons]="buttons"></app-shared-nav>
-  </div> 
 
-    <div class="col-md-3 ">
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+<div class="form-container"> 
+  <div class="row mt-5">
+    <div class="col-md-7"> 
+<form (ngSubmit)="addDepartment()"> 
+    <div class="form-field"> 
     
-    </div>
-            <div class="col-md-8 mt-2">
-              <div class="card mt-5 mb-5">
-                <div class="card">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title">Edit Profile</h4>
-                        <p class="card-category">Complete your profile</p>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="row">
-                             
-                                <div class="col-md-6">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Fist Name" type="text" required>
-                                  </mat-form-field>
-                                </div>
-                                <div class="col-md-6">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Middle Name" type="text">
-                                  </mat-form-field>
-                                </div>
-                                <div class="col-md-6">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Last Name" type="text">
-                                  </mat-form-field>
-                                </div> -->
+      <input type="text" id="departmentName" placeholder=" " [(ngModel)]="addDepartmentRequest.description" name="addDepartmentRequest.description" required> 
+     <label for="department">Department Level Name</label>  </div> 
+ <div style="margin-top: 10px;"><button type="submit" class="btn  btn-sm btnsave">Save </button> </div>
+    
+  </form></div> 
+  
+</div></div> 
+ <div>
+<input  class="search" type="search" placeholder="Search By DepartmentName..." [(ngModel)]="searchTerm" (input)="onSearch()">
+</div>
+  
+ 
+    <h6 class="mb-3 mt-5"> 
+        Department 
+    </h6> 
+ 
+ 
+     
+<table id="example1" class="table table-bordered table-striped"  *ngIf="departments && departments.length>0"> 
+    <thead> 
+        <tr> 
+          
+            <th>Department Name</th> 
+       
+            
+ 
+        </tr> 
+    </thead> 
+    <tbody> 
+        <tr *ngFor="let department of filteredDepartment || departments"> 
+           
+            <td>{{department.description}}</td> 
+         
+          
+            <td>   
+                <button  class="btn btn-sm btndanger" (click)="deleteDepartment(department.departmentId)">
+                    <mat-icon>delete</mat-icon></button>
+            </td> 
+          
+            <!-- <td> <a [routerLink]="['/department','edit',department.id]">  
+                View 
+                </a> 
+            </td> --> 
+        </tr> 
+    </tbody> 
+</table> 
+<p *ngIf="!departments || departments.length <= 0">no departments found</p>

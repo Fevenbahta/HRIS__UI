@@ -98,7 +98,7 @@
     display: flex;
     align-items: center;
     font-weight: 400;
-    color: #212529;
+    color: #424649;
     text-align: inherit;
     white-space: nowrap;
     background-color: transparent;
@@ -119,8 +119,12 @@
   .dropdown-icon {
     margin-left: 6px; 
     vertical-align: middle; 
+    color: #6d6969;
 /* Push the icon to the right */
 
+  }
+  .lable{
+    color:#6d6969
   }
 
   

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Division } from 'app/models/job-description.model';
 import { Department } from 'app/models/education.model';
+
 
 
 
@@ -19,25 +19,25 @@ export class DepartmentService {
   getAllDepartment(): Observable<Department[]> {
     return this.http.get<Department[]>(this.apiUrl + 'api/Department');
   }
-  getDepartment(id:number): Observable<Department> {
+  getDepartment(id:string): Observable<Department> {
     return this.http.get<Department>(this.apiUrl + 'api/Department/'+id);
   }
 
-//   addDepartment(addDivisionRequest: Department): Observable<Department> {
-//     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-//     // addDivisionRequest.id="0000000-0000-0000-0000-000000000000"
-//     return this.http.post<Department>(this.apiUrl + 'api/Department', addDepartmentRequest, httpOptions);
-//   }
+  addDepartment(addDepartmentRequest: Department): Observable<Department> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    // addDepartmentRequest.id="0000000-0000-0000-0000-000000000000"
+    return this.http.post<Department>(this.apiUrl + 'api/Department', addDepartmentRequest, httpOptions);
+  }
 
-//   updateDivision(divisionDetails: Division,Id:number): Observable<Division> {
-//     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-//     return this.http.put<Division>(this.apiUrl + 'api/Division/'+Id, divisionDetails, httpOptions);
-//   }
+  updateDepartment(DepartmentDetails: Department,Id:string): Observable<Department> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.put<Department>(this.apiUrl + 'api/Department/'+Id, DepartmentDetails, httpOptions);
+  }
 
-//   deleteDivision(Id: number): Observable<string> {
-//     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-//     return this.http.delete<string>(this.apiUrl + 'api/Division/' + Id, httpOptions);
-//   }
+  deleteDepartment(Id: string): Observable<string> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.delete<string>(this.apiUrl + 'api/Department/' + Id, httpOptions);
+  }
 
   
 

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { Department } from 'app/models/education.model';
+
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { DepartmentService } from 'app/service/department.service';
 
 @Component({
   selector: 'app-department',
@@ -6,27 +12,110 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./department.component.scss']
 })
 export class DepartmentComponent implements OnInit {
-  buttons = [
-    { label: 'Organization' , route:"/admin/organization-info" },
-    { label: 'Supervisor' , route:"/admin/supervisor"},
-     { label: 'Qualificaton', route:"/admin/qualification" }
-  ];
-  dropdownOptions = [
-    [
-      { label: 'Department', route: '/option1' },
-      { label: 'Division', route: '/option2' },
-      { label: 'grade', route: '/option3' },
-      { label: 'level', route: '/option3' },
+departments:Department[]=[];
+filteredDepartment: Department[] = []; 
+searchTerm: string = ''; 
 
-    ],
-    [
-      { label: 'Option 4', route: '/option4' },
-      { label: 'Option 5', route: '/option5' },
-      { label: 'Option 6', route: '/option6' }
-    ]  ];
-  constructor() { }
+  addDepartmentRequest: Department={
+    description:'',
+     pid:0,
+     departmentId:undefined,
+createdBy: '',
+createdDate: '2023-07-21T13:28:13.132Z',
+updatedDate: '2023-07-21T13:28:13.132Z',
+updatedBy: '',
+status:0,
+
+  }
+  buttons = [
+    { label: 'Structure',
+    dropdownOptions: [
+       { label: 'position',route:"/admin/position"  },
+       { label: 'Department',  route:"/admin/department"  },
+       { label: 'Division',  route:"/admin/division"  },
+       { label: 'branch',  route:"/admin/branch"  }
+   
+     ]},
+        { label: 'Step', route:"/admin/step" },
+       { label: 'EducationLevel' , route:"/admin/education-level"},
+        { label: 'grade', route:"/admin/grade" },
+        { label: 'Supervisor', route:"/admin/supervisor" },
+        { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
+   
+   
+     ];
+  constructor(
+    private departmentService :DepartmentService,
+    private router:Router,private dialog:MatDialog,) { }
 
   ngOnInit(): void {
+    this.departmentService.getAllDepartment()
+    .subscribe({
+      next: (departments) => {
+        this.departments=departments;
+        this.filteredDepartment=departments
+      },
+      error(response){
+        console.log(response)
+      }
+    });
   }
+  addDepartment(){
 
+    this.departmentService.addDepartment(this.addDepartmentRequest)
+    .subscribe({
+    next:(department)=>{
+      this.departments.push({ ...this.addDepartmentRequest });
+
+      this.addDepartmentRequest = {
+        description:'',
+        pid:0,
+        departmentId:undefined,
+   createdBy: '',
+   createdDate: '2023-07-21T13:28:13.132Z',
+   updatedDate: '2023-07-21T13:28:13.132Z',
+   updatedBy: '',
+   status:0,
+
+      };
+    },
+     error(response){
+      console.log(response)
+    }
+    })}
+    onSearch() {
+      this.filteredDepartment = this.departments;
+      if (this.searchTerm.trim() === '') {
+     
+        this.filteredDepartment = this.departments;
+      } else {
+     
+        this.filteredDepartment = this.departments.filter(department => {
+          
+          return (
+            department.description.toLowerCase().startsWith(this.searchTerm.toLowerCase()) 
+           
+          );
+        });
+      }
+      }
+    deleteDepartment(id: string) {
+      const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+    
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // User confirmed deletion, proceed with the delete request
+          this.departmentService.deleteDepartment(id).subscribe({
+            next: () => {
+              // Remove the deleted education level from the Departments array using filter
+              this.departments = this.departments.filter((Department) => Department.departmentId !== id);
+            },
+            error(response) {
+              console.log(response);
+            },
+          });
+        }
+      });}
+
+      
 }

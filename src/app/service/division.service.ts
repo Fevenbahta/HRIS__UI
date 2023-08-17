@@ -18,7 +18,7 @@ export class DivisionService {
   getAllDivisions(): Observable<Division[]> {
     return this.http.get<Division[]>(this.apiUrl + 'api/Division');
   }
-  getDivision(id:number): Observable<Division> {
+  getDivision(id:string): Observable<Division> {
     return this.http.get<Division>(this.apiUrl + 'api/Division/'+id);
   }
 
@@ -28,12 +28,12 @@ export class DivisionService {
     return this.http.post<Division>(this.apiUrl + 'api/Division', addDivisionRequest, httpOptions);
   }
 
-  updateDivision(divisionDetails: Division,Id:number): Observable<Division> {
+  updateDivision(divisionDetails: Division,Id:string): Observable<Division> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put<Division>(this.apiUrl + 'api/Division/'+Id, divisionDetails, httpOptions);
   }
 
-  deleteDivision(Id: number): Observable<string> {
+  deleteDivision(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.delete<string>(this.apiUrl + 'api/Division/' + Id, httpOptions);
   }

@@ -1,1 +1,67 @@
-<p>division works!</p>
+
+
+
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+ 
+<form (ngSubmit)="addDivision()"> 
+<div class="row" style="margin:10px"> 
+
+<div class="col-3"> 
+  <div class="form-field"> 
+
+    <mat-form-field  style="width: 180px;height: 65px;"> 
+      <mat-label>Select Department 
+
+      </mat-label> 
+      <mat-select placeholder="Select Department" name="selectedDepartment" required [(ngModel)]="selectedDepartment"> 
+        <mat-option *ngFor="let department of departments" [value]="department.departmentId"> 
+          {{ department.description }} 
+        </mat-option> 
+      </mat-select> 
+    </mat-form-field> 
+  </div> 
+  </div> 
+
+<div class="col-3"> 
+  <div class="form-field"> 
+   
+    <input  id="DivisionDescription" rows="1" placeholder=" " required [(ngModel)]="addDivisionRequest.description" name="description" required> 
+  <label for="DivisionDescription">Division </label>  </div> 
+</div> 
+
+
+
+
+</div> 
+<button type="submit" class="btn btn-sm btnsave">Save</button> 
+</form> 
+<input  class="search" type="search" placeholder="Search By Division Name..." [(ngModel)]="searchTerm" (input)="onSearch()">
+<table class="table  table-striped col-md-8" > 
+<thead> 
+<tr> 
+  <th>Department </th>
+
+  <th>Division</th>
+</tr> 
+</thead> 
+<tbody> 
+    <tr *ngFor="let division of filteredDivision || divisions"> 
+      <td>{{ getDepartmentName(division.departmentId) }}</td>
+
+      <td>{{division.description}}</td>
+   
+      
+      <td>   
+        <button  class="btn btn-sm btndanger" (click)="deleteDivision(division.divisionId)">
+          <mat-icon>delete</mat-icon></button>
+    </td>
+
+      
+        <!-- <td> <a [routerLink]="['/Division','edit',Division.id]">  
+            View 
+            </a> 
+        </td> --> 
+    </tr> 
+</tbody> 
+</table>

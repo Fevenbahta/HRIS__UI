@@ -18,7 +18,7 @@
                     
                     <div >
                         <div class="col-md-12" >
-                            <table class="table  table-striped col-md-8"   *ngIf="filteredEmployees.length">
+                            <table class="table  table-striped col-md-8"  >
 
                                <div> <thead>
                                     <tr>
@@ -35,7 +35,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let employee of filteredEmployees " >
+                                    <tr *ngFor="let employee of filteredEmployees || employees " >
                                               <td>{{employee.ecxId}}</td>
                                               <td>{{employee.firstName}}</td>
                                         <td>{{employee.middleName}}</td>

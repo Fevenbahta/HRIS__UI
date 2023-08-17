@@ -36,6 +36,8 @@
                 "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
                 "node_modules/jquery/dist/jquery.min.js",
                 "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
+                "node_modules/jquery/dist/jquery.min.js",
+                "node_modules/bootstrap/dist/js/bootstrap.min.js",
           
                 "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
                 "node_modules/bootstrap-notify/bootstrap-notify.js"
@@ -107,12 +109,15 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/assets/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css"
+          
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
             
               "node_modules/bootstrap-notify/bootstrap-notify.js"
            

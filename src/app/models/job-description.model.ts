@@ -7,6 +7,7 @@ departmentId:String
   createdDate: string,
   updatedDate: string,
   updatedBy: string,
+  status:number
 
 }
 export interface Step{

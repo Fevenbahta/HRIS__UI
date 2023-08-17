@@ -12,7 +12,7 @@ import { EmployeeService } from 'app/service/employee.service';
 export class HistoryComponent {
   searchTerm: string = ''; 
 
-  filteredEmployees: Employee[] = []; 
+  filteredEmployees: Employee[]=[]; 
   employees:Employee[]= []; 
   allEmployees:any=[]; 
   searchText:string[]; 
@@ -48,9 +48,7 @@ this.employeeservice.getAllEmployees()
 }); 
  
 
-} 
- 
- 
+}  
  
 getEmployees() {  
   this.employeeservice.getAllEmployees().subscribe(  
@@ -63,43 +61,45 @@ getEmployees() {
   );  
 }  
 
-onSearch(){
-  this.filteredEmployees = this.employees.filter(employee => {
-    return (
-      employee.ecxId.toLowerCase() === this.searchTerm.toLowerCase() &&
-      employee.status === 1
+// onSearch(){
+//   this.filteredEmployees = this.employees.filter(employee => {
+//     return (
+//       employee.ecxId.toLowerCase() === this.searchTerm.toLowerCase() 
+ 
+//     );
+//   });
+// }
+//  onSearch() {
+//   if (this.searchTerm.trim() === '') {
+// 
+//   } else {
+//     this.employeeservice.getEmployeeByEcx(this.searchTerm).subscribe(
+//       (filteredEmployees) => {
+//         this.filteredEmployees = filteredEmployees.filter(employee => employee.status === 1);
+//       },
+//       (error) => {
+//         console.log(error);
+//       }
+//     );
+//   }
+// }
+
+onSearch() {
+  if (this.searchTerm.trim() === '') {
+    this.filteredEmployees != this.employees; // Show all employees if search term is empty
+  } else {
+    this.filteredEmployees = this.employees.filter(employee =>
+      employee.ecxId.toLowerCase()===(this.searchTerm.toLowerCase())
     );
-  });
+  }
 }
 
-
-
-
-  
-  
- 
-
- 
-// private showSnackBar(message: string, panelClass: string = 'mat-toolbar') { 
-//   this.snackBar.open(message, 'Close', { 
-//     duration: 3000, 
-//     panelClass: ['mat-toolbar', panelClass], 
-//   }); 
-// } 
 editEmployee(employee: Employee): void { 
   // Here, we will navigate to the edit page for the selected EmergencyContact. 
   this.router.navigate(["/edit-employee", employee.empId]); 
 } 
   
-  
 
-
-
-  // buttons = [    
-  //   { label: ' Add Employee ', route: '/employee-registration' }, 
-  //   { label: '  List Employee ', route: '/employee-list' },
-  //   {label:'Employee History', route:'/history'}
-  // ] 
 }
 
 

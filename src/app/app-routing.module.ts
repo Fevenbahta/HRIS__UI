@@ -32,6 +32,8 @@ import { EditEducationComponent } from './modules/updatemodules/edit-education/e
 import { NgModule } from '@angular/core';
 import { AssignSupervisorComponent } from './modules/Admin module/Job/assign-supervisor/assign-supervisor.component';
 import { HistoryComponent } from './modules/history/history.component';
+import { DepartmentComponent } from './modules/Admin module/Job/department/department.component';
+import { DivisionComponent } from './modules/Admin module/Job/division/division.component';
 
 const routes: Routes = [
   {path: '',
@@ -75,6 +77,10 @@ component: AssignSupervisorComponent},
 component: StepComponent},
 {path:'admin/grade',
 component: GradeComponent},
+{path:'admin/department',
+component: DepartmentComponent},
+{path:'admin/division',
+component: DivisionComponent},
 {path:'admin/education-level',
 component: EducationLevelComponent},
 {path:'admin/branch',

@@ -67,6 +67,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { EditNavComponent } from 'app/modules/updatemodules/edit-nav/edit-nav.component';
 import { AssignSupervisorComponent } from 'app/modules/Admin module/Job/assign-supervisor/assign-supervisor.component';
 import { HistoryComponent } from 'app/modules/history/history.component';
+import { DepartmentComponent } from 'app/modules/Admin module/Job/department/department.component';
+import { DivisionComponent } from 'app/modules/Admin module/Job/division/division.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +110,8 @@ WorkexperienceComponent,
 EditNavComponent,
 AssignSupervisorComponent,
 HistoryComponent,
+DepartmentComponent,
+DivisionComponent
 
 
   ],

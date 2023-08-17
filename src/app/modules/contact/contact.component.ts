@@ -19,9 +19,10 @@ import { EmployeeService } from 'app/service/employee.service';
 })
 export class ContactComponent {
   contacts:Contact[]=[];
-  contact:Contact;
+
   contactSaved:boolean=false;
-  addContactRequest:Contact={
+  contactUpdate:boolean=false;
+  contact:Contact={
     pId:0,
     id: undefined,
     createdBy: '', 
@@ -59,7 +60,8 @@ contactForm: FormGroup = this.formBuilder.group({
 
 buttons = [
   { label: ' Add Employee ', route: '/employee-registration' },
-  { label: '  List Employee ', route: '/employee-list' }
+  { label: '  List Employee ', route: '/employee-list' },
+  {label:'Employee History', route:'/history'}
 ];
 ngOnInit():void {
 
@@ -79,16 +81,38 @@ addContact(){
   // if (this.contactForm.invalid) {
   //   this.contactForm.markAllAsTouched();
 
-  this.addContactRequest.pId = this.pIdservice.pId;
-  this.addContactRequest.empId = this.employeeIdService.employeeId;
-  console.log(this.addContactRequest)
-this.contactservice.addContact(this.addContactRequest)
+  this.contact.empId = this.employeeIdService.employeeId;
+  console.log(this.contact)
+this.contactservice.addContact(this.contact)
 .subscribe({ 
 next:(contacts)=>{
   this.contactSaved = true;
   setTimeout(() => {
     this.contactSaved = false;
   }, 2000);
+  this.contacts.push({ ...this.contact });
+  // Reset the form fields
+  this.contact = {
+    pId:0,
+        id:undefined,
+        status:0,
+        region: '',
+        town: '',
+        subCity: '',
+        woreda: '',
+        Kebele: '',
+        houseNo: '',
+        postCode: 0,
+        phoneNumber: '',
+         updatedDate: "2023-07-20T13:56:00.062Z", 
+         updatedBy: '', 
+         empId: "",
+         email: '',
+  };
+
+
+
+  
   this.contactservice.getAllContacts()
   .subscribe({
     next: (contacts) => {
@@ -107,9 +131,59 @@ next:(contacts)=>{
 })}
 
 editContact(contact: Contact): void {
-  // Here, we will navigate to the edit page for the selected Contact.
-  this.router.navigate(["/edit-contact", contact.id]);
+  const contactToEdit = this.contacts.find(contact => contact.id === contact.id);
+  this.contact = contactToEdit;
 }
+
+
+updateContact(): void {
+
+   
+  this.contactservice.updateContact(this.contact, this.contact.id)
+  .subscribe({
+  
+    next: (contact) => { 
+      
+      this.contactUpdate=true;
+      setTimeout(() => {
+        this.contactUpdate= false;
+      }, 2000);
+
+      // this.contactservice.getAllContacts()
+      // .subscribe({
+      //   next: (contacts) => {
+      //     // Filter emergency contacts for the current employee
+      //     this.contacts = contacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+      //   },
+      //   error(response) {
+      //     console.log(response);
+      //   },
+      // });
+          this.contact = {
+            pId:0,
+            id:undefined,
+            status:0,
+            region: '',
+            town: '',
+            subCity: '',
+            woreda: '',
+            Kebele: '',
+            houseNo: '',
+            postCode: 0,
+            phoneNumber: '',
+             updatedDate: "2023-07-20T13:56:00.062Z", 
+             updatedBy: '', 
+             empId: " ",
+             email: '',
+          };
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
+  
+}
+
 
 
 deleteContact(Contact: Contact): void {

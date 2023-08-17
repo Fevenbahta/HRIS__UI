@@ -22,8 +22,9 @@ export class EmployeeService {
   getEmployee(id:string): Observable<Employee> {
     return this.http.get<Employee>(this.apiUrl + 'api/Employee/'+id);
   }
-  getEmployeeByEcx(id:string): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiUrl + 'api/Employee/'+id);
+  getEmployeeByEcx(id: string): Observable<Employee[]> {
+    const encodedId = encodeURIComponent(id);
+    return this.http.get<Employee[]>(this.apiUrl + 'api/Employee/ecx/' + encodedId);
   }
   addEmployee(addEmployeeRequest: Employee): Observable<Employee> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

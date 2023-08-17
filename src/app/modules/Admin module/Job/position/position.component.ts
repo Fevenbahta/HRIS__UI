@@ -54,15 +54,7 @@ buttons = [
      { label: 'grade', route:"/admin/grade" },
      { label: 'Supervisor', route:"/admin/supervisor" },
     //  { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
-     {
-      label: 'Dropdown Example',
-      dropdownOptions: [
-        { label: 'Option 1', route: '/option1' },
-        { label: 'Option 2', route: '/option2' },
-        { label: 'Option 3', route: '/option3' }
-      ]
-    }
-
+   
 
   ];
   

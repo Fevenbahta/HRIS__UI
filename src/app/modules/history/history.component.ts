@@ -69,30 +69,30 @@ getEmployees() {
 //     );
 //   });
 // }
-//  onSearch() {
-//   if (this.searchTerm.trim() === '') {
-// 
-//   } else {
-//     this.employeeservice.getEmployeeByEcx(this.searchTerm).subscribe(
-//       (filteredEmployees) => {
-//         this.filteredEmployees = filteredEmployees.filter(employee => employee.status === 1);
-//       },
-//       (error) => {
-//         console.log(error);
-//       }
-//     );
-//   }
-// }
-
-onSearch() {
+ onSearch() {
   if (this.searchTerm.trim() === '') {
-    this.filteredEmployees != this.employees; // Show all employees if search term is empty
+
   } else {
-    this.filteredEmployees = this.employees.filter(employee =>
-      employee.ecxId.toLowerCase()===(this.searchTerm.toLowerCase())
+    this.employeeservice.getEmployeeByEcx(this.searchTerm).subscribe(
+      (filteredEmployees) => {
+        this.filteredEmployees = filteredEmployees.filter(employee => employee.status === 1);
+      },
+      (error) => {
+        console.log(error);
+      }
     );
   }
 }
+
+// onSearch() {
+//   if (this.searchTerm.trim() === '') {
+//     this.filteredEmployees != this.employees; // Show all employees if search term is empty
+//   } else {
+//     this.filteredEmployees = this.employees.filter(employee =>
+//       employee.ecxId.toLowerCase()===(this.searchTerm.toLowerCase())
+//     );
+//   }
+// }
 
 editEmployee(employee: Employee): void { 
   // Here, we will navigate to the edit page for the selected EmergencyContact. 

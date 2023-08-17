@@ -30,12 +30,19 @@
                                         <th>joined Date</th>
                                       
                                         <th>Pension Id</th>
+                                                 
+                                        <th>Martial Status</th>
+                                                 
+                                      
+                                        <th>Place Of Birth</th>
+                                        <th>Date of Birth </th>
+                                   <th>Crime Description </th>
                              
                             
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let employee of filteredEmployees || employees " >
+                                    <tr *ngFor="let employee of filteredEmployees " >
                                               <td>{{employee.ecxId}}</td>
                                               <td>{{employee.firstName}}</td>
                                         <td>{{employee.middleName}}</td>
@@ -43,6 +50,13 @@
                                         <td>{{employee.sex}}</td>
                                         <td>{{employee.joinDate}}</td>
                                         <td>{{employee.pensionNo}}</td>
+                                        <td>{{employee.martialStatus}}</td>
+                                   
+                                        <td>{{employee.placeOfBith}}</td>
+                                        <td>{{employee.dateOfBityh}}</td>
+                                        <td>{{employee.crimeDescription}}</td>
+
+                                    
                                      
                                  
                                     

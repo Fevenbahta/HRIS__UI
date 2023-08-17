@@ -32,46 +32,17 @@ constructor(private employeeservice: EmployeeService,
   } 
 ngOnInit(): void{ 
 
-this.employeeservice.getAllEmployees() 
-.subscribe({ 
-  next: (employees) => { 
-    this.employees=employees; 
 
-    const lastEmployee = this.employees.pop(); 
-    this.employees.unshift(lastEmployee); 
-    this.employees.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()); 
-  }, 
-     
-  error(response){ 
-    console.log(response) 
-  } 
-}); 
  
 
 }  
  
-getEmployees() {  
-  this.employeeservice.getAllEmployees().subscribe(  
-    (employees) => {  
-      this.employees = employees;  
-    },  
-    (error) => {  
-      console.log(error);  
-    }  
-  );  
-}  
 
-// onSearch(){
-//   this.filteredEmployees = this.employees.filter(employee => {
-//     return (
-//       employee.ecxId.toLowerCase() === this.searchTerm.toLowerCase() 
- 
-//     );
-//   });
-// }
+
+
  onSearch() {
   if (this.searchTerm.trim() === '') {
-
+    this.filteredEmployees = [];
   } else {
     this.employeeservice.getEmployeeByEcx(this.searchTerm).subscribe(
       (filteredEmployees) => {
@@ -84,15 +55,6 @@ getEmployees() {
   }
 }
 
-// onSearch() {
-//   if (this.searchTerm.trim() === '') {
-//     this.filteredEmployees != this.employees; // Show all employees if search term is empty
-//   } else {
-//     this.filteredEmployees = this.employees.filter(employee =>
-//       employee.ecxId.toLowerCase()===(this.searchTerm.toLowerCase())
-//     );
-//   }
-// }
 
 editEmployee(employee: Employee): void { 
   // Here, we will navigate to the edit page for the selected EmergencyContact. 

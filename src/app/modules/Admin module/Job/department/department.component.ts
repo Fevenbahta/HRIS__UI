@@ -28,15 +28,30 @@ status:0,
 
   }
   buttons = [
-    { label: 'Position' , route:"/admin/position" },
-         { label: 'Step', route:"/admin/step" },
-    { label: 'Department' , route:"/admin/education-level"},
-     { label: 'Grade', route:"/admin/grade" },
-     { label: 'Branch', route:"/admin/branch" },
-     { label: 'Supervisor', route:"/admin/supervisor" },
-     { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
-
-  ];
+    { label: 'Structure',
+    dropdownOptions: [
+       { label: 'position',route:"/admin/position"  },
+       { label: 'Department',  route:"/admin/department"  },
+       { label: 'Division',  route:"/admin/division"  },
+       { label: 'branch',  route:"/admin/branch"  }
+   
+     ]},
+        { label: 'Step', route:"/admin/step" },
+       { label: 'EducationLevel' , route:"/admin/education-level"},
+        { label: 'grade', route:"/admin/grade" },
+        { label: 'Supervisor', route:"/admin/supervisor" },
+       //  { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
+        {
+         label: 'Dropdown Example',
+         dropdownOptions: [
+           { label: 'Option 1', route: '/option1' },
+           { label: 'Option 2', route: '/option2' },
+           { label: 'Option 3', route: '/option3' }
+         ]
+       }
+   
+   
+     ];
   constructor(
     private departmentService :DepartmentService,
     private router:Router,private dialog:MatDialog,) { }

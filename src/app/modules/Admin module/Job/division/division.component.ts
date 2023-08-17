@@ -34,17 +34,31 @@ divisions:Division[]=[];
 
   }
 
-buttons = [
-    { label: 'Division' , route:"/admin/Division" },
-         { label: 'Step', route:"/admin/step" },
-    { label: 'EducationLevel' , route:"/admin/education-level"},
-     { label: 'grade', route:"/admin/grade" },
-     { label: 'branch', route:"/admin/branch" },
-     { label: 'Supervisor', route:"/admin/supervisor" },
-     { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
-
-
-  ];
+  buttons = [
+    { label: 'Structure',
+    dropdownOptions: [
+       { label: 'position',route:"/admin/position"  },
+       { label: 'Department',  route:"/admin/department"  },
+       { label: 'Division',  route:"/admin/division"  },
+       { label: 'branch',  route:"/admin/branch"  }
+   
+     ]},
+        { label: 'Step', route:"/admin/step" },
+       { label: 'EducationLevel' , route:"/admin/education-level"},
+        { label: 'grade', route:"/admin/grade" },
+        { label: 'Supervisor', route:"/admin/supervisor" },
+       //  { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
+        {
+         label: 'Dropdown Example',
+         dropdownOptions: [
+           { label: 'Option 1', route: '/option1' },
+           { label: 'Option 2', route: '/option2' },
+           { label: 'Option 3', route: '/option3' }
+         ]
+       }
+   
+   
+     ];
   
   filteredDivision: Division[] = []; 
   searchTerm: string = ''; 

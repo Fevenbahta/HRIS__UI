@@ -36,10 +36,7 @@
                 "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
                 "node_modules/jquery/dist/jquery.min.js",
                 "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
-                "node_modules/jquery/dist/jquery.min.js",
-                "node_modules/bootstrap/dist/js/bootstrap.min.js",
-          
-                "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
+     
                 "node_modules/bootstrap-notify/bootstrap-notify.js"
         
               ]

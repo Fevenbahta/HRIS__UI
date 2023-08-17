@@ -2,9 +2,122 @@
     text-decoration: none;
 
 }
-// .fixed-header {
-//     position: fixed;
-//     width: 100%;
-//     z-index: 100;
-   
-//   }
+/* Add your custom styles here */
+
+.horizontal-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar {
+    background-color: #f8f9fa;
+  }
+  
+  .header {
+    padding: 10px;
+  }
+  
+  .btn-gray {
+    color: #333;
+    background-color: #eee;
+    border: 1px solid #ccc;
+  }
+  
+  .mat-dropdown-button {
+    color: #333;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    text-decoration: none;
+  }
+  
+  .mat-dropdown-menu {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 160px;
+    padding: 0;
+  }
+  
+  .mat-menu-item {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    font-weight: 200;
+    color: #2d3136;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  /* Add your custom styles here */
+
+.horizontal-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar {
+    background-color: #f8f9fa;
+  }
+  
+  .header {
+    padding: 10px;
+  }
+  
+  .btn-gray {
+    color: #333;
+    background-color: #eee;
+    border: 1px solid #ccc;
+  }
+  
+  .mat-dropdown-button {
+    color: #333;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    text-decoration: none;
+  }
+  
+  .mat-dropdown-menu {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 160px;
+    padding: 0;
+  }
+  
+  .mat-menu-item {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .mat-dropdown-button {
+    color: #333;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    text-decoration: none;
+    font-weight: normal; /* Add this line to remove bold font-weight */
+  }
+  
+  /* Add more styles as needed */
+  
+  /* Add more styles as needed */
+  

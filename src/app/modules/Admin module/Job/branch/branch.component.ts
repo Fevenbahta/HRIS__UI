@@ -26,16 +26,23 @@ export class BranchComponent  {
     status:0,
    
 }
-  buttons = [
-    { label: 'Position' , route:"/admin/position" },
-         { label: 'Step', route:"/admin/step" },
-    { label: 'EducationLevel' , route:"/admin/education-level"},
-     { label: 'Grade', route:"/admin/grade" },
-     { label: 'Branch', route:"/admin/branch" },
-     { label: 'Supervisor', route:"/admin/supervisor" },
-     { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
-
-  ];
+buttons = [
+  { label: 'Structure',
+  dropdownOptions: [
+     { label: 'position',route:"/admin/position"  },
+     { label: 'Department',  route:"/admin/department"  },
+     { label: 'Division',  route:"/admin/division"  },
+     { label: 'branch',  route:"/admin/branch"  }
+ 
+   ]},
+      { label: 'Step', route:"/admin/step" },
+     { label: 'EducationLevel' , route:"/admin/education-level"},
+      { label: 'grade', route:"/admin/grade" },
+      { label: 'Supervisor', route:"/admin/supervisor" },
+      { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
+ 
+ 
+   ];
   constructor(private branchservice: BranchService,private router:Router,
     private dialog:MatDialog,
   ){}

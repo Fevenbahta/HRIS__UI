@@ -42,12 +42,12 @@
                        </div></div>
                   <button type="button" class="btn btn-sm btnsave" *ngIf="spouse.id!=undefined"  (click)="updateSpouse()">Update</button>
              
-                <div *ngIf="spouseUpdated" class="alert btndanger btn-sm pull-right">
+                <div *ngIf="spouseUpdated" class=" btndanger btn-sm pull-right">
                   Updated successfully!
                 </div>
                 <button type="button" class="btn btn-sm btnsave" *ngIf="spouse.id===undefined" (click)="addSpouse()">Add</button>
                      
-                <div *ngIf="spouseSaved" class="alert btndanger btn-sm pull-right">
+                <div *ngIf="spouseSaved" class=" btndanger btn-sm pull-right">
               Added successfully!
               </div>   </div>
               </form>

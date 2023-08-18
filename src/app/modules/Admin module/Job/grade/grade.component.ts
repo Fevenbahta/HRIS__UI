@@ -15,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GradeComponent implements OnInit {
   positions:Position[]= [];
+  gradeSaved:boolean=false
   selectedPosition: string='';
   grades:Grade[]=[];
 
@@ -73,6 +74,10 @@ buttons = [
     this.gradeservice.addGrade(this.addGradeRequest)
     .subscribe({
     next:(grade)=>{
+      this.gradeSaved = true;
+      setTimeout(() => {
+        this.gradeSaved = false;
+      }, 2000);
       this.grades.push({ ...this.addGradeRequest });
 
       this.addGradeRequest = {

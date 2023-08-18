@@ -15,13 +15,14 @@ import { SupervisorService } from 'app/service/supervisor.service';
   styleUrls: ['./assign-supervisor.component.css']
 })
 export class AssignSupervisorComponent {
+  assignSupervisorSaved:boolean=false
   selectedPosition: string='';
   selectedFirstSupervisor: string='';
   selectedSecondSupervisor: string='';
   selectedThirdSupervisor: string='';
   selectedFourthSupervisor: string='';
   selectedFifthSupervisor: string='';
-  assignSupervisorsaved:Boolean=false;
+
   supervisors:Supervisor[]=[];
   divisions:Division[]=[]
   firstSupervisors:Supervisor[]=[];
@@ -123,9 +124,9 @@ addAssignSupervisor(){
 this.AssignSupervisorservice.addAssignSupervisor(this.assignSupervisor)
 .subscribe({
 next:()=>{
-  this.assignSupervisorsaved=true;
+  this.assignSupervisorSaved=true;
   setTimeout(() => {
-    this.assignSupervisorsaved = false;
+    this.assignSupervisorSaved = false;
   }, 2000);
         
   this.selectedFirstSupervisor =  "";

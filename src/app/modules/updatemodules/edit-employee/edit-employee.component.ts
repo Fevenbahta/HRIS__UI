@@ -168,9 +168,7 @@ this.employeeService.getAllEmployees()
           this.employeeService.getAllEmployees()
           .subscribe((employees) => {
             this.employees = employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
-          })
-
-            
+          })  
         },
         error: (response) => {
           console.log(response);

@@ -127,12 +127,12 @@
                           
                           <button  mat-raised-button type="submit" *ngIf="employeePosition.id!=undefined" class="btn btn-sm btnedit">Update</button>
                           <div class="clearfix"></div>
-                          <div *ngIf="employeePositionUpdated" class="alert btndanger btn-sm pull-right">
+                          <div *ngIf="employeePositionUpdated" class=" btndanger btn-sm pull-right">
                             Updated successfully!
                           </div>
                           <button type="button" class="btn btn-sm btnsave"*ngIf="employeePositions.length === 0" (click)="addEmployeePosition()">Add</button>
                      
-              <div *ngIf="employeePositionSaved" class="alert btndanger btn-sm pull-right">
+              <div *ngIf="employeePositionSaved" class="btndanger btn-sm pull-right">
        Added successfully!
             </div>
                       </form>

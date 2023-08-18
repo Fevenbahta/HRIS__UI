@@ -66,9 +66,9 @@ export class EditTrainingComponent implements OnInit {
 
   updateTraining(): void {
     this.trainingService.updateTraining(this.training,this.training.id).subscribe(
-      () => {
+      () => {          this.trainingSaved=true; 
         setTimeout(() => {
-          this.trainingSaved=true; 
+          this.trainingSaved=false; 
         }, 2000);
  
         this.trainingService.getAllTraining() 

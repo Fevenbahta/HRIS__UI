@@ -15,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./step.component.scss']
 })
 export class StepComponent implements OnInit {
+  stepSaved:boolean=false
   grades:Grade[]= [];
   selectedGrade: string='';
 steps:Step[]=[];
@@ -80,6 +81,10 @@ buttons = [
     this.stepservice.addStep(this.addStepRequest)
     .subscribe({
     next:(step)=>{
+      this.stepSaved = true;
+      setTimeout(() => {
+        this.stepSaved = false;
+      }, 2000);
       this.steps.push({ ...this.addStepRequest });
 
       this.addStepRequest={

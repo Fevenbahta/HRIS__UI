@@ -13,7 +13,7 @@
                         <p class="card-category">Complete your contacts</p>
                     </div>
                     <div class="card-body">
-                        <form (ngSubmit)="addContact()">
+                        <form >
                           <div class="card-body">
                             <div class="row">
                               <div class="col-md-6">
@@ -98,9 +98,9 @@
                                 </mat-error>
                               </div>
                             </div>
-                          </div>       <div> <button mat-raised-button  class="btn btn-sm btnsave" (click)="updateContact()" *ngIf="contact.id!=undefined"  style="background-color:#76a53b;">Update  </button>
+                          </div>       <div> <button mat-raised-button  class="btn btn-sm btnsave"(click)="updateContact()" *ngIf="contact.id!=undefined"  style="background-color:#76a53b;">Update  </button>
                   
-                             <div *ngIf="contactUpdate" class="alert btndanger btn-sm pull-right">
+                             <div *ngIf="contactUpdate" class=" btndanger btn-sm pull-right">
                                Successfully Updated!
                              </div></div>
                           <div>
@@ -108,7 +108,7 @@
 
                     
            
-                             <button   class="btn btn-sm btnsave" type="submit" *ngIf="contacts.length === 0">
+                             <button   class="btn btn-sm btnsave" type="submit"(click)="addContact()" *ngIf="contacts.length === 0">
                             
                             <mat-icon>add</mat-icon>Add</button>
                             <div *ngIf="contactSaved" class="alert btndanger btn-sm pull-right">

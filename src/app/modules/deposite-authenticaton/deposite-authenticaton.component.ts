@@ -17,11 +17,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   export class DepositeAuthenticationComponent implements OnInit {
     depositeauthenticationSaved: boolean = false;
     depositeauthentications: DepositeAuthentication[] = []; 
-    depositeAuthentication: DepositeAuthentication;
 
-    addDepositeAuthenticationRequest:DepositeAuthentication={
+    depositeAuthenticationUpdated: boolean = false;
+
+    depositeAuthentication:DepositeAuthentication={
       pId:0,
-      id:  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      id: undefined,
      createdBy: '', 
        createdDate: "2023-07-20T13:56:00.062Z", 
        updatedDate: "2023-07-20T13:56:00.062Z", 
@@ -45,10 +46,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
   ngOnInit():void {
-    this.depositeauthenticationservice.getDepositeAuthentication(this.employeeIdService.employeeId) 
+    this.depositeauthenticationservice.getAllDepositeAuthentication() 
     .subscribe({ 
       next: (depositeauthentications) => { 
-        this.depositeAuthentication = depositeauthentications; 
+        this.depositeauthentications = depositeauthentications.filter(deposite => deposite.empId === this.employeeIdService.employeeId);
+        ; 
             }, 
       error(response) { 
         console.log(response); 
@@ -66,8 +68,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     {label:'Employee History', route:'/history'}
   ];
   addDepositeAuthentication() {
-    this.addDepositeAuthenticationRequest.empId = this.employeeIdService.employeeId;
-    this.depositeauthenticationservice.addDepositeAuthentication(this.addDepositeAuthenticationRequest)
+    this.depositeAuthentication.empId = this.employeeIdService.employeeId;
+    this.depositeauthenticationservice.addDepositeAuthentication(this.depositeAuthentication)
     .subscribe({
       next: (employee) => {
         this.depositeauthenticationSaved = true;
@@ -75,21 +77,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
           this.depositeauthenticationSaved = false;
         }, 2000);
         // Add the current work experience to the array
-        this.depositeauthentications.push({ ...this.addDepositeAuthenticationRequest });
+        this.depositeauthentications.push({ ...this.depositeAuthentication });
         // Reset the form fields
-        this.depositeauthenticationservice.getDepositeAuthentication(this.employeeIdService.employeeId) 
-    .subscribe({ 
-      next: (depositeauthentications) => { 
-        this.depositeAuthentication = depositeauthentications; 
-            }, 
-      error(response) { 
-        console.log(response); 
-      }, 
-  });
+        this.depositeauthenticationservice.getAllDepositeAuthentication() 
+        .subscribe({ 
+          next: (depositeauthentications) => { 
+            this.depositeauthentications = depositeauthentications.filter(deposite => deposite.empId === this.employeeIdService.employeeId);
+            ; 
+                }, 
+          error(response) { 
+            console.log(response); 
+          }, 
+      });
 
-        this.addDepositeAuthenticationRequest = {
+        this.depositeAuthentication = {
           pId:0,
-          id:  "",
+          id:  undefined,
          createdBy: '', 
            createdDate: "2023-07-20T13:56:00.062Z",   
            updatedDate: "2023-07-20T13:56:00.062Z", 
@@ -106,11 +109,40 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     console.log(response)
   }
   })}
-editDepositeAuthentication(depositeAuthentication: DepositeAuthentication): void {
-  // Here, we will navigate to the edit page for the selected DepositeAuthentication.
- 
-  this.router.navigate(["/edit-depositeAuthentication", depositeAuthentication.id]);
-}
+  updateDepositeAuthentication(): void {
+
+    this.depositeauthenticationservice.updateDepositeAuthentication(this.depositeAuthentication, this.depositeAuthentication.id).subscribe({
+      next: () => {
+        this.depositeAuthenticationUpdated = true;
+
+        setTimeout(() => {
+          this.depositeAuthenticationUpdated = false;
+        }, 2000);
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
+this.depositeAuthentication ={
+  pId:0,
+  id:  undefined,
+ createdBy: '', 
+   createdDate: "2023-07-20T13:56:00.062Z", 
+   updatedDate: "2023-07-20T13:56:00.062Z", 
+   updatedBy: '', 
+   empId: "",
+   status:0,
+ bank: '',
+ bankBranch: '',
+ bankAccount:0,
+ tinNumber: '',
+
+};
+  }
+  editDepositeAuthentication(DepositeAuthentication: DepositeAuthentication): void {
+    const depositeAuthenticationToEdit = this.depositeauthentications.find(depositeAuthentication => depositeAuthentication.id === DepositeAuthentication.id);
+    this.depositeAuthentication = depositeAuthenticationToEdit;
+  }
 
 deleteDepositeAuthentication(depositeAuthentication: DepositeAuthentication): void {
   const dialogRef = this.dialog.open(DeleteConfirmationComponent, {

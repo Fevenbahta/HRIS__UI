@@ -100,12 +100,12 @@
                           
                     <button mat-raised-button type="submit" class="btn btn-sm btnsave" *ngIf="contact.id!=undefined" style="background-color:#76a53b;">Update  </button>
                   
-                    <div *ngIf="contactUpdate" class="alert btndanger btn-sm pull-right">
+                    <div *ngIf="contactUpdate" class=" btndanger btn-sm pull-right">
                       Successfully Updated!
                     </div>
                     <button type="button" class="btn btn-sm btnsave"  *ngIf="contacts.length === 0" (click)="addContact()">Add</button>
                  
-                          <div *ngIf="contactSaved" class="alert btndanger btn-sm pull-right">
+                          <div *ngIf="contactSaved" class="btndanger btn-sm pull-right">
                          Successfully added!
                         </div>
                 </form>

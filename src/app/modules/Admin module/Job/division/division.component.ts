@@ -13,7 +13,7 @@ import { DivisionService } from 'app/service/division.service';
   styleUrls: ['./division.component.scss']
 })
 export class DivisionComponent implements OnInit {
-
+  divisionSaved:boolean=false
   departments:Department[]= [];
 selectedDepartment:string;
 
@@ -87,6 +87,10 @@ addDivision(){
 this.divisionservice.addDivision(this.addDivisionRequest)
 .subscribe({
 next:(Division)=>{
+  this.divisionSaved = true;
+  setTimeout(() => {
+    this.divisionSaved = false;
+  }, 2000);
   this.divisions.push({ ...this.addDivisionRequest });
 
   this.addDivisionRequest = {

@@ -17,6 +17,7 @@ import { Component, OnInit } from '@angular/core';
 export class PositionComponent implements OnInit {
   divisions:Division[]= [];
 selectedDivision:string;
+positionSaved:boolean=false
 
 
 positions:Position[]=[];
@@ -94,6 +95,10 @@ addposition(){
 this.positionservice.addPosition(this.addPositionRequest)
 .subscribe({
 next:(position)=>{
+  this.positionSaved = true;
+  setTimeout(() => {
+    this.positionSaved = false;
+  }, 2000);
   this.positions.push({ ...this.addPositionRequest });
 
   this.addPositionRequest = {

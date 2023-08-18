@@ -22,8 +22,10 @@ export class EmployeeRegistrationComponent implements OnInit {
    selectedImage: File;
    supervisors:Supervisor[]=[];
    filteredEmployees: any[] = []; 
+   edit:boolean=false
 
  employeeSaved: boolean = false; 
+ employeeUpdated: boolean = false; 
  employees: Employee[] = []; 
  employee:Employee;
 
@@ -50,16 +52,13 @@ export class EmployeeRegistrationComponent implements OnInit {
  
   ngOnInit(): void { 
  
-     
-   
- 
     this.employeeForm = this.formBuilder.group({ 
       pId: [0], // You can add any specific validation rule here, like Validators.required 
       createdBy: ['string', Validators.required], 
       createdDate: [ "2023-07-25T09:28:33.440Z", Validators.required], 
       updatedDate: [ "2023-07-25T09:28:33.440Z", Validators.required], 
       updatedBy: ['string', Validators.required], 
-      empId: ["3fa85f64-5717-4562-b3fc-2c963f66afa6"], // You can add any specific validation rule here, like Validators.required 
+      empId: ["9077603c-0a6b-40ce-9dc7-0b822af3ccb2"], // You can add any specific validation rule here, like Validators.required 
       ecxId: ['ecx/pi',Validators.required], 
       adId: ['ad/pi', Validators.required], 
       firstName: ['', Validators.required], 
@@ -91,18 +90,12 @@ export class EmployeeRegistrationComponent implements OnInit {
         console.log(response); 
       }, 
     }); 
-    this.employeeservice.getAllEmployees() 
-    .subscribe({ 
-      next: (employees) => { 
-        this.employees=employees; 
-      }, 
-      error(response){ 
-        console.log(response) 
-      }, 
-       
-    }); 
-
-    
+ 
+    this.employeeservice.getAllEmployees()
+    .subscribe((employees) => {
+      this.employees = employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
+    })  
+  
     this.employeeservice.getEmployee(this.employeeIdService.employeeId) 
     .subscribe({ 
       next: (employees) => { 
@@ -144,8 +137,41 @@ getEmployees() {
           setTimeout(() => { 
             this.employeeSaved = false; 
           }, 2000); 
+          this.employeeservice.getAllEmployees()
+          .subscribe((employees) => {
+            this.employees = employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
+          }) 
           // Add the current work experience to the array 
           this.employees.push({ ...this.employeeForm.value }); 
+
+
+          
+    this.employeeForm = this.formBuilder.group({ 
+      pId: [0], // You can add any specific validation rule here, like Validators.required 
+      createdBy: ['string', Validators.required], 
+      createdDate: [ "2023-07-25T09:28:33.440Z", Validators.required], 
+      updatedDate: [ "2023-07-25T09:28:33.440Z", Validators.required], 
+      updatedBy: ['string', Validators.required], 
+      empId: ["9077603c-0a6b-40ce-9dc7-0b822af3ccb2"], // You can add any specific validation rule here, like Validators.required 
+      ecxId: ['ecx/pi',Validators.required], 
+      adId: ['ad/pi', Validators.required], 
+      firstName: ['', Validators.required], 
+      middleName: [''], 
+      lastName: ['', Validators.required], 
+      joinDate: ['', Validators.required], 
+      sex: ['', Validators.required], 
+      dateOfBityh: ['', Validators.required], 
+      placeOfBith: ['', Validators.required], 
+      martialStatus: ['', Validators.required], 
+      salutation: ['', Validators.required], 
+      nationality: ['', Validators.required], 
+      pensionNo: ['', Validators.required], 
+      imageData: [''], 
+      crime: [false], 
+      crimeDescription: [''], 
+     
+      status: [0,] 
+    }); 
           // Reset the form fields 
           
     this.employeeservice.getEmployee(this.employeeIdService.employeeId) 
@@ -270,13 +296,83 @@ validateAllFormFields(formGroup: FormGroup) {
   //     panelClass: ['mat-toolbar', panelClass], 
   //   }); 
   // } 
+
+
+  updateEmployee(): void {
+    if (this.employeeForm.valid) {
+ 
+      // Add logic to update the employee using the formData
+      // For example:
+  
+      this.employeeForm.value.firstSupervisor = this.selectedFirstSupervisor; 
+      this.employeeForm.value.secondSupervisor = this.selectedSecondSupervisor;   
+         const formData = this.employeeForm.value;
+      this.employeeservice.updateEmployee(formData,this.employee.empId ).subscribe({
+        next: () => {
+          this.employeeUpdated = true;
+          setTimeout(() => {
+            this.employeeUpdated = false;
+          }, 2000);
+
+          this.employeeForm = this.formBuilder.group({ 
+            pId: [0], // You can add any specific validation rule here, like Validators.required 
+            createdBy: ['string', Validators.required], 
+            createdDate: [ "2023-07-25T09:28:33.440Z", Validators.required], 
+            updatedDate: [ "2023-07-25T09:28:33.440Z", Validators.required], 
+            updatedBy: ['string', Validators.required], 
+            empId: ["9077603c-0a6b-40ce-9dc7-0b822af3ccb2"], // You can add any specific validation rule here, like Validators.required 
+            ecxId: ['ecx/pi',Validators.required], 
+            adId: ['ad/pi', Validators.required], 
+            firstName: ['', Validators.required], 
+            middleName: [''], 
+            lastName: ['', Validators.required], 
+            joinDate: ['', Validators.required], 
+            sex: ['', Validators.required], 
+            dateOfBityh: ['', Validators.required], 
+            placeOfBith: ['', Validators.required], 
+            martialStatus: ['', Validators.required], 
+            salutation: ['', Validators.required], 
+            nationality: ['', Validators.required], 
+            pensionNo: ['', Validators.required], 
+            imageData: [''], 
+            crime: [false], 
+            crimeDescription: [''], 
+           
+            status: [0,] 
+          }); 
+
+          this.employeeservice.getAllEmployees()
+          .subscribe((employees) => {
+            this.employees = employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
+          })
+
+            
+        },
+        error: (response) => {
+          console.log(response);
+        }
+      });
+
+    } else {
+      this.validateAllFormFields(this.employeeForm);
+    }
+  }
   editEmployee(employee: Employee): void { 
-    // Here, we will navigate to the edit page for the selected EmergencyContact. 
-    this.router.navigate(["/edit-employee", employee.empId]); 
+    this.edit=true
+    this.employeeservice.getAllEmployees()
+    .subscribe((employees) => {
+      this.employees = employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
+    }) 
+    const employeeToEdit = this.employees.find(employee => employee.empId === this.employeeIdService.employeeId);
+    this.employee = employeeToEdit;
+    this.employeeForm.patchValue(this.employee);
+ 
   } 
     
-
   } 
+
+
+  
  
  
    

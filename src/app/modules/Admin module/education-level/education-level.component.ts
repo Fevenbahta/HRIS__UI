@@ -14,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EducationLevelComponent implements OnInit {
   educationLevels:EducationLevel[]=[];
+  educationLevelSaved:boolean=false
   addEducationLevelRequest: EducationLevel={
     educationName:'',
      pid:0,
@@ -60,6 +61,10 @@ status:0,
     this.educationLevelService.addEducationLevel(this.addEducationLevelRequest)
     .subscribe({
     next:(educationLevel)=>{
+      this.educationLevelSaved = true;
+      setTimeout(() => {
+        this.educationLevelSaved = false;
+      }, 2000);
       this.educationLevels.push({ ...this.addEducationLevelRequest });
 
       this.addEducationLevelRequest = {

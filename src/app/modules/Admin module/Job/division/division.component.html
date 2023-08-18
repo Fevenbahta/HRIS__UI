@@ -34,7 +34,10 @@
 
 
 </div> 
-<button type="submit" class="btn btn-sm btnsave">Save</button> 
+<button type="submit" class="btn btn-sm btnsave">Save</button>
+<div *ngIf="divisionSaved" class=" btndanger btn-sm pull-right">
+  Successfully Added!
+</div> 
 </form> 
 <input  class="search" type="search" placeholder="Search By Division Name..." [(ngModel)]="searchTerm" (input)="onSearch()">
 <table class="table  table-striped col-md-8" > 

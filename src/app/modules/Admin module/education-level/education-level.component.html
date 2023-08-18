@@ -8,7 +8,10 @@
     
       <input type="text" id="educationLevelName" placeholder=" " [(ngModel)]="addEducationLevelRequest.educationName" name="educationName" required> 
      <label for="educationLevel">Education Level Name</label>  </div> 
- <div style="margin-top: 10px;"><button type="submit" class="btn  btn-sm btnsave">Save </button> </div>
+ <div style="margin-top: 10px;"><button type="submit" class="btn  btn-sm btnsave">Save </button>
+    <div *ngIf="educationLevelSaved" class=" btndanger btn-sm pull-right">
+        Successfully Added!
+      </div> </div>
     
   </form></div> 
    

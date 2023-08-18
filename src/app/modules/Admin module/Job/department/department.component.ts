@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Department } from 'app/models/education.model';
 
@@ -105,15 +105,19 @@ status:0,
       }
       }
     deleteDepartment(id: string) {
-      const dialogRef = this.dialog.open(DeleteConfirmationComponent);
+      const dialogRef: MatDialogRef<DeleteConfirmationComponent> = this.dialog.open(DeleteConfirmationComponent);
     
       dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
+        if (result === true) {
           // User confirmed deletion, proceed with the delete request
           this.departmentService.deleteDepartment(id).subscribe({
             next: () => {
               // Remove the deleted education level from the Departments array using filter
-              this.departments = this.departments.filter((Department) => Department.departmentId !== id);
+             // this.filteredDepartment = this.departments.filter((Department) => Department.departmentId !== id);
+              this.departmentService.getAllDepartment().subscribe((departments) => {
+                this.filteredDepartment = departments;
+              });
+    
             },
             error(response) {
               console.log(response);

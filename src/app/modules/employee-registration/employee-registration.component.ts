@@ -271,24 +271,24 @@ validateAllFormFields(formGroup: FormGroup) {
     dialogRef.afterClosed().subscribe((result) => { 
       // If the user confirms the deletion, proceed with the deletion 
       if (result === true) { 
-        this.employeeservice.deleteEmployee(id).subscribe( 
-          () => { 
-            // Update the employee list by filtering out the deleted employee 
-            this.employees = this.employees.filter((employee) => employee.empId !== id); 
-            // Show a success message 
-            // this.showSnackBar('Employee deleted successfully!'); 
-            this.router.navigate(["/edit-employee"]); 
-            alert('Contact deleted successfully!');
-          }, 
-          (error) => { 
-            console.log(error); 
-            // Show an error message 
-            // this.showSnackBar('Failed to delete the employee. Please try again later.', 'mat-warn'); 
-          } 
-        ); 
-      } 
-    }); 
-  } 
+        this.employeeservice.deleteEmployee(id).subscribe({
+          next: () => {
+            this.employeeservice.getAllEmployees() 
+            .subscribe({ 
+              next: (employees) => { 
+                this.employees=employees; 
+              }, 
+              error(response){ 
+                console.log(response) 
+              }
+            });
+          
+              
+          } });
+      
+      }
+    }
+    )}
    
   // private showSnackBar(message: string, panelClass: string = 'mat-toolbar') { 
   //   this.snackBar.open(message, 'Close', { 

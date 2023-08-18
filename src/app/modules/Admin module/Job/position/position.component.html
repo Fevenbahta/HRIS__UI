@@ -3,7 +3,7 @@
 
 
   <app-shared-nav [buttons]="buttons"></app-shared-nav> 
- 
+
   <form (ngSubmit)="addposition()"> 
 <div class="row" style="margin:10px"> 
   
@@ -64,9 +64,9 @@
         <td>   
           <button  class="btn btn-sm btndanger" (click)="deletePosition(position.positionId)">
             <mat-icon>delete</mat-icon></button>
+            
       </td>
 
-        
           <!-- <td> <a [routerLink]="['/position','edit',position.id]">  
               View 
               </a> 
@@ -74,3 +74,4 @@
       </tr> 
   </tbody> 
 </table>
+

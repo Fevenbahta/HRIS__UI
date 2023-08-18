@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component } from '@angular/core';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 @Component({
   selector: 'app-branch',
   templateUrl: './branch.component.html',
@@ -95,6 +96,7 @@ buttons = [
         this.branchservice.deleteBranch(id).subscribe({
           next: (response) => {
             // Reload the branch list after successful deletion
+            this.dialog.open(DeletesucessfullmessageComponent)
             this.branchservice.getAllBranch().subscribe((branchs) => {
               this.branchs = branchs;
             });

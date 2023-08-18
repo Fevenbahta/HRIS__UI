@@ -69,6 +69,8 @@ import { AssignSupervisorComponent } from 'app/modules/Admin module/Job/assign-s
 import { HistoryComponent } from 'app/modules/history/history.component';
 import { DepartmentComponent } from 'app/modules/Admin module/Job/department/department.component';
 import { DivisionComponent } from 'app/modules/Admin module/Job/division/division.component';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+
 
 @NgModule({
   declarations: [
@@ -111,7 +113,8 @@ EditNavComponent,
 AssignSupervisorComponent,
 HistoryComponent,
 DepartmentComponent,
-DivisionComponent
+DivisionComponent,
+DeletesucessfullmessageComponent
 
 
   ],

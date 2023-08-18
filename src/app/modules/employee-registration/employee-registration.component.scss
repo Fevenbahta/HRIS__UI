@@ -64,3 +64,61 @@
   padding: 8px;
 }
 
+/* styles.css or your component-specific style file */
+
+/* Media query for devices with a maximum width of 768px */
+@media (max-width: 768px) {
+ 
+  /* Adjust form-field styles for smaller screens */
+  .form-field {
+    margin-bottom: 10px;
+  }
+
+  /* Adjust label styles for smaller screens */
+  .form-field label {
+    font-size: 12px;
+  }
+
+  /* Adjust input styles for smaller screens */
+  .form-field input {
+    font-size: 14px;
+  }
+  .sharednav{
+    width:70%;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .form-field {
+    margin-bottom: 10px;
+  }
+
+
+  .form-field label {
+    font-size: 12px;
+  }
+
+  /* Adjust input styles for smaller screens */
+  .form-field input {
+    font-size: 14px;
+  }
+
+  .sharednav{
+    width:70%;
+  }
+ 
+}
+
+
+
+/* Media query for devices with a maximum width of 1200px */
+@media (max-width: 348px) {
+  .sharednav{
+    width:50%;
+  }
+
+  /* Add more adjustments as needed */
+}
+
+

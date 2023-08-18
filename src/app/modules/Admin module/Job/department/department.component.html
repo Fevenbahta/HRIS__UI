@@ -1,21 +1,21 @@
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
 <div class="form-container"> 
-  <div class="row mt-5">
+
+<form (ngSubmit)="addDepartment()">   <div class="row mt-5">
     <div class="col-md-7"> 
-<form (ngSubmit)="addDepartment()"> 
     <div class="form-field"> 
     
       <input type="text" id="departmentName" placeholder=" " [(ngModel)]="addDepartmentRequest.description" name="addDepartmentRequest.description" required> 
      <label for="department">Department Level Name</label>  </div> 
- <div style="margin-top: 10px;"><button type="submit" class="btn  btn-sm btnsave">Save </button>
-    <div *ngIf="departmentSaved" class="btndanger btn-sm pull-right">
+ <div class="col-md-3"><button type="submit" class="btn  btn-sm btnsave">Save </button>
+    </div></div></div> <div *ngIf="departmentSaved" class="btndanger btn-sm pull-right">
         Successfully Added!
-      </div> </div>
+      </div> 
     
   </form></div> 
   
-</div></div> 
+
  <div>
 <input  class="search" type="search" placeholder="Search By DepartmentName..." [(ngModel)]="searchTerm" (input)="onSearch()">
 </div>

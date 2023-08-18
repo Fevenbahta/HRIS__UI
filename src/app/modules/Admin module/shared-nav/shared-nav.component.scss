@@ -131,4 +131,30 @@
   /* Add more styles as needed */
   
   /* Add more styles as needed */
-  
+  /* styles.css or your component-specific style file */
+
+/* Media query for devices with a maximum width of 576px */
+@media (max-width: 576px) {
+  .nav-item {
+width:50%
+  }
+
+  /* Adjust other styles as needed for smaller screens */
+}
+
+/* Media query for devices with a maximum width of 768px */
+@media (max-width: 768px) {
+  .nav-item {
+    width:70%
+  }
+
+  /* Adjust other styles as needed for medium-sized screens */
+}
+
+/* Media query for devices with a maximum width of 992px */
+@media (max-width: 992px) {
+  .nav-item {
+    width:80%
+  }
+
+}

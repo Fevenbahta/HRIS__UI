@@ -12,25 +12,25 @@
         </div>
     </div> -->
 
-
-      
-<app-header (toggleSideBarForMe)="sideBarToggler($event)"></app-header>
-
-<mat-drawer-container>
-    <mat-drawer mode="side" [opened]="sideBarOpen">
-        <div  class="sidebar " data-color="green" data-background-color="white"  style="border-top-right-radius: 10%; border-bottom-right-radius: 10%; overflow: hidden;width: 230px">
-        <app-sidebar></app-sidebar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+           
+                <app-sidebar></app-sidebar>
+            </div>
+            <div class="col-md-10">
+                <app-header (toggleSideBarForMe)="sideBarToggler()"></app-header>
+                <div class="row">
+                    <div class="col-md-12 mt-4">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+                <app-footer></app-footer>
+            </div>
         </div>
-    </mat-drawer>
-    <mat-drawer-content><div>
-        <router-outlet></router-outlet></div>
-    </mat-drawer-content>
-</mat-drawer-container>
-
-<app-footer></app-footer>
-
-
-
+    </div>
+    
+    
 
 
 

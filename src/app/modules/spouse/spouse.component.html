@@ -38,14 +38,17 @@
                               <mat-datepicker-toggle matSuffix [for]="dateofbirthPicker"></mat-datepicker-toggle>
                               <mat-datepicker #dateofbirthPicker></mat-datepicker>
                             </mat-form-field>
-                             </div></div> <div> <button type="button" class="btn btn-sm btnsave" (click)="addSpouse()">
-                              <mat-icon>add</mat-icon>Add</button>
-                   </div>
-          
-                          
-                            <div *ngIf="spouseSaved" class="alert btndanger btn-sm pull-right">
-                          Added Successfully!
-                          </div></div>
+                             </div></div> 
+                             <button type="button" class="btn btn-sm btnsave" *ngIf="spouse.id!=undefined"  (click)="updateSpouse()">Update</button>
+             
+                             <div *ngIf="spouseUpdated" class="alert btndanger btn-sm pull-right">
+                               Updated successfully!
+                             </div>
+                             <button type="button" class="btn btn-sm btnsave" *ngIf="spouse.id===undefined" (click)="addSpouse()">Add</button>
+                                  
+                             <div *ngIf="spouseSaved" class="alert btndanger btn-sm pull-right">
+                           Added successfully!
+                           </div>   </div>
                        
                          
                         <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">save Profile</button> -->

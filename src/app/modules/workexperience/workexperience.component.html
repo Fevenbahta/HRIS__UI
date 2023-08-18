@@ -18,27 +18,24 @@
               <div class="card-body">
   <div class="row">
     <div class="col-md-4 form-field">
-      <input  placeholder="" type="text" name="companyName" [(ngModel)]="addWorkExperienceRequest.companyName">
+      <input  placeholder=" " type="text" name="companyName" [(ngModel)]="workExperience.companyName">
       <label>Company Name</label>
     </div>
     <div class="col-md-4 form-field">
-      <input  placeholder=" " type="text" name="postionHeld" [(ngModel)]="addWorkExperienceRequest.postionHeld">
+      <input  placeholder=" " type="text" name="postionHeld" [(ngModel)]="workExperience.postionHeld">
       <label>Position Held</label>
     </div>
   </div>
 </div>
 <div class="card-body">
   <div class="row">
+    
     <div class="col-md-4 form-field">
-      <input  placeholder="" type="text" name="description" [(ngModel)]="addWorkExperienceRequest.description">
-      <label>Description</label>
-    </div>
-    <div class="col-md-4 form-field">
-      <input  placeholder=" " type="text" name="salary" [(ngModel)]="addWorkExperienceRequest.salary">
+      <input  placeholder=" " type="text" name="salary" [(ngModel)]="workExperience.salary">
       <label>Salary Amount</label>
     </div>
     <div class="col-md-4 form-field">
-      <input  placeholder="" type="text" name="reasonTermination" [(ngModel)]="addWorkExperienceRequest.reasonTermination">
+      <input  placeholder=" " type="text" name="reasonTermination" [(ngModel)]="workExperience.reasonTermination">
       <label>Reason for Termination</label>
     </div>
   </div>
@@ -47,7 +44,7 @@
   <div class="row">
     <div class="col-md-6">
       <mat-form-field style="height: 65px; width:160px" class="example-full-width">
-        <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="addWorkExperienceRequest.from">
+        <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="workExperience.from">
         <mat-label>Start Date</mat-label>
         <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
         <mat-datepicker #fromPicker></mat-datepicker>
@@ -55,7 +52,7 @@
     </div>
     <div class="col-md-6">
       <mat-form-field style="height: 65px; width:160px" class="example-full-width">
-        <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="addWorkExperienceRequest.to">
+        <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="workExperience.to">
         <mat-label>End Date</mat-label>
         <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
         <mat-datepicker #toPicker></mat-datepicker>
@@ -64,18 +61,20 @@
   </div>
 </div>
 
-              <button type="button" class="btn btn-sm btnsave" (click)="addWorkExperience()">
-                <mat-icon>add</mat-icon>Add</button>
+   <button type="button" class="btn btn-sm btnsave"  *ngIf="workExperience.id!=undefined" (click)="updateWorkExperience()">Update</button>
               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
                -->
-              <div *ngIf="workExperienceSaved" class="alert btndanger btn-sm pull-right">
-              Added successfully!
+              <div *ngIf="workExperienceUpdated" class="alert btndanger btn-sm pull-right">
+                Updated successfully!
               </div>
-              <div class="clearfix"></div></form>
+              <button type="button" class="btn btn-sm btnsave"  *ngIf="workExperience.id===undefined" (click)="addWorkExperience()">Add</button>
+                     
+              <div *ngIf="workExperienceSaved" class="alert btndanger btn-sm pull-right">
+          Added successfully!
+            </div>
+          </form>
           </div>
         </div>
-        <!-- qualification.component.html -->
-  
   <div class="container">
     
   
@@ -89,6 +88,7 @@
       <thead>
         <tr>
           <th>Company Name</th>
+         
           <th>Position Held</th>
           <th>From</th>
           <th>To</th>
@@ -98,6 +98,7 @@
         <!-- Use *ngFor to loop through the workExperiences array and display each work experience record -->
         <tr *ngFor="let workExperience of workExperiences">
           <td>{{ workExperience.companyName }}</td>
+         
           <td>{{ workExperience.postionHeld }}</td>
           <td>{{ workExperience.from }}</td>
           <td>{{ workExperience.to }}</td>

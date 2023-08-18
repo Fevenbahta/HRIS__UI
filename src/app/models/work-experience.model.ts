@@ -1,7 +1,7 @@
 export interface WorkExperience{
   pId:number;
     id: string;
-    description:string;
+    
   createdBy: string,
   createdDate: string,
   updatedDate: string,

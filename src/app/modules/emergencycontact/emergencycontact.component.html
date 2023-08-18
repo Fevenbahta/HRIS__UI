@@ -19,7 +19,7 @@
                             <div class="row">
                               <div class="col-md-4 form-field">
                                 
-                               <input placeholder="" type="text" name="name" [(ngModel)]="emergencycontact.name">
+                               <input placeholder=" " type="text" name="name" [(ngModel)]="emergencycontact.name">
                              <label for="name">Name</label>  </div>
                               <div class="col-md-4 form-field">
                                
@@ -65,18 +65,23 @@
                               </div>
                             </div>
                           </div>
-                 
-                    <div> <button type="button" class="btn btn-sm btnsave" (click)="addEmergencyContact()">
-                      <mat-icon>add</mat-icon>Add</button>
-                    </div>
-                         <div *ngIf="emergencycontactSaved" class="alert btndanger btn-sm pull-right">
-                        Added successfully!
-                       </div> <div class="clearfix"></div>
+             
+                      
+                          <div> <button type="button" class="btn btn-sm btnsave" *ngIf="emergencycontact.id!=undefined"  (click)="updateEmergencyContact()">Update</button>
+                          </div>
+                               <div *ngIf="emergencyContactUpdated" class="alert btndanger btn-sm pull-right">
+                              Update successfully!
+                             </div>
+                           
+                             
+                             <button type="button" class="btn btn-sm btnsave" *ngIf="emergencycontact.id===undefined" (click)="addEmergencyContact()">Add</button>
                          
-                         
-                </form>
-            </div>
-        </div>
+                                  <div *ngIf="emergencycontactSaved" class="alert btndanger btn-sm pull-right">
+                                 Added successfully!
+                                </div>
+                      </form>
+                  </div>
+              </div>
         <h6>Emergency Contact List</h6>
   <table   class="table table-bordered table-striped">
     <thead>

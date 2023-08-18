@@ -21,11 +21,11 @@
                 </div>
                 <div class="row">
                   <div class="col-md-4 form-field">
-                    <input  placeholder="" type="text" name="nameOfInstitute" [(ngModel)]="education.nameOfInstitute" required>
+                    <input  placeholder=" " type="text" name="nameOfInstitute" [(ngModel)]="education.nameOfInstitute" required>
                     <label>Institution Name</label>
                   </div>
                   <div class="col-md-4 form-field">
-                    <input  placeholder="" type="text" name="fieldOfStudy" [(ngModel)]="education.fieldOfStudy">
+                    <input  placeholder=" " type="text" name="fieldOfStudy" [(ngModel)]="education.fieldOfStudy">
                     <label>Field Of Study</label>
                   </div>
                   <div class="col-md-4 form-field">
@@ -55,19 +55,23 @@
                   </div>
                   </div>
                 </div> 
-              <button type="button" class="btn btn-sm btnsave" (click)="addEducation()">
-                <mat-icon>add</mat-icon>Add</button>
-             
-              <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
-              -->
-              <div *ngIf="educationSaved" class="alert btndanger btn-sm pull-right">
-                Added successfully!
-              </div>
-            </form>
-  </div>
-            <!-- Work Experience Form -->
-            </div>
-        <!-- qualification.component.html -->
+                <div>
+                  <button type="button" class="btn btn-sm btnsave"  *ngIf="education.id!=undefined"  (click)="updateEducation()">Update</button>
+                      
+               
+               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
+                  -->
+                  <div *ngIf="educationUpdated" class="alert btndanger btn-sm pull-right">
+                    Updated successfully!
+                  </div>
+                   
+                  <button type="button" class="btn btn-sm btnsave" *ngIf="education.id===undefined" (click)="addEducation()">Add</button>
+                         
+                  <div *ngIf="educationSaved" class="alert btndanger btn-sm pull-right">
+            Added successfully!
+                </div></div>
+                </form>
+      </div>
   
   <div class="container">
     

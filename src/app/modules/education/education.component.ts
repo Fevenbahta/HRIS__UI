@@ -18,7 +18,7 @@ export class EducationComponent {
 
   educationlevels:EducationLevel[]= [];
   selectedEducationLevel: string='';
-  
+  educationUpdated:boolean=false;
   educationSaved: boolean = false;
   workExperienceSaved: boolean = false;
 
@@ -131,11 +131,58 @@ subscribe({
       }
     });
   }
+  updateEducation(): void { 
+    console.log(this.education)
+   
+    this.education.eductionName = this.selectedEducationLevel;
+    this.educationservice.updateEducation(this.education, this.education.id).subscribe({
+      next: () => {
+        this.educationUpdated = true;
+        setTimeout(() => {
+  this.educationUpdated = false;
+        }, 
+        )
+        this.educationservice.getAllEducation().subscribe({
+          next: (educations) => {
+            this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+            ;
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
+    this.education= {
+      pId: 0,
+      id:undefined,
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+      empId: undefined,
+      from: '',
+      to: "",
+      nameOfInstitute: '',
+      fieldOfStudy: '',
+      eductionName: '',
+    };
+  }
+
+
+
 
   editEducation(education: Education): void {
-    // Here, we will navigate to the edit page for the selected Education.
-    this.router.navigate(['/edit-education', education.id]);
+    const educationToEdit = this.educations.find(education => education.id === education.id);
+    this.education = educationToEdit;
+    this.selectedEducationLevel=educationToEdit.eductionName
   }
+
+
   deleteEducation(Education: Education): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);
 

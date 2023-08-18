@@ -20,7 +20,7 @@ export class EditWorkexperienceComponent {
   workExperience: WorkExperience = {
     pId: 0,
     id: undefined,
-    description: "",
+
     createdBy: "",
     createdDate: "2023-07-26T06:13:52.512Z",
     updatedDate: "2023-07-26T06:13:52.512Z",
@@ -102,13 +102,13 @@ export class EditWorkexperienceComponent {
     this.workExperience = {
       pId: 0,
       id: undefined,
-      description: "",
+ 
       createdBy: "",
       createdDate: "2023-07-26T06:13:52.512Z",
       updatedDate: "2023-07-26T06:13:52.512Z",
       updatedBy: "",
       status: 0,
-      empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
+      empId: "",
       companyName: "",
       postionHeld: "",
       from: "",
@@ -168,7 +168,7 @@ export class EditWorkexperienceComponent {
           pId: 0,
           id: undefined,
       
-          description: "",
+        
           createdBy: "",
           createdDate: "",
           updatedDate: "",

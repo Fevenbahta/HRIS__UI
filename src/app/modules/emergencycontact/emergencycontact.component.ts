@@ -17,7 +17,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EmergencycontactComponent implements OnInit {
   emergencycontactSaved: boolean = false;
   emergencycontacts: EmergencyContact[] = []; 
-
+  emergencyContactUpdated:boolean=false;
   emergencycontact:EmergencyContact={
     pId:0,
     id:  undefined,
@@ -113,9 +113,60 @@ addEmergencyContact() {
 }
 })}
 
+
+updateEmergencyContact(): void {
+  this.emergencyContactUpdated=true;
+  this.emergencycontactservice.updateEmergencyContact
+  (this.emergencycontact, this.emergencycontact.id)
+  .subscribe({
+  
+    next: (emergencyContact) => {
+      setTimeout(() => {
+        this.emergencyContactUpdated = false;
+      }, 2000);
+      this.emergencycontactservice.getAllEmergencyContact()
+      .subscribe({
+        next: (emergencycontacts) => {
+          // Filter emergency contacts for the current employee
+          this.emergencycontacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+        },
+        error(response) {
+          console.log(response);
+        },
+      });
+    
+      this.emergencycontact = {
+        pId:0,
+        id:  undefined,
+       createdBy: '', 
+         createdDate: "2023-07-20T13:56:00.062Z", 
+         updatedDate: "2023-07-20T13:56:00.062Z", 
+         updatedBy: '', 
+         empId: "",
+        region: '', 
+         town: '', 
+         phoneNumber: '', 
+         houseNo:'',
+         subCity:'',
+         status:0,
+         name: "",
+         kebele: "",
+         relationship: "",
+      };
+    },
+    error: (response) => {
+      console.log(response);
+    }
+  });
+
+}
+
+
 editEmergencyContact(emergencyContact: EmergencyContact): void {
   // Here, we will navigate to the edit page for the selected EmergencyContact.
-  this.router.navigate(["/edit-emergencyContact", emergencyContact.id]);
+
+  const contactToEdit = this.emergencycontacts.find(contact => contact.id === emergencyContact.id);
+  this.emergencycontact = contactToEdit;
 }
 deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
    const dialogRef = this.dialog.open(DeleteConfirmationComponent);

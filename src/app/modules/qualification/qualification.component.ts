@@ -36,7 +36,7 @@ export class QualificationComponent implements OnInit {
   addWorkExperienceRequest: WorkExperience = {
     pId: 0,
     id: undefined,
-    description: "",
+
     createdBy: "",
     createdDate: "2023-07-26T06:13:52.512Z",
     updatedDate: "2023-07-26T06:13:52.512Z",
@@ -122,7 +122,7 @@ this.workExperienceService.getAllWorkExperience()
           pId: 0,
           id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       
-          description: "",
+      
           createdBy: "",
           createdDate: "",
           updatedDate: "",

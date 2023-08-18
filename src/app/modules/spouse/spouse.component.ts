@@ -16,7 +16,7 @@ export class SpouseComponent implements OnInit {
 
   spouseSaved: boolean = false;
   spouses: Spouse[] = []; 
-
+  spouseUpdated:boolean =false;
   spouse: Spouse = {
     pId: 0,
     id: undefined,
@@ -104,10 +104,55 @@ export class SpouseComponent implements OnInit {
       }
     });
   }
+  
+  updateSpouse(): void {
+    this.spouseService.updateSpouse(this.spouse, this.spouse.id).subscribe(
+      () => {
+   
+        this.spouseUpdated = true;
+        //  this.router.navigate(['employee-registration/job-description']);
+          setTimeout(() => {
+            this.spouseUpdated= false;
+          }, 2000);
+
+          this.spouseService.getAllSpouse() 
+          .subscribe({ 
+            next: (spouse) => { 
+              this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+      
+                  }, 
+            error(response) { 
+              console.log(response); 
+            }, })
+
+          this.spouses.push({ ...this.spouse });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    this.spouse= {
+      pId: 0,
+      id: undefined,
+      name: "",
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+      empId: " ",
+     dateOfBirth:" ",
+    relationship: '',
+  
+    };
+  
+  }
   editSpouse(spouse: Spouse): void {
     // Here, we will navigate to the edit page for the selected Spouse.
-    this.router.navigate(['/edit-spouse', spouse.id]);
+    const contactToEdit = this.spouses.find(contact => contact.id === spouse.id);
+    this.spouse = contactToEdit;
   }
+
   deleteSpouse(spouse: Spouse): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);
 

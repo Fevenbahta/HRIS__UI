@@ -15,8 +15,9 @@ import { Component } from '@angular/core';
 })
 export class WorkexperienceComponent {
 
-    workExperience: WorkExperience;
+
     workExperienceSaved: boolean = false;
+    workExperienceUpdated: boolean = false;
     workExperiences: WorkExperience[] = [];
   
     buttons = [
@@ -25,10 +26,10 @@ export class WorkexperienceComponent {
       {label:'Employee History', route:'/history'}
     ];
   
-    addWorkExperienceRequest: WorkExperience = {
+    workExperience: WorkExperience = {
       pId: 0,
       id: undefined,
-      description: "",
+
       createdBy: "",
       createdDate: "2023-07-26T06:13:52.512Z",
       updatedDate: "2023-07-26T06:13:52.512Z",
@@ -68,8 +69,8 @@ export class WorkexperienceComponent {
     }
   
     addWorkExperience() {
-      this.addWorkExperienceRequest.empId = this.employeeIdService.employeeId;
-      this.workExperienceService.addWorkExperience(this.addWorkExperienceRequest).subscribe({
+      this.workExperience.empId = this.employeeIdService.employeeId;
+      this.workExperienceService.addWorkExperience(this.workExperience).subscribe({
         next: () => {
         //  this.router.navigate(['/employee-registration/training']); 
         this.workExperienceSaved = true;
@@ -88,13 +89,13 @@ export class WorkexperienceComponent {
       console.log(response);
     },
   });
-          this.workExperiences.push({ ...this.addWorkExperienceRequest });
+          this.workExperiences.push({ ...this.workExperience });
           // Reset the form fields
-          this.addWorkExperienceRequest = {
+          this.workExperience = {
             pId: 0,
             id: undefined,
         
-            description: "",
+           
             createdBy: "",
             createdDate: "",
             updatedDate: "",
@@ -115,10 +116,54 @@ export class WorkexperienceComponent {
       });
     }
   
-    editWorkExperience(WorkExperience: WorkExperience): void {
-      // Here, we will navigate to the edit page for the selected WorkExperience.
-      this.router.navigate(['/edit-workExperience', WorkExperience.id]);
-    }
+  updateWorkExperience(): void {
+
+    // Assuming the WorkExperienceService has a method to update work experience
+    this.workExperienceService.updateWorkExperience(this.workExperience, this.workExperience.id).subscribe({
+      next: () => {    this.workExperienceUpdated = true;
+        setTimeout(() => {
+          this.workExperienceUpdated = false;
+        }, 2000);
+        this.workExperienceService.getAllWorkExperience().subscribe({
+          next: (workExperience) => {
+            this.workExperiences = workExperience.filter(workexperience => workexperience.empId === this.employeeIdService.employeeId);
+  
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
+      },
+
+      
+      error: (response) => {
+        console.log(response);
+      }
+    });
+ 
+    this.workExperience = {
+      pId: 0,
+      id: undefined,
+ 
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+      empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
+      companyName: "",
+      postionHeld: "",
+      from: "",
+      to: "",
+      salary: 0,
+      reasonTermination: "",
+    };
+  }
+
+  editWorkExperience(WorkExperience: WorkExperience): void {
+    const contactToEdit = this.workExperiences.find(workExperience => workExperience.id === workExperience.id);
+    this.workExperience = contactToEdit;
+  }
     deleteWorkExperience(workExperience: WorkExperience): void {
       const dialogRef = this.dialog.open(DeleteConfirmationComponent);
 

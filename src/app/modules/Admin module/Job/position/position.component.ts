@@ -41,24 +41,23 @@ fifthSupervisor:"",
 
   }
 
-  buttons = [
-    { label: 'Structure',
-    dropdownOptions: [
-       { label: 'position',route:"/admin/position"  },
-       { label: 'Department',  route:"/admin/department"  },
-       { label: 'Division',  route:"/admin/division"  },
-       { label: 'branch',  route:"/admin/branch"    }
+buttons = [
+ { label: 'Structure',
+ dropdownOptions: [
+    { label: 'position',route:"/admin/position"  },
+    { label: 'Department',  route:"/admin/department"  },
+    { label: 'Division',  route:"/admin/division"  },
+    { label: 'branch',  route:"/admin/branch"  }
+
+  ]},
+     { label: 'Step', route:"/admin/step" },
+    { label: 'EducationLevel' , route:"/admin/education-level"},
+     { label: 'grade', route:"/admin/grade" },
+     { label: 'Supervisor', route:"/admin/supervisor" },
+     { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
    
-     ]},
-        { label: 'Step', route:"/admin/step" },
-       { label: 'EducationLevel' , route:"/admin/education-level"},
-        { label: 'grade', route:"/admin/grade" },
-        { label: 'Supervisor', route:"/admin/supervisor" },
-        { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
-   
-   
-     ];
-  
+
+  ];
   
   filteredPosition: Position[] = []; 
   searchTerm: string = ''; 

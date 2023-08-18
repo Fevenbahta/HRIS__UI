@@ -20,6 +20,9 @@ export class PositionComponent implements OnInit {
 selectedDivision:string;
 positiondeleted:boolean;
 successMessage: string;
+positionSaved:boolean=false
+
+
 positions:Position[]=[];
 
   addPositionRequest:Position={
@@ -95,6 +98,10 @@ this.positionservice.addPosition(this.addPositionRequest)
 .subscribe({
 next:(position)=>{
   
+  this.positionSaved = true;
+  setTimeout(() => {
+    this.positionSaved = false;
+  }, 2000);
   this.positions.push({ ...this.addPositionRequest });
 
   this.addPositionRequest = {

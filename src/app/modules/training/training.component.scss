@@ -24,13 +24,15 @@
   
   .form-field label {
     position: absolute;
-    pointer-events: none;
-    left: 0;
-    top: 5px;
-    transition: 0.2s ease all;
+    top: 0;
+    left: 5px;
     font-size: 14px;
-    color: #696666;
+    color: #747070;
+    pointer-events: none;
+    transition: 0.2s ease all;
+
   }
+  
   
   ::ng-deep .mat-datepicker-content .mat-calendar {
     width: 229px!important;

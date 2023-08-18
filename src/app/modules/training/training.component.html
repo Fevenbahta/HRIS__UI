@@ -14,7 +14,7 @@
         </div>
         <div class="card-body">
         
-          <form (ngSubmit)="addTraining()">
+          <form >
             
             <div class="row"> 
               <div class="card-body">
@@ -45,15 +45,24 @@
               </div>
             </div>
             
-            <div><button type="button" class="btn btn-sm btnsave" (click)="addTraining()">
+            <div><button type="button" class="btn btn-sm btnsave" *ngIf="training.id===undefined" (click)="addTraining()">
               <mat-icon>add</mat-icon>Add</button>
        </div>
                  <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Training</button>
              -->
-            <div *ngIf="trainingSaved" class="alert btndanger btn-sm pull-right">
+            <div *ngIf="trainingSaved" class=" btndanger btn-sm pull-right">
               Added successfully!
             </div>
-            <div class="clearfix"></div></form>
+
+
+            <button type="button" class="btn btn-sm btnsave" *ngIf="training.id!=undefined"(click)="updateTraining()">Update</button>
+       
+          <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Training</button> -->
+
+        <div *ngIf="trainingUpdated" class=" btndanger btn-sm pull-right">
+          Updated successfully!
+        </div>
+      </form>
         </div>
       </div>
       <h6>Training Records</h6>

@@ -13,19 +13,19 @@
                         <p class="card-category">Complete your contacts</p>
                     </div>
                     <div class="card-body">
-                        <form (ngSubmit)="addContact()">
+                        <form >
                           <div class="card-body">
                             <div class="row">
                               <div class="col-md-6">
                                 <div class="form-field">
-                                  <input  id="region" placeholder=" " name="region" [(ngModel)]="addContactRequest.region" type="text" required>
+                                  <input  id="region" placeholder=" " name="region" [(ngModel)]="contact.region" type="text" required>
                                   <label for="region">Region</label>
                             
                                 </div>
                               </div>
                               <div class="col-md-6">
                                 <div class="form-field">
-                                  <input id="town" placeholder=" " type="text" name="town" [(ngModel)]="addContactRequest.town">
+                                  <input id="town" placeholder=" " type="text" name="town" [(ngModel)]="contact.town">
                                   <label for="town">Town</label>
                                 </div>
                               </div>
@@ -36,13 +36,13 @@
                             <div class="row">
                               <div class="col-md-6">
                                 <div class="form-field">
-                                  <input  id="subcity" placeholder=" " type="text" name="subcity" [(ngModel)]="addContactRequest.subCity">
+                                  <input  id="subcity" placeholder=" " type="text" name="subcity" [(ngModel)]="contact.subCity">
                                   <label for="subcity">Subcity</label>
                                 </div>
                               </div>
                               <div class="col-md-6">
                                 <div class="form-field">
-                                  <input  id="woreda" placeholder=" " type="text" name="woreda" [(ngModel)]="addContactRequest.woreda">
+                                  <input  id="woreda" placeholder=" " type="text" name="woreda" [(ngModel)]="contact.woreda">
                                   <label for="woreda">Woreda</label>
                                 </div>
                               </div>
@@ -53,13 +53,13 @@
                             <div class="row">
                               <div class="col-md-6">
                                 <div class="form-field">
-                                  <input id="kebele" placeholder=" " type="text" name="kebele" [(ngModel)]="addContactRequest.Kebele">
+                                  <input id="kebele" placeholder=" " type="text" name="kebele" [(ngModel)]="contact.Kebele">
                                   <label for="kebele">Kebele</label>
                                 </div>
                               </div>
                               <div class="col-md-6">
                                 <div class="form-field">
-                                  <input id="houseNumber" placeholder=" " type="text" name="houseNumber" [(ngModel)]="addContactRequest.houseNo">
+                                  <input id="houseNumber" placeholder=" " type="text" name="houseNumber" [(ngModel)]="contact.houseNo">
                                   <label for="houseNumber">House Number</label>
                                 </div>
                               </div>
@@ -75,13 +75,13 @@
                             <div class="row">
                               <div class="col-md-4">
                                 <div class="form-field">
-                                  <input id="postNumber" placeholder=" " type="text" name="postNumber" [(ngModel)]="addContactRequest.postCode">
+                                  <input id="postNumber" placeholder=" " type="text" name="postNumber" [(ngModel)]="contact.postCode">
                                   <label for="postNumber">P.O.Box</label>
                                 </div>
                               </div>
                               <div class="col-md-4">
                                 <div class="form-field">
-                                  <input id="email" placeholder=" " type="text" name="email" [(ngModel)]="addContactRequest.email">
+                                  <input id="email" placeholder=" " type="text" name="email" [(ngModel)]="contact.email">
                                   <label for="email">Email</label>
                                 </div>
                               </div>
@@ -90,23 +90,30 @@
 
                               <div class="col-md-4">
                                 <div class="form-field">
-                                  <input type="text" placeholder=" " name="phoneNumber" [(ngModel)]="addContactRequest.phoneNumber">
+                                  <input type="text" placeholder=" " name="phoneNumber" [(ngModel)]="contact.phoneNumber">
                                   <label>Phone Number</label>
                                 </div>
-                                <mat-error *ngIf="!addContactRequest.phoneNumber && contactForm.get('phoneNumber').touched">
+                                <mat-error *ngIf="!contact.phoneNumber && contactForm.get('phoneNumber').touched">
                                   Phone Number is required
                                 </mat-error>
                               </div>
                             </div>
-                          </div>
-                          
-                          <button  type="button" class="btn btn-sm btnsave" (click)="addContact()">
+                          </div>       <div> <button mat-raised-button  class="btn btn-sm btnsave"(click)="updateContact()" *ngIf="contact.id!=undefined"  style="background-color:#76a53b;">Update  </button>
+                  
+                             <div *ngIf="contactUpdate" class=" btndanger btn-sm pull-right">
+                               Successfully Updated!
+                             </div></div>
+                          <div>
+                     
+
+                    
+           
+                             <button   class="btn btn-sm btnsave" type="submit"(click)="addContact()" *ngIf="contacts.length === 0">
                             
                             <mat-icon>add</mat-icon>Add</button>
                             <div *ngIf="contactSaved" class="alert btndanger btn-sm pull-right">
                         Added successfully!
-                             </div> 
-                         
+                             </div> </div> 
                            
 
                 </form>

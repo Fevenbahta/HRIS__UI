@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainingComponent implements OnInit {
   trainingSaved: boolean = false;
+  trainingUpdated: boolean = false;
   trainings: Training[] = [];
 
 
@@ -98,12 +99,47 @@ export class TrainingComponent implements OnInit {
     });
   }
 
-  editTraining(training: Training): void {
-    // Here, we will navigate to the edit page for the selected training.
-    this.router.navigate(['/edit-training', training.id]);
-
+  updateTraining(): void {
+    this.trainingService.updateTraining(this.training,this.training.id).subscribe(
+      () => {       this.trainingUpdated=true; 
+        setTimeout(() => {
+          this.trainingUpdated=false; 
+        }, 2000);
+ 
+        this.trainingService.getAllTraining() 
+        .subscribe({ 
+          next: (training) => { 
+            this.trainings = training.filter(training => training.empId === this.employeeIdService.employeeId);
+    
+                }, 
+          error(response) { 
+            console.log(response); 
+          }, 
+      });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    this.training = {
+      pId: 0,
+      id: undefined,
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+      empId: " ",
+      typeOfTraining: "",
+      from: "",
+      to: "",
+    
+    };
   }
-
+  editTraining(training: Training): void {
+    const contactToEdit = this.trainings.find(training => training.id === training.id);
+    this.training = contactToEdit;
+  }
   deleteTraining(training: Training): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
       width: '300px', // Set the desired width of the dialog

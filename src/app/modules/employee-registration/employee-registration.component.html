@@ -208,10 +208,15 @@
                     </div>
                   </div>
   
-              <button type="button" class="btn btn-sm btnsave" (click)="addEmployee()" >
+              <button type="button" class="btn btn-sm btnsave" *ngIf="employees.length === 0" (click)="addEmployee()" >
                 <mat-icon>add</mat-icon>Add</button>
               <div *ngIf="employeeSaved" class="alert btndanger btn-sm pull-right">
                 Successfully Added!
+              </div>
+
+              <button  type="submit" *ngIf="edit==true" class="btn btn-sm pull-left btnsave" >  <mat-icon>add</mat-icon>update</button>
+              <div *ngIf="employeeUpdated" class="alert btndanger btn-sm pull-right">
+                Successfully Updated!
               </div>
               <div class="clearfix"></div>
             </form>

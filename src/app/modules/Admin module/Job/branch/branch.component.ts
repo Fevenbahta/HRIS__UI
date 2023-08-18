@@ -14,6 +14,7 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
 })
 export class BranchComponent  {
   branchs:Branch[]=[]
+  branchSaved:boolean=false
   addBranchRequest:Branch={
   
     id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -63,6 +64,10 @@ buttons = [
   this.branchservice.addBranch(this.addBranchRequest)
   .subscribe({
   next:(branch)=>{
+    this.branchSaved = true;
+    setTimeout(() => {
+      this.branchSaved = false;
+    }, 2000);
     this.branchs.push({ ...this.addBranchRequest });
 
     this.addBranchRequest = {

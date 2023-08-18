@@ -8,7 +8,10 @@
     
       <input type="text" id="departmentName" placeholder=" " [(ngModel)]="addDepartmentRequest.description" name="addDepartmentRequest.description" required> 
      <label for="department">Department Level Name</label>  </div> 
- <div style="margin-top: 10px;"><button type="submit" class="btn  btn-sm btnsave">Save </button> </div>
+ <div style="margin-top: 10px;"><button type="submit" class="btn  btn-sm btnsave">Save </button>
+    <div *ngIf="departmentSaved" class="btndanger btn-sm pull-right">
+        Successfully Added!
+      </div> </div>
     
   </form></div> 
   

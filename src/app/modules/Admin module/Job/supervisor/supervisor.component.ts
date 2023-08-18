@@ -14,6 +14,7 @@ import { PositionService } from 'app/service/position.service';
   styleUrls: ['./supervisor.component.css']
 })
 export class SupervisorComponent {
+  supervisorSaved:boolean=false
   positions:Position[]= [];
   selectedPosition: string='';
   supervisors:Supervisor[]=[];
@@ -77,7 +78,10 @@ buttons = [
     this.supervisorservice.addSupervisor(this.addSupervisorRequest)
     .subscribe({
     next:(supervisor)=>{
-
+      this.supervisorSaved = true;
+      setTimeout(() => {
+        this.supervisorSaved = false;
+      }, 2000);
       // Add the current work experience to the array
       this.supervisors.push({ ...this.addSupervisorRequest });
       // Reset the form fields

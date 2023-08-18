@@ -13,6 +13,7 @@ import { DepartmentService } from 'app/service/department.service';
 })
 export class DepartmentComponent implements OnInit {
 departments:Department[]=[];
+departmentSaved:boolean=false
 filteredDepartment: Department[] = []; 
 searchTerm: string = ''; 
 
@@ -65,6 +66,10 @@ status:0,
     this.departmentService.addDepartment(this.addDepartmentRequest)
     .subscribe({
     next:(department)=>{
+      this.departmentSaved = true;
+      setTimeout(() => {
+        this.departmentSaved = false;
+      }, 2000);
       this.departments.push({ ...this.addDepartmentRequest });
 
       this.addDepartmentRequest = {

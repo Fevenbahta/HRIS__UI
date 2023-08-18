@@ -18,7 +18,10 @@
               <input id="branchCity" rows="1" required placeholder=" " [(ngModel)]="addBranchRequest.city" name="city" required>
                   <label for="branchCity">Branch City</label>  </div> 
           </div> 
-        </div> <div class="col-md-3"> <button type="submit" class="btn btn-sm btnsave">Save</button> </div>
+        </div> <div class="col-md-3"> <button type="submit" class="btn btn-sm btnsave">Save</button>
+          <div *ngIf="branchSaved" class=" btndanger btn-sm pull-right">
+            Successfully Added!
+          </div> </div>
            
         </form> 
        

@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { PositionService } from 'app/service/position.service';
 import { Component, OnInit } from '@angular/core';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-position',
@@ -17,8 +18,8 @@ import { Component, OnInit } from '@angular/core';
 export class PositionComponent implements OnInit {
   divisions:Division[]= [];
 selectedDivision:string;
-
-
+positiondeleted:boolean;
+successMessage: string;
 positions:Position[]=[];
 
   addPositionRequest:Position={
@@ -93,6 +94,7 @@ addposition(){
 this.positionservice.addPosition(this.addPositionRequest)
 .subscribe({
 next:(position)=>{
+  
   this.positions.push({ ...this.addPositionRequest });
 
   this.addPositionRequest = {
@@ -140,14 +142,26 @@ onSearch() {
   }
 deletePosition(id: string) {
   const dialogRef = this.dialog.open(DeleteConfirmationComponent);
-
+ 
   dialogRef.afterClosed().subscribe((result) => {
     if (result) {
       // User confirmed deletion, proceed with the delete request
       this.positionservice.deletePosition(id).subscribe({
         next: () => {
-          // Remove the deleted position from the positions array using filter
-          this.positions = this.positions.filter((position) => position.positionId !== id);
+        //  this.positiondeleted = true; 
+          this.dialog.open(DeletesucessfullmessageComponent)
+          this.positionservice.getAllPosition()
+ 
+          .subscribe({
+            next: (positions) => {
+              this.positions=positions;
+              this.filteredPosition=this.positions;
+              
+            },
+            error(response){
+              console.log(response)
+            }
+          });
         },
         error(response) {
           console.log(response);

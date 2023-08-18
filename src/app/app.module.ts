@@ -25,9 +25,11 @@ import { HistoryComponent } from './modules/history/history.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
+   
   
 
 

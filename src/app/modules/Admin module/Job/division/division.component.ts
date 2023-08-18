@@ -135,8 +135,15 @@ deleteDivision(id: string) {
       this.divisionservice.deleteDivision(id).subscribe({
         next: () => {
           // Remove the deleted Division from the Divisions array using filter
-          this.divisions = this.divisions.filter((division) => division.divisionId !== id);
-        },
+          this.divisionservice.getAllDivisions()
+ 
+          .subscribe({
+            next: (Divisions) => {
+              this.divisions=Divisions;
+              this.filteredDivision=this.divisions;
+            },
+         // this.divisions = this.divisions.filter((division) => division.divisionId !== id);
+           } )  },
         error(response) {
           console.log(response);
         },

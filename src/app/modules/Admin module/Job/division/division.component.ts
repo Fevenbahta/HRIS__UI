@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Department } from 'app/models/education.model';
 import { Division } from 'app/models/job-description.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
@@ -139,6 +140,7 @@ deleteDivision(id: string) {
       this.divisionservice.deleteDivision(id).subscribe({
         next: () => {
           // Remove the deleted Division from the Divisions array using filter
+          this.dialog.open(DeletesucessfullmessageComponent)
           this.divisionservice.getAllDivisions()
  
           .subscribe({

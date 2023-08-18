@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-grade',
@@ -110,6 +111,7 @@ buttons = [
           this.gradeservice.deleteGrade(id).subscribe({
             next: () => {
               // Remove the deleted grade from the grades array using filter
+              this.dialog.open(DeletesucessfullmessageComponent)
               this.grades = this.grades.filter((grade) => grade.levelId!== id);
             },
             error(response) {

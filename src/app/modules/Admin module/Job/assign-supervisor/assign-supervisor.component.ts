@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Supervisor } from 'app/models/employee.model';
 import { AssignSupervisor, Division, Position } from 'app/models/job-description.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
@@ -205,6 +206,7 @@ deleteAssignSupervisor(Id: string) {
       this.AssignSupervisorservice.deleteAssignSupervisor(Id).subscribe({
         next: () => {
           // Remove the deleted position from the positions array using filter
+          this.dialog.open(DeletesucessfullmessageComponent)
           this.assignSupervisors = this.assignSupervisors.filter((assignSupervisor) => assignSupervisor.id !== Id);
         },
         error(response) {

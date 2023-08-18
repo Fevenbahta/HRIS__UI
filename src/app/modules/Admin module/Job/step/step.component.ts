@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 
 @Component({
@@ -121,6 +122,7 @@ buttons = [
           this.stepservice.deleteStep(id).subscribe({
             next: () => {
               // Remove the deleted step from the steps array using filter
+              this.dialog.open(DeletesucessfullmessageComponent)
               this.steps = this.steps.filter((step) => step.id !== id);
             },
             error(response) {

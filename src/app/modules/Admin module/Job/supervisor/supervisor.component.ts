@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 import { Position } from 'app/models/job-description.model';
 import { Supervisor } from 'app/models/employee.model';
 import { PositionService } from 'app/service/position.service';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-supervisor',
@@ -117,6 +118,7 @@ supervisorLevel: '',
           this.supervisorservice.deleteSupervisor(id).subscribe({
             next: () => {
               // Remove the deleted supervisor from the supervisors array using filter
+              this.dialog.open(DeletesucessfullmessageComponent)
               this.supervisors = this.supervisors.filter((supervisor) => supervisor.id !== id);
             },
             error(response) {

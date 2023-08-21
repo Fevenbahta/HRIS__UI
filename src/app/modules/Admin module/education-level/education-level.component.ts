@@ -41,6 +41,8 @@ status:0,
         { label: 'grade', route:"/admin/grade" },
         { label: 'Supervisor', route:"/admin/supervisor" },
         { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
+        { label: 'leave-type', route:"/leave/leave-type" },
+
    
    
      ];

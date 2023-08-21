@@ -70,6 +70,8 @@ import { HistoryComponent } from 'app/modules/history/history.component';
 import { DepartmentComponent } from 'app/modules/Admin module/Job/department/department.component';
 import { DivisionComponent } from 'app/modules/Admin module/Job/division/division.component';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { LeaverequestComponent } from 'app/modules/leave/leaverequest/leaverequest.component';
+import { LeavetypeComponent } from 'app/modules/Admin module/leavetype/leavetype.component';
 
 
 @NgModule({
@@ -114,7 +116,9 @@ AssignSupervisorComponent,
 HistoryComponent,
 DepartmentComponent,
 DivisionComponent,
-DeletesucessfullmessageComponent
+DeletesucessfullmessageComponent,
+LeaverequestComponent,
+LeavetypeComponent
 
 
   ],

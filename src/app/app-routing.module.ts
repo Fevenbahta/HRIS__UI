@@ -34,6 +34,8 @@ import { AssignSupervisorComponent } from './modules/Admin module/Job/assign-sup
 import { HistoryComponent } from './modules/history/history.component';
 import { DepartmentComponent } from './modules/Admin module/Job/department/department.component';
 import { DivisionComponent } from './modules/Admin module/Job/division/division.component';
+import { LeaverequestComponent } from './modules/leave/leaverequest/leaverequest.component';
+import { LeavetypeComponent } from './modules/Admin module/leavetype/leavetype.component';
 
 const routes: Routes = [
   {path: '',
@@ -109,7 +111,11 @@ component: EditSpouseComponent},
 {path:'edit-training/:empId',
 component: EditTrainingComponent},
 {path:'edit-depositeAuthentication/:empId',
-component: EditDepositeAuthenticationComponent}
+component: EditDepositeAuthenticationComponent},
+{path:'leave/leave-request',
+component: LeaverequestComponent},
+{path:'leave/leave-type',
+component: LeavetypeComponent}
 ]
 }]
 

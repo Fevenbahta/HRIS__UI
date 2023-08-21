@@ -1,12 +1,9 @@
-.smaller-width {
-    width: 200%;
-    margin-left: 18%; /* Adjust the width value as per your requirement */
-  }
+
   .fixed-header {
-    position: fixed;
+    position:absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
+
   }
-  

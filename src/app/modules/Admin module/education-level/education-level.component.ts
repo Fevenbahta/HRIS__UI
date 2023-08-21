@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-education-level',
@@ -93,6 +94,7 @@ status:0,
           this.educationLevelService.deleteEducationLevel(id).subscribe({
             next: () => {
               // Remove the deleted education level from the educationLevels array using filter
+              this.dialog.open(DeletesucessfullmessageComponent)
               this.educationLevels = this.educationLevels.filter((educationLevel) => educationLevel.id !== id);
             },
             error(response) {

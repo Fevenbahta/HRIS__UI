@@ -1,1 +1,17 @@
-<p>leavetype works!</p>
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+<div class="formcontainer"> 
+
+<form (ngSubmit)="addLeaveType()">   <div class="row">
+    <div class="col-md-12"> 
+    <div class="form-field"> 
+    
+      <input type="text" id="LeaveTypeName" placeholder=" " [(ngModel)]="addLeaveTypeRequest.name" name="name" required> 
+     <label for="LeaveType">Leave Type Name</label>  </div> 
+     
+ <div  class="col-md-3"><button type="submit" class="btn  btn-sm btnsave ">Save </button> </div>
+   
+  </div></div>   <div *ngIf="leaveTypeSaved" class=" btndanger btn-sm pull-right">
+        Successfully Added!
+      </div> 
+  </form> </div>

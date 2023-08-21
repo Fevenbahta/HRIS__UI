@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { LeaveType } from 'app/models/leaveType.model';
+import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { LeaveTypeService } from 'app/service/leaveType.service';
 
 @Component({
   selector: 'app-leavetype',
@@ -6,6 +12,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./leavetype.component.css']
 })
 export class LeavetypeComponent {
+  leaveTypes:LeaveType[]=[];
+  leaveTypeSaved:boolean=false
+  addLeaveTypeRequest: LeaveType={
+    pId:0,
+    id: undefined,
+  createdBy: '',
+  createdDate: '2023-07-21T13:28:13.132Z',
+  updatedDate: '2023-07-21T13:28:13.132Z',
+  updatedBy: '',
+  status:0,
+  name:'',
+  maximum:''
+
+  }
   buttons = [
     { label: 'Structure',
     dropdownOptions: [
@@ -25,13 +45,13 @@ export class LeavetypeComponent {
    
    
      ];
-     constructor(private LeaveTypeService :LeaveTypeService,private router:Router,private dialog:MatDialog,) { }
+     constructor(private leaveTypeService :LeaveTypeService,private router:Router,private dialog:MatDialog,) { }
 
      ngOnInit(): void {
-       this.LeaveTypeService.getAllLeaveTypes()
+       this.leaveTypeService.getAllLeaveType()
        .subscribe({
          next: (LeaveTypes) => {
-           this.LeaveTypes=LeaveTypes;
+           this.leaveTypes=LeaveTypes;
          },
          error(response){
            console.log(response)
@@ -40,24 +60,26 @@ export class LeavetypeComponent {
      }
      addLeaveType(){
    
-       this.LeaveTypeService.addLeaveType(this.addLeaveTypeRequest)
+       this.leaveTypeService.addLeaveType(this.addLeaveTypeRequest)
        .subscribe({
        next:(LeaveType)=>{
-         this.LeaveTypeSaved = true;
+         this.leaveTypeSaved = true;
          setTimeout(() => {
-           this.LeaveTypeSaved = false;
+           this.leaveTypeSaved = false;
          }, 2000);
-         this.LeaveTypes.push({ ...this.addLeaveTypeRequest });
+         this.leaveTypes.push({ ...this.addLeaveTypeRequest });
    
          this.addLeaveTypeRequest = {
-           educationName:'',
-           pid:0,
+
+           pId:0,
         id: undefined,
       createdBy: '',
       createdDate: '2023-07-21T13:28:13.132Z',
       updatedDate: '2023-07-21T13:28:13.132Z',
       updatedBy: '',
       status:0,
+      name:'',
+      maximum:''
           
        
          };
@@ -72,11 +94,11 @@ export class LeavetypeComponent {
          dialogRef.afterClosed().subscribe((result) => {
            if (result) {
              // User confirmed deletion, proceed with the delete request
-             this.LeaveTypeService.deleteLeaveType(id).subscribe({
+             this.leaveTypeService.deleteLeaveType(id).subscribe({
                next: () => {
                  // Remove the deleted education level from the LeaveTypes array using filter
                  this.dialog.open(DeletesucessfullmessageComponent)
-                 this.LeaveTypes = this.LeaveTypes.filter((LeaveType) => LeaveType.id !== id);
+                 this.leaveTypes = this.leaveTypes.filter((leaveType) => leaveType.id !== id);
                },
                error(response) {
                  console.log(response);

@@ -13,7 +13,7 @@ import { filter, Subscription } from 'rxjs';
 export class DefaultComponent implements OnInit {
     sideBarOpen = true;
 
-    sideBarToggler() {
+    toggleSideBar(event: any) {
       this.sideBarOpen = !this.sideBarOpen;
     }
   

@@ -105,17 +105,17 @@
              
             </div>
             
-            <div class="col-md-6">
-              <mat-radio-group name="martialStatus" formControlName="martialStatus" required>  
-                  <mat-error *ngIf="employeeForm.get('martialStatus').invalid && employeeForm.get('martialStatus').touched">
+      
+            <div class="col-md-4 form-field">
+              <mat-select class="custom-mat-select" style="height: 40px; width:180px; padding:right 10%" placeholder="Marital Status" name="martialStatus" formControlName="martialStatus"  required>
+                <mat-option value="married">Married</mat-option>
+                <mat-option value="single">Single</mat-option>
+                <mat-option value="divorce">Divorced</mat-option>
+               
+              </mat-select>
+              <mat-error *ngIf="employeeForm.get('martialStatus').invalid && employeeForm.get('martialStatus').touched">
                 Marital Status is required
               </mat-error>
-                <p><mat-label>Marital Status:</mat-label></p>
-                <mat-radio-button value="married" class="radio-option">Married</mat-radio-button>
-                <mat-radio-button value="single" class="radio-option">Single</mat-radio-button>
-                <mat-radio-button value="divorce" class="radio-option">Divorce</mat-radio-button>
-              </mat-radio-group>
-          
             </div>
             </div>
             </div>

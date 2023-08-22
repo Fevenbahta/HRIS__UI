@@ -19,9 +19,19 @@
               <div class="row">
            
                 <div class="col-md-4 form-field">
+                  <mat-select placeholder="Select Employee" name="selectedEmployee" required [(ngModel)]="selectedEmployee">
+                    <mat-option *ngFor="let employee of employees" [value]="employee.empId">
+                      {{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}
+ 
+                    </mat-option>
+                  </mat-select>
+                  
+                </div>
+                
+                <div class="col-md-4 form-field">
                   <mat-select placeholder="Select Leave Type" name="selectedLeaveType" required [(ngModel)]="selectedLeaveType">
-                    <mat-option *ngFor="let leaveType of leaveTypes" [value]="leaveType.id">
-                      {{leaveType.name}}
+                    <mat-option *ngFor="let leaveType of leaveTypes" [value]="leaveType.leaveTypeId">
+                      {{leaveType.leaveTypeName}}
                     </mat-option>
                   </mat-select>
                   
@@ -52,4 +62,47 @@
                        
                 <div *ngIf="leaveRequestSaved" class="btndanger btn-sm pull-right">
           Added successfully!
-              </div></div>
+                </div></div>
+
+                <h6>Leave Request History</h6>
+                <table   *ngIf="leaveRequest" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Employee</th>
+                      <th>Leave Type</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                      <th>ApprovedBy</th>
+                      <th>ApprovedDate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Use *ngFor to loop through the leaveRequests array and display each leaveRequest record -->
+                    <tr *ngFor="let leaveRequest of leaveRequests" >
+                      <td>{{ getEmployeeName(leaveRequest.empId)}}</td>
+                      <td>{{ getLeaveTypeName(leaveRequest.leaveTypeId) }}</td>
+                      <td>{{ leaveRequest.startDate }}</td>
+                      <td>{{ leaveRequest.endDate }}</td>
+                      <td>{{ leaveRequest.status }}</td>
+                      <td>{{ leaveRequest.approvedBy }}</td>
+                      <td>{{ leaveRequest.approvedDate}}</td>
+                      <td>
+                        <button class="btn btn-sm btnedit" (click)="editleaveRequest(leaveRequest)">
+                          <mat-icon>edit</mat-icon>Edit</button>
+                        <button class="btn btn-sm btndanger" (click)="deleteleaveRequest(leaveRequest)">
+                          <mat-icon>delete</mat-icon>Delete</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+                <!-- Add Work Experience Form -->
+               
+                <!-- Work Experience Table -->
+               
+              
+  
+                
+       
+ 

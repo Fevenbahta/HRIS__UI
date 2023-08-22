@@ -1,0 +1,54 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+
+            <div class="col-md-9 ">
+              <div class="card  mb-5" >
+              <div class="card"   >
+                  <div class="card-header cardhead" >
+                      <h4 class="card-title">Leave Balance</h4>  </div>
+                   
+                  <div class="card-body " >
+          <input  class="search" type="search" placeholder="Search Employee..." [(ngModel)]="searchTerm" (input)="onSearch()">
+                
+                  </div>
+              </div>
+              <!-- jobdescription.component.html -->
+  
+  <div class="container" >
+    <h6>Leave Balance</h6>
+    <table  *ngIf="leaveBalance"  class="table table-bordered table-striped" >
+      <thead>
+        <tr>
+        
+          <th>Employee</th>
+          <th>LeaveType</th>
+          <th>Default Balance</th>
+          <th>Remaining Balance</th>
+          
+          <th>Start Date</th>
+          <th>end Date</th>
+  
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the leaveBalances array and display each employee position -->
+        <tr *ngFor="let leaveBalance of filteredLeaveBalances"  >
+            <td>{{ getEmployeeName( leaveBalance.empId) }}</td>
+          <td>{{ getLeaveTypeName(leaveBalance.leaveTypeId )}}</td>
+          <td>{{ leaveBalance.defaultBalance }}</td>
+          <td>{{ leaveBalance.remainingBalance }}</td>
+          <td>{{ leaveBalance.startDate }}</td>
+          <td>{{ leaveBalance.endDate }}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+          </div>
+         
+      </div>
+  </div>
+  
+  

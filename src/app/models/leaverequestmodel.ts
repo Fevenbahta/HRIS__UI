@@ -7,7 +7,7 @@ export interface LeaveRequest{
   updatedBy: string,
   status:number,
   empId: string,
-  leaveType: string,
+  leaveTypeId: string,
   startDate:string,
   endDate: string,
   approvedBy: string,
@@ -15,3 +15,21 @@ export interface LeaveRequest{
   leaveStatus:string,
 
 }
+export interface LeaveBalance{
+  pId:number;
+  id?: string;
+createdBy: string,
+createdDate: string,
+updatedDate: string,
+updatedBy: string,
+status:number,
+empId: string,
+leaveTypeId: string,
+startDate:string,
+endDate: string,
+defaultBalance:number,
+remainingBalance:number,
+isExpired:number
+
+}
+

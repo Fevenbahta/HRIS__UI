@@ -16,33 +16,39 @@ export class LeavetypeComponent {
   leaveTypeSaved:boolean=false
   addLeaveTypeRequest: LeaveType={
     pId:0,
-    id: undefined,
+    leaveTypeId: undefined,
   createdBy: '',
   createdDate: '2023-07-21T13:28:13.132Z',
   updatedDate: '2023-07-21T13:28:13.132Z',
   updatedBy: '',
   status:0,
-  name:'',
+  leaveTypeName:'',
   maximum:''
 
   }
   buttons = [
     { label: 'Structure',
     dropdownOptions: [
-       { label: 'position',route:"/admin/position"  },
+       { label: 'Position',route:"/admin/position"  },
        { label: 'Department',  route:"/admin/department"  },
        { label: 'Division',  route:"/admin/division"  },
-       { label: 'branch',  route:"/admin/branch"  }
+       { label: 'Branch',  route:"/admin/branch"  }
    
      ]},
-        { label: 'Step', route:"/admin/step" },
-       { label: 'LeaveType' , route:"/admin/education-level"},
-        { label: 'grade', route:"/admin/grade" },
-        { label: 'Supervisor', route:"/admin/supervisor" },
-        { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
-        { label: 'leave-type', route:"/leave/leave-type" },
-
+     { label: 'Level',
+     dropdownOptions: [
+         { label: 'Step', route:"/admin/step" },
+            { label: 'Grade', route:"/admin/grade" },
+      ]},
+      { label: 'Supervisor',
+      dropdownOptions: [
+       { label: 'Supervisor', route:"/admin/supervisor" },
+        { label: 'Assign-Supervisor', route:"/admin/assign-supervisor" },
+       ]},
    
+       { label: 'Education-Level' , route:"/admin/education-level"},
+        { label: 'Leave-Type', route:"/leave/leave-type" },
+
    
      ];
      constructor(private leaveTypeService :LeaveTypeService,private router:Router,private dialog:MatDialog,) { }
@@ -72,13 +78,13 @@ export class LeavetypeComponent {
          this.addLeaveTypeRequest = {
 
            pId:0,
-        id: undefined,
+           leaveTypeId: undefined,
       createdBy: '',
       createdDate: '2023-07-21T13:28:13.132Z',
       updatedDate: '2023-07-21T13:28:13.132Z',
       updatedBy: '',
       status:0,
-      name:'',
+      leaveTypeName:'',
       maximum:''
           
        
@@ -98,7 +104,7 @@ export class LeavetypeComponent {
                next: () => {
                  // Remove the deleted education level from the LeaveTypes array using filter
                  this.dialog.open(DeletesucessfullmessageComponent)
-                 this.leaveTypes = this.leaveTypes.filter((leaveType) => leaveType.id !== id);
+                 this.leaveTypes = this.leaveTypes.filter((leaveType) => leaveType.leaveTypeId !== id);
                },
                error(response) {
                  console.log(response);
@@ -106,5 +112,10 @@ export class LeavetypeComponent {
              });
            }
          });}
+
+         getLeaveTypeName(Id: string): string { 
+          const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id); 
+          return leaveType ? `${leaveType.leaveTypeName} `:'Unknown EMPLOYEE'; 
+        } 
    }
    

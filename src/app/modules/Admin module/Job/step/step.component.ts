@@ -40,18 +40,26 @@ steps:Step[]=[];
 buttons = [
   { label: 'Structure',
   dropdownOptions: [
-     { label: 'position',route:"/admin/position"  },
+     { label: 'Position',route:"/admin/position"  },
      { label: 'Department',  route:"/admin/department"  },
      { label: 'Division',  route:"/admin/division"  },
-     { label: 'branch',  route:"/admin/branch"  }
+     { label: 'Branch',  route:"/admin/branch"  }
  
    ]},
-      { label: 'Step', route:"/admin/step" },
-     { label: 'EducationLevel' , route:"/admin/education-level"},
-      { label: 'grade', route:"/admin/grade" },
-      { label: 'Supervisor', route:"/admin/supervisor" },
-      { label: 'assign-supervisor', route:"/admin/assign-supervisor" },
+   { label: 'Level',
+   dropdownOptions: [
+       { label: 'Step', route:"/admin/step" },
+          { label: 'Grade', route:"/admin/grade" },
+    ]},
+    { label: 'Supervisor',
+    dropdownOptions: [
+     { label: 'Supervisor', route:"/admin/supervisor" },
+      { label: 'Assign-Supervisor', route:"/admin/assign-supervisor" },
+     ]},
  
+     { label: 'Education-Level' , route:"/admin/education-level"},
+      { label: 'Leave-Type', route:"/leave/leave-type" },
+
  
    ];
   constructor( private gradeservice: GradeService,private dialog:MatDialog, private stepservice: StepService,private router:Router) { }

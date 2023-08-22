@@ -1,12 +1,12 @@
 export interface LeaveType{
     pId:number;
-    id?: string;
+    leaveTypeId?: string;
   createdBy: string,
   createdDate: string,
   updatedDate: string,
   updatedBy: string,
   status:number,
-  name: string,
+  leaveTypeName: string,
   maximum:string,
 
 }

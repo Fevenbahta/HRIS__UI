@@ -36,6 +36,7 @@ import { DepartmentComponent } from './modules/Admin module/Job/department/depar
 import { DivisionComponent } from './modules/Admin module/Job/division/division.component';
 import { LeaverequestComponent } from './modules/leave/leaverequest/leaverequest.component';
 import { LeavetypeComponent } from './modules/Admin module/leavetype/leavetype.component';
+import { LeavebalanceComponent } from './modules/leave/leavebalance/leavebalance.component';
 
 const routes: Routes = [
   {path: '',
@@ -115,7 +116,9 @@ component: EditDepositeAuthenticationComponent},
 {path:'leave/leave-request',
 component: LeaverequestComponent},
 {path:'leave/leave-type',
-component: LeavetypeComponent}
+component: LeavetypeComponent},
+{path:'leave/leave-balance',
+component: LeavebalanceComponent}
 ]
 }]
 

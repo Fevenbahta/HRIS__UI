@@ -23,6 +23,7 @@ import {MatIcon, MatIconModule} from '@angular/material/icon';
 import { HistoryComponent } from './modules/history/history.component';
 import { LeaverequestComponent } from './modules/leave/leaverequest/leaverequest.component';
 import { LeavetypeComponent } from './modules/Admin module/leavetype/leavetype.component';
+import { LeavebalanceComponent } from './modules/leave/leavebalance/leavebalance.component';
 
 
 
@@ -31,6 +32,7 @@ import { LeavetypeComponent } from './modules/Admin module/leavetype/leavetype.c
 @NgModule({
   declarations: [
     AppComponent,
+ 
 
 
    

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Employee } from 'app/models/employee.model';
 import { LeaveType } from 'app/models/leaveType.model';
 import { LeaveRequest } from 'app/models/leaverequestmodel';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { EmployeeIdService } from 'app/service/employee-id.service';
+import { EmployeeService } from 'app/service/employee.service';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { LeaveTypeService } from 'app/service/leaveType.service';
 
@@ -17,11 +19,14 @@ export class LeaverequestComponent {
   leaveRequests:LeaveRequest[]=[];
   leaveTypes:LeaveType[]=[]
   selectedLeaveType: string='';
+  selectedEmployee: string='';
   leaveRequestSaved: boolean = false;
   leaveRequestUpdated: boolean = false;
+  employees:Employee[]=[];
 
   buttons = [ 
     { label: ' Leave Request ', route: '/leave/leave-request' }, 
+    { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
 
   ]; 
  
@@ -33,10 +38,10 @@ export class LeaverequestComponent {
     updatedDate: "2023-07-26T06:13:52.512Z",
     updatedBy: "",
     status: 0,
-    empId: undefined,
+    empId:'0bd1295a-dd75-413a-9eef-811934e2880d',
     startDate: '',
     endDate: "",
-    leaveType: '',
+    leaveTypeId: '',
     leaveStatus: '',
     approvedBy:'',
     approvedDate:'',
@@ -46,17 +51,27 @@ export class LeaverequestComponent {
 
     private leaveRequestservice: LeaveRequestService,
     private router: Router,
-
+    private employeeService:EmployeeService,
     private leavetypeservice: LeaveTypeService,
     private employeeIdService: EmployeeIdService,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
+    this.employeeService.getAllEmployees() 
+.subscribe({ 
+  next: (employees) => {
+    // this.leaveRequest.empId = this.selectedEmployee;
+    this.employees=employees
+   },
+  error: (response) => {
+    console.log(response);
+  }
+});
 
     this.leaveRequestservice.getAllLeaveRequest().subscribe({
-      next: (leaveRequests) => {
-        this.leaveRequests = leaveRequests.filter(leaveRequest => leaveRequest.empId === this.employeeIdService.employeeId);
+      next: (leaveRequest) => {
+        this.leaveRequests = leaveRequest
         ;
       },
       error: (response) => {
@@ -65,8 +80,9 @@ export class LeaverequestComponent {
     });
 this.leavetypeservice.getAllLeaveType().
 subscribe({
-  next: (leaveRequestlevels) => {
-    this.leaveTypes= leaveRequestlevels
+  next: (leaveType) => {
+    // this.leaveRequest.leaveTypeId = this.selectedLeaveType;
+    this.leaveTypes= leaveType
     ;
   },
   error: (response) => {
@@ -76,14 +92,15 @@ subscribe({
 
   }
 
-  getLeaveTypeName(leavetypeId: string): string {
-    const leaveType = this.leaveTypes.find((leaveType) => leaveType.id === leavetypeId);
-    return leaveType ? leaveType.name : '';
-  }
+  // getLeaveTypeName(leavetypeId: string): string {
+  //   const leaveType = this.leaveTypes.find((leaveType) => leaveType.leaveTypeId === leavetypeId);
+  //   return leaveType ? leaveType.leaveTypeName : '';
+  // }
 
   addleaveRequest() {
-    this.leaveRequest.empId = this.employeeIdService.employeeId;
-    this.leaveRequest.leaveType = this.selectedLeaveType;
+
+    this.leaveRequest.leaveTypeId = this.selectedLeaveType;
+    this.leaveRequest.empId = this.selectedEmployee;
     this.leaveRequestservice.addLeaveRequest(this.leaveRequest).subscribe({
       next: (employee) => {
         
@@ -113,10 +130,10 @@ subscribe({
           updatedDate: "2023-07-26T06:13:52.512Z",
           updatedBy: "",
           status: 0,
-          empId: undefined,
+          empId: "0bd1295a-dd75-413a-9eef-811934e2880d",
           startDate: '',
           endDate: "",
-          leaveType: '',
+          leaveTypeId: '',
           leaveStatus: '',
           approvedBy:'',
           approvedDate:'',
@@ -130,7 +147,7 @@ subscribe({
   updateleaveRequest(): void { 
     console.log(this.leaveRequest)
    
-    this.leaveRequest.leaveType = this.selectedLeaveType;
+    this.leaveRequest.leaveTypeId = this.selectedLeaveType;
     this.leaveRequestservice.updateLeaveRequest(this.leaveRequest, this.leaveRequest.id).subscribe({
       next: () => {
         this.leaveRequestUpdated = true;
@@ -160,10 +177,10 @@ subscribe({
       updatedDate: "2023-07-26T06:13:52.512Z",
       updatedBy: "",
       status: 0,
-      empId: undefined,
+      empId: "0bd1295a-dd75-413a-9eef-811934e2880d",
       startDate: '',
       endDate: "",
-      leaveType: '',
+      leaveTypeId: '',
       leaveStatus: '',
       approvedBy:'',
       approvedDate:'',
@@ -177,7 +194,7 @@ subscribe({
   editleaveRequest(leaveRequest: LeaveRequest): void {
     const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.id === leaveRequest.id);
     this.leaveRequest = leaveRequestToEdit;
-    this.selectedLeaveType=leaveRequestToEdit.leaveType
+    this.selectedLeaveType=leaveRequestToEdit.leaveTypeId
   }
 
 
@@ -204,6 +221,14 @@ subscribe({
       }
     });
   }
-
+  getEmployeeName(empId: string): string { 
+    const employee = this.employees.find((g) => g.empId === empId); 
+    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
+  }  
+   
+  getLeaveTypeName(Id: string): string { 
+    const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id); 
+    return leaveType ? `${leaveType.leaveTypeName} `:'Unknown EMPLOYEE'; 
+  }
 
 }

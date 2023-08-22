@@ -3,15 +3,56 @@
 <div class="formcontainer"> 
 
 <form (ngSubmit)="addLeaveType()">   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-3"> 
     <div class="form-field"> 
     
-      <input type="text" id="LeaveTypeName" placeholder=" " [(ngModel)]="addLeaveTypeRequest.name" name="name" required> 
-     <label for="LeaveType">Leave Type Name</label>  </div> 
-     
- <div  class="col-md-3"><button type="submit" class="btn  btn-sm btnsave ">Save </button> </div>
+      <input type="text" id="LeaveTypeName" placeholder=" " [(ngModel)]="addLeaveTypeRequest.leaveTypeName" name="name" required> 
+     <label for="LeaveType">Leave Type Name</label>  </div> </div>
+     <div class="col-md-3"> 
+         <div class="form-field"> 
+      <input type="text" id="maximum" placeholder=" " [(ngModel)]="addLeaveTypeRequest.maximum" name="maximum" required> 
+     <label for="maximum">Maximum</label>  
+    
+    </div> 
+      </div>
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ">Save </button> </div>
    
-  </div></div>   <div *ngIf="leaveTypeSaved" class=" btndanger btn-sm pull-right">
+ </div>   <div *ngIf="leaveTypeSaved" class=" btndanger btn-sm pull-right">
         Successfully Added!
       </div> 
   </form> </div>
+
+
+
+  
+  <h6 class="mb-3"> 
+Leave Type
+</h6> 
+
+
+ 
+<table id="example1" class="table table-bordered table-striped"  *ngIf="leaveTypes && leaveTypes.length>0"> 
+<thead> 
+    <tr> 
+        <th> Leave Type Name</th> 
+        <th>Maximum Day</th> 
+   
+        
+
+    </tr> 
+</thead> 
+<tbody> 
+    <tr *ngFor="let leaveType of leaveTypes"> 
+       
+        <td>{{leaveType.leaveTypeName}}</td> 
+      <td>{{leaveType.maximum}}</td> 
+      
+        <td>   
+            <button  class="btn btn-sm btndanger" (click)="deleteLeaveType(leaveType.leaveTypeId)">
+                <mat-icon>delete</mat-icon></button>
+        </td> 
+
+    </tr> 
+</tbody> 
+</table> 
+<p *ngIf="!leaveTypes || leaveTypes.length <= 0">no leaveTypes found</p>

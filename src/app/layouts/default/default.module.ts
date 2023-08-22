@@ -72,6 +72,7 @@ import { DivisionComponent } from 'app/modules/Admin module/Job/division/divisio
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { LeaverequestComponent } from 'app/modules/leave/leaverequest/leaverequest.component';
 import { LeavetypeComponent } from 'app/modules/Admin module/leavetype/leavetype.component';
+import { LeavebalanceComponent } from 'app/modules/leave/leavebalance/leavebalance.component';
 
 
 @NgModule({
@@ -118,7 +119,8 @@ DepartmentComponent,
 DivisionComponent,
 DeletesucessfullmessageComponent,
 LeaverequestComponent,
-LeavetypeComponent
+LeavetypeComponent,
+LeavebalanceComponent
 
 
   ],

@@ -6,6 +6,7 @@ import { TrainingService } from 'app/service/training.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
@@ -152,12 +153,17 @@ export class TrainingComponent implements OnInit {
         // If the user confirmed the deletion, you can proceed with the delete logic here
         this.trainingService.deleteTraining(training.id).subscribe(
           () => {
-            // Training deleted successfully, we can update the list of trainings after deletion.
-            // Here, we are simply filtering out the deleted training from the trainings array.
-            this.trainings = this.trainings.filter((t) => t.id !== training.id);
-  
-            // You can also show a success message to the user.
-            console.log('Training deleted successfully!');
+            this.dialog.open(DeletesucessfullmessageComponent)
+            this.trainingService.getAllTraining() 
+            .subscribe({ 
+              next: (training) => { 
+                this.trainings = training.filter(training => training.empId === this.employeeIdService.employeeId);
+        
+                    }, 
+              error(response) { 
+                console.log(response); 
+              }, 
+          });
           },
           (error) => {
             console.error(error);

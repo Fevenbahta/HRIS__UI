@@ -104,8 +104,15 @@ export class LeavetypeComponent {
                next: () => {
                  // Remove the deleted education level from the LeaveTypes array using filter
                  this.dialog.open(DeletesucessfullmessageComponent)
-                 this.leaveTypes = this.leaveTypes.filter((leaveType) => leaveType.leaveTypeId !== id);
-               },
+                 this.leaveTypeService.getAllLeaveType()
+       .subscribe({
+         next: (LeaveTypes) => {
+           this.leaveTypes=LeaveTypes;
+         },
+         error(response){
+           console.log(response)
+         }
+       });  },
                error(response) {
                  console.log(response);
                },

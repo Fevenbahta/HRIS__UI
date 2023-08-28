@@ -6,6 +6,7 @@ import { SpouseService } from 'app/service/spouse.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-spouse',
@@ -162,12 +163,17 @@ export class SpouseComponent implements OnInit {
       // If the user confirms the deletion, we can call the service to delete the Spouse.
       this.spouseService.deleteSpouse(spouse.id).subscribe(
         () => {
-          // Spouse deleted successfully, we can update the list of Spouses after deletion.
-          // Here, we are simply filtering out the deleted Spouse from the Spouses array.
-          this.spouses = this.spouses.filter((t) => t.id !== spouse.id);
-     
-          // You can also show a success message to the user.
-          alert('Spouse deleted successfully!');
+          this.dialog.open(DeletesucessfullmessageComponent)
+          this.spouseService.getAllSpouse() 
+          .subscribe({ 
+            next: (spouse) => { 
+              this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+      
+                  }, 
+            error(response) { 
+              console.log(response); 
+            }, })
+
         },
         (error) => {
           console.error(error);

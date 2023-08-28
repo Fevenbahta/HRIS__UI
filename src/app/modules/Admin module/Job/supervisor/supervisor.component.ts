@@ -127,7 +127,16 @@ supervisorLevel: '',
             next: () => {
               // Remove the deleted supervisor from the supervisors array using filter
               this.dialog.open(DeletesucessfullmessageComponent)
-              this.supervisors = this.supervisors.filter((supervisor) => supervisor.id !== id);
+              this.supervisorservice.getAllSupervisors()
+              .subscribe({
+                next: (supervisors) => {
+                  this.supervisors=supervisors;
+                },
+                error(response){
+                  console.log(response)
+                }
+              });
+             
             },
             error(response) {
               console.log(response);

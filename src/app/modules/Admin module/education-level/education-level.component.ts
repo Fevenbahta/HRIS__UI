@@ -103,8 +103,15 @@ status:0,
             next: () => {
               // Remove the deleted education level from the educationLevels array using filter
               this.dialog.open(DeletesucessfullmessageComponent)
-              this.educationLevels = this.educationLevels.filter((educationLevel) => educationLevel.id !== id);
-            },
+              this.educationLevelService.getAllEducationLevels()
+    .subscribe({
+      next: (educationlevels) => {
+        this.educationLevels=educationlevels;
+      },
+      error(response){
+        console.log(response)
+      }
+    });    },
             error(response) {
               console.log(response);
             },

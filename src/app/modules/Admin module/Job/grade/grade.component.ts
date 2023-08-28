@@ -120,7 +120,16 @@ buttons = [
             next: () => {
               // Remove the deleted grade from the grades array using filter
               this.dialog.open(DeletesucessfullmessageComponent)
-              this.grades = this.grades.filter((grade) => grade.levelId!== id);
+              this.gradeservice.getAllGrade()
+              .subscribe({
+                next: (grades) => {
+                  this.grades=grades;
+                },
+                error(response){
+                  console.log(response)
+                }
+              });
+      
             },
             error(response) {
               console.log(response);

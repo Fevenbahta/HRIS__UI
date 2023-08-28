@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, filter } from 'rxjs';
 import { EmployeeService } from 'app/service/employee.service';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-contact',
@@ -149,16 +150,16 @@ updateContact(): void {
         this.contactUpdate= false;
       }, 2000);
 
-      // this.contactservice.getAllContacts()
-      // .subscribe({
-      //   next: (contacts) => {
-      //     // Filter emergency contacts for the current employee
-      //     this.contacts = contacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
-      //   },
-      //   error(response) {
-      //     console.log(response);
-      //   },
-      // });
+      this.contactservice.getAllContacts()
+      .subscribe({
+        next: (contacts) => {
+          // Filter emergency contacts for the current employee
+          this.contacts = contacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+        },
+        error(response) {
+          console.log(response);
+        },
+      });
           this.contact = {
             pId:0,
             id:undefined,
@@ -196,12 +197,18 @@ deleteContact(Contact: Contact): void {
     // If the user confirms the deletion, we can call the service to delete the Contact.
     this.contactservice.deleteContact(Contact.id).subscribe(
       () => {
-        // Contact deleted successfully, we can update the list of Contact after deletion.
-        // Here, we are simply filtering out the deleted Contact from the Contact array.
-        this.contacts = this.contacts.filter((t) => t.id !== Contact.id);
-        this.router.navigate(['employee-registration/contact']);
-        // You can also show a success message to the user.
-        alert('Contact deleted successfully!');
+        this.dialog.open(DeletesucessfullmessageComponent)
+        this.contactservice.getAllContacts()
+        .subscribe({
+          next: (contacts) => {
+            // Filter emergency contacts for the current employee
+            this.contacts = contacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+          },
+          error(response) {
+            console.log(response);
+          },
+        });
+      
       },
       (error) => {
         console.error(error);

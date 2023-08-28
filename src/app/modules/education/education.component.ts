@@ -7,6 +7,7 @@ import { EducationService } from 'app/service/education.service';
 import { EducationLevelService } from 'app/service/educationlevel.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-education',
@@ -191,11 +192,16 @@ subscribe({
       this.educationservice.deleteEducation(Education.id).subscribe(
         () => {
          
-          this.educations = this.educations.filter((t) => t.id !== Education.id);
-
-          // You can also show a success message to the user.
-          //alert('Education deleted successfully!');
-          this.router.navigate(['employee-registration/education']);
+          this.dialog.open(DeletesucessfullmessageComponent)
+          this.educationservice.getAllEducation().subscribe({
+            next: (educations) => {
+              this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+              ;
+            },
+            error: (response) => {
+              console.log(response);
+            }
+          });
         },
         (error) => {
           console.error(error);

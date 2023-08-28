@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Employee } from 'app/models/employee.model';
 import { LeaveType } from 'app/models/leaveType.model';
 import { LeaveRequest } from 'app/models/leaverequestmodel';
@@ -32,7 +33,7 @@ export class LeaverequestComponent {
  
   leaveRequest: LeaveRequest = {
     pId: 0,
-    id:undefined,
+    leaveRequestId:undefined,
     createdBy: "",
     createdDate: "2023-07-26T06:13:52.512Z",
     updatedDate: "2023-07-26T06:13:52.512Z",
@@ -42,7 +43,7 @@ export class LeaverequestComponent {
     startDate: '',
     endDate: "",
     leaveTypeId: '',
-    leaveStatus: '',
+    leaveStatus: 'pendding',
     approvedBy:'',
     approvedDate:'',
   };
@@ -92,10 +93,10 @@ subscribe({
 
   }
 
-  // getLeaveTypeName(leavetypeId: string): string {
-  //   const leaveType = this.leaveTypes.find((leaveType) => leaveType.leaveTypeId === leavetypeId);
-  //   return leaveType ? leaveType.leaveTypeName : '';
-  // }
+  getLeaveTypeName(leavetypeId: string): string {
+    const leaveType = this.leaveTypes.find((leaveType) => leaveType.leaveTypeId === leavetypeId);
+    return leaveType ? leaveType.leaveTypeName : '';
+  }
 
   addleaveRequest() {
 
@@ -112,7 +113,7 @@ subscribe({
         }, 2000);
         this.leaveRequestservice.getAllLeaveRequest().subscribe({
           next: (leaveRequests) => {
-            this.leaveRequests = leaveRequests.filter(leaveRequest => leaveRequest.empId === this.employeeIdService.employeeId);
+            this.leaveRequests = leaveRequests
             ;
           },
           error: (response) => {
@@ -122,19 +123,22 @@ subscribe({
         // Add the current leaveRequest to the array
         this.leaveRequests.push({ ...this.leaveRequest });
         // Reset the form fields
+
+        this.selectedEmployee= '';
+        this.selectedLeaveType= '';
         this.leaveRequest = {
           pId: 0,
-          id:undefined,
+          leaveRequestId:undefined,
           createdBy: "",
           createdDate: "2023-07-26T06:13:52.512Z",
           updatedDate: "2023-07-26T06:13:52.512Z",
           updatedBy: "",
           status: 0,
-          empId: "0bd1295a-dd75-413a-9eef-811934e2880d",
+          empId: " ",
           startDate: '',
           endDate: "",
           leaveTypeId: '',
-          leaveStatus: '',
+          leaveStatus: 'pendding',
           approvedBy:'',
           approvedDate:'',
         };
@@ -146,55 +150,63 @@ subscribe({
   }
   updateleaveRequest(): void { 
     console.log(this.leaveRequest)
-   
+    this.leaveRequest.updatedDate=new Date().toISOString();;
+    if(this.leaveRequest.endDate < this.leaveRequest.updatedDate ){
+   this.leaveRequest.leaveStatus='pendding'
     this.leaveRequest.leaveTypeId = this.selectedLeaveType;
-    this.leaveRequestservice.updateLeaveRequest(this.leaveRequest, this.leaveRequest.id).subscribe({
+    this.leaveRequestservice.updateLeaveRequest(this.leaveRequest, this.leaveRequest.leaveRequestId).subscribe({
       next: () => {
         this.leaveRequestUpdated = true;
         setTimeout(() => {
   this.leaveRequestUpdated = false;
-        }, 
-        )
-        this.leaveRequestservice.getAllLeaveRequest().subscribe({
-          next: (leaveRequests) => {
-            this.leaveRequests = leaveRequests.filter(leaveRequest => leaveRequest.empId === this.employeeIdService.employeeId);
-            ;
-          },
-          error: (response) => {
-            console.log(response);
-          }
+        }, 2000);
+        
+        this.leaveRequestservice.getAllLeaveRequest().subscribe((leave) => {
+          this.leaveRequests = leave;
         });
       },
       error: (response) => {
         console.log(response);
       }
     });
+    this.selectedLeaveType=''
+    this.selectedEmployee=''
     this.leaveRequest= {
       pId: 0,
-      id:undefined,
+      leaveRequestId:undefined,
       createdBy: "",
       createdDate: "2023-07-26T06:13:52.512Z",
       updatedDate: "2023-07-26T06:13:52.512Z",
       updatedBy: "",
       status: 0,
-      empId: "0bd1295a-dd75-413a-9eef-811934e2880d",
+      empId: "",
       startDate: '',
       endDate: "",
       leaveTypeId: '',
-      leaveStatus: '',
+      leaveStatus: 'pendding',
       approvedBy:'',
       approvedDate:'',
   
-    };
+    };}
   }
 
 
 
 
-  editleaveRequest(leaveRequest: LeaveRequest): void {
-    const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.id === leaveRequest.id);
+  editleaveRequest(leave: LeaveRequest): void {
+    const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId);
     this.leaveRequest = leaveRequestToEdit;
     this.selectedLeaveType=leaveRequestToEdit.leaveTypeId
+    this.selectedEmployee=leaveRequestToEdit.empId
+    this.leaveRequestservice.getAllLeaveRequest().subscribe({
+      next: (leaveRequest) => {
+        this.leaveRequests = leaveRequest
+        ;
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
   }
 
 
@@ -203,32 +215,29 @@ subscribe({
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-      this.leaveRequestservice.deleteLeaveRequest(leaveRequest.id).subscribe(
-        () => {
-         
-          this.leaveRequests = this.leaveRequests.filter((t) => t.id !== leaveRequest.id);
-
-          // You can also show a success message to the user.
-          //alert('leaveRequest deleted successfully!');
-          this.router.navigate(['employee-registration/leaveRequest']);
+      this.leaveRequestservice.deleteLeaveRequest(leaveRequest.leaveRequestId).subscribe({
+        next: (response) => {
+          this.dialog.open(DeletesucessfullmessageComponent)
+          this.leaveRequestservice.getAllLeaveRequest().subscribe((leave) => {
+            this.leaveRequests = leave;
+          });
         },
-        (error) => {
-          console.error(error);
-          // If there was an error during deletion, you can show an error message.
-         // alert('Failed to delete the leaveRequest. Please try again later.');
-        }
-        );
+        error(response) {
+          console.log(response);}
+        });
       }
     });
   }
+  
+
   getEmployeeName(empId: string): string { 
     const employee = this.employees.find((g) => g.empId === empId); 
     return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
   }  
    
-  getLeaveTypeName(Id: string): string { 
-    const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id); 
-    return leaveType ? `${leaveType.leaveTypeName} `:'Unknown EMPLOYEE'; 
-  }
+  // getLeaveTypeName(Id: string): string { 
+  //   const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id); 
+  //   return leaveType ? `${leaveType.leaveTypeName} `:'Unknown EMPLOYEE'; 
+  // }
 
 }

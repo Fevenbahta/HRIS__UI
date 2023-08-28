@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
         
-          <form (ngSubmit)="addleaveRequest()">
+          <form >
             
             <div class="card-body">
               <div>
@@ -58,11 +58,22 @@
               <div>
           
                  
-                <button type="button" class="btn btn-sm btnsave" *ngIf="leaveRequest.id===undefined" (click)="addleaveRequest()">Add</button>
+                <button type="button" class="btn btn-sm btnsave" *ngIf="leaveRequest.leaveRequestId===undefined" (click)="addleaveRequest()">Add</button>
                        
                 <div *ngIf="leaveRequestSaved" class="btndanger btn-sm pull-right">
           Added successfully!
-                </div></div>
+                </div>
+
+                <button type="button" class="btn btn-sm btnsave"  *ngIf="leaveRequest.leaveRequestId!=undefined"  (click)="updateleaveRequest()">Update</button>
+                      
+               
+             
+                   <div *ngIf="leaveRequestUpdated" class=" btndanger btn-sm pull-right">
+                     Updated successfully!
+                   </div>
+                    
+              
+              </div>
 
                 <h6>Leave Request History</h6>
                 <table   *ngIf="leaveRequest" class="table table-bordered table-striped">
@@ -84,22 +95,20 @@
                       <td>{{ getLeaveTypeName(leaveRequest.leaveTypeId) }}</td>
                       <td>{{ leaveRequest.startDate }}</td>
                       <td>{{ leaveRequest.endDate }}</td>
-                      <td>{{ leaveRequest.status }}</td>
+                      <td>{{ leaveRequest.leaveStatus }}</td>
                       <td>{{ leaveRequest.approvedBy }}</td>
                       <td>{{ leaveRequest.approvedDate}}</td>
                       <td>
                         <button class="btn btn-sm btnedit" (click)="editleaveRequest(leaveRequest)">
                           <mat-icon>edit</mat-icon>Edit</button>
-                        <button class="btn btn-sm btndanger" (click)="deleteleaveRequest(leaveRequest)">
+                        <button class="btn btn-sm btndanger" *ngIf="leaveRequest.leaveStatus=='pendding'" (click)="deleteleaveRequest(leaveRequest)">
                           <mat-icon>delete</mat-icon>Delete</button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               
-                <!-- Add Work Experience Form -->
-               
-                <!-- Work Experience Table -->
+            
                
               
   

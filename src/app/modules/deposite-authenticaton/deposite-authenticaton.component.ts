@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 @Component({
   selector: 'app-deposite-authenticaton',
   templateUrl: './deposite-authenticaton.component.html',
@@ -123,6 +124,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
         console.log(response);
       }
     });
+    this.depositeauthenticationservice.getAllDepositeAuthentication() 
+    .subscribe({ 
+      next: (depositeauthentications) => { 
+        this.depositeauthentications = depositeauthentications.filter(deposite => deposite.empId === this.employeeIdService.employeeId);
+        ; 
+            }, 
+      error(response) { 
+        console.log(response); 
+      }, 
+  });
 this.depositeAuthentication ={
   pId:0,
   id:  undefined,
@@ -156,12 +167,17 @@ deleteDepositeAuthentication(depositeAuthentication: DepositeAuthentication): vo
       // If the user confirmed the deletion, you can proceed with the delete logic here
       this.depositeauthenticationservice.deleteDepositeAuthentication(depositeAuthentication.id).subscribe(
         () => {
-          // DepositeAuthentication deleted successfully, we can update the list of DepositeAuthentications after deletion.
-          // Here, we are simply filtering out the deleted DepositeAuthentication from the DepositeAuthentications array.
-          this.depositeauthentications = this.depositeauthentications.filter((t) => t.id !== depositeAuthentication.id);
-
-          // You can also show a success message to the user.
-          console.log('DepositeAuthentication deleted successfully!');
+          this.dialog.open(DeletesucessfullmessageComponent)
+          this.depositeauthenticationservice.getAllDepositeAuthentication() 
+          .subscribe({ 
+            next: (depositeauthentications) => { 
+              this.depositeauthentications = depositeauthentications.filter(deposite => deposite.empId === this.employeeIdService.employeeId);
+              ; 
+                  }, 
+            error(response) { 
+              console.log(response); 
+            }, 
+        });
         },
         (error) => {
           console.error(error);

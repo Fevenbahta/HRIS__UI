@@ -214,8 +214,15 @@ deleteAssignSupervisor(Id: string) {
         next: () => {
           // Remove the deleted position from the positions array using filter
           this.dialog.open(DeletesucessfullmessageComponent)
-          this.assignSupervisors = this.assignSupervisors.filter((assignSupervisor) => assignSupervisor.id !== Id);
-        },
+          this.AssignSupervisorservice.getAllAssignSupervisor()
+          .subscribe({
+            next: (assignSupervisors) => {
+              this.assignSupervisors=assignSupervisors;
+            },
+            error(response){
+              console.log(response)
+            }
+          });     },
         error(response) {
           console.log(response);
         },

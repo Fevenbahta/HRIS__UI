@@ -131,7 +131,16 @@ buttons = [
             next: () => {
               // Remove the deleted step from the steps array using filter
               this.dialog.open(DeletesucessfullmessageComponent)
-              this.steps = this.steps.filter((step) => step.id !== id);
+              this.stepservice.getAllStep()
+              .subscribe({
+                next: (steps) => {
+                  this.steps=steps;
+                },
+                error(response){
+                  console.log(response)
+                }
+              });
+            
             },
             error(response) {
               console.log(response);

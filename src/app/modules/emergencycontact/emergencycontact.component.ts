@@ -8,6 +8,7 @@ import { PidService } from 'app/service/pid.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-emergencycontact',
@@ -178,10 +179,17 @@ deleteEmergencyContact(EmergencyContact: EmergencyContact): void {
       () => {
         // EmergencyContact deleted successfully, we can update the list of EmergencyContacts after deletion.
         // Here, we are simply filtering out the deleted EmergencyContact from the EmergencyContacts array.
-        this.emergencycontacts = this.emergencycontacts.filter((t) => t.id !== EmergencyContact.id);
-
-        this.router.navigate(['employee-registration/emergency-contact']);
-        alert('EmergencyContact deleted successfully!');
+        this.dialog.open(DeletesucessfullmessageComponent)
+        this.emergencycontactservice.getAllEmergencyContact()
+      .subscribe({
+        next: (emergencycontacts) => {
+          // Filter emergency contacts for the current employee
+          this.emergencycontacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+        },
+        error(response) {
+          console.log(response);
+        },
+      });
       },
       (error) => {
         console.error(error);

@@ -1,0 +1,15 @@
+.page_content-data{
+    width: 30%;
+}
+.login-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .back{
+    background-color:#76a53b;
+    width:fit-content;
+  }

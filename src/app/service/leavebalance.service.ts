@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LeaveBalance } from 'app/models/leaverequestmodel';
+import { AnnualLeaveBalance } from 'app/models/leaverequestmodel';
 
 
 
@@ -16,22 +16,22 @@ export class LeaveBalanceService {
 
   constructor(private http: HttpClient) { }
 
-  getAllLeaveBalance(): Observable<LeaveBalance[]> {
-    return this.http.get<LeaveBalance[]>(this.apiUrl + 'api/LeaveBalance');
+  getAllLeaveBalance(): Observable<AnnualLeaveBalance[]> {
+    return this.http.get<AnnualLeaveBalance[]>(this.apiUrl + 'api/LeaveBalance');
   }
-  getLeaveBalance(id:string): Observable<LeaveBalance[]> {
-    return this.http.get<LeaveBalance[]>(this.apiUrl + 'api/LeaveBalance/'+id);
+  getLeaveBalance(id:string): Observable<AnnualLeaveBalance[]> {
+    return this.http.get<AnnualLeaveBalance[]>(this.apiUrl + 'api/LeaveBalance/'+id);
   }
 
-  addLeaveBalance(addLeaveBalanceRequest:LeaveBalance): Observable<LeaveBalance> {
+  addLeaveBalance(addLeaveBalanceRequest:AnnualLeaveBalance): Observable<AnnualLeaveBalance> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<LeaveBalance>(this.apiUrl + 'api/LeaveBalance', addLeaveBalanceRequest,httpOptions);
+    return this.http.post<AnnualLeaveBalance>(this.apiUrl + 'api/LeaveBalance', addLeaveBalanceRequest,httpOptions);
   }
 
-  updateLeaveBalance(LeaveBalanceDetails:LeaveBalance, Id:string): Observable<LeaveBalance> {
+  updateLeaveBalance(LeaveBalanceDetails:AnnualLeaveBalance, Id:string): Observable<AnnualLeaveBalance> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<LeaveBalance>(this.apiUrl + 'api/LeaveBalance/'+Id, LeaveBalanceDetails,httpOptions);
+    return this.http.put<AnnualLeaveBalance>(this.apiUrl + 'api/LeaveBalance/'+Id, LeaveBalanceDetails,httpOptions);
   }
 
   deleteLeaveBalance(Id: string): Observable<string> {

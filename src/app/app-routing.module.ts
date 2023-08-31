@@ -37,6 +37,8 @@ import { DivisionComponent } from './modules/Admin module/Job/division/division.
 import { LeaverequestComponent } from './modules/leave/leaverequest/leaverequest.component';
 import { LeavetypeComponent } from './modules/Admin module/leavetype/leavetype.component';
 import { LeavebalanceComponent } from './modules/leave/leavebalance/leavebalance.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const routes: Routes = [
   {path: '',
@@ -49,6 +51,10 @@ component:DashboardComponent,
 {path:'dashboard',
 component:DashboardComponent,
 },
+{path:'login',
+component:LoginComponent},
+{path:'signup',
+component:SignupComponent},
 {path:'employee-registration',
 component:EmployeeRegistrationComponent}
 ,

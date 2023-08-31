@@ -43,26 +43,21 @@
                   </div>
               <!-- jobdescription.component.html -->
   
-  <div class="container" >
+  <div  >
     <h6>Leave Balance</h6>
-    <table  *ngIf="leaveBalance"  class="table table-bordered table-striped" >
+    <table  *ngIf="leaveBalance"  class="table-responsive table table-bordered table-striped table-sm" >
       <thead>
         <tr>
         
           <th>Employee</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Annual</th>
+          <th>Annual Start Date</th>
+          <th>Annual End Date</th> 
+          <th>Annual Default</th>
+          <th>Annual Remainig</th>
           <th>Privious Annual</th>
-          <th>Sick</th>
-          <th>Sick Expire Date</th>
-          <th>Maternity</th>
-          <th>Paternity</th>
-          <th>Compassinate</th>
-          <th>Education</th>
-          <th>Marraiage</th>
-          <th>With out pay</th>
-          <th>Court</th>
+          <th>Privious Two Year</th>
+         
+         
   
         </tr>
       </thead>
@@ -70,26 +65,83 @@
         <!-- Use *ngFor to loop through the leaveBalances array and display each employee position -->
         <tr *ngFor="let leaveBalance of filteredLeaveBalances"  >
             <td>{{ getEmployeeName( leaveBalance.empId) }}</td> 
-              <td>{{ leaveBalance.startDate }}</td>
-          <td>{{ leaveBalance.endDate }}</td>
+              <td>{{ leaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
+          <td>{{ leaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
           <td>{{ leaveBalance.annualDefaultBalance }}</td>
+          <td>{{ leaveBalance.annualRemainingBalance }}</td>
           <td>{{ leaveBalance.previousYearAnnualBalance }}</td>
-          <td>{{ leaveBalance.sickRemainingBalance }}</td>
-             <td>{{ leaveBalance.maternityRemainingBalance }}</td>
-          <td>{{ leaveBalance.paternityRemainingBalance }}</td>
-          <td>{{ leaveBalance.compassinateRemainingBalance }}</td>    
-          <td>{{ leaveBalance.educationRemainingBalance }}</td>
-          <td>{{ leaveBalance.marraiageRemainingBalance }}</td>
-          <td>{{ leaveBalance.leaveWotPayRemainingBalance }}</td>
-          <td>{{ leaveBalance.courtLeaveRemainingBalance }}</td>
-          <td>{{ leaveBalance.sickEndDate }}</td>
+          <td>{{ leaveBalance.previousTwoYear }}</td>
        
       
          
         </tr>
       </tbody>
     </table>
-    <p *ngIf="!(filteredLeaveBalances.length || leaveBalances.length)">No Leave Balance found</p>
+    <p *ngIf="!(filteredotherLeaveBalances.length || otherleaveBalances.length)">No Leave Balance found</p>
+
+  </div>
+  <div   >
+    <h6>Other Leave Balance</h6>
+    <table  *ngIf="otherleaveBalances"  class="table table-responsive table-bordered table-striped  table-sm" >
+      <thead>
+        <tr  >
+        
+          <th scope="col">Employee</th>
+          <th scope="col">Sick Leave Default</th>
+          <th scope="col">Sick Leave Remainig</th>
+          <th scope="col">Sick LeaveStart Date</th>
+          <th scope="col">Sick Leave End Date</th> 
+          <th scope="col">Marraige Leave Default</th>
+          <th scope="col">Marraige Leave Remainig</th>
+          <th scope="col">Paternity Leave Default</th>
+          <th scope="col">Paternity Leave Remainig</th>
+          <th scope="col">Maternity Leave Default</th>
+          <th scope="col">Maternity Leave Remainig</th>
+          <th scope="col">compasionate Leave Default</th>
+          <th scope="col">compasionate Leave Remainig</th>
+          <th scope="col">Education Leave Default</th>
+          <th scope="col">Education Leave Remainig</th>
+          <th scope="col">LeaveWithOutPay Default</th>
+          <th scope="col">LeaveWithOutPay Remainig</th>
+          <th scope="col">Abortion Leave Default</th>
+          <th scope="col">Abortion Leave  Remainig</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the leaveBalances array and display each employee position -->
+        <tr *ngFor="let otherleaveBalance of filteredotherLeaveBalances"  >
+            <td>{{ getEmployeeName( otherleaveBalance.empId) }}</td> 
+              <td>{{ otherleaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
+          <td>{{ otherleaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
+          <td>{{ otherleaveBalance.sickDefaultBalance }}</td>
+          <td>{{ otherleaveBalance.sickRemainingBalance }}</td>
+          <td>{{ otherleaveBalance.sickStartDate| date:'yyyy-MM-dd'}}</td>
+          <td>{{ otherleaveBalance.sickEndDate| date:'yyyy-MM-dd' }}</td>
+          <td>{{ otherleaveBalance.marriageDefaultBalance }}</td>
+          <td>{{ otherleaveBalance.marriageRemainingBalance}}</td>
+          <td>{{ otherleaveBalance.paternityDefaultBalance}}</td>
+          <td>{{ otherleaveBalance.paternityRemainingBalance}}</td>
+      
+            <td>{{ otherleaveBalance.maternityDefaultBalance}}</td>
+     
+              <td>{{ otherleaveBalance.maternityRemainingBalance}}</td>
+              <td>{{ otherleaveBalance.compassinateDefaultBalance}}</td>
+
+              <td>{{ otherleaveBalance.compassinateRemainingBalance}}</td>
+              <td>{{ otherleaveBalance.educationDefaultBalance}}</td>
+              <td>{{ otherleaveBalance.educationRemainingBalance}}</td>
+              <td>{{ otherleaveBalance.leaveWotPayDefaultBalance}}</td>
+              <td>{{ otherleaveBalance.leaveWotPayRemainingBalance}}</td>
+              <td>{{ otherleaveBalance.courtLeaveDefaultBalance}}</td>
+              <td>{{ otherleaveBalance.courtLeaveRemainingBalance}}</td>
+              <td>{{ otherleaveBalance.abortionLeaveDefaultBalance}}</td>
+              <td>{{ otherleaveBalance.abortionLeaveRemainingBalance}}</td>
+           
+         
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="!(filteredotherLeaveBalances.length || otherleaveBalances.length)">No Leave Balance found</p>
 
   </div>
   

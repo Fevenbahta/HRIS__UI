@@ -24,6 +24,8 @@ import { HistoryComponent } from './modules/history/history.component';
 import { LeaverequestComponent } from './modules/leave/leaverequest/leaverequest.component';
 import { LeavetypeComponent } from './modules/Admin module/leavetype/leavetype.component';
 import { LeavebalanceComponent } from './modules/leave/leavebalance/leavebalance.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 
@@ -32,6 +34,8 @@ import { LeavebalanceComponent } from './modules/leave/leavebalance/leavebalance
 @NgModule({
   declarations: [
     AppComponent,
+
+    SignupComponent,
  
 
 

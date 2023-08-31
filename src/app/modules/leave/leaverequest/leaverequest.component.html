@@ -37,24 +37,49 @@
                   
                 </div>
               </div>
-            </div>          <div class="card-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field style="height: 65px; width:160px"  class="example-full-width">
-                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="leaveRequest.startDate">
-                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #fromPicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                  <mat-form-field style="height: 65px; width:160px" class="example-full-width">
-                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="leaveRequest.endDate">
-                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #toPicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                </div>
-              </div> 
+
+            </div>         
+              <div class="card-body">
+                <div class="row ">
+              <div class="col-md-4 form-field mt-3">
+                                
+                <input placeholder=" " type="text" name="workingDays" [(ngModel)]="leaveRequest.workingDays">
+              <label for="name">Working Days</label>  </div>
+              <div class="col-md-4 form-field mt-3">
+                              
+                <input placeholder=" " type="text" name="reason" [(ngModel)]="leaveRequest.reason">
+              <label for="name">Reason</label>  </div>
+                
+              <div class="col-md-4">
+                <label for="name">Supporting File</label>
+      <input placeholder=" " name="file" class="file" type="file" id="file"  (change)="onFileSelected($event)"  >
+      </div>
+       
+              </div></div>
+
+
+              <div class="card-body">
+                <div class="row mt-2">
+                  <div class="col-md-6">
+                    <mat-form-field style="height: 65px; width:160px"  class="example-full-width">
+                      <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="leaveRequest.startDate">
+                      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #fromPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                      <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="leaveRequest.endDate">
+                      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #toPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+               
+                  
+               
+                  </div>
+                  
+                </div> 
               <div>
           
                  
@@ -93,11 +118,11 @@
                     <tr *ngFor="let leaveRequest of leaveRequests" >
                       <td>{{ getEmployeeName(leaveRequest.empId)}}</td>
                       <td>{{ getLeaveTypeName(leaveRequest.leaveTypeId) }}</td>
-                      <td>{{ leaveRequest.startDate }}</td>
-                      <td>{{ leaveRequest.endDate }}</td>
+                      <td>{{ leaveRequest.startDate| date:'yyyy-MM-dd' }}</td>
+                      <td>{{ leaveRequest.endDate| date:'yyyy-MM-dd' }}</td>
                       <td>{{ leaveRequest.leaveStatus }}</td>
                       <td>{{ leaveRequest.approvedBy }}</td>
-                      <td>{{ leaveRequest.approvedDate}}</td>
+                      <td>{{ leaveRequest.approvedDate| date:'yyyy-MM-dd'}}</td>
                       <td>
                         <button class="btn btn-sm btnedit" (click)="editleaveRequest(leaveRequest)">
                           <mat-icon>edit</mat-icon>Edit</button>

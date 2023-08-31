@@ -3,10 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Employee } from 'app/models/employee.model';
 import { LeaveType } from 'app/models/leaveType.model';
-import { LeaveBalance } from 'app/models/leaverequestmodel';
+import { AnnualLeaveBalance, OtherLeaveBalance } from 'app/models/leaverequestmodel';
 import { EmployeeService } from 'app/service/employee.service';
 import { LeaveTypeService } from 'app/service/leaveType.service';
 import { LeaveBalanceService } from 'app/service/leavebalance.service';
+import { OtherLeaveBalanceService } from 'app/service/leavebalance.service copy';
+
 
 @Component({
   selector: 'app-leavebalance',
@@ -16,19 +18,23 @@ import { LeaveBalanceService } from 'app/service/leavebalance.service';
 export class LeavebalanceComponent {
  leaveBalanceSaved: boolean = false;
  leaveBalanceUpdated: boolean = false;
-leaveBalances:LeaveBalance[]=[]
+leaveBalances:AnnualLeaveBalance[]=[]
+otherleaveBalanceSaved: boolean = false;
+otherleaveBalanceUpdated: boolean = false;
+otherleaveBalances:OtherLeaveBalance[]=[]
 employees:Employee[]=[]
   leaveTypes:LeaveType[]= [];
   selectedLeaveType: string='';
   selectedEmployee: Employee[]=[];
  empIdsWithLeaveBalances;
+ empIdsWithOtherLeaveBalances;
   buttons = [ 
     { label: ' Leave Request ', route: '/leave/leave-request' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
 
   ]; 
 
- leaveBalance:LeaveBalance={
+ leaveBalance:AnnualLeaveBalance={
     pId:0,
     empId:"",
     id:undefined,
@@ -41,9 +47,29 @@ createdDate: '2023-07-21T08:09:41.138Z',
 updatedDate: '2023-07-21T08:09:41.138Z',
 updatedBy: '',
 
+previousTwoYear: 0,
+previousYearAnnualBalance: 0,
+totalRemaining: 0,
+totalRequest: 0,
 annualDefaultBalance: 0,
 annualRemainingBalance: 0,
-previousYearAnnualBalance: 0,
+
+
+  }
+  
+ otherleaveBalance:OtherLeaveBalance={
+  pId:0,
+  empId:"",
+  id:undefined,
+isExpired:0,
+status:0,
+startDate: '2023-07-21T08:09:41.138Z',
+endDate: '2023-07-21T08:09:41.138Z',
+createdBy: '',
+createdDate: '2023-07-21T08:09:41.138Z',
+updatedDate: '2023-07-21T08:09:41.138Z',
+updatedBy: '',
+
 sickDefaultBalance: 0,
 sickRemainingBalance: 0,
 maternityDefaultBalance: 0,
@@ -55,24 +81,29 @@ compassinateRemainingBalance: 0,
 educationDefaultBalance: 0,
 educationRemainingBalance: 0,
 marriageDefaultBalance: 0,
-marraiageRemainingBalance: 0,
+marriageRemainingBalance: 0,
 leaveWotPayDefaultBalance: 0,
 leaveWotPayRemainingBalance: 0,
 courtLeaveDefaultBalance: 0,
 courtLeaveRemainingBalance: 0,
+abortionLeaveDefaultBalance: 0,
+abortionLeaveRemainingBalance: 0,
 sickEndDate: '2023-07-21T08:09:41.138Z',
+sickStartDate: '2023-07-21T08:09:41.138Z',
 
 
-  }
+}
  
 
  searchTerm: string = ''; 
 
-  filteredLeaveBalances: LeaveBalance[]=[]; 
+  filteredLeaveBalances: AnnualLeaveBalance[]=[]; 
 
+  filteredotherLeaveBalances: OtherLeaveBalance[]=[]; 
 constructor(
   private leaveTypeService: LeaveTypeService,
   private leaveBalanceService: LeaveBalanceService,
+  private otherleaveBalanceService: OtherLeaveBalanceService,
   private employeeService:EmployeeService,
 
   private dialog: MatDialog,
@@ -91,16 +122,31 @@ ngOnInit(): void{
         this.leaveBalances =leaveBalances;
         this.filteredLeaveBalances=leaveBalances;
         const empIdsWithLeaveBalances = leaveBalances.map((lb) => lb.empId);
-        this.selectedEmployee = this.employees.filter((employee) => !empIdsWithLeaveBalances.includes(employee.empId));
-  
-             
+        
+        this.otherleaveBalanceService.getAllOtherLeaveBalance()
+        .subscribe({
+          next: (otherleaveBalance) => {
+            this.otherleaveBalances =otherleaveBalance;
+            this.filteredotherLeaveBalances=otherleaveBalance;
+        
+            const empIdsWithOtherLeaveBalances=otherleaveBalance.map((lb) => lb.empId);
+            this.selectedEmployee = this.employees.filter((employee) => !(empIdsWithOtherLeaveBalances && empIdsWithLeaveBalances).includes(employee.empId));
+      
+                 
+    
+                 
+          },
+          error(response){
+            console.log(response)
+          }
+        });
+           
       },
       error(response){
         console.log(response)
       }
     });
-  
-   
+
   },
   error(response){
     console.log(response)
@@ -112,13 +158,11 @@ ngOnInit(): void{
 
 }
 
-hasLeaveBalance(empId: string): boolean {
-  return this.leaveBalances.some(leaveBalance => leaveBalance.empId === empId);
-}
+
 
 addLeaveBalancesForSelectedEmployees() {
   for (const employee of this.selectedEmployee) {
-    const newLeaveBalance: LeaveBalance = {
+    const newLeaveBalance: AnnualLeaveBalance = {
       pId:this.leaveBalance.pId,
       empId: employee.empId,
 
@@ -133,23 +177,12 @@ addLeaveBalancesForSelectedEmployees() {
 annualDefaultBalance: this.leaveBalance.annualDefaultBalance,
 annualRemainingBalance: this.leaveBalance.annualRemainingBalance,
 previousYearAnnualBalance: this.leaveBalance.previousYearAnnualBalance,
-sickDefaultBalance: this.leaveBalance.sickDefaultBalance,
-sickRemainingBalance: this.leaveBalance.sickRemainingBalance,
-maternityDefaultBalance: this.leaveBalance.maternityDefaultBalance,
-maternityRemainingBalance: this.leaveBalance.maternityRemainingBalance,
-paternityDefaultBalance: this.leaveBalance.maternityDefaultBalance,
-paternityRemainingBalance: this.leaveBalance.paternityRemainingBalance,
-compassinateDefaultBalance: this.leaveBalance.compassinateDefaultBalance,
-compassinateRemainingBalance: this.leaveBalance.compassinateRemainingBalance,
-educationDefaultBalance: this.leaveBalance.educationDefaultBalance,
-educationRemainingBalance: this.leaveBalance.educationRemainingBalance,
-marriageDefaultBalance: this.leaveBalance.marriageDefaultBalance,
-marraiageRemainingBalance: this.leaveBalance.marraiageRemainingBalance,
-leaveWotPayDefaultBalance: this.leaveBalance.leaveWotPayDefaultBalance,
-leaveWotPayRemainingBalance: this.leaveBalance.leaveWotPayRemainingBalance,
-courtLeaveDefaultBalance: this.leaveBalance.courtLeaveDefaultBalance,
-courtLeaveRemainingBalance: this.leaveBalance.courtLeaveRemainingBalance,
-sickEndDate: this.leaveBalance.sickEndDate,
+
+previousTwoYear:this.leaveBalance.previousTwoYear,
+
+totalRemaining: this.leaveBalance.totalRemaining,
+totalRequest: this.leaveBalance.totalRequest,
+
 
     };
 
@@ -163,18 +196,7 @@ sickEndDate: this.leaveBalance.sickEndDate,
         }, 2000);
 
         // Fetch updated leave balances
-        this.leaveBalanceService.getAllLeaveBalance().subscribe({
-          next: (leave) => {
-            this.leaveBalances = leave;
-            this.filteredLeaveBalances=leave;
-            const empIdsWithLeaveBalances = leave.map((lb) => lb.empId);
-            this.selectedEmployee = this.employees.filter((employee) => !empIdsWithLeaveBalances.includes(employee.empId));
-      
-          },
-          error: (response) => {
-            console.log(response);
-          }
-        });
+       
 
         // Add the current leave balance to the array
         this.filteredLeaveBalances.push({ ...newLeaveBalance });
@@ -183,7 +205,109 @@ sickEndDate: this.leaveBalance.sickEndDate,
         console.log(response);
       }
     });
-  }
+  
+
+
+  const newotherLeaveBalance: OtherLeaveBalance = {
+    pId:this.otherleaveBalance.pId,
+    empId: employee.empId,
+
+    isExpired: this.otherleaveBalance.isExpired,
+    status: this.otherleaveBalance.status,
+    startDate: this.otherleaveBalance.startDate,
+    endDate: this.otherleaveBalance.endDate,
+    createdBy: this.otherleaveBalance.createdBy,
+    createdDate: this.otherleaveBalance.createdDate,
+    updatedDate: this.otherleaveBalance.updatedDate,
+    updatedBy: this.otherleaveBalance.updatedBy,   
+    sickDefaultBalance: this.otherleaveBalance.sickDefaultBalance,
+    sickRemainingBalance: this.otherleaveBalance.sickRemainingBalance,
+    maternityDefaultBalance: this.otherleaveBalance.maternityDefaultBalance,
+    maternityRemainingBalance: this.otherleaveBalance.marriageRemainingBalance,
+    paternityDefaultBalance: this.otherleaveBalance.paternityDefaultBalance,
+    paternityRemainingBalance: this.otherleaveBalance.paternityRemainingBalance,
+    compassinateDefaultBalance: this.otherleaveBalance.compassinateDefaultBalance,
+    compassinateRemainingBalance: this.otherleaveBalance.compassinateRemainingBalance,
+    educationDefaultBalance: this.otherleaveBalance.educationDefaultBalance,
+    educationRemainingBalance: this.otherleaveBalance.educationRemainingBalance,
+    marriageDefaultBalance: this.otherleaveBalance.marriageDefaultBalance,
+    marriageRemainingBalance: this.otherleaveBalance.marriageRemainingBalance,
+    leaveWotPayDefaultBalance: this.otherleaveBalance.leaveWotPayDefaultBalance,
+    leaveWotPayRemainingBalance: this.otherleaveBalance.leaveWotPayRemainingBalance,
+    courtLeaveDefaultBalance: this.otherleaveBalance.courtLeaveDefaultBalance,
+    courtLeaveRemainingBalance: this.otherleaveBalance.courtLeaveRemainingBalance,
+    abortionLeaveDefaultBalance: this.otherleaveBalance.abortionLeaveDefaultBalance,
+    abortionLeaveRemainingBalance: this.otherleaveBalance.abortionLeaveRemainingBalance,
+    sickEndDate: this.otherleaveBalance.sickEndDate,
+    sickStartDate: this.otherleaveBalance.sickStartDate,
+    
+  };
+
+  this.otherleaveBalanceService.addOtherLeaveBalance(newotherLeaveBalance).subscribe({
+    next: (employees) => {
+
+    
+      this.otherleaveBalanceSaved = true;
+      setTimeout(() => {
+        this.otherleaveBalanceSaved = false;
+      }, 2000);
+
+      // Fetch updated leave balances
+   
+
+      // Add the current leave balance to the array
+      this.filteredotherLeaveBalances.push({ ...newotherLeaveBalance });
+
+
+      this.employeeService.getAllEmployees() 
+      .subscribe({ 
+        next: (employees) => { 
+          this.employees=employees
+      
+      
+          this.leaveBalanceService.getAllLeaveBalance()
+          .subscribe({
+            next: (leaveBalances) => {
+              this.leaveBalances =leaveBalances;
+              this.filteredLeaveBalances=leaveBalances;
+              const empIdsWithLeaveBalances = leaveBalances.map((lb) => lb.empId);
+              
+              this.otherleaveBalanceService.getAllOtherLeaveBalance()
+              .subscribe({
+                next: (otherleaveBalance) => {
+                  this.otherleaveBalances =otherleaveBalance;
+                  this.filteredotherLeaveBalances=otherleaveBalance;
+              
+                  const empIdsWithOtherLeaveBalances=otherleaveBalance.map((lb) => lb.empId);
+                  this.selectedEmployee = this.employees.filter((employee) => !(empIdsWithOtherLeaveBalances && empIdsWithLeaveBalances).includes(employee.empId));
+            
+                       
+          
+                       
+                },
+                error(response){
+                  console.log(response)
+                }
+              });
+                 
+            },
+            error(response){
+              console.log(response)
+            }
+          });
+      
+        },
+        error(response){
+          console.log(response)
+        }
+      });
+      
+    },
+    error(response) {
+      console.log(response);
+    }
+  });
+}
 }
 
 onSearch() {
@@ -193,17 +317,22 @@ onSearch() {
    if (this.searchTerm.trim() === '') {
   
      this.filteredLeaveBalances = this.leaveBalances;
+     this.filteredotherLeaveBalances = this.otherleaveBalances;
+
    } else {
   
-     this.filteredLeaveBalances = this.leaveBalances.filter(leaveBalance => {
-       
-       return (
-        this.getEmployeeName(leaveBalance.empId).toLowerCase().startsWith(this.searchTerm.toLowerCase()) 
+    this.filteredLeaveBalances = this.leaveBalances.filter(leaveBalance => {
+      return this.getEmployeeName(leaveBalance.empId)
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase());
+    });
 
-       );
-       
+    this.filteredotherLeaveBalances = this.otherleaveBalances.filter(otherLeaveBalance => {
+      return this.getEmployeeName(otherLeaveBalance.empId)
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase());
+    });
 
-     });
    }
   
    }

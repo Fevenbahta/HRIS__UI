@@ -13,9 +13,14 @@ export interface LeaveRequest{
   approvedBy: string,
   approvedDate:string,
   leaveStatus:string,
+  reason: string,
+  file: File,
+  workingDays: number,
+  sickStartDate: string,
+  sickEndDate: string,
 
 }
-export interface LeaveBalance{
+export interface AnnualLeaveBalance{
   pId:number;
   id?: string;
 createdBy: string,
@@ -27,9 +32,32 @@ empId: string,
 startDate:string,
 endDate: string,
 isExpired:number,
+previousTwoYear: number,
+previousYearAnnualBalance: number,
+totalRemaining: number,
+totalRequest: number,
 annualDefaultBalance: number,
 annualRemainingBalance: number,
-previousYearAnnualBalance: number,
+
+
+
+}
+
+
+
+export interface OtherLeaveBalance{
+  pId:number;
+  id?: string;
+createdBy: string,
+createdDate: string,
+updatedDate: string,
+updatedBy: string,
+status:number,
+empId: string,
+startDate:string,
+endDate: string,
+isExpired:number,
+
 sickDefaultBalance: number,
 sickRemainingBalance: number,
 maternityDefaultBalance: number,
@@ -41,14 +69,17 @@ compassinateRemainingBalance: number,
 educationDefaultBalance: number,
 educationRemainingBalance: number,
 marriageDefaultBalance: number,
-marraiageRemainingBalance: number,
+marriageRemainingBalance
+: number,
 leaveWotPayDefaultBalance: number,
 leaveWotPayRemainingBalance: number,
 courtLeaveDefaultBalance: number,
 courtLeaveRemainingBalance: number,
+abortionLeaveDefaultBalance: number,
+abortionLeaveRemainingBalance: number,
 sickEndDate: string,
+sickStartDate: string,
 
 
 
 }
-

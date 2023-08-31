@@ -1,7 +1,7 @@
 
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
-import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
 import { filter, Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ import { filter, Subscription } from 'rxjs';
 })
 export class DefaultComponent implements OnInit {
     sideBarOpen = true;
+    isLoginPage: boolean = false;
 
     toggleSideBar(event: any) {
       this.sideBarOpen = !this.sideBarOpen;
@@ -21,7 +22,14 @@ export class DefaultComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
 
-  constructor( public location: Location, private router: Router) {}
+
+  constructor(private router: Router, public location: Location, private activatedRoute: ActivatedRoute) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isLoginPage = this.activatedRoute.firstChild?.snapshot.routeConfig?.path === 'login';
+      }
+    });
+  }
 
   ngOnInit() {
   }}

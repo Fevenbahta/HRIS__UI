@@ -47,13 +47,13 @@ export class LeaverequestComponent {
     approvedBy:'',
     approvedDate:'',
     reason: '',
-    file:null,
+    file:"",
     workingDays: 0,
     sickStartDate: "2023-07-26T06:13:52.512Z",
     sickEndDate: "2023-07-26T06:13:52.512Z",
   };
 
-   selectedFile: File | null = null;
+   selectedFile: string;
 
 
   constructor(
@@ -106,16 +106,18 @@ subscribe({
     const fileInput = document.getElementById('file') as HTMLInputElement;
     fileInput.click();
   }
+
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       this.getBase64(file).then((data) => {
-       this.selectedFile = data;
-        
+        this.selectedFile = data;
+     
+        this.leaveRequest.file = data
       });
     }
   }
-  
+
   private getBase64(file: File): Promise<any> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -135,10 +137,8 @@ subscribe({
 
     this.leaveRequest.leaveTypeId = this.selectedLeaveType;
     this.leaveRequest.empId = this.selectedEmployee;
-   
-  
-    
-      console.log( this.leaveRequest.file)
+    this.leaveRequest.file = this.selectedFile;
+    console.log (this.selectedFile)
     this.leaveRequestservice.addLeaveRequest(this.leaveRequest).subscribe({
       next: (employee) => {
         
@@ -242,10 +242,12 @@ subscribe({
 
 
   editleaveRequest(leave: LeaveRequest): void {
+    this.onFileSelected(event);
     const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId);
     this.leaveRequest = leaveRequestToEdit;
     this.selectedLeaveType=leaveRequestToEdit.leaveTypeId
     this.selectedEmployee=leaveRequestToEdit.empId
+    this.selectedFile=leaveRequestToEdit.file
     this.leaveRequestservice.getAllLeaveRequest().subscribe({
       next: (leaveRequest) => {
         this.leaveRequests = leaveRequest

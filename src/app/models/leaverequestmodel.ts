@@ -14,7 +14,7 @@ export interface LeaveRequest{
   approvedDate:string,
   leaveStatus:string,
   reason: string,
-  file: File,
+  file?: string,
   workingDays: number,
   sickStartDate: string,
   sickEndDate: string,

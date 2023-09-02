@@ -159,7 +159,6 @@ ngOnInit(): void{
 }
 
 
-
 addLeaveBalancesForSelectedEmployees() {
   for (const employee of this.selectedEmployee) {
     const newLeaveBalance: AnnualLeaveBalance = {

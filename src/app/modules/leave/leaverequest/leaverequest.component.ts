@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Employee } from 'app/models/employee.model';
 import { LeaveType } from 'app/models/leaveType.model';
-import { LeaveRequest } from 'app/models/leaverequestmodel';
+import { AnnualLeaveBalance, LeaveRequest, OtherLeaveBalance } from 'app/models/leaverequestmodel';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { EmployeeService } from 'app/service/employee.service';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { LeaveTypeService } from 'app/service/leaveType.service';
+import { LeaveBalanceService } from 'app/service/leavebalance.service';
+import { OtherLeaveBalanceService } from 'app/service/leavebalance.service copy';
 
 @Component({
   selector: 'app-leaverequest',
@@ -19,11 +21,19 @@ import { LeaveTypeService } from 'app/service/leaveType.service';
 export class LeaverequestComponent {
   leaveRequests:LeaveRequest[]=[];
   leaveTypes:LeaveType[]=[]
+  leaveBalances:AnnualLeaveBalance[]=[]
+  selectedLeaveBalance:number=0;
+  selectedPreviousYear:number=0;
+  selectedTwoPerviousYear:number=0;
   selectedLeaveType: string='';
+  leaveName: string=''
+
   selectedEmployee: string='';
   leaveRequestSaved: boolean = false;
   leaveRequestUpdated: boolean = false;
   employees:Employee[]=[];
+  otherLeaveBalances:OtherLeaveBalance[]=[]
+  selectedOtherLeaveBalance:number=0
 
   buttons = [ 
     { label: ' Leave Request ', route: '/leave/leave-request' }, 
@@ -61,7 +71,10 @@ export class LeaverequestComponent {
     private leaveRequestservice: LeaveRequestService,
     private router: Router,
     private employeeService:EmployeeService,
+    private otherLeaveBalanceService:OtherLeaveBalanceService,
+    private otherLeaveBalance:OtherLeaveBalanceService,
     private leavetypeservice: LeaveTypeService,
+    private leaveBalanceService: LeaveBalanceService,
     private employeeIdService: EmployeeIdService,
     private dialog: MatDialog,
   ) { }
@@ -77,7 +90,26 @@ export class LeaverequestComponent {
     console.log(response);
   }
 });
-
+this.leaveBalanceService.getAllLeaveBalance() 
+.subscribe({ 
+  next: (leaveBalances) => {
+    // this.leaveRequest.empId = this.selectedEmployee;
+    this.leaveBalances=leaveBalances
+   },
+  error: (response) => {
+    console.log(response);
+  }
+});
+this.otherLeaveBalanceService.getAllOtherLeaveBalance() 
+.subscribe({ 
+  next: (otherLeaveBalance) => {
+    // this.leaveRequest.empId = this.selectedEmployee;
+    this.otherLeaveBalances=otherLeaveBalance
+   },
+  error: (response) => {
+    console.log(response);
+  }
+});
     this.leaveRequestservice.getAllLeaveRequest().subscribe({
       next: (leaveRequest) => {
         this.leaveRequests = leaveRequest
@@ -190,13 +222,81 @@ subscribe({
       }
     });
   }
+  
+ 
+availableLeaveBalance(): void {
+   
+  const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === this.selectedLeaveType);
+  const balance= this.leaveBalanceService.getLeaveBalance(this.selectedEmployee);
+ 
+  this.leaveName= leaveType.leaveTypeName
+    console.log(this.selectedLeaveType);
+    console.log(this.selectedEmployee);
+    console.log(this.leaveBalanceService.getLeaveBalance(this.selectedEmployee));
+    console.log(this.leaveBalances.find((leaveB)=>leaveB.empId === this.selectedEmployee))
+    if ( this.leaveName === "Annual") {
+    const selectedBalance = this.leaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance = selectedBalance.annualRemainingBalance;
+    this.selectedPreviousYear = selectedBalance.previousYearAnnualBalance;
+    this.selectedTwoPerviousYear= selectedBalance.previousTwoYear;
+  }
+    if( this.leaveName === "Sick")
+    {
+     const selectedBalance= this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance=selectedBalance.sickRemainingBalance;
+    }
+    if( this.leaveName === "Maternity")
+    {
+    const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance=selectedBalance.maternityRemainingBalance;
+    }
+    if( this.leaveName === "Paternity")
+    {
+    const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance=selectedBalance.paternityRemainingBalance;
+    }
+    if( this.leaveName === "Compassinate")
+    {
+    const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance=selectedBalance.compassinateRemainingBalance;
+    }
+    if( this.leaveName === "Education")
+    {
+    const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance=selectedBalance.educationRemainingBalance;
+    }
+    if( this.leaveName === "CourtLeave")
+    {
+    const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance=selectedBalance.courtLeaveRemainingBalance;
+    }
+    if( this.leaveName === "LeaveWithOutPay")
+    {
+    const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance=selectedBalance.leaveWotPayRemainingBalance;
+    }
+    if( this.leaveName === "AbortionLeave")
+    {
+    const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance=selectedBalance.leaveWotPayRemainingBalance;
+    }
+    if( this.leaveName === "Marriage")
+    {
+    const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee)
+    this.selectedLeaveBalance=selectedBalance.marriageDefaultBalance;
+    }
+    
+    
+    
+  }
+
   updateleaveRequest(): void { 
     console.log(this.leaveRequest)
     this.leaveRequest.updatedDate=new Date().toISOString();;
     if(this.leaveRequest.endDate < this.leaveRequest.updatedDate ){
    this.leaveRequest.leaveStatus='pendding'
     this.leaveRequest.leaveTypeId = this.selectedLeaveType;
-    this.leaveRequest.file=this.selectedFile
+
     this.leaveRequestservice.updateLeaveRequest(this.leaveRequest, this.leaveRequest.leaveRequestId).subscribe({
       next: () => {
         this.leaveRequestUpdated = true;

@@ -1,7 +1,36 @@
 .cardhead{
     background-color: rgb(224, 224, 217);
   }
+  .insufficient-balance{
+    color:red;
+  }
+
+  .compact-table th {
+    font-size: 15px; /* Adjust the font size as needed */
+  }
+  .compact-table tr {
+    font-size: 12px; /* Adjust the font size as needed */
+  }
   
+  .compact-table th, .compact-table td {
+    padding: 4px 8px; 
+  }
+
+  .main-body{
+    padding-left: 10%;
+  }
+  .select{
+    border-bottom: 1px solid #ced4da;
+    font-size: 15px;
+  }
+  // .custom-select{
+  //   border: 1px solid #ced4da; /* Add your desired border styles here */
+  //   border-radius: 4px; /* Optional: Add border radius for rounded corners */
+  // }
+  // .custom-select .mat-select-arrow {
+  //   display: none;
+  // }
+
     .form-field {
       position: relative;
     }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Department } from 'app/models/education.model';
+import { ApiUrlService } from './api-url.service';
 
 
 
@@ -11,32 +12,32 @@ import { Department } from 'app/models/education.model';
   providedIn: 'root'
 })
 export class DepartmentService {
-  readonly apiUrl = 'https://localhost:7008/';
+ 
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private apiUrlService: ApiUrlService) { }
 
   getAllDepartment(): Observable<Department[]> {
-    return this.http.get<Department[]>(this.apiUrl + 'api/Department');
+    return this.http.get<Department[]>(this.apiUrlService.apiUrl + 'api/Department');
   }
   getDepartment(id:string): Observable<Department> {
-    return this.http.get<Department>(this.apiUrl + 'api/Department/'+id);
+    return this.http.get<Department>(this.apiUrlService.apiUrl + 'api/Department/'+id);
   }
 
   addDepartment(addDepartmentRequest: Department): Observable<Department> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     // addDepartmentRequest.id="0000000-0000-0000-0000-000000000000"
-    return this.http.post<Department>(this.apiUrl + 'api/Department', addDepartmentRequest, httpOptions);
+    return this.http.post<Department>(this.apiUrlService.apiUrl + 'api/Department', addDepartmentRequest, httpOptions);
   }
 
   updateDepartment(DepartmentDetails: Department,Id:string): Observable<Department> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Department>(this.apiUrl + 'api/Department/'+Id, DepartmentDetails, httpOptions);
+    return this.http.put<Department>(this.apiUrlService.apiUrl + 'api/Department/'+Id, DepartmentDetails, httpOptions);
   }
 
   deleteDepartment(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrl + 'api/Department/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'api/Department/' + Id, httpOptions);
   }
 
   

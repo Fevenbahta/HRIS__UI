@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Contact } from 'app/models/contact.model';
+import { ApiUrlService } from './api-url.service';
 
 
 
@@ -10,34 +11,34 @@ import { Contact } from 'app/models/contact.model';
 })
 export class ContactService {
  
-  readonly apiUrl = 'https://localhost:7008/';
+ 
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private apiUrlService: ApiUrlService) { }
 
   getAllContacts(): Observable<Contact[]> {
-    return this.http.get<Contact[]>(this.apiUrl + 'api/Address');
+    return this.http.get<Contact[]>(this.apiUrlService.apiUrl + 'api/Address');
   }
   getContact(empid:string): Observable<Contact> {
-    return this.http.get<Contact>(this.apiUrl + 'api/Address/'+empid);
+    return this.http.get<Contact>(this.apiUrlService.apiUrl + 'api/Address/'+empid);
   }
   getContactByEmpId(empId:string): Observable<Contact> {
-    return this.http.get<Contact>(this.apiUrl + 'api/Address/'+empId);
+    return this.http.get<Contact>(this.apiUrlService.apiUrl + 'api/Address/'+empId);
   }
   addContact(addContactRequest:Contact): Observable<Contact> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Contact>(this.apiUrl + 'api/Address', addContactRequest,httpOptions);
+    return this.http.post<Contact>(this.apiUrlService.apiUrl + 'api/Address', addContactRequest,httpOptions);
   }
 
   updateContact(contactDetails:Contact, Id:string): Observable<Contact> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Contact>(this.apiUrl + 'api/Address/'+Id, contactDetails,httpOptions);
+    return this.http.put<Contact>(this.apiUrlService.apiUrl + 'api/Address/'+Id, contactDetails,httpOptions);
   }
 
   deleteContact(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrl + 'api/Address/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'api/Address/' + Id, httpOptions);
   }
 
   

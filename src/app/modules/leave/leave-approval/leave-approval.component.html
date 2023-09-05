@@ -1,16 +1,16 @@
 
 <app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
-<div class="col-md-4"><button *ngIf="leaveApproved"class="alert  btndanger btn-sm pull-right">  Approved
-            </button></div>
 
     <div class="card col-md-7 mb-5 ml-5">
       <div class="card">
         <div class="card-header  cardhead">
           <h4 class="card-title  ">Leave Approval</h4>
           <p class="card-category ">Leaves on pendding  </p>
-           
+          
+
         </div></div>
-     <!--  -->
+     <!--  --><button *ngIf="leaveApproved"class="alert  btndanger btn-sm pull-right">  Approved
+            </button>
      <div  class="col-md-9">
 
                 <table   *ngIf="leavePenddings" class="table table-bordered table-striped">

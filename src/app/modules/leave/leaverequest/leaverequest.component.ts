@@ -329,8 +329,8 @@ availableLeaveBalance(): void {
  
   updateleaveRequest(): void {  
     console.log(this.leaveRequest) 
-    this.leaveRequest.updatedDate=new Date().toISOString();; 
-    if(this.leaveRequest.endDate < this.leaveRequest.updatedDate ){ 
+    // this.leaveRequest.updatedDate=new Date().toISOString();
+    // if(this.leaveRequest.endDate < this.leaveRequest.updatedDate ){ 
    this.leaveRequest.leaveStatus='pendding' 
     this.leaveRequest.leaveTypeId = this.selectedLeaveType; 
  
@@ -373,7 +373,7 @@ availableLeaveBalance(): void {
       sickEndDate: "2023-07-26T06:13:52.512Z", 
    
     };} 
-  } 
+  
  
  
  

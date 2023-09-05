@@ -64,7 +64,7 @@ export class LeaverequestComponent {
     approvedDate:'', 
     reason: '', 
     file:null, 
-    workingDays: 0, 
+    workingDays: null, 
     sickStartDate: "2023-07-26T06:13:52.512Z", 
     sickEndDate: "2023-07-26T06:13:52.512Z", 
   }; 
@@ -230,7 +230,7 @@ subscribe({
     approvedDate:'', 
     reason: '', 
     file: null, 
-    workingDays: 0, 
+    workingDays: null, 
     sickStartDate: "2023-07-26T06:13:52.512Z", 
     sickEndDate: "2023-07-26T06:13:52.512Z", 
         }; 

@@ -1,42 +1,28 @@
-
-
-.btnsave  {
-  background-color: #76a53b;
+.btnsave  { 
+  background-color: #76a53b; 
+} 
+.btnupdate { 
+  background-color: #76a53b; 
+} 
+.btnedit{ 
+  background-color: #76a53b;; 
+  color:rgb(22, 20, 20); 
+  font-weight: 600; 
+font-size:small; 
+border-style:groove; 
+ 
+border-radius: 10%; 
+}  
+.btndanger{ 
+color: rgb(22, 21, 21); 
+font-weight: 600; 
+font-size:small; 
+ width: 25%;
+ height:5%;
+border-color: white; 
+ 
+ 
+border-radius: 10%; 
+background-color:#fcc034 ; 
+ 
 }
-.btnupdate {
-  background-color: #76a53b;
-}
-.btnedit{
-  background-color: #76a53b;;
-  color:rgb(22, 20, 20);
-  font-weight: 600;
-font-size:small;
-border-style:groove;
-
-border-radius: 10%;
-}  .btndanger{
-color: rgb(22, 21, 21);
-font-weight: 600;
-font-size:small;
-
-border-color: white;
-
-
-border-radius: 10%;
-background-color:#fcc034 ;
-
-}
-.card-title{
-  font-weight: 200;
-}
-th {
-  font-family: Arial;
-  font-size: 8px;
-  font-weight: 500;
-  color:black
-}
-td {
-  font-family: Arial;
-  font-size: 14px;
-}
-  

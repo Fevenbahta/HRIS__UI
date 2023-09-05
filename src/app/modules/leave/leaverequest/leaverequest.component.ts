@@ -41,7 +41,9 @@ export class LeaverequestComponent {
   fileData: string = ''; 
   buttons = [  
     { label: ' Leave Request ', route: '/leave/leave-request' },  
-    { label: ' Leave Balance ', route: '/leave/leave-balance' },  
+    { label: ' Leave Balance ', route: '/leave/leave-balance' },
+    { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
+    { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' },   
  
   ];  
   
@@ -272,6 +274,8 @@ availableLeaveBalance(): void {
     this.selectedLeaveBalance = selectedBalance.annualRemainingBalance; 
     this.selectedPreviousYear = selectedBalance.previousYearAnnualBalance; 
     this.selectedTwoPerviousYear= selectedBalance.previousTwoYear; 
+    console.log( selectedBalance)
+ 
   } 
     if( this.leaveName === "Sick") 
     { 
@@ -427,7 +431,7 @@ LeaveRequest): void {
  
   getEmployeeName(empId: string): string {  
     const employee = this.employees.find((g) => g.empId === empId);  
-    return employee ? ${employee.firstName}  ${employee.middleName} ${employee.lastName}:'Unknown EMPLOYEE';  
+    return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE';  
   }   
     
   // getLeaveTypeName(Id: string): string {  

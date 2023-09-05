@@ -32,15 +32,15 @@
               <div *ngIf="selectedLeaveBalance <= 0 && leaveName">
                 <p class="insufficient-balance">Insufficient Balance</p>
               </div>
-              <label *ngIf="leaveName === 'Annual'">Previous Year Balance</label>
-              <input class="form-control" *ngIf="leaveName === 'Annual'" name="selectedPreviousYear" required [(ngModel)]="selectedPreviousYear" [disabled]="true">
-              <label *ngIf="leaveName === 'Annual'">Previous 2 Balance</label>
-              <input class="form-control" *ngIf="leaveName === 'Annual'" name="selectedTwoPerviousYear" required [(ngModel)]="selectedTwoPerviousYear" [disabled]="true">
+              <label *ngIf="leaveName === 'Annual' && selectedPreviousYear>0">Previous Year Balance</label>
+              <input class="form-control" *ngIf="leaveName === 'Annual' && selectedPreviousYear>0 " name="selectedPreviousYear" required [(ngModel)]="selectedPreviousYear" [disabled]="true">
+              <label *ngIf="leaveName === 'Annual' && selectedTwoPerviousYear>0">Previous 2 Balance</label>
+              <input class="form-control" *ngIf="leaveName === 'Annual'&& selectedTwoPerviousYear>0" name="selectedTwoPerviousYear" required [(ngModel)]="selectedTwoPerviousYear" [disabled]="true">
             </div>
           </div>
           
           <div class="row">
-            <div class="col-md-4 form-group mt-3">
+            <div class="col-md-4 form-group mt-3 select ">
               <label for="name">Working Days</label>
               <input class="form-control" placeholder="Working Days" type="text" name="workingDays" [(ngModel)]="leaveRequest.workingDays">
             

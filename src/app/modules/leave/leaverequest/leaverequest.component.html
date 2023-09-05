@@ -34,16 +34,16 @@
               </div>
               <label *ngIf="leaveName === 'Annual'">Previous Year Balance</label>
               <input class="form-control" *ngIf="leaveName === 'Annual'" name="selectedPreviousYear" required [(ngModel)]="selectedPreviousYear" [disabled]="true">
-              <label *ngIf="leaveName === 'Annual'">Previous 2 Balance</label>
+              <label *ngIf="leaveName === 'Annual' && selectedPreviousYear>0 ">Previous 2 Balance</label>
               <input class="form-control" *ngIf="leaveName === 'Annual'" name="selectedTwoPerviousYear" required [(ngModel)]="selectedTwoPerviousYear" [disabled]="true">
-              <label *ngIf="leaveName === 'Annual'">Annual Remaining Balance</label>
+              <label *ngIf="leaveName === 'Annual'&& selectedTwoPerviousYear>0">Annual Remaining Balance</label>
               <input class="form-control" *ngIf="leaveName === 'Annual'" name="selected" required [(ngModel)]="selectedLeaveBalance" [disabled]="true">
            
             </div>
           </div>
           
           <div class="row">
-            <div class="col-md-4 form-group mt-3">
+            <div class="col-md-4 form-group mt-3 select ">
               <label for="name">Working Days</label>
               <input class="form-control" placeholder="Working Days" type="text" name="workingDays" [(ngModel)]="leaveRequest.workingDays">
             
@@ -114,8 +114,9 @@
                     <td>{{ leaveRequest.approvedBy }}</td>
                     <td>{{ leaveRequest.approvedDate | date:'yyyy-MM-dd' }}</td>
                   
-                    <td><button (click)="fetchAndDisplayPDF(leaveRequest)" 
-                      style="background-color: hwb(40 71% 28%); color: #0c0c0c; border: none; padding: 5px 10px; cursor: pointer; border-radius: 5px;"  download="filename.pdf" >File</button></td>
+                    <td>  <button class="btn btn-sm btnedit" (click)="fetchAndDisplayPDF(leaveRequest)" 
+                      style="background-color: hwb(240 71% 28%); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+                      <mat-icon>attach_file</mat-icon>File</button></td>
                     <!-- Add a button to trigger fetching and displaying the PDF -->
                    
                     <td>

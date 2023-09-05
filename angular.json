@@ -27,7 +27,9 @@
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/assets/styles.scss",
+      "./node_modules/material-icons-font/material-icons-font.css",
+      
+    "src/assets/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
@@ -104,7 +106,8 @@
            
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/assets/styles.scss",
+      "./node_modules/material-icons-font/material-icons-font.css",
+      "src/assets/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css"
           
             ],

@@ -70,9 +70,14 @@ import { HistoryComponent } from 'app/modules/history/history.component';
 import { DepartmentComponent } from 'app/modules/Admin module/Job/department/department.component';
 import { DivisionComponent } from 'app/modules/Admin module/Job/division/division.component';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
-import { LeaverequestComponent } from 'app/modules/leave/leaverequest/leaverequest.component';
+
 import { LeavetypeComponent } from 'app/modules/Admin module/leavetype/leavetype.component';
 import { LeavebalanceComponent } from 'app/modules/leave/leavebalance/leavebalance.component';
+
+import { LeaveApprovalComponent } from 'app/modules/leave/leave-approval/leave-approval.component';
+import { EmployeeLeaverequestComponent } from 'app/modules/leave/employee-leaverequest/employee-leaverequest.component';
+import { EmployeeLeavebalanceComponent } from 'app/modules/leave/employee-leavebalance/employee-leavebalance.component';
+import { LeaverequestComponent } from 'app/modules/leave/leaverequest/leaverequest.component';
 
 
 
@@ -124,6 +129,10 @@ LeaverequestComponent,
 LeavetypeComponent,
 LeavebalanceComponent,
 
+LeaveApprovalComponent,
+EmployeeLeaverequestComponent,
+EmployeeLeavebalanceComponent,
+
 
   ],
 
@@ -154,7 +163,8 @@ LeavebalanceComponent,
  MatTableModule,
  SharedModule,
  MatDialogModule,
- MatIconModule
+ MatIconModule,
+
 
   ],
 

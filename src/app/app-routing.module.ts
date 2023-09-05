@@ -38,7 +38,9 @@ import { LeaverequestComponent } from './modules/leave/leaverequest/leaverequest
 import { LeavetypeComponent } from './modules/Admin module/leavetype/leavetype.component';
 import { LeavebalanceComponent } from './modules/leave/leavebalance/leavebalance.component';
 
-import { SignupComponent } from './auth/signup/signup.component';
+
+import { LeaveApprovalComponent } from './modules/leave/leave-approval/leave-approval.component';
+import { EmployeeLeavebalanceComponent } from './modules/leave/employee-leavebalance/employee-leavebalance.component';
 
 const routes: Routes = [
   {path: '',
@@ -52,8 +54,7 @@ component:DashboardComponent,
 component:DashboardComponent,
 },
 
-{path:'signup',
-component:SignupComponent},
+
 {path:'employee-registration',
 component:EmployeeRegistrationComponent}
 ,
@@ -120,10 +121,14 @@ component: EditTrainingComponent},
 component: EditDepositeAuthenticationComponent},
 {path:'leave/leave-request',
 component: LeaverequestComponent},
+{path:'leave/leave-approve',
+component: LeaveApprovalComponent},
 {path:'leave/leave-type',
 component: LeavetypeComponent},
 {path:'leave/leave-balance',
-component: LeavebalanceComponent}
+component: LeavebalanceComponent},
+{path:'leave/employeeleavebalance',
+component: EmployeeLeavebalanceComponent}
 ]
 }]
 

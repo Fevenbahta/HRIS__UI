@@ -7,7 +7,7 @@ import { AnnualLeaveBalance, OtherLeaveBalance } from 'app/models/leaverequestmo
 import { EmployeeService } from 'app/service/employee.service';
 import { LeaveTypeService } from 'app/service/leaveType.service';
 import { LeaveBalanceService } from 'app/service/leavebalance.service';
-import { OtherLeaveBalanceService } from 'app/service/leavebalance.service copy';
+import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service';
 
 
 @Component({
@@ -31,6 +31,8 @@ employees:Employee[]=[]
   buttons = [ 
     { label: ' Leave Request ', route: '/leave/leave-request' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
+    { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
+    { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
 
   ]; 
 
@@ -110,6 +112,17 @@ constructor(
   private router:Router){}
 ngOnInit(): void{
 
+  this.leaveTypeService.getAllLeaveType().
+subscribe({
+  next: (leaveType) => {
+    // this.leaveRequest.leaveTypeId = this.selectedLeaveType;
+    this.leaveTypes= leaveType
+    ;
+  },
+  error: (response) => {
+    console.log(response);
+  }
+});
   this.employeeService.getAllEmployees() 
 .subscribe({ 
   next: (employees) => { 

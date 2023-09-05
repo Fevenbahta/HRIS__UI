@@ -30,6 +30,7 @@
     "highcharts": "^11.1.0",
     "highcharts-angular": "^3.1.2",
     "jquery": "^3.7.0",
+    "material-icons-font": "^2.1.0",
     "ng-angular-popup": "^0.4.7",
     "ng2-filter": "^0.1.2",
     "ng2-filter-pipe": "^0.1.10",

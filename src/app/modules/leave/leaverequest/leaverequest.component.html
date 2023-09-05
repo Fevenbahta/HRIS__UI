@@ -52,7 +52,8 @@
             </div>
             <div class="col-md-4 mt-3">
               <label for="name">Supporting File</label>
-              <input placeholder=" " name="file" class="form-control" type="file" id="file" (change)="onFileSelected($event)">
+              <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+             
             </div>
           </div>
           
@@ -81,16 +82,13 @@
           </div>
         </div>
       </form>
-  
- 
-
-
 
               <h6>Leave Request History</h6>
               <table *ngIf="leaveRequest" class="table table-striped table-bordered compact-table">
                 <thead>
                   <tr>
                     <th>Employee</th>
+                    
                     <th>Leave Type</th>
                     <th>Start Date</th>
                     <th>End Date</th>
@@ -104,12 +102,19 @@
                   <!-- Use *ngFor to loop through the leaveRequests array and display each leaveRequest record -->
                   <tr *ngFor="let leaveRequest of leaveRequests">
                     <td>{{ getEmployeeName(leaveRequest.empId) }}</td>
+                    
                     <td>{{ getLeaveTypeName(leaveRequest.leaveTypeId) }}</td>
+                   
                     <td>{{ leaveRequest.startDate | date:'yyyy-MM-dd' }}</td>
                     <td>{{ leaveRequest.endDate | date:'yyyy-MM-dd' }}</td>
                     <td>{{ leaveRequest.leaveStatus }}</td>
                     <td>{{ leaveRequest.approvedBy }}</td>
                     <td>{{ leaveRequest.approvedDate | date:'yyyy-MM-dd' }}</td>
+                  
+                    <td><button (click)="fetchAndDisplayPDF(leaveRequest)" 
+                      style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; cursor: pointer; border-radius: 5px;"  download="filename.pdf" >File</button></td>
+                    <!-- Add a button to trigger fetching and displaying the PDF -->
+                   
                     <td>
                       <button class="btn btn-sm btnedit" (click)="editleaveRequest(leaveRequest)">
                         <mat-icon>edit</mat-icon>Edit

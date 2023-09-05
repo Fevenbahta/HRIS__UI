@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -27,14 +28,16 @@ export class LeaverequestComponent {
   selectedTwoPerviousYear:number=0;
   selectedLeaveType: string='';
   leaveName: string=''
-
+  downloadFileUrl: string='';
+  pdfUrl:string=''
   selectedEmployee: string='';
   leaveRequestSaved: boolean = false;
   leaveRequestUpdated: boolean = false;
   employees:Employee[]=[];
   otherLeaveBalances:OtherLeaveBalance[]=[]
   selectedOtherLeaveBalance:number=0
-
+  fileType: string = 'other'; // Initialize as 'other' by default
+  fileData: string = '';
   buttons = [ 
     { label: ' Leave Request ', route: '/leave/leave-request' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
@@ -67,7 +70,7 @@ export class LeaverequestComponent {
 
 
   constructor(
-
+  
     private leaveRequestservice: LeaveRequestService,
     private router: Router,
     private employeeService:EmployeeService,
@@ -77,9 +80,26 @@ export class LeaverequestComponent {
     private leaveBalanceService: LeaveBalanceService,
     private employeeIdService: EmployeeIdService,
     private dialog: MatDialog,
-  ) { }
+    private http: HttpClient,
+  ) { 
+   
+  }
 
   ngOnInit(): void {
+    
+    this.leaveRequestservice.getAllLeaveRequest().subscribe({
+      next: (leaveRequestd) => {
+        this.leaveRequests = leaveRequestd;
+        
+      
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
+   
+  
+    
     this.employeeService.getAllEmployees() 
 .subscribe({ 
   next: (employees) => {
@@ -95,6 +115,7 @@ this.leaveBalanceService.getAllLeaveBalance()
   next: (leaveBalances) => {
     // this.leaveRequest.empId = this.selectedEmployee;
     this.leaveBalances=leaveBalances
+
    },
   error: (response) => {
     console.log(response);
@@ -110,15 +131,9 @@ this.otherLeaveBalanceService.getAllOtherLeaveBalance()
     console.log(response);
   }
 });
-    this.leaveRequestservice.getAllLeaveRequest().subscribe({
-      next: (leaveRequest) => {
-        this.leaveRequests = leaveRequest
-        ;
-      },
-      error: (response) => {
-        console.log(response);
-      }
-    });
+
+   
+   
 this.leavetypeservice.getAllLeaveType().
 subscribe({
   next: (leaveType) => {
@@ -133,44 +148,42 @@ subscribe({
 
   }
 
-  openFileDialog(): void {
-    // Trigger click on the file input element to open the image dialog
-    const fileInput = document.getElementById('file') as HTMLInputElement;
-    fileInput.click();
-  }
-  onFileSelected(event: any): void {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.getBase64(file).then((data) => {
-       this.selectedFile = data;
-        
-      });
-    }
-  }
   
-  private getBase64(file: File): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  }
+  // private getBase64(file: File): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = () => resolve(reader.result);
+  //     reader.onerror = (error) => reject(error);
+  //   });
+  // }
+ 
 
 
   getLeaveTypeName(leavetypeId: string): string {
     const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId);
     return leaveType ? leaveType.leaveTypeName : '';
   }
+  onFileSelected(event: any) {
+  
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+        const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part
+        this.leaveRequest.file = base64String;
+    };
+    reader.readAsDataURL(file);
+  }
+
 
   addleaveRequest() {
 
     this.leaveRequest.leaveTypeId = this.selectedLeaveType;
     this.leaveRequest.empId = this.selectedEmployee;
-   
+
   
     
-      console.log( this.leaveRequest.file)
+ 
     this.leaveRequestservice.addLeaveRequest(this.leaveRequest).subscribe({
       next: (employee) => {
         
@@ -192,12 +205,12 @@ subscribe({
         // Add the current leaveRequest to the array
         this.leaveRequests.push({ ...this.leaveRequest });
         // Reset the form fields
-
+     
         this.selectedEmployee= '';
         this.selectedLeaveType= '';
         this.leaveRequest = {
           pId: 0,
-    leaveRequestId:undefined,
+    leaveRequestId:this.leaveRequest.leaveRequestId,
     createdBy: "",
     createdDate: "2023-07-26T06:13:52.512Z",
     updatedDate: "2023-07-26T06:13:52.512Z",
@@ -222,7 +235,27 @@ subscribe({
       }
     });
   }
-  
+  fetchAndDisplayPDF(leave: LeaveRequest):void {
+    // Call your service method to fetch the PDF file 
+    const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId);
+    leaveRequestToEdit.leaveRequestId
+    this.leaveRequestservice.getLeaveRequestFile(leaveRequestToEdit.leaveRequestId)
+   
+      .subscribe(
+        (pdf: Blob) => {
+          const file = new Blob([pdf], { type: 'application/pdf' });
+          this.downloadFileUrl = window.URL.createObjectURL(file);
+          window.open(this.downloadFileUrl, '_blank');
+          //console.log(this.leaveRequest.leaveRequestId);
+          
+        },
+        
+        (error) => {
+          console.error('Error loading PDF:', error);
+          // Handle the error, e.g., display an error message to the user.
+        }
+      );
+  }
  
 availableLeaveBalance(): void {
    
@@ -230,10 +263,7 @@ availableLeaveBalance(): void {
   const balance= this.leaveBalanceService.getLeaveBalance(this.selectedEmployee);
  
   this.leaveName= leaveType.leaveTypeName
-    console.log(this.selectedLeaveType);
-    console.log(this.selectedEmployee);
-    console.log(this.leaveBalanceService.getLeaveBalance(this.selectedEmployee));
-    console.log(this.leaveBalances.find((leaveB)=>leaveB.empId === this.selectedEmployee))
+    
     if ( this.leaveName === "Annual") {
     const selectedBalance = this.leaveBalances.find((balance) => balance.empId === this.selectedEmployee)
     this.selectedLeaveBalance = selectedBalance.annualRemainingBalance;
@@ -330,7 +360,7 @@ availableLeaveBalance(): void {
       approvedBy:'',
       approvedDate:'',
       reason: '',
-      file: null,
+      file: '',
       workingDays: 0,
       sickStartDate: "2023-07-26T06:13:52.512Z",
       sickEndDate: "2023-07-26T06:13:52.512Z",
@@ -346,10 +376,23 @@ availableLeaveBalance(): void {
     this.leaveRequest = leaveRequestToEdit;
     this.selectedLeaveType=leaveRequestToEdit.leaveTypeId
     this.selectedEmployee=leaveRequestToEdit.empId
+
+    this.leaveRequestservice.getLeaveRequestFile(leaveRequestToEdit.leaveRequestId).subscribe(
+      (pdf: Blob) => {
+        const file = new Blob([pdf], { type: 'application/pdf' });
+        this.leaveRequest.file = window.URL.createObjectURL(file);
+      },
+      (error) => {
+        console.error('Error loading PDF:', error);
+        // Handle the error, e.g., display an error message to the user.
+      }
+    );
+    
+ 
     this.leaveRequestservice.getAllLeaveRequest().subscribe({
       next: (leaveRequest) => {
-        this.leaveRequests = leaveRequest
-        ;
+        this.leaveRequests = leaveRequest;
+      
       },
       error: (response) => {
         console.log(response);

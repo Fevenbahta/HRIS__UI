@@ -22,6 +22,9 @@ export class LeaveRequestService {
   getLeaveRequest(id:string): Observable<LeaveRequest> {
     return this.http.get<LeaveRequest>(this.apiUrl + 'api/LeaveRequest/'+id);
   }
+  getLeaveRequestByStatus(leavestatus:string,): Observable<LeaveRequest[]> {
+    return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/status/'+leavestatus);
+  }
 
   addLeaveRequest(addLeaveRequestRequest:LeaveRequest): Observable<LeaveRequest> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"

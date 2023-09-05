@@ -21,14 +21,14 @@ export class LeaverequestComponent {
   leaveTypes:LeaveType[]=[]
   selectedLeaveType: string='';
   selectedEmployee: string='';
-  leaveRequestSaved: boolean = false;
-  leaveRequestUpdated: boolean = false;
   employees:Employee[]=[];
-
+ leaveRequestSaved: boolean = false;
+  leaveRequestUpdated: boolean = false;
   buttons = [ 
     { label: ' Leave Request ', route: '/leave/leave-request' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-
+    { label: ' Leave Approve ', route: '/leave/leave-approve' },
+    { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
   ]; 
  
   leaveRequest: LeaveRequest = {

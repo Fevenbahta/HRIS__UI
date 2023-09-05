@@ -26,6 +26,9 @@ import { LeavetypeComponent } from './modules/Admin module/leavetype/leavetype.c
 import { LeavebalanceComponent } from './modules/leave/leavebalance/leavebalance.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { LeaveApprovalComponent } from './modules/leave/leave-approval/leave-approval.component';
+import { EmployeeLeaverequestComponent } from './modules/leave/employee-leaverequest/employee-leaverequest.component';
+import { EmployeeLeavebalanceComponent } from './modules/leave/employee-leavebalance/employee-leavebalance.component';
 
 
 
@@ -36,6 +39,8 @@ import { SignupComponent } from './auth/signup/signup.component';
     AppComponent,
 
     SignupComponent,
+   
+ 
  
 
 

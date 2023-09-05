@@ -74,6 +74,9 @@ import { LeaverequestComponent } from 'app/modules/leave/leaverequest/leavereque
 import { LeavetypeComponent } from 'app/modules/Admin module/leavetype/leavetype.component';
 import { LeavebalanceComponent } from 'app/modules/leave/leavebalance/leavebalance.component';
 import { LoginComponent } from 'app/auth/login/login.component';
+import { LeaveApprovalComponent } from 'app/modules/leave/leave-approval/leave-approval.component';
+import { EmployeeLeaverequestComponent } from 'app/modules/leave/employee-leaverequest/employee-leaverequest.component';
+import { EmployeeLeavebalanceComponent } from 'app/modules/leave/employee-leavebalance/employee-leavebalance.component';
 
 
 
@@ -123,7 +126,10 @@ DeletesucessfullmessageComponent,
 LeaverequestComponent,
 LeavetypeComponent,
 LeavebalanceComponent,
-LoginComponent
+LoginComponent,
+LeaveApprovalComponent,
+EmployeeLeaverequestComponent,
+EmployeeLeavebalanceComponent,
 
   ],
 
@@ -154,7 +160,8 @@ LoginComponent
  MatTableModule,
  SharedModule,
  MatDialogModule,
- MatIconModule
+ MatIconModule,
+
 
   ],
 

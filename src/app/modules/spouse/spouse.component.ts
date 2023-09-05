@@ -11,7 +11,7 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
 @Component({
   selector: 'app-spouse',
   templateUrl: './spouse.component.html',
-  styleUrls: ['./spouse.component.scss']
+  styleUrls: ['./spouse.component.css']
 })
 export class SpouseComponent implements OnInit {
 

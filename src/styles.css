@@ -1,3 +1,5 @@
+
+
 .btnsave  {
   background-color: #76a53b;
 }
@@ -23,5 +25,18 @@ border-color: white;
 border-radius: 10%;
 background-color:#fcc034 ;
 
+}
+.card-title{
+  font-weight: 200;
+}
+th {
+  font-family: Arial;
+  font-size: 8px;
+  font-weight: 500;
+  color:black
+}
+td {
+  font-family: Arial;
+  font-size: 14px;
 }
   

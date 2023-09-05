@@ -5,30 +5,30 @@ import { Employee } from 'app/models/employee.model';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { EmployeeIdService } from './employee-id.service';
+import { ApiUrlService } from './api-url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
  
-  readonly apiUrl = 'https://localhost:7008/';
   
 
-  constructor(private http: HttpClient, private employeeidservice:EmployeeIdService) { }
+  constructor(private http: HttpClient, private employeeidservice:EmployeeIdService,private apiUrlService: ApiUrlService) { }
 
   getAllEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiUrl + 'api/Employee');
+    return this.http.get<Employee[]>(this.apiUrlService.apiUrl + 'api/Employee');
   }
   getEmployee(id:string): Observable<Employee> {
-    return this.http.get<Employee>(this.apiUrl + 'api/Employee/'+id);
+    return this.http.get<Employee>(this.apiUrlService.apiUrl + 'api/Employee/'+id);
   }
   getEmployeeByEcx(id: string): Observable<Employee[]> {
     const encodedId = encodeURIComponent(id);
-    return this.http.get<Employee[]>(this.apiUrl + 'api/Employee/ecx/' + encodedId);
+    return this.http.get<Employee[]>(this.apiUrlService.apiUrl + 'api/Employee/ecx/' + encodedId);
   }
   addEmployee(addEmployeeRequest: Employee): Observable<Employee> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Employee>(this.apiUrl + 'api/Employee', addEmployeeRequest, httpOptions)
+    return this.http.post<Employee>(this.apiUrlService.apiUrl + 'api/Employee', addEmployeeRequest, httpOptions)
     .pipe(  
       map(response => {  
         // Assuming the server's response contains the empId as response.empId  
@@ -40,12 +40,12 @@ export class EmployeeService {
   }
   updateEmployee(employeeDetails: Employee, Id:string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<string>(this.apiUrl + 'api/Employee/'+Id, employeeDetails,httpOptions);
+    return this.http.put<string>(this.apiUrlService.apiUrl + 'api/Employee/'+Id, employeeDetails,httpOptions);
   }
 
   deleteEmployee(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrl + 'api/Employee/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'api/Employee/' + Id, httpOptions);
   }
 
   

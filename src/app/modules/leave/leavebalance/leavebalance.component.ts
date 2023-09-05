@@ -172,7 +172,6 @@ subscribe({
 }
 
 
-
 addLeaveBalancesForSelectedEmployees() {
   for (const employee of this.selectedEmployee) {
     const newLeaveBalance: AnnualLeaveBalance = {

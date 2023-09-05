@@ -22,7 +22,10 @@ export class LeaveBalanceService {
   getLeaveBalance(id:string): Observable<AnnualLeaveBalance[]> {
     return this.http.get<AnnualLeaveBalance[]>(this.apiUrl + 'api/LeaveBalance/'+id);
   }
-
+  getLeaveBalanceByEmp(employeeId: string): Observable<any> {
+    const url = `${this.apiUrl}/api/LeaveBalance/${employeeId}`;
+ return this.http.get(url);;
+  }
   addLeaveBalance(addLeaveBalanceRequest:AnnualLeaveBalance): Observable<AnnualLeaveBalance> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

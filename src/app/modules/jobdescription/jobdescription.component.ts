@@ -286,11 +286,11 @@ addEmployeePosition(){
    
     const selectedPosition = this.positions.find(position => position.positionId === this.selectedPosition);
    
-    //console.log( this.positions.find(position => position.positionId))
+   
     if (selectedPosition ) {
       
       const selectedDivision = this.divisions.find(division => division.divisionId === selectedPosition.divisionId);
-//console.log(this.divisions.find(division => division.divisionId))
+
 console.log(this.assignedSupervisors)
 const selectedassignedSupervisor= this.assignedSupervisors.find(assignedSupervisor => assignedSupervisor.positionId === selectedPosition.positionId);
 console.log("Selected Position:", selectedPosition);

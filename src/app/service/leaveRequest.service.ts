@@ -19,13 +19,13 @@ export class LeaveRequestService {
   getAllLeaveRequest(): Observable<LeaveRequest[]> {
     return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest');
   }
-  getLeaveRequest(id:string): Observable<LeaveRequest> {
-    return this.http.get<LeaveRequest>(this.apiUrl + 'api/LeaveRequest/'+id);
+  // getLeaveRequest(filedId:string): Observable<LeaveRequest> {
+  //   return this.http.get<LeaveRequest>(this.apiUrl + 'api/LeaveRequest/'+filedId);
+  // }
+  getLeaveRequestFile(leaveRequestId: string): Observable<Blob> {
+    const url = this.apiUrl +'api/LeaveRequest/'+leaveRequestId;
+    return this.http.get(url, { responseType: 'blob' });
   }
-  getLeaveRequestByStatus(leavestatus:string,): Observable<LeaveRequest[]> {
-    return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/status/'+leavestatus);
-  }
-
   addLeaveRequest(addLeaveRequestRequest:LeaveRequest): Observable<LeaveRequest> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

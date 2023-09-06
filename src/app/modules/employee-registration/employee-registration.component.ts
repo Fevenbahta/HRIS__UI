@@ -11,7 +11,18 @@ import { SupervisorService } from 'app/service/supervisor.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeIdService } from 'app/service/employee-id.service';
+ function  validateDate(control) {
+  const selectedDate = new Date(control.joinDate);
+  const currentDate = new Date();
+console.log(selectedDate);
+console.log(currentDate)
+  if (selectedDate < currentDate) {
+    console.log("invalid date")
+    return { invalidDate: true };
+   
+  }
  
+}
 @Component({ 
   selector: 'app-employee-registration', 
   templateUrl: './employee-registration.component.html', 
@@ -64,7 +75,7 @@ export class EmployeeRegistrationComponent implements OnInit {
       firstName: ['', Validators.required], 
       middleName: [''], 
       lastName: ['', Validators.required], 
-      joinDate: ['', Validators.required], 
+      joinDate: ['', [Validators.required,validateDate] ], 
       sex: ['', Validators.required], 
       dateOfBityh: ['', Validators.required], 
       placeOfBith: ['', Validators.required], 
@@ -158,7 +169,7 @@ getEmployees() {
       firstName: ['', Validators.required], 
       middleName: [''], 
       lastName: ['', Validators.required], 
-      joinDate: ['', Validators.required,this.validateDate], 
+      joinDate: ['', [Validators.required,validateDate]], 
       sex: ['', Validators.required], 
       dateOfBityh: ['', Validators.required], 
       placeOfBith: ['', Validators.required], 
@@ -193,25 +204,13 @@ getEmployees() {
 console.log(this.employeeForm.value) 
     } 
      else { 
-      this.validateDate(this.employeeForm.value)
+    
       this.validateAllFormFields(this.employeeForm); 
       console.log("error") 
     } 
   } 
   
-  validateDate(control) {
-    const selectedDate = new Date(control.joinDate);
-    const currentDate = new Date();
-console.log(selectedDate);
-console.log(currentDate)
-    if (selectedDate < currentDate) {
-      console.log("valid date")
-      return { invalidDate: true };
-     
-    }
-    console.log("invalid date")
-    return null;
-  }
+ 
  
 validateAllFormFields(formGroup: FormGroup) { 
   Object.keys(formGroup.controls).forEach((field) => { 

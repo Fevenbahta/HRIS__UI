@@ -128,10 +128,12 @@
              
 
                  
-        <div class="row mt-3">
+          
+<div class="row mt-3">
                   <div class="col-md-6">
                     <mat-form-field style="height: 65px; width:150px">
-                      <mat-error *ngIf="employeeForm.get('joinDate').hasError('invalidDate') && employeeForm.get('joinDate').touched">
+                      
+                      <mat-error *ngIf="employeeForm.hasError('invalidDate')">
                         Joined Date must be less than or equal to today.
                       </mat-error>
                       <mat-label>Joined Date</mat-label>

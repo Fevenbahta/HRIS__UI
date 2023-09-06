@@ -92,9 +92,9 @@ subscribe({
    console.log(leaveRequest)
     this.leaveRequestservice
     .updateLeaveRequest(leaveRequest,leaveRequestId)
-    .subscribe(() => {
+    .subscribe(() =>{
       this.leaveApproved = true;
-      //  this.router.navigate(['employee-registration/job-description']);
+console.log("updated")
         setTimeout(() => {
           this.leaveApproved= false;
         }, 2000);

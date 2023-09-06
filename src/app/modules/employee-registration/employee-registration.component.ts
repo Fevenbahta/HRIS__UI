@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router'; 
  
  
@@ -21,8 +21,9 @@ console.log(currentDate)
     return { invalidDate: true };
    
   }
- 
 }
+
+
 @Component({ 
   selector: 'app-employee-registration', 
   templateUrl: './employee-registration.component.html', 
@@ -59,7 +60,9 @@ export class EmployeeRegistrationComponent implements OnInit {
     private supervisorService:SupervisorService ,
     private dialog: MatDialog, 
     private employeeIdService:EmployeeIdService
-  ) {} 
+  ) {
+   
+  } 
  
   ngOnInit(): void { 
  
@@ -75,7 +78,7 @@ export class EmployeeRegistrationComponent implements OnInit {
       firstName: ['', Validators.required], 
       middleName: [''], 
       lastName: ['', Validators.required], 
-      joinDate: ['', [Validators.required,validateDate] ], 
+      joinDate: ['', [Validators.required,this.validateJoinDate]], 
       sex: ['', Validators.required], 
       dateOfBityh: ['', Validators.required], 
       placeOfBith: ['', Validators.required], 
@@ -132,7 +135,16 @@ getEmployees() {
   );  ;
 }     
    
- 
+validateJoinDate(control: AbstractControl): { [key: string]: boolean } | null {
+  const joinDate = new Date(control.value);
+  const currentDate = new Date();
+
+  if (joinDate > currentDate) {
+    return { 'invalidJoinDate': true }; // You can name this error as you like
+  }
+
+  return null;
+}
   addEmployee(): void { 
     if (this.employeeForm.valid) { 
       const formData = this.employeeForm.value; 
@@ -169,7 +181,7 @@ getEmployees() {
       firstName: ['', Validators.required], 
       middleName: [''], 
       lastName: ['', Validators.required], 
-      joinDate: ['', [Validators.required,validateDate]], 
+      joinDate: ['', Validators.required], 
       sex: ['', Validators.required], 
       dateOfBityh: ['', Validators.required], 
       placeOfBith: ['', Validators.required], 
@@ -204,13 +216,12 @@ getEmployees() {
 console.log(this.employeeForm.value) 
     } 
      else { 
-    
+     
       this.validateAllFormFields(this.employeeForm); 
       console.log("error") 
     } 
   } 
   
- 
  
 validateAllFormFields(formGroup: FormGroup) { 
   Object.keys(formGroup.controls).forEach((field) => { 

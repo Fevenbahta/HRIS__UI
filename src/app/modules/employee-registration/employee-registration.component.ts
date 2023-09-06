@@ -11,7 +11,17 @@ import { SupervisorService } from 'app/service/supervisor.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeIdService } from 'app/service/employee-id.service';
- 
+ function  validateDate(control) {
+  const selectedDate = new Date(control.joinDate);
+  const currentDate = new Date();
+console.log(selectedDate);
+console.log(currentDate)
+  if (selectedDate < currentDate) {
+    console.log("invalid date")
+    return { invalidDate: true };
+   
+  }
+}
 
 
 @Component({ 
@@ -212,7 +222,6 @@ console.log(this.employeeForm.value)
     } 
   } 
   
-
  
 validateAllFormFields(formGroup: FormGroup) { 
   Object.keys(formGroup.controls).forEach((field) => { 

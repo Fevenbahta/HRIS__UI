@@ -62,7 +62,7 @@
       
             <form [formGroup]="leaveRequestForm">
               <div class="card-body">
-                 <div class="row mt-3"> <div class="col-md-6">
+                 <div class="row mt-3"> <div class="col-md-4">
                 <!-- Start Date -->
                 <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
                   <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="startDate"  formControlName="startDate">
@@ -76,7 +76,7 @@
               </mat-error>
               </div>   
             
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <!-- End Date -->
                 <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
                   <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="endDate"  formControlName="endDate">
@@ -133,17 +133,18 @@
                     <td>{{ leaveRequest.approvedBy }}</td>
                     <td>{{ leaveRequest.approvedDate | date:'yyyy-MM-dd' }}</td>
                   
-                    <td>  <button class="btn btn-sm btnedit" (click)="fetchAndDisplayPDF(leaveRequest)" 
+                    <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leaveRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                       style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
                       <mat-icon>attach_file</mat-icon>File</button></td>
                     <!-- Add a button to trigger fetching and displaying the PDF -->
                    
                     <td>
-                      <button class="btn btn-sm btnedit" (click)="editleaveRequest(leaveRequest)">
-                        <mat-icon>edit</mat-icon>Edit
+                      <button class="btn btn-sm btnedit" (click)="editleaveRequest(leaveRequest)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                        <mat-icon>edit</mat-icon>
                       </button>
-                      <button class="btn btn-sm btndanger" *ngIf="leaveRequest.leaveStatus === 'pendding'" (click)="deleteleaveRequest(leaveRequest)">
-                        <mat-icon>delete</mat-icon>Delete
+                      <button class="btn btn-sm btndanger" *ngIf="leaveRequest.leaveStatus === 'pendding'" (click)="deleteleaveRequest(leaveRequest)"
+                      [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                        <mat-icon>delete</mat-icon>
                       </button>
                     </td>
                   </tr>

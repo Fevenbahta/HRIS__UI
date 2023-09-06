@@ -7,10 +7,11 @@
 .btnedit{ 
   background-color: #76a53b;; 
   color:rgb(22, 20, 20); 
-  font-weight: 600; 
-font-size:small; 
+
+
 border-style:groove; 
- 
+font-size:small;
+padding: 4px 19px;
 border-radius: 10%; 
 }  
 

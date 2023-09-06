@@ -158,7 +158,7 @@ getEmployees() {
       firstName: ['', Validators.required], 
       middleName: [''], 
       lastName: ['', Validators.required], 
-      joinDate: ['', Validators.required], 
+      joinDate: ['', Validators.required,this.validateDate], 
       sex: ['', Validators.required], 
       dateOfBityh: ['', Validators.required], 
       placeOfBith: ['', Validators.required], 
@@ -193,10 +193,26 @@ getEmployees() {
 console.log(this.employeeForm.value) 
     } 
      else { 
+      this.validateDate(this.employeeForm.value)
       this.validateAllFormFields(this.employeeForm); 
       console.log("error") 
     } 
   } 
+  
+  validateDate(control) {
+    const selectedDate = new Date(control.joinDate);
+    const currentDate = new Date();
+console.log(selectedDate);
+console.log(currentDate)
+    if (selectedDate < currentDate) {
+      console.log("valid date")
+      return { invalidDate: true };
+     
+    }
+    console.log("invalid date")
+    return null;
+  }
+ 
 validateAllFormFields(formGroup: FormGroup) { 
   Object.keys(formGroup.controls).forEach((field) => { 
     const control = formGroup.get(field); 
@@ -212,8 +228,6 @@ validateAllFormFields(formGroup: FormGroup) {
     return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
   } 
 
-
- 
   openImageDialog(): void {
     // Trigger click on the file input element to open the image dialog
     const fileInput = document.getElementById('image') as HTMLInputElement;

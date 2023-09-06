@@ -40,8 +40,29 @@
     width: 229px!important;
     height: 300px!important;
   }
-  .custom-mat-select {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px;
+  
+
+  .select{
+    border-bottom: 1px solid #ced4da;
+    font-size: 14px;
   }
+  .select2{
+    border: none;
+    border-bottom:1px solid #ced4da;
+  }
+  .compact-table th {
+    font-size: 13px;
+    color: black;
+    font-weight:650; /* Adjust the font size as needed */
+  }
+  .compact-table tr {
+    font-size: 13px; /* Adjust the font size as needed */
+  }
+  
+  .compact-table th, .compact-table td {
+    padding: 4px 8px; 
+  }
+  td ,th{
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  

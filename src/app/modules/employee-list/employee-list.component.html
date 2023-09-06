@@ -26,8 +26,8 @@
                     </div>
                     
                     <div >
-                        <div class="col-md-12" >
-                            <table class="table  table-striped col-md-8"   *ngIf="filteredEmployees.length || employees.length ">
+                       
+                            <table class="table  table-striped col-md-8 compact-table"   *ngIf="filteredEmployees.length || employees.length ">
 
                                <div> <thead>
                                     <tr>
@@ -69,7 +69,7 @@
                             </table>
                             <p *ngIf="!(filteredEmployees.length || employees.length)">No employees found</p>
 
-                        </div>
+                   
                     </div>
                 </div>
             </div>

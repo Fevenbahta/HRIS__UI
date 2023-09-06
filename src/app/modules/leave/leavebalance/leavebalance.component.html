@@ -4,7 +4,7 @@
     <div class="row">
 
       <!-- First Column -->
-      <div class="col-md-9 ml-5">
+      <div class="col-md-11 ml-5">
         <div class="card mb-5">
           <div class="card">
             <div class="card-header cardhead">
@@ -14,7 +14,7 @@
                     
 
   
-    <table  *ngIf="leaveBalance"  class="table col-md-8 table-bordered table-striped" >
+    <table  *ngIf="leaveBalance"  class="table col-md-8 table-bordered table-striped compact-table" >
       <thead> 
          <tr><td><button class="btn btn-sm btndanger" (click)="addLeaveBalancesForSelectedEmployees()">
             <mat-icon>perm_data_setting</mat-icon> Generate </button></td></tr> 
@@ -45,12 +45,9 @@
             <input class="search" type="search" placeholder="Search Employee..." [(ngModel)]="searchTerm" (input)="onSearch()">
           </div>
       <!-- Second Column -->
-      <div class="col-md-12">
-        <div class="row">
-
-          <div class="col-md-8">
-            <h6>Annual Leave Balance</h6>
-    <table  *ngIf="leaveBalance"  class="table-responsive table table-bordered table-striped table-sm" >
+    
+            <p>Annual Leave Balance</p>
+    <table  *ngIf="leaveBalance"  class="table-responsive table table-bordered table-striped table-sm compact-table" >
       <thead>
         <tr>
         
@@ -83,11 +80,12 @@
       </tbody>
     </table>
     <p *ngIf="!(filteredLeaveBalances.length || leaveBalances.length)">No Leave Balance found</p>
-  </div>
 
-  <div class="col-md-8">
-    <h6>Other Leave Balance</h6>
-            <table  *ngIf="otherleaveBalances"  class="table table-responsive table-bordered table-striped  table-sm" >
+
+
+    <p>Other Leave Balance</p>
+    <div style="overflow-x: auto; ">
+            <table  *ngIf="otherleaveBalances"  class="table table-responsive table-bordered table-striped  table-sm compact-table" >
               <thead>
                 <tr  >
                 
@@ -108,6 +106,8 @@
                   <th scope="col">Education Leave Remainig</th>
                   <th scope="col">LeaveWithOutPay Default</th>
                   <th scope="col">LeaveWithOutPay Remainig</th>
+                  <th scope="col">Court Leave Default</th>
+                  <th scope="col">Court Leave  Remainig</th>
                   <th scope="col">Abortion Leave Default</th>
                   <th scope="col">Abortion Leave  Remainig</th>
                 </tr>
@@ -116,12 +116,12 @@
                 <!-- Use *ngFor to loop through the leaveBalances array and display each employee position -->
                 <tr *ngFor="let otherleaveBalance of filteredotherLeaveBalances"  >
                     <td>{{ getEmployeeName( otherleaveBalance.empId) }}</td> 
-                      <td>{{ otherleaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
-                  <td>{{ otherleaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
+                     
                   <td>{{ otherleaveBalance.sickDefaultBalance }}</td>
                   <td>{{ otherleaveBalance.sickRemainingBalance }}</td>
-                  <td>{{ otherleaveBalance.sickStartDate| date:'yyyy-MM-dd'}}</td>
-                  <td>{{ otherleaveBalance.sickEndDate| date:'yyyy-MM-dd' }}</td>
+                  <td>{{ otherleaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
+                  <td>{{ otherleaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
+         
                   <td>{{ otherleaveBalance.marriageDefaultBalance }}</td>
                   <td>{{ otherleaveBalance.marriageRemainingBalance}}</td>
                   <td>{{ otherleaveBalance.paternityDefaultBalance}}</td>
@@ -148,14 +148,13 @@
             </table>
             <p *ngIf="!(filteredotherLeaveBalances.length || otherleaveBalances.length)">No Leave Balance found</p>
           </div>
+          </div>
 
         </div>
       </div>
+      </div>
 
     </div>
-  </div>
-</div>
-     </div>
-      </div>
+  
 
   

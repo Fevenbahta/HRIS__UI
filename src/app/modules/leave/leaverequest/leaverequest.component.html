@@ -87,7 +87,7 @@
             
               <!-- Display validation errors if needed -->
               <mat-error *ngIf="leaveRequestForm.hasError('invalidDateRange')">
-                Invalid date range.
+             EndDate must be greater than Start date
               </mat-error>
               <mat-error *ngIf="leaveRequestForm.get('endDate').hasError('required') && leaveRequestForm.get('endDate').touched">
                 End Date is required.

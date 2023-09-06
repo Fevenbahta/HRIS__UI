@@ -69,8 +69,8 @@ export class LeaverequestComponent {
     updatedBy: "", 
     status: 0, 
     empId:'0bd1295a-dd75-413a-9eef-811934e2880d', 
-    startDate: '', 
-    endDate: "", 
+    startDate: null, 
+    endDate: null, 
     leaveTypeId: '', 
     leaveStatus: 'pendding', 
     approvedBy:'', 
@@ -204,8 +204,16 @@ subscribe({
  
     this.leaveRequest.leaveTypeId = this.selectedLeaveType; 
     this.leaveRequest.empId = this.selectedEmployee; 
- this.leaveRequest.startDate=this.leaveRequestForm.value.startDate;
- this.leaveRequest.endDate=this.leaveRequestForm.value.endDate;
+    const selectedStartDate = new Date(this.leaveRequestForm.get('startDate').value);
+    const selectedEndDate = new Date(this.leaveRequestForm.get('endDate').value);
+    
+    // Add one day to both the start and end dates
+    selectedStartDate.setDate(selectedStartDate.getDate() + 1);
+    selectedEndDate.setDate(selectedEndDate.getDate() + 1);
+    
+    // Assign the modified dates to this.leaveRequest
+    this.leaveRequest.startDate = selectedStartDate;
+    this.leaveRequest.endDate = selectedEndDate;
     const startDate = this.leaveRequestForm.get('startDate').value;
   const endDate = this.leaveRequestForm.get('endDate').value;
 
@@ -249,8 +257,8 @@ subscribe({
     updatedBy: "", 
     status: 0, 
     empId:'0bd1295a-dd75-413a-9eef-811934e2880d', 
-    startDate: '', 
-    endDate: "", 
+    startDate: null, 
+    endDate: null, 
     leaveTypeId: '', 
     leaveStatus: 'pendding', 
     approvedBy:'', 
@@ -360,12 +368,24 @@ availableLeaveBalance(): void {
   } 
  
   updateleaveRequest(): void {  
-    console.log(this.leaveRequest) 
+
     // this.leaveRequest.updatedDate=new Date().toISOString();
     // if(this.leaveRequest.endDate < this.leaveRequest.updatedDate ){ 
    this.leaveRequest.leaveStatus='pendding' 
     this.leaveRequest.leaveTypeId = this.selectedLeaveType; 
- 
+    // Get the selected start and end dates from the form controls
+const selectedStartDate = new Date(this.leaveRequestForm.get('startDate').value);
+const selectedEndDate = new Date(this.leaveRequestForm.get('endDate').value);
+
+// Add one day to both the start and end dates
+selectedStartDate.setDate(selectedStartDate.getDate() + 1);
+selectedEndDate.setDate(selectedEndDate.getDate() + 1);
+
+// Assign the modified dates to this.leaveRequest
+this.leaveRequest.startDate = selectedStartDate;
+this.leaveRequest.endDate = selectedEndDate;
+
+     console.log(this.leaveRequest.endDate) 
     this.leaveRequestservice.updateLeaveRequest(this.leaveRequest, this.leaveRequest.leaveRequestId).subscribe({ 
       next: () => { 
         this.leaveRequestUpdated = true; 
@@ -392,8 +412,8 @@ availableLeaveBalance(): void {
       updatedBy: "", 
       status: 0, 
       empId:'0bd1295a-dd75-413a-9eef-811934e2880d', 
-      startDate: '', 
-      endDate: "", 
+      startDate: null, 
+      endDate: null, 
       leaveTypeId: '', 
       leaveStatus: 'pendding', 
       approvedBy:'', 
@@ -416,7 +436,10 @@ LeaveRequest): void {
     this.leaveRequest = leaveRequestToEdit; 
     this.selectedLeaveType=leaveRequestToEdit.leaveTypeId 
     this.selectedEmployee=leaveRequestToEdit.empId 
- 
+    this.leaveRequestForm.patchValue({
+      startDate: leaveRequestToEdit.startDate,
+      endDate: leaveRequestToEdit.endDate
+    });
     this.leaveRequestservice.getLeaveRequestFile(leaveRequestToEdit.leaveRequestId).subscribe( 
       (pdf: Blob) => { 
         const file = new Blob([pdf], { type: 'application/pdf' }); 

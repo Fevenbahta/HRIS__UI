@@ -11,7 +11,10 @@
 .cardhead{
   background-color: rgb(224, 224, 217);
 }
-
+.select{
+  border-bottom: 1px solid #ced4da;
+  font-size: 15px;
+}
 .img {
   width:50%;
   height: 90%;
@@ -63,6 +66,22 @@
   border-radius: 4px;
   padding: 8px;
 }
+.compact-table th {
+  font-size: 13px;
+  color: black;
+  font-weight:650; /* Adjust the font size as needed */
+}
+.compact-table tr {
+  font-size: 13px; /* Adjust the font size as needed */
+}
+
+.compact-table th, .compact-table td {
+  padding: 4px 8px; 
+}
+td ,th{
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
 
 /* styles.css or your component-specific style file */
 

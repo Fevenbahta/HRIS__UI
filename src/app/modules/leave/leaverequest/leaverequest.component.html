@@ -57,32 +57,52 @@
               <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
              
             </div>
-          </div>
+          </div></div>
           
-          <div class="row mt-3">
-            <div class="col-md-4">
-              <mat-form-field style="height: 65px; width: 160px;" class="example-full-width">
-                <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="leaveRequest.startDate">
-                <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-                <mat-datepicker #fromPicker></mat-datepicker>
-              </mat-form-field>
-            </div>
-            <div class="col-md-4">
-              <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
-                <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="leaveRequest.endDate">
-                <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
-                <mat-datepicker #toPicker></mat-datepicker>
-              </mat-form-field>
-            </div>
-          </div>
+      
+            <form [formGroup]="leaveRequestForm">
+              <div class="card-body">
+                 <div class="row mt-3"> <div class="col-md-6">
+                <!-- Start Date -->
+                <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
+                  <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="startDate"  formControlName="startDate">
+                  <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #fromPicker></mat-datepicker>
+                </mat-form-field><mat-error *ngIf="leaveRequestForm.get('startDate').hasError('required') && leaveRequestForm.get('startDate').touched">
+                Start Date is required.
+              </mat-error>
+              <mat-error *ngIf="leaveRequestForm.get('startDate').hasError('matDatepickerParse') && leaveRequestForm.get('startDate').touched">
+                Invalid Start Date.
+              </mat-error>
+              </div>   
+            
+              <div class="col-md-6">
+                <!-- End Date -->
+                <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
+                  <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="endDate"  formControlName="endDate">
+                  <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #toPicker></mat-datepicker>
+                </mat-form-field>
+              
+            
+              <!-- Display validation errors if needed -->
+              <mat-error *ngIf="leaveRequestForm.hasError('invalidDateRange')">
+                Invalid date range.
+              </mat-error>
+              <mat-error *ngIf="leaveRequestForm.get('endDate').hasError('required') && leaveRequestForm.get('endDate').touched">
+                End Date is required.
+              </mat-error></div>    </div>   </div>
           
+            </form>
+            
+   
           <div class="mt-3">
             <button type="button" class="btn btnsave btn-sm" *ngIf="!leaveRequest.leaveRequestId" (click)="addleaveRequest()">Add</button>
             <div *ngIf="leaveRequestSaved" class=" btndanger btn-sm pull-right">Added successfully!</div>
             <button type="button" class="btn btnsave btn-sm" *ngIf="leaveRequest.leaveRequestId" (click)="updateleaveRequest()">Update</button>
             <div *ngIf="leaveRequestUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
           </div>
-        </div>
+      
       </form>
 
               <p>Leave Request History</p>
@@ -114,7 +134,7 @@
                     <td>{{ leaveRequest.approvedDate | date:'yyyy-MM-dd' }}</td>
                   
                     <td>  <button class="btn btn-sm btnedit" (click)="fetchAndDisplayPDF(leaveRequest)" 
-                      style="background-color: hwb(240 71% 28%); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+                      style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
                       <mat-icon>attach_file</mat-icon>File</button></td>
                     <!-- Add a button to trigger fetching and displaying the PDF -->
                    

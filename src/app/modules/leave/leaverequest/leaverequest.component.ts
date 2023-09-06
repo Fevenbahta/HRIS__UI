@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'; 
 import { Component } from '@angular/core'; 
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog'; 
 import { Router } from '@angular/router'; 
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component'; 
@@ -14,6 +15,17 @@ import { LeaveTypeService } from 'app/service/leaveType.service';
 import { LeaveBalanceService } from 'app/service/leavebalance.service'; 
 import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service';
 
+function dateRangeValidator(control: AbstractControl): ValidationErrors | null {
+  const startDate = control.get('startDate').value;
+  const endDate = control.get('endDate').value;
+
+  if (startDate && endDate && startDate > endDate) {
+    return { invalidDateRange: true };
+  }
+
+
+  return null;
+}
  
 @Component({ 
   selector: 'app-leaverequest', 
@@ -21,6 +33,7 @@ import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service'
   styleUrls: ['./leaverequest.component.scss'] 
 }) 
 export class LeaverequestComponent { 
+  leaveRequestForm: FormGroup;
   leaveRequests:LeaveRequest[]=[]; 
   leaveTypes:LeaveType[]=[] 
   leaveBalances:AnnualLeaveBalance[]=[] 
@@ -73,7 +86,7 @@ export class LeaverequestComponent {
  
  
   constructor( 
-   
+   private formBuilder: FormBuilder,
     private leaveRequestservice: LeaveRequestService, 
     private router: Router, 
     private employeeService:EmployeeService, 
@@ -85,8 +98,14 @@ export class LeaverequestComponent {
     private dialog: MatDialog, 
     private http: HttpClient, 
   ) {  
-    
+      this.leaveRequestForm = this.formBuilder.group({
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+    },  { validator: dateRangeValidator }); // Add the custom validator here
+  
   } 
+
+  
  
   ngOnInit(): void { 
      
@@ -100,7 +119,7 @@ export class LeaverequestComponent {
         console.log(response); 
       } 
     }); 
-    
+  
    
      
     this.employeeService.getAllEmployees()  
@@ -153,7 +172,7 @@ subscribe({
  
   } 
  
-   
+    
   // private getBase64(file: File): Promise<any> { 
   //   return new Promise((resolve, reject) => { 
   //     const reader = new FileReader(); 
@@ -185,8 +204,16 @@ subscribe({
  
     this.leaveRequest.leaveTypeId = this.selectedLeaveType; 
     this.leaveRequest.empId = this.selectedEmployee; 
- 
-   
+ this.leaveRequest.startDate=this.leaveRequestForm.value.startDate;
+ this.leaveRequest.endDate=this.leaveRequestForm.value.endDate;
+    const startDate = this.leaveRequestForm.get('startDate').value;
+  const endDate = this.leaveRequestForm.get('endDate').value;
+
+  // Get the current date
+  const currentDate = new Date();
+
+  // Check if start date is greater than current date and end date is greater than start date
+  if (startDate < endDate) {
      
   
     this.leaveRequestservice.addLeaveRequest(this.leaveRequest).subscribe({ 
@@ -238,7 +265,12 @@ subscribe({
       error(response) { 
         console.log(response) 
       } 
-    }); 
+    }); }
+   else {
+    // Display an error message or handle invalid dates
+    console.log('Invalid date range');
+  }
+    
   } 
   fetchAndDisplayPDF(leave: LeaveRequest):void { 
     // Call your service method to fetch the PDF file  

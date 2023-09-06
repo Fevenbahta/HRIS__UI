@@ -149,33 +149,7 @@
             </div>
             </div>
         
-<!--              
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-6 form-field" >
-                    <mat-select class="form-field custom-mat-select" placeholder="First Supervisor" required formControlName="firstSupervisor" name="selectedFirstSupervisor" [(ngModel)]="selectedFirstSupervisor">
-                      <mat-option *ngFor="let supervisor of firstSupervisors" [value]="supervisor.empId">
-                        {{ getEmployeeName(supervisor.empId) }}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="employeeForm.get('firstSupervisor').invalid && employeeForm.get('firstSupervisor').touched">
-                      First Supervisor is required
-                    </mat-error>
-                  </div> -->
-              
-                  <!-- <div class="col-md-6 form-field" >
-                    <mat-select class="form-field custom-mat-select" placeholder="Second Supervisor" required formControlName="secondSupervisor" name="selectedSecondSupervisor" [(ngModel)]="selectedSecondSupervisor">
-                      <mat-option  *ngFor="let supervisor of secondSupervisors" [value]="supervisor.empId">
-                        {{ getEmployeeName(supervisor.empId) }}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="employeeForm.get('secondSupervisor').invalid && employeeForm.get('secondSupervisor').touched">
-                      Second Supervisor is required
-                    </mat-error>
-                  </div>
-                </div>
-              </div> -->
-              
+
               <div class="card-body mt-3">
                 <div class="row">
                   <div class="col-md-5 form-field">
@@ -216,7 +190,7 @@
       <div >
  
         <h6>Profile info </h6>
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped compact-table">
           <thead>
                 <tr>
                     
@@ -243,9 +217,9 @@
                 <td>{{ employee.ecxId }}</td>
                 <td>{{ employee.pensionNo }}</td>
          
-                <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)">Edit</button></td>
+                <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> <mat-icon>edit</mat-icon></button></td>
 
-          <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)">Delete</button>
+          <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> <mat-icon>delete</mat-icon></button>
               </tr>
             </tbody>
         </table>

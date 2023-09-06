@@ -83,7 +83,7 @@
   
     <!-- Education Table -->
     <h6>Education History</h6>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped compact-table">
       <thead>
         <tr >
           <th>Education Level</th>
@@ -103,8 +103,10 @@
           <td>{{ education.from }}</td>
           <td>{{ education.to }}</td>
           <td>
-            <button class="btn btn-sm btnedit" (click)="editEducation(education)">Edit</button>
-            <button class="btn btn-sm btndanger" (click)="deleteEducation(education)">Delete</button>
+            <button class="btn btn-sm btnedit" (click)="editEducation(education)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>edit</mat-icon></button>
+            <button class="btn btn-sm btndanger" (click)="deleteEducation(education)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>delete</mat-icon></button>
           </td>
         </tr>
       </tbody>

@@ -1,37 +1,41 @@
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
-<div class="formcontainer"> 
+<div class="row" > 
+    <div class="col-md-6 ml-5">
+      <div class="card" >
 
-<form (ngSubmit)="addLeaveType()">   <div class="row">
-    <div class="col-md-3"> 
+
+<form (ngSubmit)="addLeaveType()">   
+    <div class="row ml-4">
+    <div class="col-md-5 mt-5 "> 
     <div class="form-field"> 
     
       <input type="text" id="LeaveTypeName" placeholder=" " [(ngModel)]="addLeaveTypeRequest.leaveTypeName" name="name" required> 
      <label for="LeaveType">Leave Type Name</label>  </div> </div>
-     <div class="col-md-3"> 
+     <div class="col-md-3 mt-5"> 
          <div class="form-field"> 
       <input type="text" id="maximum" placeholder=" " [(ngModel)]="addLeaveTypeRequest.maximum" name="maximum" required> 
      <label for="maximum">Maximum</label>  
     
     </div> 
       </div>
- <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ">Save </button> </div>
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3">Save </button> </div>
    
  </div>   <div *ngIf="leaveTypeSaved" class="alert  btndanger btn-sm pull-right">
         Successfully Added!
       </div> 
-  </form> </div>
+  </form> 
 
 
 
   
-  <h6 class="mb-3"> 
+  <h6 class="mb-3 ml-3 mt-2"> 
 Leave Type
 </h6> 
 
 
  
-<table id="example1" class="table table-bordered table-striped"  *ngIf="leaveTypes && leaveTypes.length>0"> 
+<table id="example1" class="table table-bordered table-striped compact-table"  *ngIf="leaveTypes && leaveTypes.length>0"> 
 <thead> 
     <tr> 
         <th> Leave Type Name</th> 
@@ -48,7 +52,7 @@ Leave Type
       <td>{{leaveType.maximum}}</td> 
       
         <td>   
-            <button  class="btn btn-sm btndanger" (click)="deleteLeaveType(leaveType.leaveTypeId)">
+            <button  class="btn btn-sm btndanger" (click)="deleteLeaveType(leaveType.leaveTypeId)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                 <mat-icon>delete</mat-icon></button>
         </td> 
 
@@ -56,3 +60,6 @@ Leave Type
 </tbody> 
 </table> 
 <p *ngIf="!leaveTypes || leaveTypes.length <= 0">no leaveTypes found</p>
+</div>
+</div>
+</div>

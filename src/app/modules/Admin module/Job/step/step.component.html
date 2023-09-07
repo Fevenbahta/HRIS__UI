@@ -3,7 +3,8 @@
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
  
- 
+<div class="col-md-9 ml-2">
+  <div class="card" >
   <form (ngSubmit)="addstep()"> 
     <div class="row " style="margin-left: 15px; margin-top:25px;"> 
       
@@ -19,16 +20,16 @@
           </mat-form-field> 
         </div> 
         </div> 
-      <div class="col-md-3"> 
+      <div class="col-md-3 ml-2 mt-2"> 
         <div class="form-field"> 
       
           <input  id="stepDescription" rows="1" required placeholder=" "  name="description" [(ngModel)]="addStepRequest.description" name="description" required>
             <label for="stepDescription">Step Description</label> </div> 
       </div> 
-      <div class="col-md-2"> 
+      <div class="col-md-3 ml-2 mt-2"> 
         <div class="form-field"> 
          
-          <input type="text"  id="salary" required placeholder=" "  name="name" [(ngModel)]="addStepRequest.salary" name="salary" required> 
+          <input type="text"  id="salary" required  name="name" [(ngModel)]="addStepRequest.salary" name="salary" required> 
         <label for="Salary">Salary</label>  </div> 
       </div> 
      
@@ -36,21 +37,21 @@
      
      
     </div> 
-    <button type="submit" class="btn btn-sm btnsave">Save</button> 
+    <button type="submit" class="btn btn-sm btnsave ml-3">Save</button> 
     <div *ngIf="stepSaved" class=" btndanger btn-sm pull-right">
       Successfully Added!
     </div>
     </form> 
  
     
-    <h6 class="mb-3"> 
+    <h6 class="mb-2 ml-3 mt-3"> 
         Step 
     </h6> 
     
  
  
    
-<table id="example1" class="table table-bordered table-striped"> 
+<table id="example1" class="table table-bordered table-striped compact-table ml-1"> 
   <thead> 
   <tr> 
     <th>Grade Level</th>
@@ -67,7 +68,7 @@
     
  
       <td>   
-        <button  class="btn btn-sm btndanger" (click)="deleteStep(step.id)">
+        <button  class="btn btn-sm btndanger" (click)="deleteStep(step.id)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
           <mat-icon>delete</mat-icon></button>
     </td> 
     
@@ -80,3 +81,5 @@
 </table> 
  
 <p *ngIf="!steps || steps.length <= 0">no steps found</p>
+</div>
+</div>

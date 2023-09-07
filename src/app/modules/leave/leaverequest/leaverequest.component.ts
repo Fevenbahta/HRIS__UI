@@ -322,12 +322,12 @@ availableLeaveBalance(): void {
      const selectedBalance= this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.sickRemainingBalance; 
     } 
-    if( this.leaveName === "Maternity") 
+    if( this.leaveName === "Maternal") 
     { 
     const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.maternityRemainingBalance; 
     } 
-    if( this.leaveName === "Paternity") 
+    if( this.leaveName === "Paternal") 
     { 
     const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.paternityRemainingBalance; 
@@ -342,7 +342,7 @@ availableLeaveBalance(): void {
     const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.educationRemainingBalance; 
     } 
-    if( this.leaveName === "CourtLeave") 
+    if( this.leaveName === "Court") 
     { 
     const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.courtLeaveRemainingBalance; 
@@ -352,7 +352,7 @@ availableLeaveBalance(): void {
     const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.leaveWotPayRemainingBalance; 
     } 
-    if( this.leaveName === "AbortionLeave") 
+    if( this.leaveName === "Abortion") 
     { 
     const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.leaveWotPayRemainingBalance; 

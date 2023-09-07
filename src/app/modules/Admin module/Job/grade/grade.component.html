@@ -3,11 +3,12 @@
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
  
-   
+<div class="col-md-7 ml-2 ">
+  <div class="card" >
   <form (ngSubmit)="addGrade()"> 
-    <div class="row" > 
+    <div class="row mt-4" > 
       
-      <div class="col-3"> 
+      <div class="col-4 mt-3"> 
         <div style="margin-left: 20px;"> 
       
           <mat-form-field  style="width: 180px;height: 65px;"> 
@@ -20,26 +21,26 @@
           </mat-form-field> 
         </div> 
         </div> 
-      <div class="col-4" style="margin-top: 15px;"> 
+      <div class="col-3 mt-4 ml-4" style="margin-top: 15px;"> 
         <div class="form-field"> 
         
           <input id="gradeDescription" rows="1" placeholder=" "  [(ngModel)]="addGradeRequest.description"  name="description" required>
         <label for="gradeDescription">Grade Description</label>   </div> 
       </div> 
     </div> 
-    <button type="submit" class="btn btn-sm btnsave">Save</button> 
+    <button type="submit" class="btn btn-sm btnsave ml-3">Save</button> 
     <div *ngIf="gradeSaved" class=" btndanger btn-sm pull-right">
       Successfully Added!
     </div>
     </form> 
   
-    <h6 class="mb-3"> 
+    <h6 class="mb-2 ml-3 mt-3 "> 
      Grade 
     </h6> 
     <!-- <div class="d-flex justify-content-end">    
     <button class="btn btn-success" routerLink="position/add">Add Position</button> 
     </div> --> 
-<table class="table" id="example1" class="table table-bordered table-striped" *ngIf="grades&& grades.length>0"> 
+<table class="table" id="example1" class="table table-bordered table-striped compact-table" *ngIf="grades&& grades.length>0"> 
     <thead> 
         <tr> 
             <th>ID</th> 
@@ -54,7 +55,7 @@
        
           <td>{{grade.description}}</td>
               <td>   
-          <button  class="btn btn-sm btndanger" (click)="deleteGrade(grade.levelId)">
+          <button  class="btn btn-sm btndanger" (click)="deleteGrade(grade.levelId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
             <mat-icon>delete</mat-icon></button>
       </td> 
         </tr> 
@@ -62,3 +63,5 @@
     </tbody> 
 </table> 
 <p *ngIf="!grades || grades.length <= 0">no grades found</p>
+</div>
+</div>

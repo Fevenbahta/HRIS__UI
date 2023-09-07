@@ -3,14 +3,17 @@
 
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
- 
+<div class="row" > 
+  <div class="col-md-8 ml-5">
+    <div class="card" >
 <form (ngSubmit)="addAssignSupervisor()"> 
-<div class="row" style="margin:10px"> 
+
+  <div class="row mt-4 ml-3" >
 
 <div class="col-3"> 
   <div class="form-field"> 
 
-    <mat-form-field  style="width: 180px;height: 65px;"> 
+    <mat-form-field > 
       <mat-label>Select position 
 
       </mat-label> 
@@ -24,11 +27,10 @@
   </div> 
 
 
-
-<div class="col-3"> 
+<div class="col-3 ml-4"> 
  
 
-    <mat-form-field  style="width: 180px;height: 65px;"> 
+    <mat-form-field  > 
       <mat-label>Select First Supervisor
 
       </mat-label> 
@@ -39,7 +41,8 @@
       </mat-select> 
     </mat-form-field> 
   </div>
-  <div class="col-3" *ngIf="selectedFirstSupervisor !== ''"> 
+  
+  <div class="col-3  ml-4" *ngIf="selectedFirstSupervisor !== ''"> 
 
     <mat-form-field  style="width: 180px;height: 65px;"> 
       <mat-label>Select Second Supervisor
@@ -52,7 +55,9 @@
       </mat-select> 
     </mat-form-field> 
   </div> 
+</div>
 
+<div class="row mt-3 ml-3" >
   <div class="col-3" *ngIf="selectedSecondSupervisor !== ''"> 
 
     <mat-form-field  style="width: 180px;height: 65px;"> 
@@ -66,8 +71,8 @@
       </mat-select> 
     </mat-form-field> 
   </div> 
-  
-  <div class="col-3"style="margin-left :270px;"  *ngIf="selectedThirdSupervisor !== ''"> 
+ 
+  <div class="col-3 ml-4" *ngIf="selectedThirdSupervisor !== ''"> 
 
     <mat-form-field  style="width: 180px;height: 65px;"> 
       <mat-label>Select Forth Supervisor
@@ -80,7 +85,7 @@
       </mat-select> 
     </mat-form-field> 
   </div> 
-  <div class="col-3"> 
+  <div class="col-3 ml-4"> 
 
     <mat-form-field  style="width: 180px;height: 65px;" *ngIf="selectedFourthSupervisor !== ''"> 
       <mat-label>Select Fifth Supervisor
@@ -93,14 +98,14 @@
       </mat-select> 
     </mat-form-field> 
   </div> 
-</div> 
+</div>
 
-<button type="submit" class="btn btn-sm btnsave">Save</button> 
+<button type="submit" class="btn btn-sm btnsave ml-2">Save</button> 
 <div *ngIf="assignSupervisorSaved" class=" btndanger btn-sm pull-right">
   Successfully Added!
   </div>
 </form> 
-<table id="example1" class="table table-bordered table-striped"> 
+<table id="example1" class="table table-bordered table-striped compact-table"> 
 <thead> 
 <tr> 
   <th>position </th>
@@ -122,7 +127,7 @@
    
       
       <td>   
-        <button  class="btn btn-sm btndanger" (click)="deleteAssignSupervisor(assignSupervisor.id)">
+        <button  class="btn btn-sm btndanger" (click)="deleteAssignSupervisor(assignSupervisor.id)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
           <mat-icon>delete</mat-icon></button>
     </td>
 
@@ -134,3 +139,6 @@
     </tr> 
 </tbody> 
 </table>
+</div>
+</div>
+</div>

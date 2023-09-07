@@ -2,10 +2,12 @@
 
 
       <app-shared-nav [buttons]="buttons"></app-shared-nav> 
+      <div class="col-md-8 ml-2">
+        <div class="card" >
       <form (ngSubmit)="addBranch()"> 
         <div class="row" style="margin: 20px; margin-top: 40px; padding: 5px;"> 
           
-          <div class="col-md-3"> 
+          <div class="col-4"> 
             <div class="form-field"> 
               
           
@@ -25,13 +27,13 @@
            
         </form> 
        
-        <h6 class="mb-3"> 
+        <h6 class="mb-2 ml-3 mt-3"> 
          Branch 
         </h6> 
         <!-- <div class="d-flex justify-content-end">    
         <button class="btn btn-success" routerLink="position/add">Add Position</button> 
         </div> --> 
-    <table id="example1" class="table table-bordered table-striped"*ngIf="branchs&& branchs.length>0"> 
+    <table id="example1" class="table table-bordered table-striped compact-table " *ngIf="branchs&& branchs.length>0"> 
         <thead> 
             <tr> 
               <th>Description</th>
@@ -46,10 +48,12 @@
                 <td>{{branch.name}}</td> 
                 <td>{{branch.city}}</td> 
                 <td>   
-                  <button  class="btn btn-sm btndanger" (click)="deleteBranch(branch.id)">
+                  <button  class="btn btn-sm btndanger" (click)="deleteBranch(branch.id)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                     <mat-icon>delete</mat-icon></button>
               </td> 
             </tr> 
         </tbody> 
     </table> 
     <p *ngIf="!branchs || branchs.length <= 0">no branchs found</p>
+    </div>
+    </div>

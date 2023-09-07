@@ -56,7 +56,7 @@
               </div>
           </div>
           <h6>Deposit Authentication List</h6>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped compact-table ">
       <thead>
         <tr>
           <th>Bank</th>
@@ -73,8 +73,10 @@
           <td>{{depositeAuthentication.bankAccount }}</td>
           <td>{{ depositeAuthentication.tinNumber }}</td>
           <td>
-            <button class="btn btn-sm btnedit" (click)="editDepositeAuthentication(depositeAuthentication)">Edit</button>
-            <button class="btn btn-sm btndanger" (click)="deleteDepositeAuthentication(depositeAuthentication)">Delete</button>
+            <button class="btn btn-sm btnedit" (click)="editDepositeAuthentication(depositeAuthentication)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>edit</mat-icon></button>
+            <button class="btn btn-sm btndanger" (click)="deleteDepositeAuthentication(depositeAuthentication)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>delete</mat-icon></button>
           </td>
         </tr>
       </tbody>

@@ -86,7 +86,7 @@
   
   
     <h6>Work Experience History</h6>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped compact-table">
       <thead>
         <tr>
           <th>Company Name</th>
@@ -103,8 +103,10 @@
           <td>{{ workExperience.from }}</td>
           <td>{{ workExperience.to }}</td>
           <td>
-            <button class="btn btn-sm btnedit" (click)="editWorkExperience(workExperience)">Edit</button>
-            <button class="btn btn-sm btndanger" (click)="deleteWorkExperience(workExperience)">Delete</button>
+            <button class="btn btn-sm btnedit" (click)="editWorkExperience(workExperience)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>edit</mat-icon></button>
+            <button class="btn btn-sm btndanger" (click)="deleteWorkExperience(workExperience)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>delete</mat-icon></button>
           </td>
         </tr>
       </tbody>

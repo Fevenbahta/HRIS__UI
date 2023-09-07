@@ -3,13 +3,12 @@
 
   <app-shared-nav [buttons]="buttons"></app-shared-nav> 
   <div class="row" > 
-      
-
- 
+    <div class="col-md-6 ml-5">
+      <div class="card" >
   <form (ngSubmit)="addSupervisor()"> 
-    <div class="row" > 
+    <div class="row mt-4" > 
       
-      <div class="col-md-3" style="margin-left: 10px;"> 
+      <div class="col-md-5" style="margin-left: 10px;"> 
         <div class="form-group"> 
         
           <mat-form-field style="height: 65px; width:200px"  > 
@@ -22,7 +21,7 @@
           </mat-form-field> 
         </div> 
         </div> 
-      <div class="col-3"> 
+      <div class="col-5"> 
         <div class="form-group"> 
       
     <mat-form-field style="height: 65px; width:200px" > 
@@ -43,7 +42,7 @@
      
      
     </div> 
-    <button style="margin-left: 10px;" type="submit" class="btn btn-sm btnsave">Save</button> 
+    <button style="margin-left: 10px;" type="submit" class="btn btn-sm btnsave ml-3" >Save</button> 
     
     <div *ngIf="supervisorSaved" class=" btndanger btn-sm pull-right">
       Successfully Added!
@@ -51,13 +50,11 @@
     </form> 
  
    
-    <h6 class="mb-3"> 
+    <h6 class="mb-2 ml-3 mt-3"> 
         Supervisor 
     </h6> 
-    <div class="row" > 
-      
-      <div class="col-md-8" style="margin-left: 20px;"> 
-<table id="example1" class="table table-bordered table-striped" *ngIf="supervisors&& supervisors.length>0"> 
+    
+<table id="example1" class="table table-bordered table-striped compact-table" *ngIf="supervisors&& supervisors.length>0"> 
     <thead> 
         <tr> 
             <th>position Name</th> 
@@ -73,7 +70,7 @@
             <td>{{supervisor.supervisorLevel}}</td>
          
             <td>   
-              <button  class="btn btn-sm btndanger" (click)="deleteSupervisor(supervisor.id)">
+              <button  class="btn btn-sm btndanger" (click)="deleteSupervisor(supervisor.id)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                 <mat-icon>delete</mat-icon></button>
               </td>
        

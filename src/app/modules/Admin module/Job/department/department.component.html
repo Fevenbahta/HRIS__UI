@@ -1,41 +1,41 @@
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
-<div class="form-container"> 
 
+    <div class="col-md-8">
+        <div class="card" >
 <form (ngSubmit)="addDepartment()">   <div class="row mt-5">
-    <div class="col-md-7"> 
-    <div class="form-field"> 
+    <div class="col-md-7 ml-3"> 
+    <div class="form-field "> 
     
       <input type="text" id="departmentName" placeholder=" " [(ngModel)]="addDepartmentRequest.description" name="addDepartmentRequest.description" required> 
-     <label for="department">Department Level Name</label>  </div> 
- <div class="col-md-3"><button type="submit" class="btn  btn-sm btnsave">Save </button>
+     <label for="department">Department Level Name</label>  
+    </div> 
+ <div class="col-md-3 mt-2"><button type="submit" class="btn  btn-sm btnsave">Save </button>
     </div></div></div> <div *ngIf="departmentSaved" class="btndanger btn-sm pull-right">
         Successfully Added!
       </div> 
     
-  </form></div> 
+  </form>
   
 
  <div>
-<input  class="search" type="search" placeholder="Search By DepartmentName..." [(ngModel)]="searchTerm" (input)="onSearch()">
+<input  class="search ml-2 mt-3" type="search" placeholder="Search By DepartmentName..." [(ngModel)]="searchTerm" (input)="onSearch()">
 </div>
   
  
-    <h6 class="mb-3 mt-5"> 
+    <h6 class="mb-3 mt-3 ml-2"> 
         Department 
     </h6> 
  
  
      
-<table id="example1" class="table table-bordered table-striped"  *ngIf="departments && departments.length>0"> 
+<table id="example1" class="table table-bordered table-striped compact-table ml-2 "  *ngIf="departments && departments.length>0"> 
     <thead> 
         <tr> 
           
             <th>Department Name</th> 
        
-            
- 
-        </tr> 
+    </tr> 
     </thead> 
     <tbody> 
         <tr *ngFor="let department of filteredDepartment || departments"> 
@@ -44,7 +44,7 @@
          
           
             <td>   
-                <button  class="btn btn-sm btndanger" (click)="deleteDepartment(department.departmentId)">
+                <button  class="btn btn-sm btndanger" (click)="deleteDepartment(department.departmentId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                     <mat-icon>delete</mat-icon></button>
             </td> 
           
@@ -56,3 +56,5 @@
     </tbody> 
 </table> 
 <p *ngIf="!departments || departments.length <= 0">no departments found</p>
+</div>
+</div> 

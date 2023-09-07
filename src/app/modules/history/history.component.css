@@ -30,3 +30,19 @@ input[type="search"]:focus {
   border-color: #76a53b;
   outline: none;
 }
+
+.compact-table th {
+  font-size: 13px;
+  color: black;
+  font-weight: bold; /* Adjust the font size as needed */
+}
+.compact-table tr {
+  font-size: 13px; /* Adjust the font size as needed */
+}
+
+.compact-table th, .compact-table td {
+  padding: 4px 8px; 
+}
+td ,th{
+  white-space: nowrap; /* Prevent text wrapping */
+}

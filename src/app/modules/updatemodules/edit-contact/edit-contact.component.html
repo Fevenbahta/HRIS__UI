@@ -114,7 +114,7 @@
         
         <!-- contact.component.html -->
 <h6>contact info </h6>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped compact-table">
   <thead>
     <tr>
 
@@ -135,8 +135,10 @@
       <td>{{ contact.email }}</td>
       <td>{{ contact.postCode }}</td>
       <td>
-        <button class="btn btn-sm btnedit" (click)="editContact(contact)">Edit</button>
-        <button class="btn btn-sm btndanger" (click)="deleteContact(contact)">Delete</button>
+        <button class="btn btn-sm btnedit" (click)="editContact(contact)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+          <mat-icon>edit</mat-icon></button>
+        <button class="btn btn-sm btndanger" (click)="deleteContact(contact)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+           <mat-icon>delete</mat-icon></button>
       </td>
     </tr>
   </tbody>

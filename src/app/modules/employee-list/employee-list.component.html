@@ -15,7 +15,7 @@
         <p>{{pageSize * currentPage}} of {{ employees.length }}</p>
           </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8 ml-5">
                 <div class="card" >
              
                    
@@ -54,10 +54,10 @@
                                  
                                     
                                       
-                                  <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)">
+                                  <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                                     <mat-icon>edit</mat-icon></button></td>
 
-                                  <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)">
+                                  <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                                     <mat-icon>delete</mat-icon></button>
                         </td> 
                                    

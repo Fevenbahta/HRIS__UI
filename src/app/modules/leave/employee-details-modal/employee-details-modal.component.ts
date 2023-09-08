@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Division, EmployeePosition, Position } from 'app/models/job-description.model';
 import { LeaveRequest } from 'app/models/leaverequestmodel';
-
 import { EmployeePositionService } from 'app/service/employee-position';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { PositionService } from 'app/service/position.service';
@@ -88,17 +87,12 @@ openModal(leaverequest: LeaveRequest) {
         console.log(this.selectedDivision)
        }})
 
+       
   }
-
- 
-
-
 
 closeModal() {
   this.isOpen.next(false);
 }
-
-
 printEmployeeDetails() {
   // Implement printing functionality here
   // You can use browser-specific printing techniques or a library like ngx-print to handle printing.

@@ -10,16 +10,42 @@
     <div *ngIf="showVacancyForm" class="mt-4">
       <h2 class="mb-3">Add Vacancy</h2>
       <form (submit)="addVacancy()">
-        <div class="row"> 
-            <div class="card-body">
+       
+            <div class="card-body"> <div class="row"> 
               <div class="col-md-4 form-field">
-                <input  placeholder="" type="text" name="positionId" [(ngModel)]="vacancy.positionId">
+                <input  placeholder="" type="text" name="title" [(ngModel)]="vacancy.title">
                 <label>Title</label>
               </div>
-            </div>
+              <div class="col-md-4 form-field">
+                <textarea  placeholder="" type="come" name="requirement" [(ngModel)]="vacancy.requirement">Requirements</textarea>
+                <label>Requirement</label>
+              </div>
+              <div class="card-body"> <div class="row"> 
+              <div class="col-md-4"> 
+      
+                <mat-form-field  style="width: 180px;height: 65px;"> 
+                  <mat-label>Select Position</mat-label> 
+                  <mat-select placeholder="Select Position" name="selectedPosition" required [(ngModel)]="selectedPosition"> 
+                    <mat-option *ngFor="let position of positions" [value]="position.positionId"> 
+                      {{ position.description }} 
+                    </mat-option> 
+                  </mat-select> 
+                </mat-form-field> 
+              </div> 
+              <div class="col-md-4"> 
+                <mat-form-field style="height: 65px; width:160px"  > 
+                  <mat-label>Select Grade</mat-label> 
+                  <mat-select placeholder="Select Grade Level" name="selectedGrade" required [(ngModel)]="selectedGrade"> 
+                    <mat-option *ngFor="let grade of grades" [value]="grade.levelId"> 
+                      {{ grade.description }} 
+                    </mat-option> 
+                  </mat-select> 
+                </mat-form-field> 
+              </div> 
+            </div></div></div>
             <div class="card-body">
               <div class="row">
-                <div class="col-md-6 ">
+                <div class="col-md-4 ">
                   <mat-form-field style="height: 65px; width:160px" class="example-full-width">
                     <mat-label>Release Date</mat-label> <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="vacancy.releaseDate">
                    
@@ -27,7 +53,7 @@
                     <mat-datepicker #fromPicker></mat-datepicker>
                   </mat-form-field>
                 </div>
-                <div class="col-md-6 ">
+                <div class="col-md-4 ">
                   <mat-form-field style="height: 65px; width:160px" class="example-full-width">
                        <mat-label>Deadline</mat-label>  <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="vacancy.deadline">
                

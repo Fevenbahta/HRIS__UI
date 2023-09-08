@@ -1,0 +1,85 @@
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<div class="col-md-11 main-body">
+ 
+    <div class="card card-body">
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Vacancy Management</h1>
+    <button class="btn btnedit" (click)="toggleVacancyForm()">Add Vacancy</button>
+  
+    <!-- Vacancy Form (Initially Hidden) -->
+    <div *ngIf="showVacancyForm" class="mt-4">
+      <h2 class="mb-3">Add Vacancy</h2>
+      <form (submit)="addVacancy()">
+        <div class="row"> 
+            <div class="card-body">
+              <div class="col-md-4 form-field">
+                <input  placeholder="" type="text" name="positionId" [(ngModel)]="vacancy.positionId">
+                <label>Title</label>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 ">
+                  <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                    <mat-label>Release Date</mat-label> <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="vacancy.releaseDate">
+                   
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6 ">
+                  <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                       <mat-label>Deadline</mat-label>  <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="vacancy.deadline">
+               
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div><button  type="submit"class="btn btn-sm btnsave" *ngIf="vacancy.id===undefined" (click)="addVacancy()">
+            <mat-icon>add</mat-icon>Add</button>
+     </div>
+               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save vacancy</button>
+           -->
+          <div *ngIf="vacancySaved" class=" btndanger btn-sm pull-right">
+            Added successfully!
+          </div>
+
+
+          <button type="button" class="btn btn-sm btnsave" *ngIf="vacancy.id!=undefined"(click)="updatevacancy()">Update</button>
+     
+        <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save vacancy</button> -->
+
+      <div *ngIf="vacancyUpdated" class=" btndanger btn-sm pull-right">
+        Updated successfully!
+      </div>
+      </form>
+    </div>
+  
+    <!-- Vacancy Table -->
+    <h2 class="mt-4">Vacancies</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Deadline</th>
+          <th>Release Date</th>
+          <th>Position</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vacancy of vacancies">
+          <td>{{ vacancy.title }}</td>
+          <td>{{ vacancy.deadline }}</td>
+          <td>{{ vacancy.releaseDate }}</td>
+          <td>{{ vacancy.positionId }}</td>
+          <td>{{ vacancy.levelId }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ </div></div> 

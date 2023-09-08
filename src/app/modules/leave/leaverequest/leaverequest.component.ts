@@ -355,7 +355,7 @@ availableLeaveBalance(): void {
     if( this.leaveName === "Abortion") 
     { 
     const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
-    this.selectedLeaveBalance=selectedBalance.leaveWotPayRemainingBalance; 
+    this.selectedLeaveBalance=selectedBalance.abortionLeaveRemainingBalance; 
     } 
     if( this.leaveName === "Marriage") 
     { 

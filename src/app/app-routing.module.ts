@@ -41,6 +41,9 @@ import { LeavebalanceComponent } from './modules/leave/leavebalance/leavebalance
 
 import { LeaveApprovalComponent } from './modules/leave/leave-approval/leave-approval.component';
 import { EmployeeLeavebalanceComponent } from './modules/leave/employee-leavebalance/employee-leavebalance.component';
+import { PromotionhistoryComponent } from './modules/Promotion/promotionhistory/promotionhistory.component';
+import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/vacancymanagment.component';
+import { VacancyComponent } from './modules/Promotion/vacancy/vacancy.component';
 
 const routes: Routes = [
   {path: '',
@@ -128,7 +131,13 @@ component: LeavetypeComponent},
 {path:'leave/leave-balance',
 component: LeavebalanceComponent},
 {path:'leave/employeeleavebalance',
-component: EmployeeLeavebalanceComponent}
+component: EmployeeLeavebalanceComponent},
+{path:'promotionhistory',
+component:PromotionhistoryComponent},
+{path:'vacancymanagment',
+component:VacancymanagmentComponent},
+{path:'vacancy',
+component:VacancyComponent},
 ]
 }]
 

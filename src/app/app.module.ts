@@ -29,6 +29,9 @@ import { LeavebalanceComponent } from './modules/leave/leavebalance/leavebalance
 import { LeaveApprovalComponent } from './modules/leave/leave-approval/leave-approval.component';
 import { EmployeeLeaverequestComponent } from './modules/leave/employee-leaverequest/employee-leaverequest.component';
 import { EmployeeLeavebalanceComponent } from './modules/leave/employee-leavebalance/employee-leavebalance.component';
+import { VacancyComponent } from './modules/Promotion/vacancy/vacancy.component';
+import { PromotionhistoryComponent } from './modules/Promotion/promotionhistory/promotionhistory.component';
+import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/vacancymanagment.component';
 
 
 
@@ -37,8 +40,7 @@ import { EmployeeLeavebalanceComponent } from './modules/leave/employee-leavebal
 @NgModule({
   declarations: [
     AppComponent,
-
-
+   
    
  
  

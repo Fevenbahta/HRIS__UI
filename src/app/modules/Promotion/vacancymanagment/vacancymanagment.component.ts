@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Grade, Position } from 'app/models/job-description.model';
 import { Vacancy } from 'app/models/vacancy/vacancy.model';
+import { GradeService } from 'app/service/grade.service';
+import { PositionService } from 'app/service/position.service';
 import { VacancyService } from 'app/service/vacancy.service';
 
 @Component({
@@ -15,9 +18,10 @@ export class VacancymanagmentComponent {
  vacancies:Vacancy[]=[]
  vacancySaved: boolean = false;
   vacancyUpdated: boolean = false;
-
-
-
+positions:Position[]=[];
+grades:Grade[]=[];
+selectedPosition:string="";
+selectedGrade:string="";
   vacancy: Vacancy = {
     pId: 0,
     id: undefined,
@@ -40,7 +44,8 @@ vacancyId:""
     private router: Router, 
     private dialog: MatDialog, 
     private vacancyService: VacancyService,
- 
+    private positionservice: PositionService,
+    private gradeservice: GradeService
   ) {
      
   } 
@@ -48,6 +53,24 @@ vacancyId:""
  
  
   ngOnInit(): void { 
+    this.positionservice.getAllPosition()
+    .subscribe({
+      next: (positions) => {
+        this.positions=positions;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
+    this.gradeservice.getAllGrade()
+    .subscribe({
+      next: (grades) => {
+        this.grades=grades;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
   }
 
   buttons = [  
@@ -62,7 +85,8 @@ vacancyId:""
   }
 
   addVacancy() {
-
+    this.vacancy.positionId = this.selectedPosition;
+    this.vacancy.levelId = this.selectedGrade;
     this.vacancyService.addVacancy(this.vacancy)
     .subscribe({
       next: (employee) => {
@@ -106,6 +130,8 @@ vacancyId:""
     });
   }
 updatevacancy(){
+  this.vacancy.positionId = this.selectedPosition;
+  this.vacancy.levelId = this.selectedGrade;
   this.vacancyService.updateVacancy(this.vacancy,this.vacancy.id).subscribe(
     () => {       this.vacancyUpdated=true; 
       setTimeout(() => {

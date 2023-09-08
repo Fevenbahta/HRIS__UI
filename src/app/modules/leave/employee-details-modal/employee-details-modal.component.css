@@ -1,0 +1,8 @@
+.custom-modal{
+    width: 800px; /* Set a fixed width for your modal */
+  max-height: 80vh; /* Set a maximum height */
+  overflow-y: auto; /* Add scrollbars for content that overflows the modal */
+}
+ p{
+    margin-left: 100;
+}

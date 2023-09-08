@@ -31,6 +31,12 @@ export class LeaveRequestService {
     
       return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/status/'+leaveStatus)
     }
+
+  
+    getLeaveRequestByEmp(employeeId:string): Observable<LeaveRequest> {
+   
+      return this.http.get<LeaveRequest>(this.apiUrl + 'api/LeaveRequest/emp/'+employeeId)
+    }
   addLeaveRequest(addLeaveRequestRequest:LeaveRequest): Observable<LeaveRequest> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

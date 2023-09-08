@@ -1,6 +1,6 @@
 
 <app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
-
+<app-employee-details-modal *ngIf="employeeDetailsModalService.isOpen$ | async"></app-employee-details-modal>
     <div class="card col-md-10 mb-5 ml-5">
       <div class="card">
         <div class="card-header  cardhead">
@@ -12,10 +12,10 @@
     
           
 
-        </div></div>
+   
      <!--  --><button *ngIf="leaveApproved"class="alert  btndanger btn-sm pull-right">  Approved
             </button>
-     <div  class="col-md-9">
+    
 
                 <table   *ngIf="leavePenddings" class="table table-bordered table-striped compact-table">
                   <thead>
@@ -37,9 +37,14 @@
                       <td>{{ leavePending.startDate| date:'yyyy-MM-dd' }}</td>
                       <td>{{ leavePending.endDate| date:'yyyy-MM-dd' }}</td>
                       <td>{{ leavePending.leaveStatus }}</td>
-                      
+                      <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leavePending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                        style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+                        <mat-icon>attach_file</mat-icon>File</button></td>
         
                       <td>
+                        <!-- leave-approval.component.html -->
+                        <button (click)="openEmployeeDetailsModal(leavePending)">View Details</button>
+
                         <button class="btn btn-sm btnedit" (click)="approveleavePendding(leavePending)">
                           <mat-icon>how_to_reg</mat-icon>Approve</button>
                          
@@ -48,7 +53,7 @@
                   </tbody>
                 </table>
                 </div>
-    
+              </div>
               
        
  

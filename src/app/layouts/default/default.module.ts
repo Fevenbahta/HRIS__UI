@@ -78,6 +78,8 @@ import { LeaveApprovalComponent } from 'app/modules/leave/leave-approval/leave-a
 import { EmployeeLeaverequestComponent } from 'app/modules/leave/employee-leaverequest/employee-leaverequest.component';
 import { EmployeeLeavebalanceComponent } from 'app/modules/leave/employee-leavebalance/employee-leavebalance.component';
 import { LeaverequestComponent } from 'app/modules/leave/leaverequest/leaverequest.component';
+import { EmployeeDetailsModalServiceService } from 'app/service/employee-details-modal-service.service';
+import { EmployeeDetailsModalComponent } from 'app/modules/leave/employee-details-modal/employee-details-modal.component';
 import { VacancyComponent } from 'app/modules/Promotion/vacancy/vacancy.component';
 
 import { PromotionhistoryComponent } from 'app/modules/Promotion/promotionhistory/promotionhistory.component';
@@ -136,6 +138,7 @@ LeavebalanceComponent,
 LeaveApprovalComponent,
 EmployeeLeaverequestComponent,
 EmployeeLeavebalanceComponent,
+EmployeeDetailsModalComponent,
 VacancymanagmentComponent,
 VacancyComponent,
 PromotionhistoryComponent,

@@ -18,7 +18,7 @@ export class PositionService {
   getAllPosition(): Observable<Position[]> {
     return this.http.get<Position[]>(this.apiUrl + 'api/Position');
   }
-  getPosition(id:number): Observable<Position> {
+  getPosition(id:string): Observable<Position> {
     return this.http.get<Position>(this.apiUrl + 'api/Position/'+id);
   }
 

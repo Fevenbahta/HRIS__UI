@@ -1,0 +1,12 @@
+<div class="custom-modal">
+    <h2>Employee Details</h2>
+
+    <!-- Display employee information here -->
+    <p >Name: {{ selectedEmployee }}</p>
+   <p>position:{{selectedPosition}}</p>
+   <p >Division: {{ selectedDivision }}</p>
+   <p>Branch:{{selectedBranch}}</p>
+    <!-- Add more details as needed -->
+    <button (click)="printEmployeeDetails()">Print</button>
+    <button (click)="onCancelClick()">Cancel</button>
+  </div>

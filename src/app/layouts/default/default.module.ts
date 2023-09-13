@@ -84,6 +84,7 @@ import { VacancyComponent } from 'app/modules/Promotion/vacancy/vacancy.componen
 
 import { PromotionhistoryComponent } from 'app/modules/Promotion/promotionhistory/promotionhistory.component';
 import { VacancymanagmentComponent } from 'app/modules/Promotion/vacancymanagment/vacancymanagment.component';
+import { ApprovepromotionComponent } from 'app/modules/Promotion/approvepromotion/approvepromotion.component';
 
 
 
@@ -142,6 +143,7 @@ EmployeeDetailsModalComponent,
 VacancymanagmentComponent,
 VacancyComponent,
 PromotionhistoryComponent,
+ApprovepromotionComponent,
 
   ],
 

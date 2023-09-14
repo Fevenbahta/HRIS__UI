@@ -36,7 +36,7 @@ positionId:"",
 levelId:"",
 title:"",
 requirement:"",
-vacancyId:""
+vacancyId:undefined
   
   };
   constructor( 
@@ -50,7 +50,10 @@ vacancyId:""
      
   } 
 
- 
+  capitalizeFirstLetter(text: string): string {
+    if (!text) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
  
   ngOnInit(): void { 
     this.positionservice.getAllPosition()
@@ -71,12 +74,22 @@ vacancyId:""
         console.log(response)
       }
     });
+    this.vacancyService.getAllVacancy()
+    .subscribe({
+      next: (vacancy) => {
+        this.vacancies=vacancy;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
   }
 
-  buttons = [  
+  buttons = [ 
+     { label: 'Promotions ', route: '/promotionhistory' }, 
     { label: 'Vacancy Management', route: '/vacancymanagment' },  
     { label: ' Vacancy', route: '/vacancy' },
-    { label: 'Promotions ', route: '/promotionhistory' }, 
+    
 
  
   ];  
@@ -121,7 +134,7 @@ vacancyId:""
       levelId:"",
       title:"",
       requirement:"",
-      vacancyId:""
+      vacancyId:undefined
         };
       },
       error(response) {
@@ -171,5 +184,13 @@ vacancyId:""
   
   };
 }
-  
+   
+getPositionName(positionId: string): string {
+  const position = this.positions.find((g) => g.positionId === positionId);
+  return position ? position.name : 'Unknown Grade';
+}
+getGradeName(levelId: string): string {
+  const grade = this.grades.find((g) => g.levelId === levelId);
+  return grade ? grade.description : 'Unknown Grade';
+} 
 }

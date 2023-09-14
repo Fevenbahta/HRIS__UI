@@ -33,6 +33,7 @@ import { EmployeeDetailsModalComponent } from './modules/leave/employee-details-
 import { VacancyComponent } from './modules/Promotion/vacancy/vacancy.component';
 import { PromotionhistoryComponent } from './modules/Promotion/promotionhistory/promotionhistory.component';
 import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/vacancymanagment.component';
+import { ActingAssigmentComponent } from './modules/acting-assigment/acting-assigment.component';
 
 
 
@@ -41,6 +42,7 @@ import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/
 @NgModule({
   declarations: [
     AppComponent,
+    
 
 
 

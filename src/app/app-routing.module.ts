@@ -44,6 +44,7 @@ import { EmployeeLeavebalanceComponent } from './modules/leave/employee-leavebal
 import { PromotionhistoryComponent } from './modules/Promotion/promotionhistory/promotionhistory.component';
 import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/vacancymanagment.component';
 import { VacancyComponent } from './modules/Promotion/vacancy/vacancy.component';
+import { ActingAssigmentComponent } from './modules/acting-assigment/acting-assigment.component';
 
 const routes: Routes = [
   {path: '',
@@ -138,6 +139,8 @@ component:PromotionhistoryComponent},
 component:VacancymanagmentComponent},
 {path:'vacancy',
 component:VacancyComponent},
+{path:'acting-assigment',
+component:ActingAssigmentComponent},
 ]
 }]
 

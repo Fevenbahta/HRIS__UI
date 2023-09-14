@@ -90,7 +90,7 @@ vacancyId:undefined
     { label: 'Vacancy Management', route: '/vacancymanagment' },  
     { label: ' Vacancy', route: '/vacancy' },
     
-
+    { label: ' Approve Promotion', route: '/approvepromotion' },
  
   ];  
   toggleVacancyForm() {

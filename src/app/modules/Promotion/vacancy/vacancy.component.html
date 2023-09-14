@@ -8,17 +8,20 @@
     <h5 class="text-center card-title">Open Vacancies </h5>
 </div>
   <div class="container mt-5">
-    <h6>Vacancies</h6>
+
     <div class="row">
       <div class="col-md-6" *ngFor="let vacancy of vacancies">
         <div class="card mb-4">
-          <div class="card-body">
-            <div class="head"><h5 class="card-title "> <strong>{{ vacancy.title.charAt(0).toUpperCase() + vacancy.title.slice(1) }}</strong> </h5></div>
-            <p class="card-text"><strong>Position:</strong> {{getPositionName( vacancy.positionId) }} </p>
-            <p class="card-text"><strong>Grade:</strong>{{ getGradeName( vacancy.levelId) }} </p>
-            <p class="card-text"><strong>Requirement:</strong> {{ vacancy.requirement }}</p>
-            <p class="card-text"><strong>Deadline:</strong> {{ vacancy.deadline| date:'yyyy-MM-dd' }}</p>
-            <p class="card-text"><strong>Release Date: </strong> {{ vacancy.releaseDate| date:'yyyy-MM-dd' }}</p>
+          <div class="card-body head ">
+            <div class="btn-grey text-center"><h5 class="card-title title-with-shadow"> <strong>{{ vacancy.title.charAt(0).toUpperCase() + vacancy.title.slice(1) }}</strong> </h5></div>
+            <p class="card-text"><strong>Position:  </strong> {{getPositionName( vacancy.positionId) }} </p>
+            <p class="card-text"><strong>Grade:  </strong>{{ getGradeName( vacancy.levelId) }} </p>
+            <p class="card-text"><strong>Requirement:  </strong> {{ vacancy.requirement }}</p>
+            <p class="card-text"><strong>Deadline:  </strong> {{ vacancy.deadline| date:'yyyy-MM-dd' }}</p>
+            <p class="card-text"><strong>Release Date:  </strong> {{ vacancy.releaseDate| date:'yyyy-MM-dd' }}</p>
+            <button class="btn btn-sm btnedit"(click)="apply(vacancy)">
+              <mat-icon>thumb_up</mat-icon>Apply</button>
+              
           </div>
         </div>
       </div>

@@ -147,7 +147,8 @@ getLevel(vacancyId:string)
   return vacancy ? `${vacancy.levelId}`:'Unknown '; 
 
 }
-approvePromotionPendding(promotionRelation: PromotionRelation){
+approvePromotionPendding(){
+  var promotionRelation=this.selectedPromotionRelationPending
     
   var Id=promotionRelation.id
   promotionRelation.promotionStatus="Promoted"
@@ -162,15 +163,57 @@ console.log("updated")
       }, 2000);
 
     
-      this.PromotionRelationService.getpromotionRelationByStatus(this.promotionStatus).subscribe({
-        next: (promotionRelationPendding) => {
-          this.promotionRelationPenddings = promotionRelationPendding
-          ;
+      this.vacancyService.getAllVacancy()
+      .subscribe({
+        next: (vacancy) => {
+          this.vacancies=vacancy;
         },
-        error: (response) => {
-          console.log(response);
+        error(response){
+          console.log(response)
         }
       });
+      this.employeeService.getAllEmployees() 
+    .subscribe({ 
+      next: (employees) => { 
+        this.employees=employees}})
+    
+        this.PromotionRelationService.getpromotionRelationByStatus(this.promotionStatus).subscribe({
+          next: (promotionRelationPendding) => {
+            this.promotionRelationPenddings = promotionRelationPendding
+            ;
+          },
+          error: (response) => {
+            console.log(response);
+          }
+        });
+        
+      this.PromotionService.getAllPromotion()
+      .subscribe({
+        next: (Promotion) => {
+          this.Promotions=Promotion;
+        },
+        error(response){
+          console.log(response)
+        }
+      });
+      this.positionservice.getAllPosition()
+    .subscribe({
+      next: (positions) => {
+        this.positions=positions;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
+    this.gradeservice.getAllGrade()
+    .subscribe({
+      next: (grades) => {
+        this.grades=grades;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
       
   });
 }

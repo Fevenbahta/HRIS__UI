@@ -27,8 +27,8 @@ export class PromotionRelationService {
     return this.http.get<PromotionRelation[]>(this.apiUrlService.apiUrl + 'api/promotionRelation/status/'+promotionStatus)
   }
 
-  getPromotionRelation(id:string): Observable<PromotionRelation> {
-    return this.http.get<PromotionRelation>(this.apiUrlService.apiUrl + 'api/PromotionRelation/'+id);
+  getPromotionRelation(id:string): Observable<PromotionRelation[]> {
+    return this.http.get<PromotionRelation[]>(this.apiUrlService.apiUrl + 'api/PromotionRelation/'+id);
   }
 
   addPromotionRelation(addPromotionRelationRequest:PromotionRelation): Observable<PromotionRelation> {

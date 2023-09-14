@@ -27,7 +27,7 @@
       <td>{{ promotionRelationPending.promotionStatus }}</td>
       <td>
         <!-- "Approve" button -->
-        <button class="btn btn-sm btnedit" (click)="approvePromotionPendding(promotionRelationPending)" (click)="togglePromotionForm(promotionRelationPending)" >
+        <button class="btn btn-sm btnedit" (click)="togglePromotionForm(promotionRelationPending)" >
           <mat-icon>how_to_reg</mat-icon>
         </button>
       </td>
@@ -49,7 +49,7 @@
       </mat-form-field>
     </div>
     <!-- Add other form fields here if needed -->
-    <button type="submit"  class="btn btn-sm btnsave">
+    <button type="submit"  class="btn btn-sm btnsave" (click)="approvePromotionPendding()" >
       <mat-icon>add</mat-icon> Promote
     </button>
   </form>

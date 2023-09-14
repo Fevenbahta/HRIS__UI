@@ -43,7 +43,7 @@ export class VacancyComponent {
    { label: ' Approve Promotion', route: '/approvepromotion' },
 
  ];  
-
+promotionRelations:PromotionRelation[]=[];
  promotionRelation: PromotionRelation = {
   pId: 0,
   id: undefined,
@@ -53,7 +53,7 @@ export class VacancyComponent {
   updatedBy: "",
   status: 0,
 vacancyId:undefined,
-empId:"",
+empId:"cdd54097-fb5e-44e2-bfd1-dca6a169bbbd",
 approvedDate: "2023-09-13T07:12:00.970Z",
 promotionStatus: "pendding",
 
@@ -61,6 +61,17 @@ promotionStatus: "pendding",
 };
 
   ngOnInit(): void { 
+
+    this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6a169bbbd").subscribe({
+      next: (promotionRelation) => {
+        this.promotionRelations = promotionRelation
+        console.log( this.promotionRelations)
+        ;
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
     
     this.vacancyService.getAllVacancy()
     .subscribe({
@@ -71,7 +82,15 @@ promotionStatus: "pendding",
         console.log(response)
       }
     });
-    
+    this.promotionRelationService.getAllPromotionRelation()
+    .subscribe({
+      next: (vacancy) => {
+        this.promotionRelations=vacancy;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
     this.positionservice.getAllPosition()
     .subscribe({
       next: (positions) => {
@@ -96,6 +115,8 @@ promotionStatus: "pendding",
     if (!text) return text;
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
+  
+  
   getPositionName(positionId: string): string {
     const position = this.positions.find((g) => g.positionId === positionId);
     return position ? position.name : 'Unknown Grade';
@@ -105,7 +126,7 @@ promotionStatus: "pendding",
     return grade ? grade.description : 'Unknown Grade';
   }
   apply(vacancy :Vacancy){
-  this.promotionRelation.empId="4fe71f64-011a-4eca-af24-335119565c56";
+  this.promotionRelation.empId="cdd54097-fb5e-44e2-bfd1-dca6a169bbbd";
   this.promotionRelation.vacancyId=vacancy.vacancyId;
 
     this.promotionRelationService.addPromotionRelation(this.promotionRelation)
@@ -127,7 +148,7 @@ promotionStatus: "pendding",
           updatedBy: "",
           status: 0,
         vacancyId:undefined,
-        empId:"",
+        empId:"cdd54097-fb5e-44e2-bfd1-dca6a169bbbd",
         approvedDate: "2023-09-13T07:12:00.970Z",
         promotionStatus: "pendding",
         };
@@ -137,5 +158,6 @@ promotionStatus: "pendding",
       }
     });
   }
+
 
 }

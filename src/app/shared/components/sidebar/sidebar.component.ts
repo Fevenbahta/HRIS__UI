@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/admin', title: 'Admin',  icon:'people', class: '' },
     { path: '/leave/leave-request', title: 'Leave',  icon:'house', class: '' },
   { path: '/promotionhistory', title: 'Promotion',  icon:'train', class: '' },
-    { path: '/assignment', title: 'Assignment',  icon:'people', class: '' },
+    { path: '/acting-assigment', title: 'Assignment',  icon:'people', class: '' },
     { path: '/attendance', title: 'Attendance',  icon:'book', class: '' },
   
 

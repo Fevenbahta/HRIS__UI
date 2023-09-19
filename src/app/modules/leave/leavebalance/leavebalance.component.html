@@ -114,33 +114,34 @@
               </thead>
               <tbody>
                 <!-- Use *ngFor to loop through the leaveBalances array and display each employee position -->
-                <tr *ngFor="let otherleaveBalance of filteredotherLeaveBalances"  >
-                    <td>{{ getEmployeeName( otherleaveBalance.empId) }}</td> 
+                <tr *ngFor="let otherLeaveBalance of filteredotherLeaveBalances"  >
+                    <td>{{ getEmployeeName( otherLeaveBalance.empId) }}</td> 
                      
-                  <td>{{ otherleaveBalance.sickDefaultBalance }}</td>
-                  <td>{{ otherleaveBalance.sickRemainingBalance }}</td>
-                  <td>{{ otherleaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
-                  <td>{{ otherleaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
+                  <td>{{ otherLeaveBalance.sickDefaultBalance }}</td>
+                  <td>{{ otherLeaveBalance.sickRemainingBalance }}</td>
+                  <td>{{ otherLeaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
+                  <td>{{ otherLeaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
          
-                  <td>{{ otherleaveBalance.marriageDefaultBalance }}</td>
-                  <td>{{ otherleaveBalance.marriageRemainingBalance}}</td>
-                  <td>{{ otherleaveBalance.paternityDefaultBalance}}</td>
-                  <td>{{ otherleaveBalance.paternityRemainingBalance}}</td>
+                  <td>{{ otherLeaveBalance.marriageDefaultBalance }}</td>
+                  <td>{{ otherLeaveBalance.marriageRemainingBalance}}</td>
+                  
+                  <td>{{ otherLeaveBalance.paternityDefaultBalance}}</td>
+                  <td>{{ otherLeaveBalance.paternityRemainingBalance}}</td>
               
-                    <td>{{ otherleaveBalance.maternityDefaultBalance}}</td>
+                    <td>{{ otherLeaveBalance.maternityDefaultBalance}}</td>
              
-                      <td>{{ otherleaveBalance.maternityRemainingBalance}}</td>
-                      <td>{{ otherleaveBalance.compassinateDefaultBalance}}</td>
+                      <td>{{ otherLeaveBalance.maternityRemainingBalance}}</td>
+                      <td>{{ otherLeaveBalance.compassinateDefaultBalance}}</td>
         
-                      <td>{{ otherleaveBalance.compassinateRemainingBalance}}</td>
-                      <td>{{ otherleaveBalance.educationDefaultBalance}}</td>
-                      <td>{{ otherleaveBalance.educationRemainingBalance}}</td>
-                      <td>{{ otherleaveBalance.leaveWotPayDefaultBalance}}</td>
-                      <td>{{ otherleaveBalance.leaveWotPayRemainingBalance}}</td>
-                      <td>{{ otherleaveBalance.courtLeaveDefaultBalance}}</td>
-                      <td>{{ otherleaveBalance.courtLeaveRemainingBalance}}</td>
-                      <td>{{ otherleaveBalance.abortionLeaveDefaultBalance}}</td>
-                      <td>{{ otherleaveBalance.abortionLeaveRemainingBalance}}</td>
+                      <td>{{ otherLeaveBalance.compassinateRemainingBalance}}</td>
+                      <td>{{ otherLeaveBalance.educationDefaultBalance}}</td>
+                      <td>{{ otherLeaveBalance.educationRemainingBalance}}</td>
+                      <td>{{ otherLeaveBalance.leaveWotPayDefaultBalance}}</td>
+                      <td>{{ otherLeaveBalance.leaveWotPayRemainingBalance}}</td>
+                      <td>{{ otherLeaveBalance.courtLeaveDefaultBalance}}</td>
+                      <td>{{ otherLeaveBalance.courtLeaveRemainingBalance}}</td>
+                      <td>{{ otherLeaveBalance.abortionLeaveDefaultBalance}}</td>
+                      <td>{{ otherLeaveBalance.abortionLeaveRemainingBalance}}</td>
                    
                  
                 </tr>

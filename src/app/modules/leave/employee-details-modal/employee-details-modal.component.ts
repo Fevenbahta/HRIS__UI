@@ -1,8 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Division, EmployeePosition, Position } from 'app/models/job-description.model';
+import { Department } from 'app/models/education.model';
+import { CombinedEmployeeData } from 'app/models/employee.model';
+import { Branch, Division, EducationLevel, EmployeePosition, Grade, Position, Step } from 'app/models/job-description.model';
+import { LeaveType } from 'app/models/leaveType.model';
 import { LeaveRequest } from 'app/models/leaverequestmodel';
 import { EmployeePositionService } from 'app/service/employee-position';
+import { EmployeeService } from 'app/service/employee.service';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { PositionService } from 'app/service/position.service';
 import { BehaviorSubject, forkJoin } from 'rxjs';
@@ -14,8 +18,15 @@ import { BehaviorSubject, forkJoin } from 'rxjs';
 })
 export class EmployeeDetailsModalComponent {
 
+  divisions:Division[]= [];
+  departments:Department[]=[];
 
+  branches:Branch[]= [];
+  steps:Step[]= [];
+  levels: Grade[]=[];
+  educationlevels:EducationLevel[]= [];
   constructor(
+    private employeeservice: EmployeeService,
     public dialogRef: MatDialogRef<EmployeeDetailsModalComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any,private postionService: PositionService, private leaveRequestService: LeaveRequestService,private employeePosition:EmployeePositionService) {} // Replace with your actual backend service
 
@@ -33,28 +44,7 @@ export class EmployeeDetailsModalComponent {
   this.dialogRef.close(false);
 }
 ngOnInit(): void {
-  this.employeePosition.getAllEmployeePosition()
-.subscribe({ 
-next: (employees) => {
-  // this.leaveRequest.empId = this.selectedEmployee;
-  this.employePosition=employees
   
- },
-error: (response) => {
-  console.log(response);
-},
-
-});
-this.postionService.getAllPosition()
-.subscribe({ 
-next: (postion) => {
-  // this.leaveRequest.empId = this.selectedEmployee;
-  this.positions=postion
-  console.log(this.positions)
- },
-error: (response) => {
-  console.log(response);
-}})
 }
 
 private isOpen = new BehaviorSubject<boolean>(false);
@@ -65,7 +55,34 @@ isOpen$ = this.isOpen.asObservable();
 
 public employeeName = new BehaviorSubject<string | null>(null); // Corrected property name
 employeeName$ = this.employeeName.asObservable();
+leaveTypes:LeaveType[]=[] 
+getLeaveTypeName(leavetypeId: string): string { 
+  const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId); 
+  return leaveType ? leaveType.leaveTypeName : ''; 
+} 
+getEducationName(educationLevelId: string): string {
+  const educationLevel = this.educationlevels.find((educationLevel) => educationLevel.id === educationLevelId);
+  return educationLevel ? educationLevel.educationName : '';
+}
+getSupervisorName(positionId: string): string {
+  const position = this.positions.find((position) => position.positionId === positionId);
+  return position ? position.name : '';
+}
+getDivisionName(divisionId: string): string {
+  const division = this.divisions.find((division) => division.divisionId === divisionId);
+  return division ? division.description : '';
+}
 
+getStepName(stepId: string): string {
+  const step = this.steps.find((step) => step.id === stepId);
+  return step ? step.description : '';
+}
+
+getBranchName(branchId: string): string {
+  const branch = this.branches.find((branch) => branch.id === branchId);
+  return branch ? branch.name : '';
+}
+ge
 getPositionName(positionId: string): string {
   
   const position = this.positions.find((g) => g.positionId === positionId);
@@ -73,19 +90,22 @@ getPositionName(positionId: string): string {
   
 
 }
-openModal(leaverequest: LeaveRequest) {
-  this.selectedEmployee=leaverequest.empId
-    this.employeePosition.getEmployeePosition(leaverequest.empId).subscribe({ 
-      next: (employees) => {
-        // this.leaveRequest.empId = this.selectedEmployee;
+employeeData: CombinedEmployeeData;
+openModal(empId: string) {
+  this.selectedEmployee=empId
+  this.employeeservice.getEmployeeData(this.selectedEmployee).subscribe(
+    (data) => {
+      this.employeeData = data;
+      console.log('Employee:', data.employee);
+      console.log('Addresses:', data.addresses);
+      console.log('Emergency Contacts:', data.employeePositions);
+    
      
-
-       // this.selectedPosition= employees.position
-        this.selectedPosition= employees.position;
-        this.selectedDivision=employees.divisionId;
-        this.selectedBranch=employees.branchId;
-        console.log(this.selectedDivision)
-       }})
+    },
+    (error) => {
+      console.error('Error:', error);
+    }
+  );
 
        
   }

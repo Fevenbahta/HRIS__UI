@@ -1,4 +1,5 @@
 export interface Vacancy{
+ 
     positionId: string,
     vacancyId: string,
     levelId:string,

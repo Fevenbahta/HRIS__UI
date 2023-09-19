@@ -1,3 +1,11 @@
+import { Contact } from "./contact.model";
+import { EmergencyContact } from "./emergency-contact.model";
+import { EmployeePosition } from "./job-description.model";
+import { AnnualLeaveBalance, LeaveRequest, OtherLeaveBalance } from "./leaverequestmodel";
+import { Spouse } from "./spouse.model";
+import { Training } from "./training.model";
+import { Education, WorkExperience } from "./work-experience.model";
+
 export interface Employee{
      pId: Number;
      createdBy: string;
@@ -37,5 +45,22 @@ export interface Supervisor{
   status:number;
 
 }
+export interface CombinedEmployeeData {
+  employee: Employee;
+  addresses: Contact;
+  emergencyContacts: EmergencyContact[];
+  employeePositions: EmployeePosition;
+  educations: Education[];
+  trainings: Training[];
+  spouses:Spouse[];
+  leaveRequests:LeaveRequest[];
+  annualLeaveBalances:AnnualLeaveBalance[];
+  otherLeaveBalances:OtherLeaveBalance[];
+  workExperiences:WorkExperience[];
+  // Add other properties as needed to match the API response
+}
+
+
+
 
   

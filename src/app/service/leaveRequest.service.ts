@@ -27,15 +27,15 @@ export class LeaveRequestService {
     return this.http.get(url, { responseType: 'blob' });
   }
     // }
-    getLeaveRequestByStatus(leaveStatus: string): Observable<LeaveRequest[]> {
+    getLeaveRequestByStatus(leaveStatus: string, supervisor:string ): Observable<LeaveRequest[]> {
     
-      return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/status/'+leaveStatus)
+      return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/status/'+leaveStatus+ '/' + supervisor)
     }
 
   
-    getLeaveRequestByEmp(employeeId:string): Observable<LeaveRequest> {
+    getLeaveRequestByEmp(employeeId:string): Observable<LeaveRequest[]> {
    
-      return this.http.get<LeaveRequest>(this.apiUrl + 'api/LeaveRequest/emp/'+employeeId)
+      return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/empId/'+employeeId)
     }
   addLeaveRequest(addLeaveRequestRequest:LeaveRequest): Observable<LeaveRequest> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"

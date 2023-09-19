@@ -90,8 +90,17 @@
     border-color: #353636;
   }
   .head{
-    background-color:#fcc034 ; 
+    background-color:rgb(224, 224, 217) ; 
   }
+  .header{
+border-color: rgb(241, 241, 241);
+
+  }
+  /* Add this CSS in your styles.css or your component's CSS file */
+.title-with-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
   
   
   

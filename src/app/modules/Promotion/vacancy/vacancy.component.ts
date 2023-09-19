@@ -57,11 +57,18 @@ empId:"cdd54097-fb5e-44e2-bfd1-dca6a169bbbd",
 approvedDate: "2023-09-13T07:12:00.970Z",
 promotionStatus: "pendding",
 
-
 };
 
   ngOnInit(): void { 
 
+    this.promotionRelationService.getAllPromotionRelation().subscribe((data) => {
+      this.promotionRelations = data;
+
+      // Now that you have fetched promotionRelations, you can check and update the vacancies
+     this.updateVacanciesWithAppliedStatus();
+    });
+
+  
     this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6a169bbbd").subscribe({
       next: (promotionRelation) => {
         this.promotionRelations = promotionRelation
@@ -111,11 +118,22 @@ promotionStatus: "pendding",
     });
   
   }
+  updateVacanciesWithAppliedStatus(): void {
+    // Iterate through vacancies and set an "applied" property based on the promotion relations
+    this.promotionRelations.forEach((vacancy) => {
+      vacancy.promotionStatus = this.isVacancyApplied(vacancy);
+    });}
   capitalizeFirstLetter(text: string): string {
     if (!text) return text;
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
-  
+  isVacancyApplied(vacancy: any): string {
+    const isApplied = this.promotionRelations.some(
+      (promotion) => promotion.vacancyId === vacancy.id
+    );
+  console.log()
+    return isApplied ? 'Applied' : 'Not Applied';
+  }
   
   getPositionName(positionId: string): string {
     const position = this.positions.find((g) => g.positionId === positionId);
@@ -151,13 +169,22 @@ promotionStatus: "pendding",
         empId:"cdd54097-fb5e-44e2-bfd1-dca6a169bbbd",
         approvedDate: "2023-09-13T07:12:00.970Z",
         promotionStatus: "pendding",
+       
         };
+    
       },
       error(response) {
         console.log(response)
       }
     });
   }
+  app(Vacancy:Vacancy){
+
+    if( this.promotionRelation.vacancyId=== Vacancy.vacancyId){
+
+    }
+  }
+   
 
 
 }

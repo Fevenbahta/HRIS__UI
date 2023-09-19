@@ -18,11 +18,15 @@
             <p class="card-text"><strong>Grade:  </strong>{{ getGradeName( vacancy.levelId) }} </p>
             <p class="card-text"><strong>Requirement:  </strong> {{ vacancy.requirement }}</p>
             <p class="card-text"><strong>Deadline:  </strong> {{ vacancy.deadline| date:'yyyy-MM-dd' }}</p>
-            <p class="card-text"><strong>Release Date:  </strong> {{ vacancy.releaseDate| date:'yyyy-MM-dd' }}</p>
-            <button class="btn btn-sm btnedit"(click)="apply(vacancy)">
-              <mat-icon>thumb_up</mat-icon>Apply</button>
-              
-          </div>
+           <p class="card-text"><strong>Release Date:  </strong> {{ vacancy.releaseDate| date:'yyyy-MM-dd' }}</p>
+           
+            <button class="btnedit"
+             class="btn btn-sm btnedit"
+            (click)="apply(vacancy)"
+           
+          >
+            
+     </button>
         </div>
       </div>
     </div>

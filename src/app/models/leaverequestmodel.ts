@@ -18,6 +18,7 @@ export interface LeaveRequest{
   workingDays: number,
   sickStartDate: string,
   sickEndDate: string,
+  supervisor:string
 
 }
 export interface AnnualLeaveBalance{

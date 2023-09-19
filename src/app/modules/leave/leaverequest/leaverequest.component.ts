@@ -44,7 +44,7 @@ export class LeaverequestComponent {
   leaveName: string='' 
   downloadFileUrl: string=''; 
   pdfUrl:string='' 
-  selectedEmployee: string=''; 
+  selectedEmployee: string='cdd54097-fb5e-44e2-bfd1-dca6a169bbbd'; 
   leaveRequestSaved: boolean = false; 
   leaveRequestUpdated: boolean = false; 
   employees:Employee[]=[]; 
@@ -80,6 +80,7 @@ export class LeaverequestComponent {
     workingDays: null, 
     sickStartDate: "2023-07-26T06:13:52.512Z", 
     sickEndDate: "2023-07-26T06:13:52.512Z", 
+    supervisor:"bc314c90-d887-4733-9583-08203986b1c9"
   }; 
  
    selectedFile: File | null = null; 
@@ -109,7 +110,7 @@ export class LeaverequestComponent {
  
   ngOnInit(): void { 
      
-    this.leaveRequestservice.getAllLeaveRequest().subscribe({ 
+    this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
       next: (leaveRequestd) => { 
         this.leaveRequests = leaveRequestd; 
          
@@ -204,6 +205,7 @@ subscribe({
  
     this.leaveRequest.leaveTypeId = this.selectedLeaveType; 
     this.leaveRequest.empId = this.selectedEmployee; 
+    this.leaveRequest.supervisor = "bc314c90-d887-4733-9583-08203986b1c9"; 
     const selectedStartDate = new Date(this.leaveRequestForm.get('startDate').value);
     const selectedEndDate = new Date(this.leaveRequestForm.get('endDate').value);
     
@@ -267,7 +269,8 @@ subscribe({
     file: null, 
     workingDays: null, 
     sickStartDate: "2023-07-26T06:13:52.512Z", 
-    sickEndDate: "2023-07-26T06:13:52.512Z", 
+    sickEndDate: "2023-07-26T06:13:52.512Z",
+    supervisor:"" 
         }; 
       } , 
       error(response) { 
@@ -423,6 +426,7 @@ this.leaveRequest.endDate = selectedEndDate;
       workingDays: 0, 
       sickStartDate: "2023-07-26T06:13:52.512Z", 
       sickEndDate: "2023-07-26T06:13:52.512Z", 
+      supervisor:""
    
     };} 
   

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Employee } from 'app/models/employee.model';
+import { CombinedEmployeeData, Employee } from 'app/models/employee.model';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { EmployeeIdService } from './employee-id.service';
@@ -26,9 +26,13 @@ export class EmployeeService {
     const encodedId = encodeURIComponent(id);
     return this.http.get<Employee[]>(this.apiUrlService.apiUrl + 'api/Employee/ecx/' + encodedId);
   }
+  getEmployeeData(id: string): Observable<CombinedEmployeeData> {
+
+    return this.http.get<CombinedEmployeeData>(this.apiUrlService.apiUrl + 'api/Employee/GetEmployeeData/'+id);
+  }
   addEmployee(addEmployeeRequest: Employee): Observable<Employee> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Employee>(this.apiUrlService.apiUrl + 'api/Employee', addEmployeeRequest, httpOptions)
+    return this.http.post<Employee>(this.apiUrlService.apiUrl + 'api/Employee/', addEmployeeRequest, httpOptions)
     .pipe(  
       map(response => {  
         // Assuming the server's response contains the empId as response.empId  

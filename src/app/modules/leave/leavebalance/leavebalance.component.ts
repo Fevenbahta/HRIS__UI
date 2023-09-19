@@ -141,6 +141,7 @@ subscribe({
           next: (otherleaveBalance) => {
             this.otherleaveBalances =otherleaveBalance;
             this.filteredotherLeaveBalances=otherleaveBalance;
+            console.log(this.filteredotherLeaveBalances)
         
             const empIdsWithOtherLeaveBalances=otherleaveBalance.map((lb) => lb.empId);
             this.selectedEmployee = this.employees.filter((employee) => !(empIdsWithOtherLeaveBalances && empIdsWithLeaveBalances).includes(employee.empId));

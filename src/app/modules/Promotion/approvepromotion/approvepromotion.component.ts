@@ -34,7 +34,7 @@ export class ApprovepromotionComponent {
 
 positions:Position[]=[];
 grades:Grade[]=[];
-promotionStatus="pendding"
+promotionStatus="Applied"
 promotionRelationPenddings:PromotionRelation[]=[]
 showPromotionForm: boolean = false;
 vacancies:Vacancy[]=[]

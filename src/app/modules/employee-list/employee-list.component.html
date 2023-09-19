@@ -20,7 +20,7 @@
              
                    
                     <div class="card-header cardhead">
-                        <h4 class="card-title ">Employee Table</h4>
+                        <h6 class="card-title ">Employee Table</h6>
                         <div class=" ">
                            </div>
                     </div>
@@ -52,8 +52,9 @@
                                         <td>{{employee.pensionNo}}</td>
                                      
                                  
-                                    
-                                      
+                                        <button class="btn btn-sm btnedit" (click)="openEmployeeDetailsModal(employee.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                                            <mat-icon>info</mat-icon> 
+                                          </button>
                                   <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                                     <mat-icon>edit</mat-icon></button></td>
 
@@ -69,10 +70,9 @@
                             </table>
                             <p *ngIf="!(filteredEmployees.length || employees.length)">No employees found</p>
 
-                   
+                   </div></div>
                     </div>
-                </div>
-            </div>
+ 
         </div>
     </div>
   </div>

@@ -19,7 +19,7 @@
       </mat-label> 
       <mat-select placeholder="Select position" name="selectedposition" required [(ngModel)]="selectedPosition"> 
         <mat-option *ngFor="let position of positions" [value]="position.positionId"> 
-          {{ position.description }} 
+          {{ position.name }} 
         </mat-option> 
       </mat-select> 
     </mat-form-field> 

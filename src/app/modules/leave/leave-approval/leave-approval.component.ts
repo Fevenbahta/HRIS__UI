@@ -26,7 +26,7 @@ leaveApproved: boolean = false;
 leaveRequests:LeaveRequest[]=[]; 
 downloadFileUrl: string=''; 
  leaveStatus:string="pendding";
-
+ supervisor:string="bc314c90-d887-4733-9583-08203986b1c9";
   buttons = [ 
     { label: ' Leave Request ', route: '/leave/leave-request' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
@@ -57,10 +57,11 @@ downloadFileUrl: string='';
   }
 });
 
-    this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus).subscribe({
+    this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
       next: (leaveRequest) => {
         this.leavePenddings = leaveRequest
         ;
+        console.log(leaveRequest)
       },
       error: (response) => {
         console.log(response);
@@ -78,13 +79,13 @@ subscribe({
   }
 });    
   }
-  openEmployeeDetailsModal(leaveRequest: LeaveRequest) {
+  openEmployeeDetailsModal(empId: string) {
     const dialogRef =this.dialog.open(EmployeeDetailsModalComponent,{
        // Set the width to 100% to maximize
       // Apply your custom CSS class
     })
-    dialogRef.componentInstance.openModal(leaveRequest)
-    console.log(leaveRequest.empId);
+    dialogRef.componentInstance.openModal(empId)
+
   }
   getLeaveTypeName(leavetypeId: string): string {
     const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId);
@@ -131,7 +132,7 @@ console.log("updated")
         }, 2000);
 
       
-      this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus).subscribe({
+      this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
         next: (leaveRequest) => {
           this.leavePenddings = leaveRequest
           ;

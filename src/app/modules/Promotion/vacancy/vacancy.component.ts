@@ -23,6 +23,7 @@ export class VacancyComponent {
    promotionRelationSaved:boolean = false;
  positions:Position[]=[];
  grades:Grade[]=[];
+
   constructor( 
  
     private router: Router, 
@@ -55,23 +56,24 @@ promotionRelations:PromotionRelation[]=[];
 vacancyId:undefined,
 empId:"cdd54097-fb5e-44e2-bfd1-dca6a169bbbd",
 approvedDate: "2023-09-13T07:12:00.970Z",
-promotionStatus: "pendding",
+promotionStatus: "Pendding",
 
 
 };
 
   ngOnInit(): void { 
 
-    this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6a169bbbd").subscribe({
-      next: (promotionRelation) => {
-        this.promotionRelations = promotionRelation
-        console.log( this.promotionRelations)
-        ;
-      },
-      error: (response) => {
-        console.log(response);
-      }
-    });
+    // this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6a169bbbd").subscribe({
+    //   next: (promotionRelation) => {
+    //     this.promotionRelations = promotionRelation
+       
+    //     console.log( this.promotionRelations)
+    //     ;
+    //   },
+    //   error: (response) => {
+    //     console.log(response);
+    //   }
+    // });
     
     this.vacancyService.getAllVacancy()
     .subscribe({
@@ -82,6 +84,18 @@ promotionStatus: "pendding",
         console.log(response)
       }
     });
+    // Assuming this.vacancies and this.promotionRelations are arrays of objects
+
+this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6a169bbbd").subscribe({
+  next: (promotionRelation) => {
+    this.promotionRelations = promotionRelation;
+
+  },
+  error: (response) => {
+    console.log(response);
+  }
+});
+
     this.promotionRelationService.getAllPromotionRelation()
     .subscribe({
       next: (vacancy) => {
@@ -125,10 +139,17 @@ promotionStatus: "pendding",
     const grade = this.grades.find((g) => g.levelId === levelId);
     return grade ? grade.description : 'Unknown Grade';
   }
+  shouldDisplayApplyButton(vacancyId: string): boolean {
+    // Find the corresponding PromotionRelation
+    const promotionRelation = this.promotionRelations.find((pr) => pr.vacancyId === vacancyId);
+
+    return !promotionRelation || promotionRelation.promotionStatus === 'Pendding';
+  }
+  
   apply(vacancy :Vacancy){
   this.promotionRelation.empId="cdd54097-fb5e-44e2-bfd1-dca6a169bbbd";
   this.promotionRelation.vacancyId=vacancy.vacancyId;
-
+  this.promotionRelation.promotionStatus="Applied";
     this.promotionRelationService.addPromotionRelation(this.promotionRelation)
     .subscribe({
       next: (employee) => {
@@ -138,7 +159,20 @@ promotionStatus: "pendding",
       }, 2000);
      
 
-  
+
+      
+    this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6a169bbbd").subscribe({
+      next: (promotionRelation) => {
+        this.promotionRelations = promotionRelation
+       
+        console.log( this.promotionRelations)
+        ;
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
+
         this.promotionRelation = {
           pId: 0,
           id: undefined,
@@ -150,7 +184,7 @@ promotionStatus: "pendding",
         vacancyId:undefined,
         empId:"cdd54097-fb5e-44e2-bfd1-dca6a169bbbd",
         approvedDate: "2023-09-13T07:12:00.970Z",
-        promotionStatus: "pendding",
+        promotionStatus: "Pendding",
         };
       },
       error(response) {

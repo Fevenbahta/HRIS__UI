@@ -27,8 +27,7 @@ export class EmployeeDetailsModalServiceService {
       this.employeePosition.getEmployeePosition(leaverequestId)
     ]).subscribe(([leaveRequest, employeePositionData]) => {
       // Extract data from the responses and set properties accordingly
-      this.employeeName.next(leaveRequest.file);
-      this.employeeName.next(leaveRequest.leaveTypeId);
+   
       // Set other related data properties accordingly
       this.position.next(employeePositionData.divisionId);
       this.position.next(employeePositionData.position)

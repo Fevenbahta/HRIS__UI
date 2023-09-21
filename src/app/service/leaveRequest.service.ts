@@ -32,7 +32,10 @@ export class LeaveRequestService {
       return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/status/'+leaveStatus+ '/' + supervisor)
     }
 
-  
+    getAllLeaveRequestByStatus(leaveStatus: string ): Observable<LeaveRequest[]> {
+    
+      return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/status/'+leaveStatus)
+    }
     getLeaveRequestByEmp(employeeId:string): Observable<LeaveRequest[]> {
    
       return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/empId/'+employeeId)

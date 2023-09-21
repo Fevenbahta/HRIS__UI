@@ -28,10 +28,11 @@ downloadFileUrl: string='';
  leaveStatus:string="pendding";
  supervisor:string="bc314c90-d887-4733-9583-08203986b1c9";
   buttons = [ 
-    { label: ' Leave Request ', route: '/leave/leave-request' }, 
+    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
     { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
+    { label: 'Leave Requests ', route: '/leave/leave-requests' }, 
   ]; 
   leavePenddings:LeaveRequest[]=[]
   leavependding:LeaveRequest;

@@ -39,6 +39,10 @@ export class LeaveRequestService {
 
       return this.http.get<CombinedLeaveData>(this.apiUrl + 'api/LeaveRequest/GetLeaveData/'+id);
     }
+    getAllLeaveRequestByStatus(leaveStatus: string ): Observable<LeaveRequest[]> {
+    
+      return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/status/'+leaveStatus)
+    }
     getLeaveRequestByEmp(employeeId:string): Observable<LeaveRequest[]> {
    
       return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/empId/'+employeeId)

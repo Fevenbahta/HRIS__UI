@@ -45,6 +45,7 @@ import { PromotionhistoryComponent } from './modules/Promotion/promotionhistory/
 import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/vacancymanagment.component';
 import { VacancyComponent } from './modules/Promotion/vacancy/vacancy.component';
 import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/approvepromotion.component';
+import { AdminLeaverequestComponent } from './modules/leave/admin-leaverequest/admin-leaverequest.component';
 
 const routes: Routes = [
   {path: '',
@@ -123,8 +124,10 @@ component: EditSpouseComponent},
 component: EditTrainingComponent},
 {path:'edit-depositeAuthentication/:empId',
 component: EditDepositeAuthenticationComponent},
-{path:'leave/leave-request',
+{path:'leave/leave-request-form',
 component: LeaverequestComponent},
+{path:'leave/leave-requests',
+component: AdminLeaverequestComponent},
 {path:'leave/leave-approve',
 component: LeaveApprovalComponent},
 {path:'leave/leave-type',

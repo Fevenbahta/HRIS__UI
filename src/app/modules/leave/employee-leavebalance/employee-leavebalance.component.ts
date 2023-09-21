@@ -23,11 +23,11 @@ export class EmployeeLeavebalanceComponent {
    
  
    buttons = [ 
-     { label: ' Leave Request ', route: '/leave/leave-request' }, 
-     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-     { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
-     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
- 
+    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
+    { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
+    { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
+    { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
+    { label: 'Leave Requests ', route: '/leave/leave-requests' }, 
    ]; 
  
   leaveBalance:AnnualLeaveBalance[]=[]
@@ -47,7 +47,7 @@ export class EmployeeLeavebalanceComponent {
    private router:Router){}
    ngOnInit(): void {
     console.log('Fetching employee...');
-    this.employeeService.getEmployee("ab2c18df-5be7-4f18-85d9-06dec12e7005")
+    this.employeeService.getEmployee("b1db0e8d-3941-4db9-945c-322d7ff2e317")
       .subscribe({
         next: (employee) => {
           this.employee = employee;
@@ -59,7 +59,7 @@ export class EmployeeLeavebalanceComponent {
       });
   
     console.log('Fetching leave balance...');
-    this.leaveBalanceService.getLeaveBalance("ab2c18df-5be7-4f18-85d9-06dec12e7005")
+    this.leaveBalanceService.getLeaveBalance("b1db0e8d-3941-4db9-945c-322d7ff2e317")
       .subscribe({
         next: (leaveBalance) => {
           this.leaveBalance = leaveBalance;
@@ -72,7 +72,7 @@ export class EmployeeLeavebalanceComponent {
       });
   
     console.log('Fetching other leave balance...');
-    this.otherleaveBalanceService.getOtherLeaveBalance("ab2c18df-5be7-4f18-85d9-06dec12e7005")
+    this.otherleaveBalanceService.getOtherLeaveBalance("b1db0e8d-3941-4db9-945c-322d7ff2e317")
       .subscribe({
         next: (otherleaveBalance) => {
           this.otherleaveBalance = otherleaveBalance;

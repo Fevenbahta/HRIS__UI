@@ -29,11 +29,11 @@ employees:Employee[]=[]
  empIdsWithLeaveBalances;
  empIdsWithOtherLeaveBalances;
   buttons = [ 
-    { label: ' Leave Request ', route: '/leave/leave-request' }, 
+    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
     { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
-
+    { label: 'Leave Requests ', route: '/leave/leave-requests' }, 
   ]; 
 
  leaveBalance:AnnualLeaveBalance={

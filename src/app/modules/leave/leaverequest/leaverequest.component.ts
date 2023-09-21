@@ -18,16 +18,43 @@ import { EmployeeLeaveDetailComponent } from '../employee-leave-detail/employee-
 import { NgxImageCompressService } from 'ngx-image-compress';
 import * as JSZip from 'jszip';
 
-function dateRangeValidator(control: AbstractControl): ValidationErrors | null {
-  const startDate = control.get('startDate').value;
-  const endDate = control.get('endDate').value;
+// function dateRangeValidator(control: AbstractControl): ValidationErrors | null {
+//   const startDate = control.get('startDate').value;
+//   const endDate = control.get('endDate').value;
 
-  if (startDate && endDate && startDate > endDate) {
-    return { invalidDateRange: true };
-  }
+//   if (startDate && endDate && startDate > endDate) {
+//     return { invalidDateRange: true };
+//   }
 
 
-  return null;
+//   return null;
+// }
+
+function dateRangeValidator(selectedLeaveBalance: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const startDate = control.get('startDate').value;
+    const endDate = control.get('endDate').value;
+
+    if (startDate && endDate) {
+      const startDateObj = new Date(startDate);
+      const endDateObj = new Date(endDate);
+    const timeDifference = endDateObj.getTime() - startDateObj.getTime();
+      const durationInDays = timeDifference / (1000 * 3600 * 24);
+      if (startDateObj > endDateObj) {
+       
+        
+        return { invalidDateRange: true, message: 'End date must be after start date' };
+        
+      }
+
+      if (durationInDays >= selectedLeaveBalance) { 
+        console.log(selectedLeaveBalance);
+        return { invalidLeaveBalance: true, message: 'Date difference exceeds selected leave balance' };
+      }
+    }
+
+    return null;
+  };
 }
  
 @Component({ 
@@ -47,7 +74,7 @@ export class LeaverequestComponent {
   leaveName: string='' 
   downloadFileUrl: string=''; 
   pdfUrl:string='' 
-  selectedEmployee: string='cdd54097-fb5e-44e2-bfd1-dca6a169bbbd'; 
+  selectedEmployee: string='b1db0e8d-3941-4db9-945c-322d7ff2e317'; 
   leaveRequestSaved: boolean = false; 
   leaveRequestUpdated: boolean = false; 
   employees:Employee[]=[]; 
@@ -56,11 +83,11 @@ export class LeaverequestComponent {
   fileType: string = 'other'; // Initialize as 'other' by default 
   fileData: string = ''; 
   buttons = [  
-    { label: ' Leave Request ', route: '/leave/leave-request' },  
-    { label: ' Leave Balance ', route: '/leave/leave-balance' },
+    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
+    { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
     { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
-    { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' },   
- 
+    { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
+    { label: 'Leave Requests ', route: '/leave/leave-requests' }, 
   ];  
   
   leaveRequest: LeaveRequest = { 
@@ -71,7 +98,7 @@ export class LeaverequestComponent {
     updatedDate: "2023-07-26T06:13:52.512Z", 
     updatedBy: "", 
     status: 0, 
-    empId:'0bd1295a-dd75-413a-9eef-811934e2880d', 
+    empId:'b1db0e8d-3941-4db9-945c-322d7ff2e317', 
     startDate: null, 
     endDate: null, 
     leaveTypeId: '', 
@@ -107,8 +134,9 @@ export class LeaverequestComponent {
       this.leaveRequestForm = this.formBuilder.group({
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-    },  { validator: dateRangeValidator }); // Add the custom validator here
-  
+      
+    },  {  validator: dateRangeValidator(this.selectedLeaveBalance)}); // Add the custom validator here
+    console.log(this.selectedLeaveBalance);
   } 
 
   
@@ -278,7 +306,7 @@ subscribe({
     updatedDate: "2023-07-26T06:13:52.512Z", 
     updatedBy: "", 
     status: 0, 
-    empId:'0bd1295a-dd75-413a-9eef-811934e2880d', 
+    empId:'b1db0e8d-3941-4db9-945c-322d7ff2e317', 
     startDate: null, 
     endDate: null, 
     leaveTypeId: '', 
@@ -387,7 +415,9 @@ availableLeaveBalance(): void {
     this.selectedLeaveBalance=selectedBalance.marriageDefaultBalance; 
     } 
      
-     
+    this.leaveRequestForm.setValidators(dateRangeValidator(this.selectedLeaveBalance));
+    this.leaveRequestForm.updateValueAndValidity(); // Update form validation
+  
      
   } 
  
@@ -435,7 +465,7 @@ this.leaveRequest.endDate = selectedEndDate;
       updatedDate: "2023-07-26T06:13:52.512Z", 
       updatedBy: "", 
       status: 0, 
-      empId:'0bd1295a-dd75-413a-9eef-811934e2880d', 
+      empId:'b1db0e8d-3941-4db9-945c-322d7ff2e317', 
       startDate: null, 
       endDate: null, 
       leaveTypeId: '', 

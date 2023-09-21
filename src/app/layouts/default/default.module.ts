@@ -75,7 +75,7 @@ import { LeavetypeComponent } from 'app/modules/Admin module/leavetype/leavetype
 import { LeavebalanceComponent } from 'app/modules/leave/leavebalance/leavebalance.component';
 
 import { LeaveApprovalComponent } from 'app/modules/leave/leave-approval/leave-approval.component';
-import { EmployeeLeaverequestComponent } from 'app/modules/leave/employee-leaverequest/employee-leaverequest.component';
+import { AdminLeaverequestComponent,  } from 'app/modules/leave/admin-leaverequest/admin-leaverequest.component';
 import { EmployeeLeavebalanceComponent } from 'app/modules/leave/employee-leavebalance/employee-leavebalance.component';
 import { LeaverequestComponent } from 'app/modules/leave/leaverequest/leaverequest.component';
 import { EmployeeDetailsModalServiceService } from 'app/service/employee-details-modal-service.service';
@@ -139,7 +139,7 @@ LeavetypeComponent,
 LeavebalanceComponent,
 
 LeaveApprovalComponent,
-EmployeeLeaverequestComponent,
+AdminLeaverequestComponent,
 EmployeeLeavebalanceComponent,
 EmployeeDetailsModalComponent,
 VacancymanagmentComponent,

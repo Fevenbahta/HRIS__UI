@@ -85,7 +85,10 @@
                   <mat-datepicker #toPicker></mat-datepicker>
                 </mat-form-field>
               
-            
+
+        <mat-error *ngIf="leaveRequestForm.hasError('invalidLeaveBalance')">
+          Date difference exceeds selected leave balance
+           </mat-error>
               <!-- Display validation errors if needed -->
               <mat-error *ngIf="leaveRequestForm.hasError('invalidDateRange')">
              EndDate must be greater than Start date

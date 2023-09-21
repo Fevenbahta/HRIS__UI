@@ -111,6 +111,7 @@ openEmployeeDetailsModal(empId: string) {
   dialogRef.componentInstance.openModal(empId)
 
 }
+
 employeeData: CombinedEmployeeData;
 detail(empId:string){
 
@@ -119,7 +120,7 @@ detail(empId:string){
     this.employeeData = data;
     console.log('Employee:', data.employee);
     console.log('Addresses:', data.addresses);
-    console.log('Emergency Contacts:', data.emergencyContacts);
+    console.log('Emergency Contacts:', data.workExperiences);
   
    
   },

@@ -4,7 +4,7 @@ import { Department } from 'app/models/education.model';
 import { CombinedEmployeeData } from 'app/models/employee.model';
 import { Branch, Division, EducationLevel, EmployeePosition, Grade, Position, Step } from 'app/models/job-description.model';
 import { LeaveType } from 'app/models/leaveType.model';
-import { LeaveRequest } from 'app/models/leaverequestmodel';
+
 import { EmployeePositionService } from 'app/service/employee-position';
 import { EmployeeService } from 'app/service/employee.service';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
@@ -28,7 +28,7 @@ export class EmployeeDetailsModalComponent {
   constructor(
     private employeeservice: EmployeeService,
     public dialogRef: MatDialogRef<EmployeeDetailsModalComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: any,private postionService: PositionService, private leaveRequestService: LeaveRequestService,private employeePosition:EmployeePositionService) {} // Replace with your actual backend service
+      @Inject(MAT_DIALOG_DATA) public data: any,private postionService: PositionService, private employeePosition:EmployeePositionService) {} // Replace with your actual backend service
 
       selectedEmployee: string;
       selectedPosition:string;
@@ -37,7 +37,7 @@ export class EmployeeDetailsModalComponent {
       division:Division[];
       positions:Position[]
       employePosition:EmployeePosition[]
-      leaveRequest:LeaveRequest[]
+    
 
 
  onCancelClick(): void {
@@ -98,7 +98,7 @@ openModal(empId: string) {
       this.employeeData = data;
       console.log('Employee:', data.employee);
       console.log('Addresses:', data.addresses);
-      console.log('Emergency Contacts:', data.employeePositions);
+      console.log('Emergency Contacts:', data.spouses);
     
      
     },

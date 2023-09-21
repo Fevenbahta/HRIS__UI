@@ -14,6 +14,9 @@ import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { LeaveTypeService } from 'app/service/leaveType.service'; 
 import { LeaveBalanceService } from 'app/service/leavebalance.service'; 
 import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service';
+import { EmployeeLeaveDetailComponent } from '../employee-leave-detail/employee-leave-detail.component';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import * as JSZip from 'jszip';
 
 function dateRangeValidator(control: AbstractControl): ValidationErrors | null {
   const startDate = control.get('startDate').value;
@@ -87,6 +90,8 @@ export class LeaverequestComponent {
  
  
   constructor( 
+   
+    private imageCompress: NgxImageCompressService,
    private formBuilder: FormBuilder,
     private leaveRequestservice: LeaveRequestService, 
     private router: Router, 
@@ -199,7 +204,22 @@ subscribe({
     }; 
     reader.readAsDataURL(file); 
   } 
- 
+
+//   onFileSelected(event: any) {
+//     const file: File = event.target.files[0];
+
+//     const formData = new FormData();
+//     formData.append('zipFile', file);
+
+//  this.leaveRequestservice.uploadZipFile(formData).subscribe(
+//         (response) => {
+//             console.log('ZIP file uploaded successfully', response);
+//         },
+//         (error) => {
+//             console.error('Error uploading ZIP file', error);
+//         }
+//     );
+// }
  
   addleaveRequest() { 
  
@@ -283,6 +303,7 @@ subscribe({
   }
     
   } 
+ 
   fetchAndDisplayPDF(leave: LeaveRequest):void { 
     // Call your service method to fetch the PDF file  
     const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
@@ -493,6 +514,15 @@ LeaveRequest): void {
     return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE';  
   }   
     
+
+  openLeaveDetailsModal(empId: string) {
+    const dialogRef =this.dialog.open(EmployeeLeaveDetailComponent,{
+       // Set the width to 100% to maximize
+      // Apply your custom CSS class
+    })
+    dialogRef.componentInstance.openModal(empId)
+  
+  }
   // getLeaveTypeName(Id: string): string {  
   //   const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id);  
   //   return leaveType ? ${leaveType.leaveTypeName} :'Unknown EMPLOYEE';  

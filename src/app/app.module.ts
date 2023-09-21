@@ -35,6 +35,7 @@ import { PromotionhistoryComponent } from './modules/Promotion/promotionhistory/
 import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/vacancymanagment.component';
 import { ActingAssigmentComponent } from './modules/acting-assigment/acting-assigment.component';
 import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/approvepromotion.component';
+import { EmployeeLeaveDetailComponent } from './modules/leave/employee-leave-detail/employee-leave-detail.component';
 
 
 
@@ -66,7 +67,8 @@ import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/
 
  
       
-    AppComponent, 
+    AppComponent,
+                                                                                EmployeeLeaveDetailComponent, 
 
   ],
   imports: [

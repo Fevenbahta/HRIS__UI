@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LeaveRequest } from 'app/models/leaverequestmodel';
+import { CombinedLeaveData, LeaveRequest } from 'app/models/leaverequestmodel';
 
 
 
@@ -26,13 +26,19 @@ export class LeaveRequestService {
     const url = this.apiUrl +'api/LeaveRequest/'+leaveRequestId;
     return this.http.get(url, { responseType: 'blob' });
   }
+  uploadZipFile(formData: FormData) {
+    return this.http.post(this.apiUrl + 'api/LeaveRequest/upload', formData);
+}
     // }
     getLeaveRequestByStatus(leaveStatus: string, supervisor:string ): Observable<LeaveRequest[]> {
     
       return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/status/'+leaveStatus+ '/' + supervisor)
     }
 
-  
+    getLeaveData(id: string): Observable<CombinedLeaveData> {
+
+      return this.http.get<CombinedLeaveData>(this.apiUrl + 'api/LeaveRequest/GetLeaveData/'+id);
+    }
     getLeaveRequestByEmp(employeeId:string): Observable<LeaveRequest[]> {
    
       return this.http.get<LeaveRequest[]>(this.apiUrl + 'api/LeaveRequest/empId/'+employeeId)

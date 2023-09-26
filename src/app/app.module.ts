@@ -34,7 +34,9 @@ import { PromotionhistoryComponent } from './modules/Promotion/promotionhistory/
 import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/vacancymanagment.component';
 import { ActingAssigmentComponent } from './modules/acting-assigment/acting-assigment.component';
 import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/approvepromotion.component';
+import { EmployeeLeaveDetailComponent } from './modules/leave/employee-leave-detail/employee-leave-detail.component';
 import { HolidaysComponent } from './modules/Admin module/holidays/holidays.component';
+
 
 
 
@@ -43,8 +45,31 @@ import { HolidaysComponent } from './modules/Admin module/holidays/holidays.comp
 @NgModule({
   declarations: [
     AppComponent,
+    
 
 
+
+   
+   
+ 
+ 
+
+
+   
+  
+
+
+
+
+    
+
+  
+
+
+ 
+      
+    AppComponent, EmployeeLeaveDetailComponent, 
+    HolidaysComponent, 
   ],
   imports: [
     BrowserModule,

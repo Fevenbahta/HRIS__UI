@@ -14,6 +14,7 @@ import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { LeaveTypeService } from 'app/service/leaveType.service'; 
 import { LeaveBalanceService } from 'app/service/leavebalance.service'; 
 import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service';
+import { EmployeeLeaveDetailComponent } from '../employee-leave-detail/employee-leave-detail.component';
 
 // function dateRangeValidator(control: AbstractControl): ValidationErrors | null {
 //   const startDate = control.get('startDate').value;
@@ -118,6 +119,8 @@ export class LeaverequestComponent {
  
  
   constructor( 
+   
+   
    private formBuilder: FormBuilder,
     private leaveRequestservice: LeaveRequestService, 
     private router: Router, 
@@ -565,6 +568,15 @@ LeaveRequest): void {
     return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE';  
   }   
     
+
+  openLeaveDetailsModal(empId: string) {
+    const dialogRef =this.dialog.open(EmployeeLeaveDetailComponent,{
+       // Set the width to 100% to maximize
+      // Apply your custom CSS class
+    })
+    dialogRef.componentInstance.openModal(empId)
+  
+  }
   // getLeaveTypeName(Id: string): string {  
   //   const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id);  
   //   return leaveType ? ${leaveType.leaveTypeName} :'Unknown EMPLOYEE';  

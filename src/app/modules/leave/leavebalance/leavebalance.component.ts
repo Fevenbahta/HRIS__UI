@@ -8,8 +8,8 @@ import { EmployeeService } from 'app/service/employee.service';
 import { LeaveTypeService } from 'app/service/leaveType.service';
 import { LeaveBalanceService } from 'app/service/leavebalance.service';
 import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service';
-
-
+import { EmployeeLeaveDetailComponent } from '../employee-leave-detail/employee-leave-detail.component';
+import { EditLeaveBalanceModalComponent } from '../edit-leave-balance-modal/edit-leave-balance-modal.component';
 @Component({
   selector: 'app-leavebalance',
   templateUrl: './leavebalance.component.html',
@@ -55,7 +55,7 @@ totalRemaining: 0,
 totalRequest: 0,
 annualDefaultBalance: 0,
 annualRemainingBalance: 0,
-
+UnusedDays:0,
 
   }
   
@@ -135,7 +135,7 @@ subscribe({
         this.leaveBalances =leaveBalances;
         this.filteredLeaveBalances=leaveBalances;
         const empIdsWithLeaveBalances = leaveBalances.map((lb) => lb.empId);
-        
+     console.log("this" ,this.filteredLeaveBalances)
         this.otherleaveBalanceService.getAllOtherLeaveBalance()
         .subscribe({
           next: (otherleaveBalance) => {
@@ -195,7 +195,7 @@ previousTwoYear:this.leaveBalance.previousTwoYear,
 
 totalRemaining: this.leaveBalance.totalRemaining,
 totalRequest: this.leaveBalance.totalRequest,
-
+UnusedDays:0,
 
     };
 
@@ -358,4 +358,18 @@ onSearch() {
   getLeaveTypeName(Id: string): string { 
     const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id); 
     return leaveType ? `${leaveType.leaveTypeName} `:'Unknown EMPLOYEE'; 
-  }  }
+  }  
+  openLeaveDetailsModal(empId: string) {
+    const dialogRef =this.dialog.open(EditLeaveBalanceModalComponent)
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'refresh') {
+        // Perform the refresh action here
+        window.location.reload();
+      }  })
+  
+    dialogRef.componentInstance.openModal(empId)
+  
+    
+  }
+}

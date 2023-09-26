@@ -139,7 +139,10 @@
                     <td>{{ leaveRequest.approvedBy }}</td>
                     <td>{{ leaveRequest.approvedDate | date:'yyyy-MM-dd' }}</td>
                   
-                    <td>  <button class="btn btn-sm "  (click)="fetchAndDisplayPDF(leaveRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                    <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveRequest.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                      <mat-icon>info</mat-icon> 
+                    </button>
+                    <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leaveRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                       style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
                       <mat-icon>get_app</mat-icon></button>
                       <mat-error  *ngIf="FileNull && id == leaveRequest.leaveRequestId"

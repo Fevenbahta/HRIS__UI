@@ -53,9 +53,7 @@ export interface CombinedEmployeeData {
   educations: Education[];
   trainings: Training[];
   spouses:Spouse[];
-  leaveRequests:LeaveRequest[];
-  annualLeaveBalances:AnnualLeaveBalance[];
-  otherLeaveBalances:OtherLeaveBalance[];
+  
   workExperiences:WorkExperience[];
   // Add other properties as needed to match the API response
 }

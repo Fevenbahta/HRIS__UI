@@ -186,138 +186,14 @@
                     </div>
                   </div>
                   
-                  <div class="col-md-6 card">
-                    <p class="card-head">Annual Leave</p>
-                    <!-- Table for annual leave -->
-                    <div class="table-responsive">
-                      <table *ngIf="employeeData.annualLeaveBalances" class="table table-border table-striped compact-table">
-                        <thead>
-                          <tr>
-                            <th>Annual Start Date</th>
-                            <th>Annual End Date</th>
-                            <th>Annual Default</th>
-                            <th>Annual Remaining</th>
-                            <th>Previous Annual</th>
-                            <th>Previous Two Year</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let leaveBalance of employeeData.annualLeaveBalances">
-                            <td>{{ leaveBalance.startDate | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ leaveBalance.endDate | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ leaveBalance.annualDefaultBalance }}</td>
-                            <td>{{ leaveBalance.annualRemainingBalance }}</td>
-                            <td>{{ leaveBalance.previousYearAnnualBalance }}</td>
-                            <td>{{ leaveBalance.previousTwoYear }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 card">
-                    <p class="card-head">Other Leaves</p>
-                    <!-- Table for other leaves -->
-                    <div class="table-responsive">
-                      <table *ngIf="employeeData.otherLeaveBalances" class="table table-border compact-table">
-                        <thead>
-                          <tr>
-             
-                                       
-  <th scope="col">Employee</th>
-  <th scope="col">Sick Leave Default</th>
-  <th scope="col">Sick Leave Remainig</th>
-  <th scope="col">Sick LeaveStart Date</th>
-  <th scope="col">Sick Leave End Date</th> 
-  <th scope="col">Marraige Leave Default</th>
-  <th scope="col">Marraige Leave Remainig</th>
-  <th scope="col">Paternity Leave Default</th>
-  <th scope="col">Paternity Leave Remainig</th>
-  <th scope="col">Maternity Leave Default</th>
-  <th scope="col">Maternity Leave Remainig</th>
-  <th scope="col">compasionate Leave Default</th>
-  <th scope="col">compasionate Leave Remainig</th>
-  <th scope="col">Education Leave Default</th>
-  <th scope="col">Education Leave Remainig</th>
-  <th scope="col">LeaveWithOutPay Default</th>
-  <th scope="col">LeaveWithOutPay Remainig</th>
-  <th scope="col">Court Leave Default</th>
-  <th scope="col">Court Leave  Remainig</th>
-  <th scope="col">Abortion Leave Default</th>
-  <th scope="col">Abortion Leave  Remainig</th>
-</tr>
-                       
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let otherLeaveBalance of employeeData.otherLeaveBalances">
-                           
-                            <td>{{ otherLeaveBalance.sickDefaultBalance }}</td>
-                            <td>{{ otherLeaveBalance.sickRemainingBalance }}</td>
-                            <td>{{ otherLeaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
-                            <td>{{ otherLeaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
-                   
-                            <td>{{ otherLeaveBalance.marriageDefaultBalance }}</td>
-                            <td>{{ otherLeaveBalance.marriageRemainingBalance}}</td>
-                            
-                            <td>{{ otherLeaveBalance.paternityDefaultBalance}}</td>
-                            <td>{{ otherLeaveBalance.paternityRemainingBalance}}</td>
-                        
-                              <td>{{ otherLeaveBalance.maternityDefaultBalance}}</td>
-                       
-                                <td>{{ otherLeaveBalance.maternityRemainingBalance}}</td>
-                                <td>{{ otherLeaveBalance.compassinateDefaultBalance}}</td>
-                  
-                                <td>{{ otherLeaveBalance.compassinateRemainingBalance}}</td>
-                                <td>{{ otherLeaveBalance.educationDefaultBalance}}</td>
-                                <td>{{ otherLeaveBalance.educationRemainingBalance}}</td>
-                                <td>{{ otherLeaveBalance.leaveWotPayDefaultBalance}}</td>
-                                <td>{{ otherLeaveBalance.leaveWotPayRemainingBalance}}</td>
-                                <td>{{ otherLeaveBalance.courtLeaveDefaultBalance}}</td>
-                                <td>{{ otherLeaveBalance.courtLeaveRemainingBalance}}</td>
-                                <td>{{ otherLeaveBalance.abortionLeaveDefaultBalance}}</td>
-                                <td>{{ otherLeaveBalance.abortionLeaveRemainingBalance}}</td>
-                             
-                           <!-- Add similar data cells for other leave types -->
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6 card">
-                    <p class="card-head">Leave Request</p>
-                    <!-- Table for leave requests -->
-                    <div class="table-responsive">
-                      <table *ngIf="employeeData.leaveRequests" class="table table-border table-responsive table-striped  compact-table">
-                        <thead>
-                          <tr>
-                            <th>Leave Type</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Status</th>
-                            <th>Approved By</th>
-                            <th>Approved Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let leaveRequest of employeeData.leaveRequests">
-                            <td>{{  getLeaveTypeName(leaveRequest.leaveTypeId) }}</td>
-                            <td>{{ leaveRequest.startDate | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ leaveRequest.endDate | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ leaveRequest.status }}</td>
-                            <td>{{ leaveRequest.approvedBy }}</td>
-                            <td>{{ leaveRequest.approvedDate | date:'yyyy-MM-dd' }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
+      
       </div>
+      <button (click)="printEmployeeDetails()">Print</button>
+      <button (click)="onCancelClick()">Cancel</button>
     </div>
-       
+
 </div>
 
 
-    <button (click)="printEmployeeDetails()">Print</button>
-    <button (click)="onCancelClick()">Cancel</button>
+
   </div>

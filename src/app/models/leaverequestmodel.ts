@@ -1,3 +1,5 @@
+import { Employee } from "./employee.model";
+
 export interface LeaveRequest{
     pId:number;
     leaveRequestId?: string;
@@ -39,7 +41,7 @@ totalRemaining: number,
 totalRequest: number,
 annualDefaultBalance: number,
 annualRemainingBalance: number,
-
+UnusedDays:number,
 
 
 }
@@ -83,4 +85,13 @@ sickStartDate: string,
 
 
 
+}
+
+export interface CombinedLeaveData {
+  employee: Employee;
+  leaveRequests:LeaveRequest[];
+  annualLeaveBalances:AnnualLeaveBalance[];
+  otherLeaveBalances:OtherLeaveBalance[];
+
+  // Add other properties as needed to match the API response
 }

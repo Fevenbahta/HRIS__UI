@@ -31,21 +31,21 @@
                   </thead>
                   <tbody>
                     <!-- Use *ngFor to loop through the leavePendings array and display each leavePending record -->
-                    <tr *ngFor="let leavePending of leavePenddings" >
-                      <td>{{ getEmployeeName(leavePending.empId)}}</td>
-                      <td>{{ getLeaveTypeName(leavePending.leaveTypeId) }}</td>
-                      <td>{{ leavePending.startDate| date:'yyyy-MM-dd' }}</td>
-                      <td>{{ leavePending.endDate| date:'yyyy-MM-dd' }}</td>
-                      <td>{{ leavePending.leaveStatus }}</td>
-                      <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leavePending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                    <tr *ngFor="let Pending of leavePenddings" >
+                      <td>{{ getEmployeeName(Pending.empId)}}</td>
+                      <td>{{ getLeaveTypeName(Pending.leaveTypeId) }}</td>
+                      <td>{{ Pending.startDate| date:'yyyy-MM-dd' }}</td>
+                      <td>{{ Pending.endDate| date:'yyyy-MM-dd' }}</td>
+                      <td>{{ Pending.leaveStatus }}</td>
+                      <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Pending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                         style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
                         <mat-icon>attach_file</mat-icon>File</button></td>
         
                       <td>
                         <!-- leave-approval.component.html -->
-                        <button (click)="openEmployeeDetailsModal(leavePending.empId)">View Details</button>
+                        <button (click)="openEmployeeDetailsModal(Pending.empId)">View Details</button>
 
-                        <button class="btn btn-sm btnedit" (click)="approveleavePendding(leavePending)">
+                        <button class="btn btn-sm btnedit" (click)="approveleavePendding(Pending)">
                           <mat-icon>how_to_reg</mat-icon>Approve</button>
                          
                       </td>

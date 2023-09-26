@@ -7,16 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizationInfoComponent implements OnInit {
   buttons = [
-    { label: 'Organization' , route:"/admin/organization-info" },
-    { label: 'Job', 
+    { label: 'Structure',
     dropdownOptions: [
-      { label: 'Department', route: '/admin/department' },
-      { label: 'Division', route: '/admin/division' },
-      { label: 'Position', route: '/admin/position' }
-    ] },
-    { label: 'Supervisor' , route:"/admin/supervisor"},
-     { label: 'Qualificaton', route:"/admin/qualification" },
-
+       { label: 'Position',route:"/admin/position"  },
+       { label: 'Department',  route:"/admin/department"  },
+       { label: 'Division',  route:"/admin/division"  },
+       { label: 'Branch',  route:"/admin/branch"  }
+   
+     ]},
+     { label: 'Level',
+     dropdownOptions: [
+         { label: 'Step', route:"/admin/step" },
+            { label: 'Grade', route:"/admin/grade" },
+      ]},
+      { label: 'Supervisor',
+      dropdownOptions: [
+       { label: 'Supervisor', route:"/admin/supervisor" },
+        { label: 'Assign-Supervisor', route:"/admin/assign-supervisor" },
+       ]},
+       { label: 'Leave',
+       dropdownOptions: [
+        { label: 'Holiday', route:"/holiday" },
+        { label: 'Leave-Type', route:"/leave/leave-type" },
+       ]},
+   { label: 'Education-Level' , route:"/admin/education-level"},
   ];
   constructor() { }
 

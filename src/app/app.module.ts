@@ -43,7 +43,7 @@ import { HolidaysComponent } from './modules/Admin module/holidays/holidays.comp
 @NgModule({
   declarations: [
     AppComponent,
-    HolidaysComponent,
+
 
   ],
   imports: [

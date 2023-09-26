@@ -30,9 +30,9 @@ downloadFileUrl: string='';
 buttons = [ 
   { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
   { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-  { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
+  { label: ' Leave Approval ', route: '/leave/leave-approve' }, 
   { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
-  { label: 'Leave Requests ', route: '/leave/leave-requests' }, 
+  { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
 ]; 
   constructor(    private leaveRequestservice: LeaveRequestService,
     private router: Router,
@@ -41,7 +41,7 @@ buttons = [
     private employeeIdService: EmployeeIdService,
     private dialog: MatDialog,
   ) { }
-  leaveStatus:string="Approved";
+  leaveStatus:string="First-Approved";
   supervisor:string="bc314c90-d887-4733-9583-08203986b1c9";
   ngOnInit(): void {
     this.employeeService.getAllEmployees() 
@@ -109,4 +109,32 @@ getLeaveTypeName(leavetypeId: string): string {
 getEmployeeName(empId: string): string { 
   const employee = this.employees.find((g) => g.empId === empId); 
   return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
-} }
+} 
+approveleavePendding(leaveRequest: LeaveRequest){
+    
+  var leaveRequestId=leaveRequest.leaveRequestId
+  leaveRequest.leaveStatus="Approved"
+ console.log(leaveRequest)
+  this.leaveRequestservice
+  .updateLeaveRequest(leaveRequest,leaveRequestId)
+  .subscribe(() =>{
+    this.leaveApproved = true;
+console.log("updated")
+      setTimeout(() => {
+        this.leaveApproved= false;
+      }, 2000);
+
+    
+    this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
+      next: (leaveRequest) => {
+        this.leavePenddings = leaveRequest
+        ;
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
+  });
+}
+}
+

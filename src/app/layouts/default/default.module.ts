@@ -86,6 +86,7 @@ import { PromotionhistoryComponent } from 'app/modules/Promotion/promotionhistor
 import { VacancymanagmentComponent } from 'app/modules/Promotion/vacancymanagment/vacancymanagment.component';
 import { ActingAssigmentComponent } from 'app/modules/acting-assigment/acting-assigment.component';
 import { ApprovepromotionComponent } from 'app/modules/Promotion/approvepromotion/approvepromotion.component';
+import { HolidaysComponent } from 'app/modules/Admin module/holidays/holidays.component';
 
 
 
@@ -147,6 +148,7 @@ VacancyComponent,
 PromotionhistoryComponent,
 ActingAssigmentComponent,
 ApprovepromotionComponent,
+HolidaysComponent,
 
   ],
 

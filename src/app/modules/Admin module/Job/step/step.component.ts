@@ -56,11 +56,12 @@ buttons = [
      { label: 'Supervisor', route:"/admin/supervisor" },
       { label: 'Assign-Supervisor', route:"/admin/assign-supervisor" },
      ]},
- 
-     { label: 'Education-Level' , route:"/admin/education-level"},
+     { label: 'Leave',
+     dropdownOptions: [
+      { label: 'Holiday', route:"/holiday" },
       { label: 'Leave-Type', route:"/leave/leave-type" },
-
- 
+     ]},
+ { label: 'Education-Level' , route:"/admin/education-level"},
    ];
   constructor( private gradeservice: GradeService,private dialog:MatDialog, private stepservice: StepService,private router:Router) { }
 

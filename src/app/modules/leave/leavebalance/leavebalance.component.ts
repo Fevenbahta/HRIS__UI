@@ -31,9 +31,9 @@ employees:Employee[]=[]
   buttons = [ 
     { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-    { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
+    { label: ' Leave Approval ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
-    { label: 'Leave Requests ', route: '/leave/leave-requests' }, 
+    { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
   ]; 
 
  leaveBalance:AnnualLeaveBalance={

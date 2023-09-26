@@ -56,7 +56,9 @@
             <div class="col-md-4 mt-3">
               <label for="name">Supporting File</label>
               <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
-             
+              <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+              <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+    
             </div>
           </div></div>
           
@@ -137,11 +139,13 @@
                     <td>{{ leaveRequest.approvedBy }}</td>
                     <td>{{ leaveRequest.approvedDate | date:'yyyy-MM-dd' }}</td>
                   
-                    <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leaveRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                    <td>  <button class="btn btn-sm "  (click)="fetchAndDisplayPDF(leaveRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                       style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
-                      <mat-icon>attach_file</mat-icon>File</button></td>
-                    <!-- Add a button to trigger fetching and displaying the PDF -->
-                   
+                      <mat-icon>get_app</mat-icon>File</button>
+                      <mat-error  *ngIf="FileNull && id == leaveRequest.leaveRequestId"
+                      class="  pull-right">No File</mat-error >
+    
+                  </td>
                     <td>
                       <button class="btn btn-sm btnedit" (click)="editleaveRequest(leaveRequest)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                         <mat-icon>edit</mat-icon>

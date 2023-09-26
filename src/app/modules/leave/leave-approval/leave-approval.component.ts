@@ -30,9 +30,9 @@ downloadFileUrl: string='';
   buttons = [ 
     { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-    { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
+    { label: ' Leave Approval ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
-    { label: 'Leave Requests ', route: '/leave/leave-requests' }, 
+    { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
   ]; 
   leavePenddings:LeaveRequest[]=[]
   leavependding:LeaveRequest;
@@ -78,7 +78,18 @@ subscribe({
   error: (response) => {
     console.log(response);
   }
-});    
+});   
+this.leaveRequestservice.getAllLeaveRequest().
+subscribe({
+  next: (leave) => {
+  //this.leaveRequest.leaveTypeId = this.selectedLeaveType;
+    this.leaveRequests= leave
+    ;
+  },
+  error: (response) => {
+    console.log(response);
+  }
+});  
   }
   openEmployeeDetailsModal(empId: string) {
     const dialogRef =this.dialog.open(EmployeeDetailsModalComponent,{
@@ -98,8 +109,10 @@ subscribe({
   } 
   fetchAndDisplayPDF(leave: LeaveRequest):void { 
     // Call your service method to fetch the PDF file  
+    console.log(leave.leaveRequestId)
     const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
     leaveRequestToEdit.leaveRequestId 
+    
     this.leaveRequestservice.getLeaveRequestFile(leaveRequestToEdit.leaveRequestId) 
     
       .subscribe( 
@@ -121,7 +134,7 @@ subscribe({
   approveleavePendding(leaveRequest: LeaveRequest){
     
     var leaveRequestId=leaveRequest.leaveRequestId
-    leaveRequest.leaveStatus="Approved"
+    leaveRequest.leaveStatus="First-Approved"
    console.log(leaveRequest)
     this.leaveRequestservice
     .updateLeaveRequest(leaveRequest,leaveRequestId)

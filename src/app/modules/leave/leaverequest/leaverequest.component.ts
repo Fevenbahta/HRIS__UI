@@ -79,6 +79,10 @@ export class LeaverequestComponent {
   selectedOtherLeaveBalance:number=0 
   fileType: string = 'other'; // Initialize as 'other' by default 
   fileData: string = ''; 
+    IsPdf:boolean = false;
+  IsBig:boolean = false;
+  FileNull:boolean = false;
+  id:string;
   buttons = [  
     { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
@@ -217,18 +221,43 @@ subscribe({
     const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId); 
     return leaveType ? leaveType.leaveTypeName : ''; 
   } 
-  onFileSelected(event: any) { 
+  // onFileSelected(event: any) { 
    
-    const file: File = event.target.files[0]; 
-    const reader = new FileReader(); 
-    reader.onload = () => { 
-        const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
-        this.leaveRequest.file = base64String; 
-    }; 
-    reader.readAsDataURL(file); 
-  } 
+  //   const file: File = event.target.files[0]; 
+  //   const reader = new FileReader(); 
+  //   reader.onload = () => { 
+  //       const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
+  //       this.leaveRequest.file = base64String; 
+  //   }; 
+  //   reader.readAsDataURL(file); 
+  // } 
  
- 
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+  
+    if (file.type !== 'application/pdf') {
+      this.IsPdf=true;
+    console.error('Selected file is not a PDF.');
+   return;
+    }
+  
+    if (file.size > 200 * 1024 * 1024) {
+      this.IsBig=true;
+ console.error('File size exceeds 200MB.');
+return;
+    }
+    this.IsPdf=false;
+    this.IsBig=false;
+    const reader = new FileReader();
+  
+    reader.onload = () => {
+      const base64String = reader.result.toString().split(',')[1];
+      this.leaveRequest.file = file.name;
+   
+    };
+    reader.readAsDataURL(file);
+  }
+  
   addleaveRequest() { 
  
     this.leaveRequest.leaveTypeId = this.selectedLeaveType; 
@@ -251,11 +280,12 @@ subscribe({
   const currentDate = new Date();
 
   // Check if start date is greater than current date and end date is greater than start date
-  if (startDate < endDate) {
+  if (startDate <= endDate) {
      
   
     this.leaveRequestservice.addLeaveRequest(this.leaveRequest).subscribe({ 
       next: (employee) => { 
+         
          
       //  this.router.navigate(['/employee-registration/work-experience']);  
  
@@ -265,7 +295,7 @@ subscribe({
         }, 2000); 
         this.leaveRequestservice.getAllLeaveRequest().subscribe({ 
           next: (leaveRequests) => { 
-            this.leaveRequests = leaveRequests 
+         
             ; 
           }, 
           error: (response) => { 
@@ -311,27 +341,29 @@ subscribe({
   }
     
   } 
-  fetchAndDisplayPDF(leave: LeaveRequest):void { 
-    // Call your service method to fetch the PDF file  
-    const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
-    leaveRequestToEdit.leaveRequestId 
-    this.leaveRequestservice.getLeaveRequestFile(leaveRequestToEdit.leaveRequestId) 
-    
-      .subscribe( 
-        (pdf: Blob) => { 
-          const file = new Blob([pdf], { type: 'application/pdf' }); 
-          this.downloadFileUrl = window.URL.createObjectURL(file); 
-          window.open(this.downloadFileUrl, '_blank'); 
-          //console.log(this.leaveRequest.leaveRequestId); 
-           
-        }, 
-         
-        (error) => { 
-          console.error('Error loading PDF:', error); 
-          // Handle the error, e.g., display an error message to the user. 
-        } 
-      ); 
-  } 
+
+  fetchAndDisplayPDF(leave: LeaveRequest): void {
+    const leaveRequestToEdit = this.leaveRequests.find(
+      (leaveRequest) => leaveRequest.leaveRequestId === leave.leaveRequestId
+    );
+
+  
+    this.leaveRequestservice.getLeaveRequestFile(leaveRequestToEdit.leaveRequestId).subscribe(
+      (pdf: Blob) => {
+   
+        var file = new Blob([pdf], { type: 'application/pdf' });
+
+        this.downloadFileUrl = window.URL.createObjectURL(file);
+        window.open(this.downloadFileUrl, '_blank');    
+      },
+      (error) => {
+        this.FileNull=true
+        console.error('Error loading PDF:', error);
+       this.id= leaveRequestToEdit.leaveRequestId
+      }
+    );
+  }
+  
   
 availableLeaveBalance(): void { 
     
@@ -426,9 +458,18 @@ this.leaveRequest.endDate = selectedEndDate;
   this.leaveRequestUpdated = false; 
         }, 2000); 
          
-        this.leaveRequestservice.getAllLeaveRequest().subscribe((leave) => { 
-          this.leaveRequests = leave; 
-        }); 
+        this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
+      next: (leaveRequestd) => { 
+        this.leaveRequests = leaveRequestd; 
+         
+       
+      }, 
+      error: (response) => { 
+        console.log(response); 
+      } 
+    }); 
+  
+  
       }, 
       error: (response) => { 
         console.log(response); 
@@ -486,9 +527,10 @@ LeaveRequest): void {
     ); 
      
   
-    this.leaveRequestservice.getAllLeaveRequest().subscribe({ 
-      next: (leaveRequest) => { 
-        this.leaveRequests = leaveRequest; 
+    this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
+      next: (leaveRequestd) => { 
+        this.leaveRequests = leaveRequestd; 
+         
        
       }, 
       error: (response) => { 
@@ -503,15 +545,15 @@ LeaveRequest): void {
  
     dialogRef.afterClosed().subscribe((result) => { 
       if (result === true) { 
-      this.leaveRequestservice.deleteLeaveRequest(leaveRequest.leaveRequestId).subscribe({ 
-        next: (response) => { 
-          this.dialog.open(DeletesucessfullmessageComponent) 
-          this.leaveRequestservice.getAllLeaveRequest().subscribe((leave) => { 
-            this.leaveRequests = leave; 
-          }); 
-        }, 
-        error(response) { 
-          console.log(response);} 
+        this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
+          next: (leaveRequestd) => { 
+            this.leaveRequests = leaveRequestd; 
+             
+           
+          }, 
+          error: (response) => { 
+            console.log(response); 
+          } 
         }); 
       } 
     }); 

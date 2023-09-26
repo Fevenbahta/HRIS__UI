@@ -41,6 +41,7 @@ import { HolidaysComponent } from './modules/Admin module/holidays/holidays.comp
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,10 +68,8 @@ import { HolidaysComponent } from './modules/Admin module/holidays/holidays.comp
 
  
       
-    AppComponent,
-                                                                                EmployeeLeaveDetailComponent, 
-    HolidaysComponent,
-
+    AppComponent, EmployeeLeaveDetailComponent, 
+    HolidaysComponent, 
   ],
   imports: [
     BrowserModule,

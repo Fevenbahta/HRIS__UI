@@ -35,7 +35,7 @@ getLeaveTypeName(leavetypeId: string): string {
 
       leaveData: CombinedLeaveData;
 openModal(empId: string) {
-  this.selectedEmployee=empId
+  this.selectedEmployee=empId;
   this.leaveService.getLeaveData(this.selectedEmployee).subscribe(
     (data) => {
       this.leaveData = data;

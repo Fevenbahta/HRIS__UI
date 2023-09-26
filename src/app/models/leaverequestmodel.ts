@@ -41,7 +41,7 @@ totalRemaining: number,
 totalRequest: number,
 annualDefaultBalance: number,
 annualRemainingBalance: number,
-
+UnusedDays:number,
 
 
 }

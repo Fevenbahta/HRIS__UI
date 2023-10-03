@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { WorkExperience } from 'app/models/work-experience.model';
+import { ApiUrlService } from './api-url.service';
 
 
 
@@ -11,32 +12,31 @@ import { WorkExperience } from 'app/models/work-experience.model';
 })
 export class WorkExperienceService {
  
-  readonly apiUrl = 'https://localhost:7008/';
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private apiUrlService: ApiUrlService) { }
 
   getAllWorkExperience(): Observable<WorkExperience[]> {
-    return this.http.get<WorkExperience[]>(this.apiUrl + 'api/WorkExperience');
+    return this.http.get<WorkExperience[]>(this.apiUrlService.apiUrl + 'WorkExperience');
   }
   getWorkExperience(id:string): Observable<WorkExperience> {
-    return this.http.get<WorkExperience>(this.apiUrl + 'api/WorkExperience/'+id);
+    return this.http.get<WorkExperience>(this.apiUrlService.apiUrl + 'WorkExperience/'+id);
   }
 
   addWorkExperience(addWorkExperienceRequest:WorkExperience): Observable<WorkExperience> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<WorkExperience>(this.apiUrl + 'api/WorkExperience', addWorkExperienceRequest,httpOptions);
+    return this.http.post<WorkExperience>(this.apiUrlService.apiUrl + 'WorkExperience', addWorkExperienceRequest,httpOptions);
   }
 
   updateWorkExperience(workexperienceDetails:WorkExperience, Id:string): Observable<WorkExperience> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<WorkExperience>(this.apiUrl + 'api/WorkExperience/'+Id, workexperienceDetails,httpOptions);
+    return this.http.put<WorkExperience>(this.apiUrlService.apiUrl + 'WorkExperience/'+Id, workexperienceDetails,httpOptions);
   }
 
   deleteWorkExperience(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrl + 'api/WorkExperience/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'WorkExperience/' + Id, httpOptions);
   }
 
   

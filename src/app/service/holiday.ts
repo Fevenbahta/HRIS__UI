@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Holiday } from 'app/models/holiday';
+import { ApiUrlService } from './api-url.service';
 
 
 @Injectable({
@@ -11,21 +12,21 @@ import { Holiday } from 'app/models/holiday';
 })
 export class HolidayService {
  
-  readonly apiUrl = 'https://localhost:7008/';
+  
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private apiUrlService: ApiUrlService) { }
 
   getAllHoliday(): Observable<Holiday[]> {
-    return this.http.get<Holiday[]>(this.apiUrl + 'api/Holiday');
+    return this.http.get<Holiday[]>(this.apiUrlService.apiUrl+ 'Holiday');
   }
   getHoliday(id:string): Observable<Holiday> {
-    return this.http.get<Holiday>(this.apiUrl + 'api/Holiday/'+id);
+    return this.http.get<Holiday>(this.apiUrlService.apiUrl + 'Holiday/'+id);
   }
 
   addHoliday(addHolidayRequest: Holiday): Observable<Holiday> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Holiday>(this.apiUrl + 'api/Holiday', addHolidayRequest, httpOptions)
+    return this.http.post<Holiday>(this.apiUrlService.apiUrl + 'Holiday', addHolidayRequest, httpOptions)
       .pipe(
         catchError((error) => {
           console.error('Error occurred during addHoliday:', error);
@@ -36,12 +37,12 @@ export class HolidayService {
   }
   updateHoliday(HolidayDetails: Holiday, Id:string): Observable<Holiday> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Holiday>(this.apiUrl + 'api/Holiday/'+Id, HolidayDetails,httpOptions);
+    return this.http.put<Holiday>(this.apiUrlService.apiUrl + 'Holiday/'+Id, HolidayDetails,httpOptions);
   }
 
   deleteHoliday(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrl + 'api/Holiday/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'Holiday/' + Id, httpOptions);
   }
 
   

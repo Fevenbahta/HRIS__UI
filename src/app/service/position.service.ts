@@ -4,27 +4,28 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Position } from 'app/models/job-description.model';
+import { ApiUrlService } from './api-url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PositionService {
  
-  readonly apiUrl = 'https://localhost:7008/';
+
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private apiUrlService: ApiUrlService) { }
 
   getAllPosition(): Observable<Position[]> {
-    return this.http.get<Position[]>(this.apiUrl + 'api/Position');
+    return this.http.get<Position[]>(this.apiUrlService.apiUrl + 'Position');
   }
   getPosition(id:string): Observable<Position> {
-    return this.http.get<Position>(this.apiUrl + 'api/Position/'+id);
+    return this.http.get<Position>(this.apiUrlService.apiUrl + 'Position/'+id);
   }
 
   addPosition(addPositionRequest: Position): Observable<Position> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Position>(this.apiUrl + 'api/Position', addPositionRequest, httpOptions)
+    return this.http.post<Position>(this.apiUrlService.apiUrl + 'Position', addPositionRequest, httpOptions)
       .pipe(
         catchError((error) => {
           console.error('Error occurred during addPosition:', error);
@@ -35,12 +36,12 @@ export class PositionService {
   }
   updatePosition(positionDetails: Position, Id:string): Observable<Position> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Position>(this.apiUrl + 'api/Position/'+Id, positionDetails,httpOptions);
+    return this.http.put<Position>(this.apiUrlService.apiUrl + 'Position/'+Id, positionDetails,httpOptions);
   }
 
   deletePosition(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrl + 'api/Position/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'Position/' + Id, httpOptions);
   }
 
   

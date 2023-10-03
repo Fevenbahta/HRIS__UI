@@ -17,26 +17,26 @@ export class EducationService {
   constructor(private http: HttpClient , private apiUrlService: ApiUrlService) { }
 
   getAllEducation(): Observable<Education[]> {
-    return this.http.get<Education[]>(this.apiUrlService.apiUrl + 'api/Education');
+    return this.http.get<Education[]>(this.apiUrlService.apiUrl + 'Education');
   }
   getEducation(id:string): Observable<Education> {
-    return this.http.get<Education>(this.apiUrlService.apiUrl + 'api/Education/'+id);
+    return this.http.get<Education>(this.apiUrlService.apiUrl + 'Education/'+id);
   }
 
   addEducation(addEducationRequest:Education): Observable<Education> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Education>(this.apiUrlService.apiUrl + 'api/Education', addEducationRequest,httpOptions);
+    return this.http.post<Education>(this.apiUrlService.apiUrl + 'Education', addEducationRequest,httpOptions);
   }
 
   updateEducation(educationDetails:Education, Id:string): Observable<Education> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Education>(this.apiUrlService.apiUrl + 'api/Education/'+Id, educationDetails,httpOptions);
+    return this.http.put<Education>(this.apiUrlService.apiUrl + 'Education/'+Id, educationDetails,httpOptions);
   }
 
   deleteEducation(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrlService.apiUrl + 'api/Education/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'Education/' + Id, httpOptions);
   }
 
   

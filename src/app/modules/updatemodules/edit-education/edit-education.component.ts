@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { EducationLevel } from 'app/models/job-description.model';
 import { Education } from 'app/models/work-experience.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
@@ -149,8 +150,16 @@ export class EditEducationComponent {
       this.educationService.deleteEducation(Education.id).subscribe(
         () => {
          
-          this.educations = this.educations.filter((t) => t.id !== Education.id);
-          this.router.navigate(['employee-registration/education']);
+          this.dialog.open(DeletesucessfullmessageComponent)
+          this.educationService.getAllEducation().subscribe({
+            next: (educations) => {
+              this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
+              ;
+            },
+            error: (response) => {
+              console.log(response);
+            }
+          });
         },
         (error) => {
           console.error(error);

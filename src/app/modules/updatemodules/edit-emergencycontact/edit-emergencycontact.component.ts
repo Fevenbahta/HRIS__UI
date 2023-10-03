@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { EmergencyContact } from 'app/models/emergency-contact.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { EmergencyContactService } from 'app/service/emergency-contact.service';
@@ -141,10 +142,17 @@ export class EditEmergencyContactComponent implements OnInit {
        () => {
          // EmergencyContact deleted successfully, we can update the list of EmergencyContacts after deletion.
          // Here, we are simply filtering out the deleted EmergencyContact from the EmergencyContacts array.
-         this.emergencyContacts = this.emergencyContacts.filter((t) => t.id !== EmergencyContact.id);
- 
-         this.router.navigate(['employee-registration/emergency-contact']);
-         alert('EmergencyContact deleted successfully!');
+         this.dialog.open(DeletesucessfullmessageComponent)
+         this.emergencyContactService.getAllEmergencyContact()
+       .subscribe({
+         next: (emergencycontacts) => {
+           // Filter emergency contacts for the current employee
+           this.emergencyContacts = emergencycontacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+         },
+         error(response) {
+           console.log(response);
+         },
+       });
        },
        (error) => {
          console.error(error);

@@ -11,6 +11,7 @@ import { SupervisorService } from 'app/service/supervisor.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeIdService } from 'app/service/employee-id.service';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
  function  validateDate(control) {
   const selectedDate = new Date(control.joinDate);
   const currentDate = new Date();
@@ -297,13 +298,18 @@ validateAllFormFields(formGroup: FormGroup) {
       if (result === true) { 
         this.employeeservice.deleteEmployee(id).subscribe({
           next: () => {
+
+            this.dialog.open(DeletesucessfullmessageComponent)
+          
             this.employeeservice.getAllEmployees() 
             .subscribe({ 
               next: (employees) => { 
-                this.employees=employees; 
+                this.employees= employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
+                ; 
               }, 
               error(response){ 
                 console.log(response) 
+                alert('Failed to delete the EmployeePosition. Please try again later.');
               }
             });
           

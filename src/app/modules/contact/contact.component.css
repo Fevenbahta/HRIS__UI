@@ -1,7 +1,9 @@
 .cardhead{
     background-color: rgb(224, 224, 217);
 }
-
+.col{
+  background-color:yellow
+}
 
   form-field {
     position: relative;

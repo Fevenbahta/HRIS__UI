@@ -4,30 +4,30 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Files } from 'app/models/File';
+import { ApiUrlService } from './api-url.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
- 
-  readonly apiUrl = 'https://localhost:7008/';
+
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private apiUrlService: ApiUrlService) { }
 
   getAllFiles(): Observable<Files[]> {
-    return this.http.get<Files[]>(this.apiUrl + 'api/File');
+    return this.http.get<Files[]>(this.apiUrlService.apiUrl + 'File');
   }
  
   getFiles(id:string): Observable<Blob> {
   
-    return this.http.get(this.apiUrl + 'api/File/'+id ,{ responseType: 'blob' });
+    return this.http.get(this.apiUrlService.apiUrl + 'File/'+id ,{ responseType: 'blob' });
   }
 
   addFiles(addFilesRequest: Files): Observable<Files> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Files>(this.apiUrl + 'api/File', addFilesRequest, httpOptions)
+    return this.http.post<Files>(this.apiUrlService.apiUrl + 'File', addFilesRequest, httpOptions)
       .pipe(
         catchError((error) => {
           console.error('Error occurred during addFiles:', error);
@@ -38,12 +38,12 @@ export class FileService {
   }
   updateFiles(FilesDetails: Files, Id:string): Observable<Files> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Files>(this.apiUrl + 'api/File/'+Id, FilesDetails,httpOptions);
+    return this.http.put<Files>(this.apiUrlService.apiUrl + 'File/'+Id, FilesDetails,httpOptions);
   }
 
   deleteFiles(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrl + 'api/File/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'File/' + Id, httpOptions);
   }
 
   

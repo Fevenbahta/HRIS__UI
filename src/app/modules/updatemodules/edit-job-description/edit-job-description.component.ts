@@ -14,6 +14,7 @@ import { Department } from 'app/models/education.model';
 import { AssignSupervisorService } from 'app/service/AssignSupervisor';
 import { DepartmentService } from 'app/service/department.service';
 import { GradeService } from 'app/service/grade.service';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-edit-job-description',
@@ -290,10 +291,10 @@ if(selectedassignedSupervisor){
         () => {
           // EmployeePosition deleted successfully, we can update the list of EmployeePositions after deletion.
           // Here, we are simply filtering out the deleted EmployeePosition from the EmployeePositions array.
-          this.employeePositions = this.employeePositions.filter((t) => t.id !== EmployeePosition.id);
-  
-          this.router.navigate(['employee-registration/job-description']);
-          alert('EmployeePosition deleted successfully!');
+          this.dialog.open(DeletesucessfullmessageComponent)
+          this.employeePositionService.getAllEmployeePosition().subscribe((employeePositions) => {
+            this.employeePositions = employeePositions.filter(employeePositions => employeePositions.empId === this.employeeIdService.employeeId);})
+      
         },
         (error) => {
           console.error(error);

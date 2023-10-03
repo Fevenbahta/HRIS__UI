@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
   providedIn: 'root', // Make the service available throughout the app
 })
 export class ApiUrlService {
-  readonly apiUrl = 'https://localhost:7008/';
+  readonly apiUrl = 'https://localhost:7008/api/';
 }

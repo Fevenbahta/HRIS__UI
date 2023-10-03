@@ -15,15 +15,15 @@ export class EmployeePositionService {
   constructor(private http: HttpClient,private apiUrlService: ApiUrlService) { }
 
   getAllEmployeePosition(): Observable<EmployeePosition[]> {
-    return this.http.get<EmployeePosition[]>(this.apiUrlService.apiUrl + 'api/EmployeePosition');
+    return this.http.get<EmployeePosition[]>(this.apiUrlService.apiUrl + 'EmployeePosition');
   }
   getEmployeePosition(id:string): Observable<EmployeePosition> {
-    return this.http.get<EmployeePosition>(this.apiUrlService.apiUrl + 'api/EmployeePosition/'+id);
+    return this.http.get<EmployeePosition>(this.apiUrlService.apiUrl + 'EmployeePosition/'+id);
   }
 
   addEmployeePosition(addEmployeePositionRequest: EmployeePosition): Observable<EmployeePosition> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<EmployeePosition>(this.apiUrlService.apiUrl + 'api/EmployeePosition', addEmployeePositionRequest, httpOptions)
+    return this.http.post<EmployeePosition>(this.apiUrlService.apiUrl + 'EmployeePosition', addEmployeePositionRequest, httpOptions)
       .pipe(
         catchError((error) => {
           console.error('Error occurred during addEmployeePosition:', error);
@@ -34,12 +34,12 @@ export class EmployeePositionService {
   }
   updateEmployeePosition(employeePositionDetails: EmployeePosition, Id:string): Observable<EmployeePosition> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<EmployeePosition>(this.apiUrlService.apiUrl + 'api/EmployeePosition/'+Id, employeePositionDetails,httpOptions);
+    return this.http.put<EmployeePosition>(this.apiUrlService.apiUrl + 'EmployeePosition/'+Id, employeePositionDetails,httpOptions);
   }
 
   deleteEmployeePosition(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrlService.apiUrl + 'api/EmployeePosition/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'EmployeePosition/' + Id, httpOptions);
   }
 
   

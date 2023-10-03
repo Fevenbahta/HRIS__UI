@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Contact } from 'app/models/contact.model';
 import { Employee, Supervisor } from 'app/models/employee.model';
 import { ContactComponent } from 'app/modules/contact/contact.component';
@@ -238,24 +239,29 @@ this.employeeService.getAllEmployees()
     dialogRef.afterClosed().subscribe((result) => { 
       // If the user confirms the deletion, proceed with the deletion 
       if (result === true) { 
-        this.employeeService.deleteEmployee(id).subscribe( 
-          () => { 
-            // Update the employee list by filtering out the deleted employee 
-            this.employees = this.employees.filter((employee) => employee.empId !== id); 
-            // Show a success message 
-            // this.showSnackBar('Employee deleted successfully!'); 
-            this.router.navigate(["/edit-employee"]); 
-          }, 
-          (error) => { 
-            console.log(error); 
-            // Show an error message 
-            // this.showSnackBar('Failed to delete the employee. Please try again later.', 'mat-warn'); 
-          } 
-        ); 
-      } 
-    }); 
-  } 
-   
+        this.employeeService.deleteEmployee(id).subscribe({
+          next: () => {
+
+            this.dialog.open(DeletesucessfullmessageComponent)
+          
+            this.employeeService.getAllEmployees() 
+            .subscribe({ 
+              next: (employees) => { 
+                this.employees= employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
+                ; 
+              }, 
+              error(response){ 
+                console.log(response) 
+                alert('Failed to delete the EmployeePosition. Please try again later.');
+              }
+            });
+          
+              
+          } });
+      
+      }
+    }
+    )}
   // private showSnackBar(message: string, panelClass: string = 'mat-toolbar') { 
   //   this.snackBar.open(message, 'Close', { 
   //     duration: 3000, 

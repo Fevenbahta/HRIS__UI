@@ -8,9 +8,9 @@ import { EmployeeService } from 'app/service/employee.service';
 import { LeaveTypeService } from 'app/service/leaveType.service';
 import { LeaveBalanceService } from 'app/service/leavebalance.service';
 import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service';
-import { EmployeeLeaveDetailComponent } from '../employee-leave-detail/employee-leave-detail.component';
+import { EmployeeLeaveDetailComponent } from '../employee-leave-detail-modal/employee-leave-detail.component';
 import { EditLeaveBalanceModalComponent } from '../edit-leave-balance-modal/edit-leave-balance-modal.component';
-import { EditOtherLeaveBalanceComponent } from '../edit-other-leave-balance/edit-other-leave-balance.component';
+import { EditOtherLeaveBalanceComponent } from '../edit-other-leave-balance- modal/edit-other-leave-balance.component';
 @Component({
   selector: 'app-leavebalance',
   templateUrl: './leavebalance.component.html',
@@ -35,6 +35,7 @@ employees:Employee[]=[]
     { label: ' Leave Approval ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
     { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
+    { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
   ]; 
 
  leaveBalance:AnnualLeaveBalance={

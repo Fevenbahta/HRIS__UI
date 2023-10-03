@@ -1,30 +1,27 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Department } from 'app/models/education.model';
 import { Employee } from 'app/models/employee.model';
+import { Division, EmployeePosition, Position } from 'app/models/job-description.model';
 import { LeaveType } from 'app/models/leaveType.model';
 import { LeaveRequest } from 'app/models/leaverequestmodel';
-import { EmployeeDetailsModalServiceService } from 'app/service/employee-details-modal-service.service';
+import { DepartmentService } from 'app/service/department.service';
+import { DivisionService } from 'app/service/division.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
+import { EmployeePositionService } from 'app/service/employee-position';
 import { EmployeeService } from 'app/service/employee.service';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { LeaveTypeService } from 'app/service/leaveType.service';
-import { EmployeeDetailsModalComponent } from '../employee-details-modal/employee-details-modal.component';
-import { DivisionService } from 'app/service/division.service';
-import { DepartmentService } from 'app/service/department.service';
 import { PositionService } from 'app/service/position.service';
-import { Division, EmployeePosition, Position } from 'app/models/job-description.model';
-import { Department } from 'app/models/education.model';
-import { EmployeePositionService } from 'app/service/employee-position';
 import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-leave-approval',
-  templateUrl: './leave-approval.component.html',
-  styleUrls: ['./leave-approval.component.css']
+  selector: 'app-approvedleaves',
+  templateUrl: './approvedleaves.component.html',
+  styleUrls: ['./approvedleaves.component.css']
 })
-export class LeaveApprovalComponent {
-
+export class ApprovedleavesComponent {
   leaveTypes:LeaveType[]=[]
   selectedLeaveType: string='';
   selectedEmployee: string='';
@@ -37,8 +34,7 @@ divisions:Division[]= [];
    positions:Position[]= [];
    employeePosition:EmployeePosition;
    
- leaveStatus:string="pendding";
- leaverejectStatus:string="Reject";
+ leaveStatus:string="Approved";
  supervisor:string="bc314c90-d887-4733-9583-08203986b1c9";
   buttons = [ 
     { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
@@ -47,11 +43,15 @@ divisions:Division[]= [];
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
     { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
     { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
+   
+
+
+
   ]; 
-  leavePenddings:LeaveRequest[]=[]
+  approvedLeaves:LeaveRequest[]=[]
   leavependding:LeaveRequest;
   constructor(
-   public employeeDetailsModalService: EmployeeDetailsModalServiceService,
+ 
     private leaveRequestservice: LeaveRequestService,
     private router: Router,
     private employeeService:EmployeeService,
@@ -109,7 +109,7 @@ divisions:Division[]= [];
 
     this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
       next: (leaveRequest) => {
-        this.leavePenddings = leaveRequest
+        this.approvedLeaves = leaveRequest
         ;
         console.log(leaveRequest)
       },
@@ -190,14 +190,7 @@ subscribe({
     
     return position ? position.name : '';
   }
-  openEmployeeDetailsModal(empId: string) {
-    const dialogRef =this.dialog.open(EmployeeDetailsModalComponent,{
-       // Set the width to 100% to maximize
-      // Apply your custom CSS class
-    })
-    dialogRef.componentInstance.openModal(empId)
 
-  }
   getLeaveTypeName(leavetypeId: string): string {
     const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId);
     return leaveType ? leaveType.leaveTypeName : '';
@@ -247,7 +240,7 @@ console.log("updated")
       
       this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
         next: (leaveRequest) => {
-          this.leavePenddings = leaveRequest
+          this.approvedLeaves = leaveRequest
           ;
         },
         error: (response) => {
@@ -255,35 +248,6 @@ console.log("updated")
         }
       });
     });
-}
-
-
-rejectleavePendding
-(leaveRequest: LeaveRequest){
-    
-  var leaveRequestId=leaveRequest.leaveRequestId
-  leaveRequest.leaveStatus="First-Approved"
- console.log(leaveRequest)
-  this.leaveRequestservice
-  .updateLeaveRequest(leaveRequest,leaveRequestId)
-  .subscribe(() =>{
-    this.leaveApproved = true;
-console.log("updated")
-      setTimeout(() => {
-        this.leaveApproved= false;
-      }, 2000);
-
-    
-    this.leaveRequestservice.getLeaveRequestByStatus(this.leaverejectStatus,this.supervisor).subscribe({
-      next: (leaveRequest) => {
-        this.leavePenddings = leaveRequest
-        ;
-      },
-      error: (response) => {
-        console.log(response);
-      }
-    });
-  });
 }
   }
 

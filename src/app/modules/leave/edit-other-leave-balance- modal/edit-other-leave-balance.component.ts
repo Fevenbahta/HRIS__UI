@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service';
-import { EmployeeLeaveDetailComponent } from '../employee-leave-detail/employee-leave-detail.component';
+import { EmployeeLeaveDetailComponent } from '../employee-leave-detail-modal/employee-leave-detail.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CombinedLeaveData, OtherLeaveBalance } from 'app/models/leaverequestmodel';
 import { BehaviorSubject } from 'rxjs';

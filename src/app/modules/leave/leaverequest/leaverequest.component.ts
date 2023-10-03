@@ -14,7 +14,7 @@ import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { LeaveTypeService } from 'app/service/leaveType.service'; 
 import { LeaveBalanceService } from 'app/service/leavebalance.service'; 
 import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service';
-import { EmployeeLeaveDetailComponent } from '../employee-leave-detail/employee-leave-detail.component';
+import { EmployeeLeaveDetailComponent } from '../employee-leave-detail-modal/employee-leave-detail.component';
 
 // function dateRangeValidator(control: AbstractControl): ValidationErrors | null {
 //   const startDate = control.get('startDate').value;
@@ -93,6 +93,7 @@ export class LeaverequestComponent {
     { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
     { label: 'Leave Requests ', route: '/leave/leave-requests' }, 
+    { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
   ];  
   
   leaveRequest: LeaveRequest = { 

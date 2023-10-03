@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { DepositeAuthentication } from 'app/models/deposite-authentication.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { DepositeAuthenticationService } from 'app/service/deposite-authentcation.service';
@@ -100,22 +101,35 @@ this.depositeAuthentication ={
     this.depositeAuthentication = depositeAuthenticationToEdit;
   }
 
-  deleteDepositeAuthentication(deositeAuthentication: DepositeAuthentication): void {
-    const dialogRef = this.dialog.open(DeleteConfirmationComponent);
-
-    dialogRef.afterClosed().subscribe((result) => {
+  deleteDepositeAuthentication(depositeAuthentication: DepositeAuthentication): void {
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '300px', // Set the desired width of the dialog
+      data: { message: 'Are you sure you want to delete this DepositeAuthentication?' } // Pass any data you want to the delete confirmation component
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      // The result will be true if the user confirmed the deletion, otherwise false
       if (result === true) {
-      this.depositeAuthenticationService.deleteDepositeAuthentication(deositeAuthentication.id).subscribe(
-        () => {
-         
-          this.depositeAuthentications = this.depositeAuthentications.filter((t) => t.id !== deositeAuthentication.id);
-          this.router.navigate(['employee-registration/deositeAuthentication']);
-        },
-        (error) => {
-          console.error(error);
-          // If there was an error during deletion, you can show an error message.
-         // alert('Failed to delete the deositeAuthentication. Please try again later.');
-        }
+        // If the user confirmed the deletion, you can proceed with the delete logic here
+        this.depositeAuthenticationService.deleteDepositeAuthentication(depositeAuthentication.id).subscribe(
+          () => {
+            this.dialog.open(DeletesucessfullmessageComponent)
+            this.depositeAuthenticationService.getAllDepositeAuthentication() 
+            .subscribe({ 
+              next: (depositeauthentications) => { 
+                this.depositeAuthentications = depositeauthentications.filter(deposite => deposite.empId === this.employeeIdService.employeeId);
+                ; 
+                    }, 
+              error(response) { 
+                console.log(response); 
+              }, 
+          });
+          },
+          (error) => {
+            console.error(error);
+            // If there was an error during deletion, you can show an error message.
+            console.log('Failed to delete the DepositeAuthentication. Please try again later.');
+          }
         );
       }
     });

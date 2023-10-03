@@ -1,23 +1,13 @@
 
 <app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
-<app-employee-details-modal *ngIf="employeeDetailsModalService.isOpen$ | async"></app-employee-details-modal>
     <div class="card col-md-10 mb-5 ml-5">
       <div class="card">
         <div class="card-header  cardhead">
-          <h4 class="card-title  ">Leave Approval</h4>
-          <p class="card-category ">Leaves on pendding  </p>
-           
-        </div>
-     <!--  -->
-    
-          
-
+          <h4 class="card-title  ">Approved Leaves</h4>
    
-     <!--  --><button *ngIf="leaveApproved"class="alert  btndanger btn-sm pull-right">  Approved
-            </button>
+        </div>
     
-
-                <table   *ngIf="leavePenddings" class="table table-bordered table-striped compact-table">
+                <table   *ngIf="approvedLeaves" class="table table-bordered table-striped compact-table">
                   <thead>
                     <tr>
                       <th>Employee</th>
@@ -31,7 +21,7 @@
                   </thead>
                   <tbody>
                     <!-- Use *ngFor to loop through the leavePendings array and display each leavePending record -->
-                    <tr *ngFor="let Pending of leavePenddings" >
+                    <tr *ngFor="let Pending of approvedLeaves" >
                       <td>{{ getEmployeeName(Pending.empId)}}</td>
                       <td>{{ getLeaveTypeName(Pending.leaveTypeId) }}</td>
                       <td>{{ Pending.startDate| date:'yyyy-MM-dd' }}</td>
@@ -44,13 +34,7 @@
                         <mat-icon>get_app</mat-icon></button></td>
         
                       <td>
-                        <!-- leave-approval.component.html -->
                      
-
-                        <button class="btn btn-sm btnedit" (click)="approveleavePendding(Pending)">
-                          <mat-icon>how_to_reg</mat-icon>Approve</button>
-                          <button class="btn btn-sm btndanger" (click)="rejectleavePendding(Pending)">
-                            <mat-icon>how_to_reg</mat-icon>Reject</button>
                          
                       </td>
                     </tr>

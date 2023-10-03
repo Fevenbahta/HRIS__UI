@@ -8,6 +8,7 @@ import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/del
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeIdService } from 'app/service/employee-id.service';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 
 @Component({
   selector: 'app-edit-contact',
@@ -123,7 +124,7 @@ export class EditContactComponent implements OnInit {
   }
   deleteContact(Contact: Contact): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);
-
+  
     dialogRef.afterClosed().subscribe((result) => {
   
   
@@ -131,12 +132,18 @@ export class EditContactComponent implements OnInit {
       // If the user confirms the deletion, we can call the service to delete the Contact.
       this.contactService.deleteContact(Contact.id).subscribe(
         () => {
-          // Contact deleted successfully, we can update the list of Contact after deletion.
-          // Here, we are simply filtering out the deleted Contact from the Contact array.
-          this.contacts = this.contacts.filter((t) => t.id !== Contact.id);
-          this.router.navigate(['employee-registration/contact']);
-          // You can also show a success message to the user.
-          alert('Contact deleted successfully!');
+          this.dialog.open(DeletesucessfullmessageComponent)
+          this.contactService.getAllContacts()
+          .subscribe({
+            next: (contacts) => {
+              // Filter emergency contacts for the current employee
+              this.contacts = contacts.filter(contact => contact.empId === this.employeeIdService.employeeId);
+            },
+            error(response) {
+              console.log(response);
+            },
+          });
+        
         },
         (error) => {
           console.error(error);

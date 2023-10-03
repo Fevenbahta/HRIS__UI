@@ -34,9 +34,10 @@ import { PromotionhistoryComponent } from './modules/Promotion/promotionhistory/
 import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/vacancymanagment.component';
 import { ActingAssigmentComponent } from './modules/acting-assigment/acting-assigment.component';
 import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/approvepromotion.component';
-import { EmployeeLeaveDetailComponent } from './modules/leave/employee-leave-detail/employee-leave-detail.component';
+import { EmployeeLeaveDetailComponent } from './modules/leave/employee-leave-detail-modal/employee-leave-detail.component';
 import { HolidaysComponent } from './modules/Admin module/holidays/holidays.component';
-import { EditOtherLeaveBalanceComponent } from './modules/leave/edit-other-leave-balance/edit-other-leave-balance.component';
+import { EditOtherLeaveBalanceComponent } from './modules/leave/edit-other-leave-balance- modal/edit-other-leave-balance.component';
+import { ApprovedleavesComponent } from './modules/leave/approvedleaves/approvedleaves.component';
 
 
 
@@ -47,6 +48,7 @@ import { EditOtherLeaveBalanceComponent } from './modules/leave/edit-other-leave
   declarations: [
     AppComponent,
      EmployeeLeaveDetailComponent,
+
   
  
   ],

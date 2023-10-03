@@ -5,6 +5,7 @@ import { WorkExperienceService } from 'app/service/work-experience.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { EmployeeIdService } from 'app/service/employee-id.service';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 @Component({
   selector: 'app-edit-workexperience',
   templateUrl: './edit-workexperience.component.html',
@@ -131,10 +132,16 @@ export class EditWorkexperienceComponent {
         // User confirmed the delete action, proceed with deletion
         this.workExperienceService.deleteWorkExperience(workExperience.id).subscribe(
           () => {
-            // WorkExperience deleted successfully, update the list of WorkExperiences
-            this.workExperiences = this.workExperiences.filter((t) => t.id !== workExperience.id);
-
-            // Show a success message to the user (you can use MatSnackBar)
+            this.dialog.open(DeletesucessfullmessageComponent)
+            this.workExperienceService.getAllWorkExperience().subscribe({
+              next: (workExperience) => {
+                this.workExperiences = workExperience.filter(workexperience => workexperience.empId === this.employeeIdService.employeeId);
+      
+              },
+              error: (response) => {
+                console.log(response);
+              }
+            });
           },
           (error) => {
             console.error(error);

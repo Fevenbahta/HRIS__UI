@@ -88,7 +88,8 @@ import { ActingAssigmentComponent } from 'app/modules/acting-assigment/acting-as
 import { ApprovepromotionComponent } from 'app/modules/Promotion/approvepromotion/approvepromotion.component';
 import { HolidaysComponent } from 'app/modules/Admin module/holidays/holidays.component';
 import { EditLeaveBalanceModalComponent } from 'app/modules/leave/edit-leave-balance-modal/edit-leave-balance-modal.component';
-import { EditOtherLeaveBalanceComponent } from 'app/modules/leave/edit-other-leave-balance/edit-other-leave-balance.component';
+import { EditOtherLeaveBalanceComponent } from 'app/modules/leave/edit-other-leave-balance- modal/edit-other-leave-balance.component';
+import { ApprovedleavesComponent } from 'app/modules/leave/approvedleaves/approvedleaves.component';
 
 
 
@@ -152,6 +153,8 @@ ApprovepromotionComponent,
 EditLeaveBalanceModalComponent,
 HolidaysComponent,
 EditOtherLeaveBalanceComponent, 
+ApprovedleavesComponent,
+
   ],
 
   imports: [

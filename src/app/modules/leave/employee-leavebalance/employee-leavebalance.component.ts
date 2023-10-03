@@ -28,6 +28,7 @@ export class EmployeeLeavebalanceComponent {
     { label: ' Leave Approval ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
     { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
+    { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
    ]; 
  
   leaveBalance:AnnualLeaveBalance[]=[]

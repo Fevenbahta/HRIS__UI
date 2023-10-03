@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Spouse } from 'app/models/spouse.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { EmployeeIdService } from 'app/service/employee-id.service';
@@ -112,21 +113,26 @@ export class EditSpouseComponent implements OnInit {
     const contactToEdit = this.spouses.find(contact => contact.id === spouse.id);
     this.spouse = contactToEdit;
   }
-  deleteSpouse(Spouse: Spouse): void {
+  deleteSpouse(spouse: Spouse): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
   
-    if (result) {
+    if (result===true) {
       // If the user confirms the deletion, we can call the service to delete the Spouse.
-      this.spouseService.deleteSpouse(this.spouse.id).subscribe(
+      this.spouseService.deleteSpouse(spouse.id).subscribe(
         () => {
-          // Spouse deleted successfully, we can update the list of Spouses after deletion.
-          // Here, we are simply filtering out the deleted Spouse from the Spouses array.
-          this.spouses = this.spouses.filter((t) => t.id !== this.spouse.id);
-  
-          // You can also show a success message to the user.
-          alert('Spouse deleted successfully!');
+          this.dialog.open(DeletesucessfullmessageComponent)
+          this.spouseService.getAllSpouse() 
+          .subscribe({ 
+            next: (spouse) => { 
+              this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
+      
+                  }, 
+            error(response) { 
+              console.log(response); 
+            }, })
+
         },
         (error) => {
           console.error(error);

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Supervisor } from 'app/models/employee.model';
+import { ApiUrlService } from './api-url.service';
 
 
 
@@ -9,33 +10,32 @@ import { Supervisor } from 'app/models/employee.model';
   providedIn: 'root'
 })
 export class SupervisorService {
- 
-  readonly apiUrl = 'https://localhost:7008/';
+
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private apiUrlService: ApiUrlService) { }
 
   getAllSupervisors(): Observable<Supervisor[]> {
-    return this.http.get<Supervisor[]>(this.apiUrl + 'api/Supervisor');
+    return this.http.get<Supervisor[]>(this.apiUrlService.apiUrl + 'Supervisor');
   }
   getSupervisor(id:number): Observable<Supervisor> {
-    return this.http.get<Supervisor>(this.apiUrl + 'api/Supervisor/'+id);
+    return this.http.get<Supervisor>(this.apiUrlService.apiUrl + 'Supervisor/'+id);
   }
 
   addSupervisor(addSupervisorRequest:Supervisor): Observable<Supervisor> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Supervisor>(this.apiUrl + 'api/Supervisor', addSupervisorRequest,httpOptions);
+    return this.http.post<Supervisor>(this.apiUrlService.apiUrl + 'Supervisor', addSupervisorRequest,httpOptions);
   }
 
   updateSupervisor(supervisorDetails:Supervisor, Id:number): Observable<Supervisor> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Supervisor>(this.apiUrl + 'api/Supervisor/'+Id, supervisorDetails,httpOptions);
+    return this.http.put<Supervisor>(this.apiUrlService.apiUrl + 'Supervisor/'+Id, supervisorDetails,httpOptions);
   }
 
   deleteSupervisor(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrl + 'api/Supervisor/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'Supervisor/' + Id, httpOptions);
   }
 
   

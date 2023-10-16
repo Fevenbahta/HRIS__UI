@@ -44,10 +44,12 @@ import { ApprovedleavesComponent } from './modules/leave/approvedleaves/approved
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
      EmployeeLeaveDetailComponent,
+
 
   
  

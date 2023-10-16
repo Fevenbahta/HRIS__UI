@@ -45,7 +45,8 @@ updatedBy: '',
   employeePositions:EmployeePosition[]=[];
   divisions:Division[]= [];
   selectedDivision: string='';
-
+  division: string='';
+  department: string='';
   departments:Department[]=[];
   selectedDepartment:string='';
    positions:Position[]= [];
@@ -242,13 +243,11 @@ if(selectedassignedSupervisor){
 //con
     const selectedDepartment = this.departments.find(department => department.departmentId === selectedDivision.departmentId);
       if (selectedDivision) {
-        this.selectedDivision = selectedDivision.description;
-        this.selectedDepartment = selectedDepartment.description;
-        
-      } else {
-        this.selectedDivision = 'not'; 
-        this.selectedDepartment = 'not'; 
-      }
+        this.selectedDivision = selectedDivision.divisionId;
+        this.division=selectedDivision.description
+        this.selectedDepartment = selectedDepartment.departmentId;
+        this.department=selectedDepartment.description
+      } 
     }
   }
   onStepSelected(): void {

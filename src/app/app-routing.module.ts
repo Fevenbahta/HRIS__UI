@@ -48,6 +48,7 @@ import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/
 import { AdminLeaverequestComponent } from './modules/leave/admin-leaverequest/admin-leaverequest.component';
 import { HolidaysComponent } from './modules/Admin module/holidays/holidays.component';
 import { ApprovedleavesComponent } from './modules/leave/approvedleaves/approvedleaves.component';
+import { SelfleaveRequestComponent } from './modules/leave/selfleave-request/selfleave-request.component';
 
 const routes: Routes = [
   {path: '',
@@ -140,6 +141,8 @@ component: LeavebalanceComponent},
 component: EmployeeLeavebalanceComponent},
 {path:'leave/approvedleaves',
 component: ApprovedleavesComponent},
+{path:'leave/self-leave',
+component: SelfleaveRequestComponent},
 {path:'promotionhistory',
 component:PromotionhistoryComponent},
 {path:'vacancymanagment',

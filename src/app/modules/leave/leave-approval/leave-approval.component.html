@@ -15,7 +15,8 @@
    
      <!--  --><button *ngIf="leaveApproved"class="alert  btndanger btn-sm pull-right">  Approved
             </button>
-    
+            <button *ngIf="leaveRejected"class="alert  btndanger btn-sm pull-right">  Rejected
+            </button>
 
                 <table   *ngIf="leavePenddings" class="table table-bordered table-striped compact-table">
                   <thead>
@@ -26,20 +27,22 @@
                       <th>End Date</th>
                       <th>Status</th>
                       <th>Position</th> 
+                      <th>Department</th> 
                    
                     </tr>
                   </thead>
                   <tbody>
                     <!-- Use *ngFor to loop through the leavePendings array and display each leavePending record -->
-                    <tr *ngFor="let Pending of leavePenddings" >
-                      <td>{{ getEmployeeName(Pending.empId)}}</td>
-                      <td>{{ getLeaveTypeName(Pending.leaveTypeId) }}</td>
-                      <td>{{ Pending.startDate| date:'yyyy-MM-dd' }}</td>
-                      <td>{{ Pending.endDate| date:'yyyy-MM-dd' }}</td>
-                      <td>{{ Pending.leaveStatus }}</td>
-                      <td>{{ getPosition(Pending.empId) | async }}</td>
-
-                      <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Pending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                    <tr *ngFor="let Pend of leavePenddings" >
+                      <td>{{ getEmployeeName(Pend.empId)}}</td>
+                    
+                        <td>{{ getLeaveTypeName(Pend.leaveTypeId) }}</td>
+                      <td>{{ Pend.startDate| date:'yyyy-MM-dd' }}</td>
+                      <td>{{ Pend.endDate| date:'yyyy-MM-dd' }}</td> 
+                      <td>{{ Pend.leaveStatus }}</td>
+                       <td >{{getPositionName(Pend.employeePositionId)}}</td>
+                       <td >{{getDepartmentName(Pend.file)}}</td>
+                      <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Pend)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                         style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
                         <mat-icon>get_app</mat-icon></button></td>
         
@@ -47,10 +50,10 @@
                         <!-- leave-approval.component.html -->
                      
 
-                        <button class="btn btn-sm btnedit" (click)="approveleavePendding(Pending)">
+                        <button class="btn btn-sm btnedit" (click)="approveleavePendding(Pend)">
                           <mat-icon>how_to_reg</mat-icon>Approve</button>
-                          <button class="btn btn-sm btndanger" (click)="rejectleavePendding(Pending)">
-                            <mat-icon>how_to_reg</mat-icon>Reject</button>
+                          <button class="btn btn-sm btndanger" (click)="rejectleavePendding(Pend)">
+                            <mat-icon></mat-icon>Reject</button>
                          
                       </td>
                     </tr>

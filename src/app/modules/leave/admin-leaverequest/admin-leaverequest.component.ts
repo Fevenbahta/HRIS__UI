@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Department } from 'app/models/education.model';
 import { Employee } from 'app/models/employee.model';
+import { Division, Position } from 'app/models/job-description.model';
 import { LeaveType } from 'app/models/leaveType.model';
 import { LeaveRequest } from 'app/models/leaverequestmodel';
+import { DepartmentService } from 'app/service/department.service';
+import { DivisionService } from 'app/service/division.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { EmployeeService } from 'app/service/employee.service';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { LeaveTypeService } from 'app/service/leaveType.service';
+import { PositionService } from 'app/service/position.service';
 
 @Component({
   selector: 'app-admin-leaverequest',
@@ -20,10 +25,14 @@ export class AdminLeaverequestComponent {
   leaveTypes:LeaveType[]=[]
   leavePenddings:LeaveRequest[]=[]
   leavependding:LeaveRequest;
+  leaveRejected: boolean = false;
+  leaverejectStatus:string="Admin Reject";
 
   selectedLeaveType: string='';
   selectedEmployee: string='';
-
+  divisions:Division[]= [];
+  departments:Department[]=[];
+   positions:Position[]= [];
 leaveApproved: boolean = false;
 leaveRequests:LeaveRequest[]=[]; 
 downloadFileUrl: string=''; 
@@ -41,10 +50,43 @@ buttons = [
     private leavetypeservice: LeaveTypeService,
     private employeeIdService: EmployeeIdService,
     private dialog: MatDialog,
+    private divisionservice: DivisionService,
+    private departmentservice: DepartmentService,
+     private positionservice:PositionService ,
   ) { }
   leaveStatus:string="First-Approved";
-  supervisor:string="bc314c90-d887-4733-9583-08203986b1c9";
+
   ngOnInit(): void {
+
+    this.positionservice.getAllPosition()
+    .subscribe({
+      next: (positions) => {
+        this.positions=positions;
+      
+        
+      },
+      error(response){
+        console.log(response)
+      }
+    });
+    this.divisionservice.getAllDivisions()
+    .subscribe({
+      next: (division) => {
+        this.divisions=division;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
+    this.departmentservice.getAllDepartment()
+    .subscribe({
+      next: (department) => {
+        this.departments=department;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
     this.employeeService.getAllEmployees() 
 .subscribe({ 
   next: (employees) => {
@@ -111,10 +153,53 @@ getEmployeeName(empId: string): string {
   const employee = this.employees.find((g) => g.empId === empId); 
   return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
 } 
+
+rejectleavePendding
+(leaveRequest: LeaveRequest){
+    
+  var leaveRequestId=leaveRequest.leaveRequestId
+  leaveRequest.leaveStatus="Admin-Rejected"
+ console.log(leaveRequest)
+  this.leaveRequestservice
+  .updateLeaveRequest(leaveRequest,leaveRequestId)
+  .subscribe(() =>{
+    this.leaveRejected = true;
+console.log("updated")
+      setTimeout(() => {
+        this.leaveRejected= false;
+      }, 2000);
+
+    
+    this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
+      next: (leaveRequest) => {
+        this.leavePenddings = leaveRequest
+        ;
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
+  });
+}
+
+getDepartmentName(departmentId: string): string {
+  const department = this.departments.find((de) => de.departmentId === departmentId);
+  return department ? department.description : '';
+}
+employee:boolean;
+
+getPositionName(positionId: string): string {
+
+  const position = this.positions.find((position) => position.positionId === positionId);  
+  console.log('position  ',position.name)
+  this.employee=true
+  return position ? position.name  : '';
+}
+
 approveleavePendding(leaveRequest: LeaveRequest){
     
   var leaveRequestId=leaveRequest.leaveRequestId
-  leaveRequest.leaveStatus="Approved"
+  leaveRequest.leaveStatus="Admin-Approved"
  console.log(leaveRequest)
   this.leaveRequestservice
   .updateLeaveRequest(leaveRequest,leaveRequestId)
@@ -126,7 +211,7 @@ console.log("updated")
       }, 2000);
 
     
-    this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
+    this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
       next: (leaveRequest) => {
         this.leavePenddings = leaveRequest
         ;

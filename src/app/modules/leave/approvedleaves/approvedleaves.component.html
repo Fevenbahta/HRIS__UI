@@ -16,6 +16,9 @@
                       <th>End Date</th>
                       <th>Status</th>
                       <th>Position</th> 
+            
+                      <th>Department</th>
+                      <th>File</th>
                    
                     </tr>
                   </thead>
@@ -27,7 +30,8 @@
                       <td>{{ Pending.startDate| date:'yyyy-MM-dd' }}</td>
                       <td>{{ Pending.endDate| date:'yyyy-MM-dd' }}</td>
                       <td>{{ Pending.leaveStatus }}</td>
-                      <td>{{ getPosition(Pending.empId) | async }}</td>
+                      <td >{{getPositionName(Pending.employeePositionId)}}</td>
+                      <td >{{getDepartmentName(Pending.departmentId)}}</td>
 
                       <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Pending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                         style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >

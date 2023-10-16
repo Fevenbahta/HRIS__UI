@@ -7,6 +7,8 @@ export interface LeaveRequest{
   createdDate: string,
   updatedDate: string,
   updatedBy: string,
+  employeePositionId:string;
+  departmentId:string,
   status:number,
   empId: string,
   leaveTypeId: string,

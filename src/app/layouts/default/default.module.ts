@@ -90,6 +90,7 @@ import { HolidaysComponent } from 'app/modules/Admin module/holidays/holidays.co
 import { EditLeaveBalanceModalComponent } from 'app/modules/leave/edit-leave-balance-modal/edit-leave-balance-modal.component';
 import { EditOtherLeaveBalanceComponent } from 'app/modules/leave/edit-other-leave-balance- modal/edit-other-leave-balance.component';
 import { ApprovedleavesComponent } from 'app/modules/leave/approvedleaves/approvedleaves.component';
+import { SelfleaveRequestComponent } from 'app/modules/leave/selfleave-request/selfleave-request.component';
 
 
 
@@ -154,6 +155,7 @@ EditLeaveBalanceModalComponent,
 HolidaysComponent,
 EditOtherLeaveBalanceComponent, 
 ApprovedleavesComponent,
+SelfleaveRequestComponent,
 
   ],
 

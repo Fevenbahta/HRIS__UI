@@ -33,6 +33,8 @@ employeepositions:EmployeePosition[]=[]
 
   divisions:Division[]= [];
   selectedDivision: string='';
+  division: string='';
+  department: string='';
 
   departments:Department[]=[];
   selectedDepartment:string='';
@@ -46,13 +48,13 @@ employeepositions:EmployeePosition[]=[]
   
   levels: Grade[]=[];
   selectedLevel:string='';
-
+  assignedSupervisors:AssignSupervisor[]=[];
   selectedFirstSupervisor:string='';
   selectedSecondSupervisor:string='';
   selectedThirdSupervisor:string='';
   selectedFourthSupervisor:string='';
   selectedFifthSupervisor:string='';
-  assignedSupervisors:AssignSupervisor[]=[];
+  
 
 
   buttons = [
@@ -231,17 +233,18 @@ updateEmployeePosition(): void {
   });
 
 }
-addEmployeePosition(){
+addEmployeePosition(){   console.log("dkjhlghl",this.selectedDivision)
   this.employeePosition.empId = this.employeeIdService.employeeId;
   this.employeePosition.divisionId = this.selectedDivision;
   this.employeePosition.position = this.selectedPosition;
   this.employeePosition.stepId = this.selectedStep;
-  this.employeePosition.branchId = this.selectedBranch;
+  this.employeePosition.branchId = this.selectedBranch; 
+
   this.employeepositionservice.addEmployeePosition(this.employeePosition)
   .subscribe({
   next:()=>{
     this.employeePositionSaved = true;
-  
+
     setTimeout(() => {
       this.employeePositionSaved = false;
     }, 2000);
@@ -308,13 +311,12 @@ if(selectedassignedSupervisor){
 //con
     const selectedDepartment = this.departments.find(department => department.departmentId === selectedDivision.departmentId);
       if (selectedDivision) {
-        this.selectedDivision = selectedDivision.description;
-        this.selectedDepartment = selectedDepartment.description;
+        this.selectedDivision = selectedDivision.divisionId;
+        this.division=selectedDivision.description
+        this.selectedDepartment = selectedDepartment.departmentId;
+        this.department=selectedDepartment.description
         
-      } else {
-        this.selectedDivision = 'not'; 
-        this.selectedDepartment = 'not'; 
-      }
+      } 
     }
   }
   onStepSelected(): void {
@@ -337,7 +339,7 @@ if(selectedassignedSupervisor){
   }
   getDivisionName(divisionId: string): string {
     const division = this.divisions.find((division) => division.divisionId === divisionId);
-    return division ? division.description : '';
+    return division ? division.description :'';
   }
   getPositionName(positionId: string): string {
     const position = this.positions.find((position) => position.positionId === positionId);

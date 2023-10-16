@@ -34,8 +34,8 @@ divisions:Division[]= [];
    positions:Position[]= [];
    employeePosition:EmployeePosition;
    
- leaveStatus:string="Approved";
- supervisor:string="bc314c90-d887-4733-9583-08203986b1c9";
+ leaveStatus:string="Admin-Approved";
+
   buttons = [ 
     { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
@@ -67,6 +67,36 @@ divisions:Division[]= [];
 
   ngOnInit(): void {
 
+
+    this.positionservice.getAllPosition()
+    .subscribe({
+      next: (positions) => {
+        this.positions=positions;
+      
+        
+      },
+      error(response){
+        console.log(response)
+      }
+    });
+    this.divisionservice.getAllDivisions()
+    .subscribe({
+      next: (division) => {
+        this.divisions=division;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
+    this.departmentservice.getAllDepartment()
+    .subscribe({
+      next: (department) => {
+        this.departments=department;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
     this.positionservice.getAllPosition()
     .subscribe({
       next: (positions) => {
@@ -107,7 +137,7 @@ divisions:Division[]= [];
 });
 
 
-    this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
+    this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
       next: (leaveRequest) => {
         this.approvedLeaves = leaveRequest
         ;
@@ -223,6 +253,7 @@ subscribe({
       ); 
   } 
   
+  
   approveleavePendding(leaveRequest: LeaveRequest){
     
     var leaveRequestId=leaveRequest.leaveRequestId
@@ -238,7 +269,7 @@ console.log("updated")
         }, 2000);
 
       
-      this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
+      this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
         next: (leaveRequest) => {
           this.approvedLeaves = leaveRequest
           ;

@@ -1,5 +1,6 @@
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
-import { Component } from '@angular/core'; 
+
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog'; 
 import { Router } from '@angular/router'; 
@@ -22,18 +23,6 @@ import { DivisionService } from 'app/service/division.service';
 import { AssignSupervisorService } from 'app/service/AssignSupervisor';
 import { Department } from 'app/models/education.model';
 import { DepartmentService } from 'app/service/department.service';
-
-// function dateRangeValidator(control: AbstractControl): ValidationErrors | null {
-//   const startDate = control.get('startDate').value;
-//   const endDate = control.get('endDate').value;
-
-//   if (startDate && endDate && startDate > endDate) {
-//     return { invalidDateRange: true };
-//   }
-
-
-//   return null;
-// }
 
 function dateRangeValidator(selectedLeaveBalance: number): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -61,13 +50,12 @@ function dateRangeValidator(selectedLeaveBalance: number): ValidatorFn {
     return null;
   };
 }
- 
-@Component({ 
-  selector: 'app-leaverequest', 
-  templateUrl: './leaverequest.component.html', 
-  styleUrls: ['./leaverequest.component.scss'] 
-}) 
-export class LeaverequestComponent { 
+@Component({
+  selector: 'app-selfleave-request',
+  templateUrl: './selfleave-request.component.html',
+  styleUrls: ['./selfleave-request.component.css']
+})
+export class SelfleaveRequestComponent {
   leaveRequestForm: FormGroup;
   departments:Department[]=[]
   selectedEmployeeDepartment:string;
@@ -85,7 +73,7 @@ export class LeaverequestComponent {
   leaveName: string='' 
   downloadFileUrl: string=''; 
   pdfUrl:string='' 
-  selectedEmployee: string='b6c5a662-34e3-4acf-845e-b9524dceaf14'; 
+  selectedEmployee: string='faa95e94-e32b-4bd3-8b6e-4b506ab70476'; 
   leaveRequestSaved: boolean = false; 
   leaveRequestUpdated: boolean = false; 
   employees:Employee[]=[]; 
@@ -104,16 +92,11 @@ export class LeaverequestComponent {
   divisions:Division[]= [];
   assignedSupervisors:AssignSupervisor[]=[];
   selectedFirstSupervisor:string='';
+  postion :EmployeePosition;
   buttons = [  
-    { label: 'Leave Request',
-    dropdownOptions: [
-      { label: ' Employee LeaveRequest Form ', route: '/leave/leave-request-form' }, 
-      { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
-   
-     ]},
-   // { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
+    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-   // { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+    { label: ' Self LeaveRequest Form ', route: '/leave/self-leave' }, 
     { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
     { label: 'Admin Leave Approval ', route: '/leave/leave-requests' },
@@ -130,7 +113,7 @@ export class LeaverequestComponent {
     updatedDate: "2023-07-26T06:13:52.512Z", 
     updatedBy: "", 
     status: 0, 
-    empId:'b6c5a662-34e3-4acf-845e-b9524dceaf14', 
+    empId:'18B48DBC-152D-420C-8830-2B2E6FB78314', 
     startDate: null, 
     endDate: null, 
     leaveTypeId: '', 
@@ -165,6 +148,7 @@ export class LeaverequestComponent {
     private positionservice:PositionService ,
     private assignSupervisorService:AssignSupervisorService,
     private departmentService:DepartmentService,
+    
 
     private dialog: MatDialog, 
     private http: HttpClient, 
@@ -236,6 +220,7 @@ this.departmentService.getAllDepartment()
   next: (employees) => { 
     // this.leaveRequest.empId = this.selectedEmployee; 
     this.employees=employees 
+    console.log("emp",this.employees)
    }, 
   error: (response) => { 
     console.log(response); 
@@ -252,17 +237,21 @@ this.leaveBalanceService.getAllLeaveBalance()
     console.log(response); 
   } 
 }); 
+
+
 this.employeepostionservice.getAllEmployeePosition()  
 .subscribe({  
   next: (leaveBalances) => { 
     // this.leaveRequest.empId = this.selectedEmployee; 
     this.employeePostions=leaveBalances 
- 
+    console.log("postions  jkkgy",this.employeePostions)
    }, 
   error: (response) => { 
     console.log(response); 
   } 
 }); 
+
+
 this.otherLeaveBalanceService.getAllOtherLeaveBalance()  
 .subscribe({  
   next: (otherLeaveBalance) => { 
@@ -277,7 +266,7 @@ this.leaveRequest
 }); 
  
     
-    
+  console.log("pos", this.employeePostions);   
 this.leavetypeservice.getAllLeaveType(). 
 subscribe({ 
   next: (leaveType) => { 
@@ -289,6 +278,51 @@ subscribe({
     console.log(response); 
   } 
 }); 
+this.employeepostionservice.getEmployeePosition( this.selectedEmployee)  
+.subscribe({  
+  next: (leave) => { 
+    // this.leaveRequest.empId = this.selectedEmployee; 
+  this.postion=leave
+    console.log("postions  jkkgy",this.postion)
+    this.selectedPosition = this.getPositionName(this.postion.position)
+console.log("jkkgy",this.postion.position)
+this.selectedEmployeepostion=this.postion.position
+
+const selectedDivision=this.postion.divisionId 
+const division=this.divisions.find(division => division.divisionId === selectedDivision);
+console.log(selectedDivision)
+const selectedDepartment = this.departments.find(department => department.departmentId === division.departmentId)
+
+  this.selectedDepartment = selectedDepartment.departmentId;
+  this.selectedEmployeeDepartment=this.getDepartmentName(this.selectedDepartment )
+console.log("deppartment",  this.selectedEmployeeDepartment);
+
+const selectedPosition = this.selectedEmployeepostion;
+
+
+if (selectedPosition ) {
+  
+  //const selectedDivision = this.divisions.find(division => division.divisionId === selectedPosition.divisionId);
+
+console.log(this.assignedSupervisors)
+const selectedassignedSupervisor= this.assignedSupervisors.find(assignedSupervisor => assignedSupervisor.positionId === selectedPosition);
+console.log("Selected Position:", selectedPosition);
+console.log("Selected Assigned Supervisor:", selectedassignedSupervisor);
+
+if(selectedassignedSupervisor){
+this.selectedFirstSupervisor=selectedassignedSupervisor.firstSupervisor;
+
+}
+}
+   }, 
+  error: (response) => { 
+    console.log(response); 
+  } 
+}); 
+
+//const postion = this.employeePostions.find((balance) => balance.empId === this.selectedEmployee);
+
+
  
   } 
  
@@ -320,6 +354,7 @@ subscribe({
   // } 
  
   onFileSelected(event: any): void {
+    
     const file: File = event.target.files[0];
   
     if (file.type !== 'application/pdf') {
@@ -461,9 +496,11 @@ console.log(this.leaveRequest.employeePositionId)
     );
   }
   onemployeeselected() :void{
-    console.log( "emp",this.employeePostions)
+   
+ 
     const postion= this.employeePostions.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedPosition = this.getPositionName( postion.position)
+    console.log("pos",  this.selectedPosition);
     this.selectedEmployeepostion=postion.position
    
     const selectedDivision=postion.divisionId 

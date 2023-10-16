@@ -30,16 +30,19 @@ export class LeaveApprovalComponent {
   selectedEmployee: string='';
   employees:Employee[]=[];
 leaveApproved: boolean = false;
+leaveRejected: boolean = false;
 leaveRequests:LeaveRequest[]=[]; 
 downloadFileUrl: string=''; 
 divisions:Division[]= [];
   departments:Department[]=[];
    positions:Position[]= [];
    employeePosition:EmployeePosition;
+   employeePositions:EmployeePosition[]=[];
    
  leaveStatus:string="pendding";
  leaverejectStatus:string="Reject";
- supervisor:string="bc314c90-d887-4733-9583-08203986b1c9";
+ empId="17320a72-e4bd-46b9-894a-dfe5bf3d967c";
+ supervisor:string="";
   buttons = [ 
     { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
@@ -62,6 +65,7 @@ divisions:Division[]= [];
     private departmentservice: DepartmentService,
      private positionservice:PositionService ,
      private employeepositionservice:EmployeePositionService,
+     private employeepostionservice : EmployeePositionService,
 
   ) { }
 
@@ -71,6 +75,7 @@ divisions:Division[]= [];
     .subscribe({
       next: (positions) => {
         this.positions=positions;
+      
         
       },
       error(response){
@@ -106,17 +111,29 @@ divisions:Division[]= [];
   }
 });
 
+this.employeepostionservice.getEmployeePosition(this.empId)  
+.subscribe({  
+  next: (employeePostion) => { 
+    // this.leaveRequest.empId = this.selectedEmployee; 
+    this.supervisor=employeePostion.position
+   console.log( this.supervisor)
+   }, 
+  error: (response) => { 
+    console.log(response); 
+  } 
+}); 
+
 
     this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
       next: (leaveRequest) => {
         this.leavePenddings = leaveRequest
         ;
-        console.log(leaveRequest)
       },
       error: (response) => {
         console.log(response);
       }
     });
+  
 this.leavetypeservice.getAllLeaveType().
 subscribe({
   next: (leaveType) => {
@@ -153,28 +170,37 @@ subscribe({
 // });
 
 //   }
-  // getPosition(empId: string): string{
-    
 
-  //   this.employeepositionservice.getAllEmployeePosition()
-  //   .subscribe({
-  //     next: (employeePositions) => {
-  //       this.employeePosition = employeePositions.find(employeePositions => employeePositions.empId === empId);
+
+
+  getPosition(empId: string): string{
+
+    this.employeepositionservice.getAllEmployeePosition()
+    .subscribe({
+      next: (employeePositions) => {
+        this.employeePosition = employeePositions.find(employeePosition => employeePosition.empId === empId);
+      
             
-             
-  //     },
+      },
      
-  //   });
-  //   return this.employeePosition? this.getPositionName(this.employeePosition.position):'';
-  // }
-  getPosition(empId: string): Observable<string> {
-    return this.employeepositionservice.getAllEmployeePosition().pipe(
-      switchMap(employeePositions => {
-        const position = employeePositions.find(employeePosition => employeePosition.empId === empId);
-        return of(position ? this.getPositionName(position.position) : '');
-      })
-    );
+    }); 
+    const  positionId=this.employeePosition.position
+    const position = this.positions.find((position) => position.positionId === positionId);  
+    console.log('position  ',position.name)
+    return position ? position.name : '';
+
+   // return  this.employeePosition? this.employeePosition.position:" ";
   }
+  // getPosition(empId: string){
+  //   return this.employeepositionservice.getAllEmployeePosition().pipe(
+  //     switchMap(employeePositions => {
+  //       const position = employeePositions.find(employeePosition => employeePosition.empId === empId);
+  //   console.log(position.position)
+  //       return (position ? this.getPositionName(position.position) : 'no name');
+      
+  //     })
+  //   );
+  // }
   
   getDivisionName(divisionId: string): string {
     const division = this.divisions.find((division) => division.divisionId === divisionId);
@@ -184,11 +210,14 @@ subscribe({
     const department = this.departments.find((de) => de.departmentId === departmentId);
     return department ? department.description : '';
   }
+  employee:boolean;
+
   getPositionName(positionId: string): string {
 
     const position = this.positions.find((position) => position.positionId === positionId);  
-    
-    return position ? position.name : '';
+    console.log('position  ',position.name)
+    this.employee=true
+    return position ? position.name  : '';
   }
   openEmployeeDetailsModal(empId: string) {
     const dialogRef =this.dialog.open(EmployeeDetailsModalComponent,{
@@ -210,6 +239,7 @@ subscribe({
     // Call your service method to fetch the PDF file  
     console.log(leave.leaveRequestId)
     const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
+    console.log(leave.leaveRequestId)
     leaveRequestToEdit.leaveRequestId 
     
     this.leaveRequestservice.getLeaveRequestFile(leaveRequestToEdit.leaveRequestId) 
@@ -262,15 +292,15 @@ rejectleavePendding
 (leaveRequest: LeaveRequest){
     
   var leaveRequestId=leaveRequest.leaveRequestId
-  leaveRequest.leaveStatus="First-Approved"
+  leaveRequest.leaveStatus="Rejected"
  console.log(leaveRequest)
   this.leaveRequestservice
   .updateLeaveRequest(leaveRequest,leaveRequestId)
   .subscribe(() =>{
-    this.leaveApproved = true;
+    this.leaveRejected = true;
 console.log("updated")
       setTimeout(() => {
-        this.leaveApproved= false;
+        this.leaveRejected= false;
       }, 2000);
 
     

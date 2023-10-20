@@ -36,6 +36,8 @@ import { ActingAssigmentComponent } from './modules/acting-assigment/acting-assi
 import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/approvepromotion.component';
 import { EmployeeLeaveDetailComponent } from './modules/leave/employee-leave-detail/employee-leave-detail.component';
 import { HolidaysComponent } from './modules/Admin module/holidays/holidays.component';
+import { AttendanceComponent } from './modules/attendace/attendance/attendance.component';
+
 
 
 
@@ -69,7 +71,7 @@ import { HolidaysComponent } from './modules/Admin module/holidays/holidays.comp
  
       
     AppComponent, EmployeeLeaveDetailComponent, 
-    HolidaysComponent, 
+
   ],
   imports: [
     BrowserModule,

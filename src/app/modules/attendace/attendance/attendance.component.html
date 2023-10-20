@@ -1,0 +1,107 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+
+  
+            <div class="col-md-12">
+              <div class="card mt-5 mb-5">
+                  <div class="card">
+                      <div class="card-header ">
+                          <h4 class="card-title">Attendances</h4>
+                         
+                          <button class="btn " (click)="toggleAttendanceForm()">Register </button>
+                   
+                      </div>
+                        <form *ngIf="showAttendanceForm">
+                          <h6>Add Employee</h6>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-4 form-group">
+                              <mat-select class="select" placeholder="Select Employee" name="selectedEmployee" required [(ngModel)]="selectedEmployee">
+                                <mat-option *ngFor="let employee of employees" [value]="employee.empId">
+                                  {{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}
+                                </mat-option>
+                              </mat-select>
+                            </div>
+                           
+                            <div class="col-md-4 form-group">
+                            <div class="form-field">
+                              <input  id="region" placeholder=" " name="region" [(ngModel)]="selectedAttendanceId" (ngModelChange)="onEmployeeSelected()"type="text" required>
+                              <label for="region">AttendanceId</label>
+                            </div>
+                            </div>
+                  
+                          </div>
+                        </div>
+                        <button   class="btn btn-sm btnsave" type="submit"(click)="updateEmployee()">save</button>
+                          </form>
+                      <div class="card-body">
+                        <div>
+                          
+                           <h6>Upload File</h6>
+                            <input type="file" (change)="onFileSelected($event)" />
+                            <button  class="btn btn-sm btnsave" (click)="uploadFile()">Upload File</button>
+                          </div>
+                          <div *ngIf="uploadSuccessMessage">{{ uploadSuccessMessage }}</div>
+                          <div *ngIf="uploadErrorMessage">{{ uploadErrorMessage }}</div>
+                          
+
+              </div>
+          </div>
+          <!-- Attendance.component.html -->
+  <h6>Attendance info </h6>
+  <div>
+    <label for="fromDate">From Date:</label>
+    <input type="date" id="fromDate" [(ngModel)]="fromDate">
+    <label for="toDate">To Date:</label>
+    <input type="date" id="toDate" [(ngModel)]="toDate">
+    <button (click)="filterByDateRange()">Search</button>
+  </div>
+  <table  class="table table-bordered table-striped compact-table">
+    <thead>
+      <tr>
+  
+        <th>Employee Name</th>
+        <th>Attendance Id </th>
+        <th>Date</th>
+        <th>Time Table</th>
+        <th>On Duty</th>
+        <th>Off Duty</th>
+        <th>Clock In</th>
+        <th>Clock Out</th>
+        <th>NormalTime</th>
+        <th>RealTime</th>
+      
+        <th>Late</th>
+        <th>Early</th>
+        <th>Absent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through the Attendances and display each Attendance's information -->
+      <tr *ngFor="let at of filteredAttendances" >
+     
+        <td>{{ getEmployeeName(at.empId) }}</td>
+        <td>{{ at.attendanceId}}</td>
+        <td>{{ at.date| date:'yyyy-MM-dd' }}</td>
+        <td>{{ at.timeTable }}</td>
+        <td>{{ at.onDuty }}</td>
+             
+        <td>{{ at.offDuty }}</td>
+        <td>{{ at.clockIn }}</td>
+        <td>{{ at.clockOut }}</td>
+        <td>{{ at.normall }}</td>
+        <td>{{ at.realTime }}</td>
+        <td>{{ at.late }}</td>
+        <td>{{ at.earl }}</td>
+        <td>{{ at.absentDays }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+    </div>
+  </div>
+  </div>
+  
+  

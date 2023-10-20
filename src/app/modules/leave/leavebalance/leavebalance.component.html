@@ -58,6 +58,7 @@
           <th>Annual Remainig</th>
           <th>Previous Annual</th>
           <th>Previous Two Year</th>
+          <th>Postion</th>
          
          
   
@@ -73,6 +74,8 @@
           <td>{{ leaveBalance.annualRemainingBalance }}</td>
           <td>{{ leaveBalance.previousYearAnnualBalance }}</td>
           <td>{{ leaveBalance.previousTwoYear }}</td>
+         
+
           <td>      <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveBalance.empId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
             <mat-icon>edit</mat-icon>
           </button></td>

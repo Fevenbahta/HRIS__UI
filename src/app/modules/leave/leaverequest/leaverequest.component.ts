@@ -224,42 +224,42 @@ subscribe({
     const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId); 
     return leaveType ? leaveType.leaveTypeName : ''; 
   } 
-  // onFileSelected(event: any) { 
+  onFileSelected(event: any) { 
    
-  //   const file: File = event.target.files[0]; 
-  //   const reader = new FileReader(); 
-  //   reader.onload = () => { 
-  //       const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
-  //       this.leaveRequest.file = base64String; 
-  //   }; 
-  //   reader.readAsDataURL(file); 
-  // } 
+    const file: File = event.target.files[0]; 
+    const reader = new FileReader(); 
+    reader.onload = () => { 
+        const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
+        this.leaveRequest.file = base64String; 
+    }; 
+    reader.readAsDataURL(file); 
+  } 
  
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
+//   onFileSelected(event: any): void {
+//     const file: File = event.target.files[0];
   
-    if (file.type !== 'application/pdf') {
-      this.IsPdf=true;
-    console.error('Selected file is not a PDF.');
-   return;
-    }
+//     if (file.type !== 'application/pdf') {
+//       this.IsPdf=true;
+//     console.error('Selected file is not a PDF.');
+//    return;
+//     }
   
-    if (file.size > 200 * 1024 * 1024) {
-      this.IsBig=true;
- console.error('File size exceeds 200MB.');
-return;
-    }
-    this.IsPdf=false;
-    this.IsBig=false;
-    const reader = new FileReader();
+//     if (file.size > 200 * 1024 * 1024) {
+//       this.IsBig=true;
+//  console.error('File size exceeds 200MB.');
+// return;
+//     }
+//     this.IsPdf=false;
+//     this.IsBig=false;
+//     const reader = new FileReader();
   
-    reader.onload = () => {
-      const base64String = reader.result.toString().split(',')[1];
-      this.leaveRequest.file = file.name;
+//     reader.onload = () => {
+//       const base64String = reader.result.toString().split(',')[1];
+//       this.leaveRequest.file = base64String;
    
-    };
-    reader.readAsDataURL(file);
-  }
+//     };
+//     reader.readAsDataURL(file);
+//   }
   
   addleaveRequest() { 
  

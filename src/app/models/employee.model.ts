@@ -29,6 +29,7 @@ export interface Employee{
     imageData: String, 
     crime: Boolean, 
     crimeDescription: String ,
+    attendanceId:string,
   
     status:number;
 }

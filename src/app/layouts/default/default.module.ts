@@ -88,6 +88,7 @@ import { ActingAssigmentComponent } from 'app/modules/acting-assigment/acting-as
 import { ApprovepromotionComponent } from 'app/modules/Promotion/approvepromotion/approvepromotion.component';
 import { HolidaysComponent } from 'app/modules/Admin module/holidays/holidays.component';
 import { EditLeaveBalanceModalComponent } from 'app/modules/leave/edit-leave-balance-modal/edit-leave-balance-modal.component';
+import { AttendanceComponent } from 'app/modules/attendace/attendance/attendance.component';
 
 
 
@@ -148,7 +149,9 @@ VacancyComponent,
 PromotionhistoryComponent,
 ActingAssigmentComponent,
 ApprovepromotionComponent,
-EditLeaveBalanceModalComponent
+EditLeaveBalanceModalComponent,
+HolidaysComponent,
+AttendanceComponent,
 
   ],
 

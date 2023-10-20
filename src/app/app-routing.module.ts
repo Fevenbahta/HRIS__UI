@@ -47,6 +47,8 @@ import { VacancyComponent } from './modules/Promotion/vacancy/vacancy.component'
 import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/approvepromotion.component';
 import { AdminLeaverequestComponent } from './modules/leave/admin-leaverequest/admin-leaverequest.component';
 import { HolidaysComponent } from './modules/Admin module/holidays/holidays.component';
+import { AttendanceComponent } from './modules/attendace/attendance/attendance.component';
+
 
 const routes: Routes = [
   {path: '',
@@ -147,7 +149,10 @@ component:VacancyComponent},
 component:ApprovepromotionComponent},
 {path:'holiday',
 component:HolidaysComponent},
+{path:'attendance',
+component:AttendanceComponent},
 ]
+
 }]
 
 

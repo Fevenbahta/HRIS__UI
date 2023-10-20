@@ -89,6 +89,7 @@ export class EmployeeRegistrationComponent implements OnInit {
       imageData: [''], 
       crime: [false], 
       crimeDescription: [''], 
+      attendanceId:undefined,
      
       status: [0,] 
     }); 
@@ -192,6 +193,7 @@ validateJoinDate(control: AbstractControl): { [key: string]: boolean } | null {
       imageData: [''], 
       crime: [false], 
       crimeDescription: [''], 
+      attendanceId:undefined,
      
       status: [0,] 
     }); 
@@ -361,7 +363,7 @@ validateAllFormFields(formGroup: FormGroup) {
             imageData: [''], 
             crime: [false], 
             crimeDescription: [''], 
-           
+            attendanceId:undefined,
             status: [0,] 
           }); 
 

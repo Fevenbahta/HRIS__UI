@@ -4,7 +4,7 @@
 
   
             <div class="col-md-12">
-              <div class="card mt-5 mb-5">
+              <div class=" mt-5 mb-5">
                   <div class="card">
                       <div class="card-header ">
                           <h4 class="card-title">Attendances</h4>
@@ -12,7 +12,8 @@
                           <button class="btn " (click)="toggleAttendanceForm()">Register </button>
                    
                       </div>
-                        <form *ngIf="showAttendanceForm">
+                        <form class="ml-5" *ngIf="showAttendanceForm">
+                          <div class="card ml-5 col-md-6">
                           <h6>Add Employee</h6>
                         <div class="card-body">
                           <div class="row">
@@ -33,7 +34,8 @@
                   
                           </div>
                         </div>
-                        <button   class="btn btn-sm btnsave" type="submit"(click)="updateEmployee()">save</button>
+                       <div> <button   class="btn btn-sm btnsave" type="submit"(click)="updateEmployee()">save</button>
+                       </div> </div>
                           </form>
                       <div class="card-body">
                         <div>

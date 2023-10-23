@@ -118,6 +118,7 @@
                   <mat-option value="married">Married</mat-option>
                   <mat-option value="single">Single</mat-option>
                   <mat-option value="divorce">Divorced</mat-option>
+                  <mat-option value="divorce">Window</mat-option>
                  
                 </mat-select>
                 <mat-error *ngIf="employeeForm.get('martialStatus').invalid && employeeForm.get('martialStatus').touched">
@@ -191,7 +192,7 @@
                 Successfully Added!
               </div>
 
-              <button  type="submit" *ngIf="edit==true" class="btn btn-sm pull-left btnsave" >  <mat-icon>add</mat-icon>update</button>
+              <button  *ngIf="edit==true" class="btn btn-sm pull-left btnsave" (click)="updateEmployee()">  <mat-icon>add</mat-icon>update</button>
               <div *ngIf="employeeUpdated" class="alert btndanger btn-sm pull-right">
                 Successfully Updated!
               </div>

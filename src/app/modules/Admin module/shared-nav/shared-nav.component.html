@@ -4,11 +4,11 @@
     <div class="container-fluid mt-4">
       <ul class="horizontal-list d-flex align-items-center list-unstyled">
         <li *ngFor="let button of buttons" class="nav-item" [ngClass]="{'mat-dropdown': button.dropdownOptions}">
-          <button mat-button [matMenuTriggerFor]="menu" *ngIf="button.dropdownOptions" class="mat-dropdown-button btn btn-gray btn-sm ml-5">
-            <span>{{ button.label }}</span> <span class="spans"><mat-icon class="dropdown-icon">arrow_drop_down</mat-icon>  </span>     
-          </button>  
+          <a mat-button [matMenuTriggerFor]="menu" class=" btn btn-gray  btn-sm ml-5"  *ngIf="button.dropdownOptions">
+            <span>{{ button.label }}</span> <span class=""><mat-icon class="">arrow_drop_down</mat-icon>  </span>     
+          </a>  
           <mat-menu #menu="matMenu" class="mat-dropdown-menu">
-            <button mat-menu-item *ngFor="let subButton of button.dropdownOptions" [routerLink]="subButton.route">{{ subButton.label }}</button>
+            <a mat-menu-item *ngFor="let subButton of button.dropdownOptions" [routerLink]="subButton.route">{{ subButton.label }}</a>
    </mat-menu>
           <a *ngIf="!button.dropdownOptions" [routerLink]="button.route" class="btn btn-gray btn-sm ml-5">{{ button.label }}</a>
           

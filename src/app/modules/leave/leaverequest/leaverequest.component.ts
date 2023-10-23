@@ -68,7 +68,11 @@ function dateRangeValidator(selectedLeaveBalance: number): ValidatorFn {
   styleUrls: ['./leaverequest.component.scss'] 
 }) 
 export class LeaverequestComponent { 
+  showLeaveForm: boolean = false;
+  currentSupervisorPosition:string
+  currentEmployee:string='17320a72-e4bd-46b9-894a-dfe5bf3d967c';
   leaveRequestForm: FormGroup;
+  positionsOfSupervisor:string[]=[]
   departments:Department[]=[]
   selectedEmployeeDepartment:string;
   leaveRequests:LeaveRequest[]=[]; 
@@ -89,6 +93,9 @@ export class LeaverequestComponent {
   leaveRequestSaved: boolean = false; 
   leaveRequestUpdated: boolean = false; 
   employees:Employee[]=[]; 
+  supervisorPositions:AssignSupervisor[]=[]
+  supervisorEmployees:Employee[]=[]; 
+  supervisoremployees:EmployeePosition[]=[]
   otherLeaveBalances:OtherLeaveBalance[]=[] 
   selectedOtherLeaveBalance:number=0 
   fileType: string = 'other'; // Initialize as 'other' by default 
@@ -138,7 +145,7 @@ export class LeaverequestComponent {
     approvedBy:'', 
     approvedDate:'', 
     reason: '', 
-    file:null, 
+    file:"", 
     employeePositionId:'',
     workingDays: null, 
     sickStartDate: "2023-07-26T06:13:52.512Z", 
@@ -199,9 +206,9 @@ this.departmentService.getAllDepartment()
   }
 });
             console.log(this.selectedEmployee )
-    this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
+    this.leaveRequestservice.getAllLeaveRequest().subscribe({ 
       next: (leaveRequestd) => { 
-        this.leaveRequests = leaveRequestd; 
+        this.leaveRequests = leaveRequestd.filter(leave=>leave.createdBy==this.currentEmployee); 
          
 
       }, 
@@ -223,24 +230,73 @@ this.departmentService.getAllDepartment()
     this.assignSupervisorService.getAllAssignSupervisor()
 .subscribe({
   next: (assignedSupervisors) => {
-    this.assignedSupervisors=assignedSupervisors;
+
+
+
+    this.employeepostionservice.getAllEmployeePosition()  
+.subscribe({  
+  next: (employeePostions) => { 
+    // this.leaveRequest.empId = this.selectedEmployee; 
+   
+    const supervisoremployeePostions=employeePostions.find(emp=>emp.empId === this.currentEmployee)
+console.log("s",supervisoremployeePostions)
+    this.currentSupervisorPosition=supervisoremployeePostions.position
+    console.log("spostion", this.currentSupervisorPosition)
+
     
+    this.assignedSupervisors=assignedSupervisors;
+     this.supervisorPositions=assignedSupervisors.filter(sup=>sup.firstSupervisor===this.currentSupervisorPosition)
+    console.log("list of pos",assignedSupervisors)
+   console.log("sec list of pos",this.currentSupervisorPosition)
+
+   console.log("supervisorpostion",this.supervisorPositions)
+  //this.positionsOfSupervisor=this.supervisorPositions.positionId;
+    //console.log("sup pos",this.positionsOfSupervisor)
+    this.employeePostions=employeePostions 
+  this.supervisorPositions.forEach(element => {
+      this.supervisoremployees=employeePostions.filter(emp=>emp.position === element.positionId)
+   
+      console.log(" employees", this.supervisoremployees)
+
+     
+});
+    
+
+   this.employeeService.getAllEmployees()  
+   .subscribe({  
+     next: (employees) => { 
+       // this.leaveRequest.empId = this.selectedEmployee; 
+       this.employees=employees 
+       this.supervisoremployees.forEach(element=> {
+      const sup=employees.find(emp => emp.empId === element.empId);
+       this.supervisorEmployees.push(sup)
+
+
+       
+       }); console.log(" suvemp", this.supervisorEmployees)
+           }, 
+     error: (response) => { 
+       console.log(response); 
+     } 
+   }); 
+   
+   
+
+ 
+   }, 
+  error: (response) => { 
+    console.log(response); 
+  } 
+}); 
+
+
   },
   error(response){
     console.log(response)
   }
 });
      
-    this.employeeService.getAllEmployees()  
-.subscribe({  
-  next: (employees) => { 
-    // this.leaveRequest.empId = this.selectedEmployee; 
-    this.employees=employees 
-   }, 
-  error: (response) => { 
-    console.log(response); 
-  } 
-}); 
+  
 this.leaveBalanceService.getAllLeaveBalance()  
 .subscribe({  
   next: (leaveBalances) => { 
@@ -252,17 +308,7 @@ this.leaveBalanceService.getAllLeaveBalance()
     console.log(response); 
   } 
 }); 
-this.employeepostionservice.getAllEmployeePosition()  
-.subscribe({  
-  next: (leaveBalances) => { 
-    // this.leaveRequest.empId = this.selectedEmployee; 
-    this.employeePostions=leaveBalances 
- 
-   }, 
-  error: (response) => { 
-    console.log(response); 
-  } 
-}); 
+
 this.otherLeaveBalanceService.getAllOtherLeaveBalance()  
 .subscribe({  
   next: (otherLeaveBalance) => { 
@@ -349,6 +395,7 @@ return;
 
     this.leaveRequest.leaveTypeId = this.selectedLeaveType; 
     this.leaveRequest.empId = this.selectedEmployee;
+    this.leaveRequest.createdBy=this.currentEmployee;
     
     this.leaveRequest.employeePositionId = this.selectedEmployeepostion; 
     this.leaveRequest.departmentId=this.selectedDepartment
@@ -389,8 +436,7 @@ console.log(this.leaveRequest.employeePositionId)
         }, 2000); 
         this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
           next: (leaveRequestd) => { 
-            this.leaveRequests = leaveRequestd; 
-             
+            this.leaveRequests = leaveRequestd.filter(leave=>leave.createdBy==this.currentEmployee); 
            
           }, 
           error: (response) => { 
@@ -419,7 +465,7 @@ console.log(this.leaveRequest.employeePositionId)
     approvedBy:'', 
     approvedDate:'', 
     reason: '', 
-    file: null, 
+    file: "", 
     employeePositionId:'',
     workingDays: null, 
     sickStartDate: "2023-07-26T06:13:52.512Z", 
@@ -586,6 +632,7 @@ availableLeaveBalance(): void {
     // this.leaveRequest.updatedDate=new Date().toISOString();
     // if(this.leaveRequest.endDate < this.leaveRequest.updatedDate ){ 
       this.leaveRequest.supervisor=this.selectedFirstSupervisor;
+      this.leaveRequest.createdBy=this.currentEmployee;
    this.leaveRequest.leaveStatus='Pendding' 
     this.leaveRequest.leaveTypeId = this.selectedLeaveType; 
     this.leaveRequest.employeePositionId = this.selectedEmployeepostion; 
@@ -611,7 +658,7 @@ this.leaveRequest.endDate = selectedEndDate;
          
         this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
       next: (leaveRequestd) => { 
-        this.leaveRequests = leaveRequestd; 
+        this.leaveRequests = leaveRequestd.filter(leave=>leave.createdBy==this.currentEmployee); 
          
        
       }, 
@@ -691,7 +738,9 @@ LeaveRequest): void {
       } 
     }); 
   } 
- 
+  toggleLeaveForm() {
+    this.showLeaveForm = !this.showLeaveForm;
+  }
  
   deleteleaveRequest(leaveRequest: LeaveRequest): void { 
     const dialogRef = this.dialog.open(DeleteConfirmationComponent); 

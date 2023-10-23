@@ -18,12 +18,16 @@
   .header {
     padding: 10px;
   }
-  
+  .btn{
+    border:none  }
   .btn-gray {
-    color: #333;
-    background-color: #eee;
-    border: 1px solid #ccc;
+    background-color:#fdfdfd;
+
   }
+  .btn:hover{
+     box-shadow: black;
+  }
+  
   
   .mat-dropdown-button {
     color: #333;
@@ -71,12 +75,7 @@
     padding: 10px;
   }
   
-  .btn-gray {
-    color: #333;
-    background-color: #eee;
-    border: 1px solid #ccc;
-  }
-  
+
   .mat-dropdown-button {
     color: #333;
     background-color: #eee;

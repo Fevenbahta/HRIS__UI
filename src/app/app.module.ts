@@ -34,10 +34,11 @@ import { PromotionhistoryComponent } from './modules/Promotion/promotionhistory/
 import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/vacancymanagment.component';
 import { ActingAssigmentComponent } from './modules/acting-assigment/acting-assigment.component';
 import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/approvepromotion.component';
-import { EmployeeLeaveDetailComponent } from './modules/leave/employee-leave-detail/employee-leave-detail.component';
+
 import { HolidaysComponent } from './modules/Admin module/holidays/holidays.component';
 import { AttendanceComponent } from './modules/attendace/attendance/attendance.component';
 
+import { EditOtherLeaveBalanceComponent } from './modules/leave/edit-other-leave-balance/edit-other-leave-balance.component';
 
 
 
@@ -47,30 +48,12 @@ import { AttendanceComponent } from './modules/attendace/attendance/attendance.c
 @NgModule({
   declarations: [
     AppComponent,
-    
-
-
-
-   
-   
- 
- 
-
-
-   
   
-
-
-
-
-    
-
-  
-
-
  
-      
-    AppComponent, EmployeeLeaveDetailComponent, 
+
+    AppComponent,  
+
+
 
   ],
   imports: [

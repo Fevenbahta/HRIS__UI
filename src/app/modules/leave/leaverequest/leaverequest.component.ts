@@ -72,7 +72,7 @@ export class LeaverequestComponent {
   leaveName: string='' 
   downloadFileUrl: string=''; 
   pdfUrl:string='' 
-  selectedEmployee: string='b1db0e8d-3941-4db9-945c-322d7ff2e317'; 
+  selectedEmployee: string='b6c5a662-34e3-4acf-845e-b9524dceaf14'; 
   leaveRequestSaved: boolean = false; 
   leaveRequestUpdated: boolean = false; 
   employees:Employee[]=[]; 
@@ -84,6 +84,9 @@ export class LeaverequestComponent {
   IsBig:boolean = false;
   FileNull:boolean = false;
   id:string;
+  selectedFullPay:number;
+  selectedHalfPay:number;
+  selectedWoPay:number;
   buttons = [  
     { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
@@ -100,7 +103,7 @@ export class LeaverequestComponent {
     updatedDate: "2023-07-26T06:13:52.512Z", 
     updatedBy: "", 
     status: 0, 
-    empId:'b1db0e8d-3941-4db9-945c-322d7ff2e317', 
+    empId:'b6c5a662-34e3-4acf-845e-b9524dceaf14', 
     startDate: null, 
     endDate: null, 
     leaveTypeId: '', 
@@ -144,12 +147,12 @@ export class LeaverequestComponent {
   
  
   ngOnInit(): void { 
-     
+            console.log(this.selectedEmployee )
     this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
       next: (leaveRequestd) => { 
         this.leaveRequests = leaveRequestd; 
          
-       
+
       }, 
       error: (response) => { 
         console.log(response); 
@@ -296,10 +299,11 @@ subscribe({
         setTimeout(() => { 
           this.leaveRequestSaved = false; 
         }, 2000); 
-        this.leaveRequestservice.getAllLeaveRequest().subscribe({ 
-          next: (leaveRequests) => { 
-         
-            ; 
+        this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
+          next: (leaveRequestd) => { 
+            this.leaveRequests = leaveRequestd; 
+             
+           
           }, 
           error: (response) => { 
             console.log(response); 
@@ -319,7 +323,7 @@ subscribe({
     updatedDate: "2023-07-26T06:13:52.512Z", 
     updatedBy: "", 
     status: 0, 
-    empId:'b1db0e8d-3941-4db9-945c-322d7ff2e317', 
+    empId:'b6c5a662-34e3-4acf-845e-b9524dceaf14', 
     startDate: null, 
     endDate: null, 
     leaveTypeId: '', 
@@ -387,6 +391,11 @@ availableLeaveBalance(): void {
     { 
      const selectedBalance= this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.sickRemainingBalance; 
+    this.selectedFullPay=selectedBalance.sickRemainingBalance-150;
+    this.selectedHalfPay=this.selectedLeaveBalance-this.selectedFullPay-90;
+    this.selectedWoPay=  this.selectedLeaveBalance-this.selectedFullPay-this.selectedHalfPay;
+
+
     } 
     if( this.leaveName === "Maternal") 
     { 
@@ -488,7 +497,7 @@ this.leaveRequest.endDate = selectedEndDate;
       updatedDate: "2023-07-26T06:13:52.512Z", 
       updatedBy: "", 
       status: 0, 
-      empId:'b1db0e8d-3941-4db9-945c-322d7ff2e317', 
+      empId:'b6c5a662-34e3-4acf-845e-b9524dceaf14', 
       startDate: null, 
       endDate: null, 
       leaveTypeId: '', 

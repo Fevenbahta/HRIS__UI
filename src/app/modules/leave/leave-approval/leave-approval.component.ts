@@ -10,6 +10,13 @@ import { EmployeeService } from 'app/service/employee.service';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { LeaveTypeService } from 'app/service/leaveType.service';
 import { EmployeeDetailsModalComponent } from '../employee-details-modal/employee-details-modal.component';
+import { DivisionService } from 'app/service/division.service';
+import { DepartmentService } from 'app/service/department.service';
+import { PositionService } from 'app/service/position.service';
+import { Division, EmployeePosition, Position } from 'app/models/job-description.model';
+import { Department } from 'app/models/education.model';
+import { EmployeePositionService } from 'app/service/employee-position';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-leave-approval',
@@ -25,6 +32,11 @@ export class LeaveApprovalComponent {
 leaveApproved: boolean = false;
 leaveRequests:LeaveRequest[]=[]; 
 downloadFileUrl: string=''; 
+divisions:Division[]= [];
+  departments:Department[]=[];
+   positions:Position[]= [];
+   employeePosition:EmployeePosition;
+   
  leaveStatus:string="pendding";
  supervisor:string="bc314c90-d887-4733-9583-08203986b1c9";
   buttons = [ 
@@ -44,9 +56,43 @@ downloadFileUrl: string='';
     private leavetypeservice: LeaveTypeService,
     private employeeIdService: EmployeeIdService,
     private dialog: MatDialog,
+    private divisionservice: DivisionService,
+    private departmentservice: DepartmentService,
+     private positionservice:PositionService ,
+     private employeepositionservice:EmployeePositionService,
+
   ) { }
 
   ngOnInit(): void {
+
+    this.positionservice.getAllPosition()
+    .subscribe({
+      next: (positions) => {
+        this.positions=positions;
+        
+      },
+      error(response){
+        console.log(response)
+      }
+    });
+    this.divisionservice.getAllDivisions()
+    .subscribe({
+      next: (division) => {
+        this.divisions=division;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
+    this.departmentservice.getAllDepartment()
+    .subscribe({
+      next: (department) => {
+        this.departments=department;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
     this.employeeService.getAllEmployees() 
 .subscribe({ 
   next: (employees) => {
@@ -57,6 +103,7 @@ downloadFileUrl: string='';
     console.log(response);
   }
 });
+
 
     this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
       next: (leaveRequest) => {
@@ -90,6 +137,56 @@ subscribe({
     console.log(response);
   }
 });  
+  }
+//   getPosition(empId:string){
+
+//     this.employeepositionservice.getEmployeePosition(empId) 
+//   .subscribe({ 
+//     next: (employeepositions) => { 
+//       var position = employeepositions.position; 
+//      console.log(this.getPositionName(position))
+//       return  this.getPositionName(position);
+//           }, 
+
+// });
+
+//   }
+  // getPosition(empId: string): string{
+    
+
+  //   this.employeepositionservice.getAllEmployeePosition()
+  //   .subscribe({
+  //     next: (employeePositions) => {
+  //       this.employeePosition = employeePositions.find(employeePositions => employeePositions.empId === empId);
+            
+             
+  //     },
+     
+  //   });
+  //   return this.employeePosition? this.getPositionName(this.employeePosition.position):'';
+  // }
+  getPosition(empId: string): Observable<string> {
+    return this.employeepositionservice.getAllEmployeePosition().pipe(
+      switchMap(employeePositions => {
+        const position = employeePositions.find(employeePosition => employeePosition.empId === empId);
+        return of(position ? this.getPositionName(position.position) : '');
+      })
+    );
+  }
+  
+  getDivisionName(divisionId: string): string {
+    const division = this.divisions.find((division) => division.divisionId === divisionId);
+    return division ? division.description : '';
+  }
+  getDepartmentName(departmentId: string): string {
+    const department = this.departments.find((de) => de.departmentId === departmentId);
+    return department ? department.description : '';
+  }
+  getPositionName(positionId: string): string {
+
+    const position = this.positions.find((position) => position.positionId === positionId);  
+    
+    return position ? position.name : '';
   }
   openEmployeeDetailsModal(empId: string) {
     const dialogRef =this.dialog.open(EmployeeDetailsModalComponent,{

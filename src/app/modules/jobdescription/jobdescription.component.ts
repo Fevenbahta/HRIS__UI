@@ -85,10 +85,11 @@ updatedBy: '',
 constructor(
   private divisionservice: DivisionService,
   private departmentservice: DepartmentService,
-  private stepservice: StepService,
+   private positionservice:PositionService ,
+    private stepservice: StepService,
   private branchservice: BranchService,
   private employeepositionservice:EmployeePositionService,
-  private positionservice:PositionService ,
+
   private employeeIdService:EmployeeIdService,
   private levelService: GradeService,
   private dialog: MatDialog,
@@ -96,6 +97,16 @@ constructor(
 
   private router:Router){}
 ngOnInit(): void{
+  this.positionservice.getAllPosition()
+.subscribe({
+  next: (positions) => {
+    this.positions=positions;
+    
+  },
+  error(response){
+    console.log(response)
+  }
+});
 this.divisionservice.getAllDivisions()
 .subscribe({
   next: (division) => {
@@ -133,16 +144,7 @@ this.employeepositionservice.getAllEmployeePosition()
     console.log(response)
   }
 });
-this.positionservice.getAllPosition()
-.subscribe({
-  next: (positions) => {
-    this.positions=positions;
-    
-  },
-  error(response){
-    console.log(response)
-  }
-});
+
 this.assignSupervisorService.getAllAssignSupervisor()
 .subscribe({
   next: (assignedSupervisors) => {
@@ -337,7 +339,10 @@ if(selectedassignedSupervisor){
     const division = this.divisions.find((division) => division.divisionId === divisionId);
     return division ? division.description : '';
   }
-
+  getPositionName(positionId: string): string {
+    const position = this.positions.find((position) => position.positionId === positionId);
+    return position ? position.name : '';
+  }
   getStepName(stepId: string): string {
     const step = this.steps.find((step) => step.id === stepId);
     return step ? step.description : '';
@@ -347,10 +352,7 @@ if(selectedassignedSupervisor){
     const branch = this.branches.find((branch) => branch.id === branchId);
     return branch ? branch.name : '';
   }
-  getPositionName(positionId: string): string {
-    const position = this.positions.find((position) => position.positionId === positionId);
-    return position ? position.name : '';
-  }
+
   editEmployeePosition(employeePosition: EmployeePosition): void {
  
     const contactToEdit = this.employeepositions.find(employeePosition => employeePosition.id === employeePosition.id);

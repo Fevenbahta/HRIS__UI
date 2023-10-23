@@ -1,8 +1,8 @@
 <div class="modal">
 <div class="modal-content">
     <h2>Edit Leave Balance</h2>
-    
-    
+
+
     <form (ngSubmit)="saveEditedData(leaveBalance.empId,leaveBalance)"  *ngFor="let leaveBalance of selectedEmployeeLeaveBalance">
       <!-- Display editable fields for the leave balance data -->
      
@@ -46,6 +46,9 @@
           {{ successMessage }}
         </div> 
       
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
         <button type="submit" class="btn btnedit">Save</button>
         <button type="button" class="btn btn-secondary" (click)="onCancelClick()">Cancel</button>
        

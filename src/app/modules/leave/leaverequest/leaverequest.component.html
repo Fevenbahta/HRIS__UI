@@ -37,7 +37,13 @@
               <label *ngIf="leaveName === 'Annual' && selectedPreviousYear>0 ">Previous 2 Balance</label>
               <input *ngIf="leaveName === 'Annual' && selectedPreviousYear>0 " class="form-control"  name="selectedTwoPerviousYear" required [(ngModel)]="selectedTwoPerviousYear" [disabled]="true">
              
-
+              <label *ngIf="leaveName === 'Sick'">Sick Full Pay</label>
+              <input class="form-control" *ngIf="leaveName === 'Sick'" name="selectedFullPay" required [(ngModel)]="selectedFullPay" [disabled]="true">
+              <label *ngIf="leaveName === 'Sick' ">Sick Half Pay</label>
+              <input *ngIf="leaveName === 'Sick'  " class="form-control"  name="selectedHalfPay" required [(ngModel)]="selectedHalfPay" [disabled]="true">
+              <label *ngIf="leaveName === 'Sick' ">Sick With out Pay</label>
+              <input *ngIf="leaveName === 'Sick'  " class="form-control"  name="selectedWoPay" required [(ngModel)]="selectedWoPay" [disabled]="true">
+             
 
             
             </div>

@@ -13,6 +13,8 @@ import { EditLeaveBalanceModalComponent } from '../edit-leave-balance-modal/edit
 import { PositionService } from 'app/service/position.service';
 import { EmployeePosition, Position } from 'app/models/job-description.model';
 import { EmployeePositionService } from 'app/service/employee-position';
+import { EditOtherLeaveBalanceComponent } from '../edit-other-leave-balance/edit-other-leave-balance.component';
+
 @Component({
   selector: 'app-leavebalance',
   templateUrl: './leavebalance.component.html',
@@ -216,7 +218,7 @@ previousTwoYear:this.leaveBalance.previousTwoYear,
 
 totalRemaining: this.leaveBalance.totalRemaining,
 totalRequest: this.leaveBalance.totalRequest,
-UnusedDays:0,
+UnusedDays:0
 
     };
 
@@ -274,7 +276,7 @@ UnusedDays:0,
     abortionLeaveRemainingBalance: this.otherleaveBalance.abortionLeaveRemainingBalance,
     sickEndDate: this.otherleaveBalance.sickEndDate,
     sickStartDate: this.otherleaveBalance.sickStartDate,
-    
+  
   };
 
   this.otherleaveBalanceService.addOtherLeaveBalance(newotherLeaveBalance).subscribe({
@@ -392,6 +394,19 @@ onSearch() {
   }  
   openLeaveDetailsModal(empId: string) {
     const dialogRef =this.dialog.open(EditLeaveBalanceModalComponent)
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'refresh') {
+        // Perform the refresh action here
+        window.location.reload();
+      }  })
+  
+    dialogRef.componentInstance.openModal(empId)
+  
+    
+  }
+  openOtherLeaveDetailsModal(empId: string) {
+    const dialogRef =this.dialog.open(EditOtherLeaveBalanceComponent)
     
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'refresh') {

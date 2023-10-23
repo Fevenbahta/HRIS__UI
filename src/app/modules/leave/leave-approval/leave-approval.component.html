@@ -25,7 +25,7 @@
                       <th>Start Date</th>
                       <th>End Date</th>
                       <th>Status</th>
-                  
+                      <th>Position</th> 
                    
                     </tr>
                   </thead>
@@ -37,6 +37,8 @@
                       <td>{{ Pending.startDate| date:'yyyy-MM-dd' }}</td>
                       <td>{{ Pending.endDate| date:'yyyy-MM-dd' }}</td>
                       <td>{{ Pending.leaveStatus }}</td>
+                      <td>{{ getPosition(Pending.empId) | async }}</td>
+
                       <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Pending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                         style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
                         <mat-icon>get_app</mat-icon></button></td>

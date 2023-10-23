@@ -89,7 +89,7 @@ import { ApprovepromotionComponent } from 'app/modules/Promotion/approvepromotio
 import { HolidaysComponent } from 'app/modules/Admin module/holidays/holidays.component';
 import { EditLeaveBalanceModalComponent } from 'app/modules/leave/edit-leave-balance-modal/edit-leave-balance-modal.component';
 import { AttendanceComponent } from 'app/modules/attendace/attendance/attendance.component';
-
+import { EditOtherLeaveBalanceComponent } from 'app/modules/leave/edit-other-leave-balance/edit-other-leave-balance.component';
 
 
 
@@ -153,6 +153,7 @@ EditLeaveBalanceModalComponent,
 HolidaysComponent,
 AttendanceComponent,
 
+EditOtherLeaveBalanceComponent, 
   ],
 
   imports: [

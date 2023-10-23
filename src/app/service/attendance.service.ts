@@ -18,27 +18,27 @@ export class AttendanceService {
   constructor(private http: HttpClient,private apiUrlService: ApiUrlService) { }
 
   getAllAttendance(): Observable<Attendance[]> {
-    return this.http.get<Attendance[]>(this.apiUrlService.apiUrl + 'api/Attendance');
+    return this.http.get<Attendance[]>(this.apiUrlService.apiUrl + 'Attendance');
   }
   getAttendance(id:number): Observable<Attendance> {
-    return this.http.get<Attendance>(this.apiUrlService.apiUrl + 'api/Attendance/'+id);
+    return this.http.get<Attendance>(this.apiUrlService.apiUrl + 'Attendance/'+id);
   }
 
   importAttendance(file: File) {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
 
-    return this.http.post(this.apiUrlService.apiUrl + 'api/Attendance/import', formData);
+    return this.http.post(this.apiUrlService.apiUrl + 'Attendance/import', formData);
   } 
 
   updateAttendance(AttendanceDetails:Employee, Id:string): Observable<Employee> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Employee>(this.apiUrlService.apiUrl + 'api/Attendance/'+Id, AttendanceDetails,httpOptions);
+    return this.http.put<Employee>(this.apiUrlService.apiUrl + 'Attendance/'+Id, AttendanceDetails,httpOptions);
   }
 
   deleteAttendance(Id: string): Observable<string> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<string>(this.apiUrlService.apiUrl + 'api/Attendance/' + Id, httpOptions);
+    return this.http.delete<string>(this.apiUrlService.apiUrl + 'Attendance/' + Id, httpOptions);
   }
 
   

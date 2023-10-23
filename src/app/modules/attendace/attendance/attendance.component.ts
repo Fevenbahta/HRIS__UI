@@ -57,7 +57,7 @@ this.attendanceService.getAllAttendance().subscribe({
         createdDate:  "2023-07-25T09:28:33.440Z", 
         updatedDate: "2023-07-25T09:28:33.440Z", 
         updatedBy: 'string', 
-        empId: "9077603c-0a6b-40ce-9dc7-0b822af3ccb2", // You can add any specific validation rule here, like Validators.required 
+        empId: "635f3d70-cf5e-49b7-8c2b-9fe69fd3f970", // You can add any specific validation rule here, like Validators.required 
         ecxId: 'ecx/pi', 
         adId: 'ad/pi', 
         firstName:'', 
@@ -123,6 +123,7 @@ this.attendanceService.getAllAttendance().subscribe({
     
     this.employee=employees;
     this.employee.attendanceId=this.selectedAttendanceId
+    
   
   }})
     }
@@ -156,7 +157,8 @@ this.attendanceService.getAllAttendance().subscribe({
 
 
   updateEmployee(): void {
-
+console.log(this.employee)
+console.log(this.selectedEmployee)
     this.attendanceService.updateAttendance(this.employee,this.selectedEmployee )
     .subscribe({
     

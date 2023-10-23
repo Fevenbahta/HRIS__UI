@@ -15,7 +15,7 @@ export interface LeaveRequest{
   startDate:Date,
   endDate: Date,
   approvedBy: string,
-  approvedDate:string,
+  approveDate:string,
   leaveStatus:string,
   reason: string,
   file: string,

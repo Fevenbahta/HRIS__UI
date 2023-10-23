@@ -41,7 +41,7 @@
                       <td>{{ Pend.endDate| date:'yyyy-MM-dd' }}</td> 
                       <td>{{ Pend.leaveStatus }}</td>
                        <td >{{getPositionName(Pend.employeePositionId)}}</td>
-                       <td >{{getDepartmentName(Pend.file)}}</td>
+                       <td >{{getDepartmentName(Pend.departmentId)}}</td>
                       <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Pend)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                         style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
                         <mat-icon>get_app</mat-icon></button></td>

@@ -163,7 +163,7 @@
                     <td>{{ leaveRequest.endDate | date:'yyyy-MM-dd' }}</td>
                     <td>{{ leaveRequest.leaveStatus }}</td>
                     <td>{{ leaveRequest.approvedBy }}</td>
-                    <td>{{ leaveRequest.approvedDate | date:'yyyy-MM-dd' }}</td>
+                    <td>{{ leaveRequest.approveDate | date:'yyyy-MM-dd' }}</td>
                   
                     <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveRequest.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                       <mat-icon>info</mat-icon> 

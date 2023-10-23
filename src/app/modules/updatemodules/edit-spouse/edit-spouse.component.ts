@@ -56,7 +56,7 @@ export class EditSpouseComponent implements OnInit {
     .subscribe({ 
       next: (spouse) => { 
         this.spouses = spouse.filter(spouse => spouse.empId === this.employeeIdService.employeeId);
-
+console.log(this.spouses)
             }, 
       error(response) { 
         console.log(response); 

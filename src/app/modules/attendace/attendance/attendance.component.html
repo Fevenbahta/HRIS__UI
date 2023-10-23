@@ -44,8 +44,8 @@
                             <input type="file" (change)="onFileSelected($event)" />
                             <button  class="btn btn-sm btnsave" (click)="uploadFile()">Upload File</button>
                           </div>
-                          <div *ngIf="uploadSuccessMessage">{{ uploadSuccessMessage }}</div>
-                          <div *ngIf="uploadErrorMessage">{{ uploadErrorMessage }}</div>
+                          <div *ngIf="attendanceUpdate">{{ uploadSuccessMessage }}</div>
+                          
                           
 
               </div>

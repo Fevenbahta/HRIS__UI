@@ -13,7 +13,7 @@ import { EditLeaveBalanceModalComponent } from '../edit-leave-balance-modal/edit
 import { EditOtherLeaveBalanceComponent } from '../edit-other-leave-balance- modal/edit-other-leave-balance.component';
 import { PositionService } from 'app/service/position.service';
 import { EmployeePositionService } from 'app/service/employee-position';
-import { EmployeePosition } from 'app/models/job-description.model';
+import { EmployeePosition, Position } from 'app/models/job-description.model';
 
 
 

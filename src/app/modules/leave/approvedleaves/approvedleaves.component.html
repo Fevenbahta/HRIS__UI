@@ -1,6 +1,6 @@
 
 <app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
-    <div class="card col-md-10 mb-5 ml-5">
+    <div class="card col-md-12 mb-5 ">
       <div class="">
         <div class="card-header  ">
           <h4 class="card-title  ">Approved Leaves</h4>
@@ -16,10 +16,11 @@
                       <th>End Date</th>
                       <th>Status</th>
                       <th>Position</th> 
-            
                       <th>Department</th>
-                      <th>File</th>
-                   
+                 
+                      <th>Approved By</th>
+                      <th>Approved Date</th>
+                        <th>File</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -32,6 +33,8 @@
                       <td>{{ Pending.leaveStatus }}</td>
                       <td >{{getPositionName(Pending.employeePositionId)}}</td>
                       <td >{{getDepartmentName(Pending.departmentId)}}</td>
+                      <td>{{ getPositionName(Pending.approvedBy)}}</td>
+                      <td>{{ Pending.approveDate| date:'yyyy-MM-dd' }}</td>
 
                       <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Pending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                         style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >

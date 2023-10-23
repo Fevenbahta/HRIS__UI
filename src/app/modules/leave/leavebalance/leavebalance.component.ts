@@ -11,6 +11,12 @@ import { OtherLeaveBalanceService } from 'app/service/otherleavebalance.service'
 import { EmployeeLeaveDetailComponent } from '../employee-leave-detail-modal/employee-leave-detail.component';
 import { EditLeaveBalanceModalComponent } from '../edit-leave-balance-modal/edit-leave-balance-modal.component';
 import { EditOtherLeaveBalanceComponent } from '../edit-other-leave-balance- modal/edit-other-leave-balance.component';
+import { PositionService } from 'app/service/position.service';
+import { EmployeePositionService } from 'app/service/employee-position';
+import { EmployeePosition } from 'app/models/job-description.model';
+
+
+
 @Component({
   selector: 'app-leavebalance',
   templateUrl: './leavebalance.component.html',
@@ -26,7 +32,10 @@ otherleaveBalances:OtherLeaveBalance[]=[]
 employees:Employee[]=[]
   leaveTypes:LeaveType[]= [];
   selectedLeaveType: string='';
+  employeepostion;
   selectedEmployee: Employee[]=[];
+  positions:Position[];
+  employeePostions :EmployeePosition[]=[];
  empIdsWithLeaveBalances;
  empIdsWithOtherLeaveBalances;
   buttons = [ 
@@ -104,12 +113,14 @@ sickStartDate: '2023-07-21T08:09:41.138Z',
   filteredLeaveBalances: AnnualLeaveBalance[]=[]; 
 
   filteredotherLeaveBalances: OtherLeaveBalance[]=[]; 
+  employeePostion: EmployeePosition;
 constructor(
   private leaveTypeService: LeaveTypeService,
   private leaveBalanceService: LeaveBalanceService,
   private otherleaveBalanceService: OtherLeaveBalanceService,
   private employeeService:EmployeeService,
-
+   private postionService :PositionService,
+   private employeepostionService : EmployeePositionService,
   private dialog: MatDialog,
   private router:Router){}
 ngOnInit(): void{
@@ -130,7 +141,15 @@ subscribe({
   next: (employees) => { 
     this.employees=employees
 
-
+    this.employeepostionService.getAllEmployeePosition()
+    .subscribe({
+      next: (employeepositions) => {
+        this.employeePostions=employeepositions;
+      },
+      error(response){
+        console.log(response)
+      }
+    });    
     this.leaveBalanceService.getAllLeaveBalance()
     .subscribe({
       next: (leaveBalances) => {
@@ -148,7 +167,16 @@ subscribe({
             const empIdsWithOtherLeaveBalances=otherleaveBalance.map((lb) => lb.empId);
             this.selectedEmployee = this.employees.filter((employee) => !(empIdsWithOtherLeaveBalances && empIdsWithLeaveBalances).includes(employee.empId));
       
-                 
+            this.postionService.getAllPosition()
+            .subscribe({
+              next: (positions) => {
+                this.positions=positions;
+              },
+              error(response){
+                console.log(response)
+              }
+            });      
+           
     
                  
           },
@@ -168,10 +196,6 @@ subscribe({
     console.log(response)
   }
 });
-
- 
-
-
 }
 
 
@@ -326,9 +350,7 @@ UnusedDays:0
 }
 
 onSearch() {
-
-
-  // this.filteredEmployees = this.employees; 
+// this.filteredEmployees = this.employees; 
    if (this.searchTerm.trim() === '') {
   
      this.filteredLeaveBalances = this.leaveBalances;
@@ -351,12 +373,24 @@ onSearch() {
    }
   
    }
- 
+   getpostion(empId:string){
+  
+    this.employeepostionService.getEmployeePosition(empId)
+    .subscribe({
+      next: (employeepositions) => {
+        this.employeePostion =employeepositions
+        console.log('this'+this.employeePostion.position)
+      },})
+    
+  }
+
+
+
   getEmployeeName(empId: string): string { 
     const employee = this.employees.find((g) => g.empId === empId); 
+    //console.log(employee.firstName)
     return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
-  }  
-   
+  }
   getLeaveTypeName(Id: string): string { 
     const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id); 
     return leaveType ? `${leaveType.leaveTypeName} `:'Unknown EMPLOYEE'; 

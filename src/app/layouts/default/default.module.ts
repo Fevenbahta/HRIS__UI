@@ -91,7 +91,8 @@ import { EditLeaveBalanceModalComponent } from 'app/modules/leave/edit-leave-bal
 import { EditOtherLeaveBalanceComponent } from 'app/modules/leave/edit-other-leave-balance- modal/edit-other-leave-balance.component';
 import { ApprovedleavesComponent } from 'app/modules/leave/approvedleaves/approvedleaves.component';
 import { SelfleaveRequestComponent } from 'app/modules/leave/selfleave-request/selfleave-request.component';
-
+import { AttendanceComponent } from 'app/modules/attendace/attendance/attendance.component';
+import { EmployeeLeaveDetailComponent } from 'app/modules/leave/employee-leave-detail-modal/employee-leave-detail.component';
 
 
 
@@ -141,7 +142,7 @@ DeletesucessfullmessageComponent,
 LeaverequestComponent,
 LeavetypeComponent,
 LeavebalanceComponent,
-
+EmployeeLeaveDetailComponent,
 LeaveApprovalComponent,
 AdminLeaverequestComponent,
 EmployeeLeavebalanceComponent,
@@ -153,6 +154,8 @@ ActingAssigmentComponent,
 ApprovepromotionComponent,
 EditLeaveBalanceModalComponent,
 HolidaysComponent,
+AttendanceComponent,
+
 EditOtherLeaveBalanceComponent, 
 ApprovedleavesComponent,
 SelfleaveRequestComponent,

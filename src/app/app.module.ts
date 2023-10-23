@@ -35,10 +35,6 @@ import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/
 import { ActingAssigmentComponent } from './modules/acting-assigment/acting-assigment.component';
 import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/approvepromotion.component';
 import { EmployeeLeaveDetailComponent } from './modules/leave/employee-leave-detail-modal/employee-leave-detail.component';
-import { HolidaysComponent } from './modules/Admin module/holidays/holidays.component';
-import { EditOtherLeaveBalanceComponent } from './modules/leave/edit-other-leave-balance- modal/edit-other-leave-balance.component';
-import { ApprovedleavesComponent } from './modules/leave/approvedleaves/approvedleaves.component';
-
 
 
 
@@ -48,11 +44,15 @@ import { ApprovedleavesComponent } from './modules/leave/approvedleaves/approved
 @NgModule({
   declarations: [
     AppComponent,
-     EmployeeLeaveDetailComponent,
+   
 
 
   
  
+  
+
+
+
   ],
   imports: [
     BrowserModule,

@@ -49,6 +49,8 @@ import { AdminLeaverequestComponent } from './modules/leave/admin-leaverequest/a
 import { HolidaysComponent } from './modules/Admin module/holidays/holidays.component';
 import { ApprovedleavesComponent } from './modules/leave/approvedleaves/approvedleaves.component';
 import { SelfleaveRequestComponent } from './modules/leave/selfleave-request/selfleave-request.component';
+import { AttendanceComponent } from './modules/attendace/attendance/attendance.component';
+
 
 const routes: Routes = [
   {path: '',
@@ -153,7 +155,10 @@ component:VacancyComponent},
 component:ApprovepromotionComponent},
 {path:'holiday',
 component:HolidaysComponent},
+{path:'attendance',
+component:AttendanceComponent},
 ]
+
 }]
 
 

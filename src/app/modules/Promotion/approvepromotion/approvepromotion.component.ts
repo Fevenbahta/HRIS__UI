@@ -5,6 +5,7 @@ import { Employee } from 'app/models/employee.model';
 import { Grade, Position } from 'app/models/job-description.model';
 import { Promotion, PromotionRelation } from 'app/models/vacancy/promotion.model';
 import { Vacancy } from 'app/models/vacancy/vacancy.model';
+import { EmployeeDetailsModalComponent } from 'app/modules/leave/employee-details-modal/employee-details-modal.component';
 import { EmployeeService } from 'app/service/employee.service';
 import { GradeService } from 'app/service/grade.service';
 import { PositionService } from 'app/service/position.service';
@@ -263,4 +264,12 @@ addPromotion(){
     });
     this.showPromotionForm = false;
   }}
+  openEmployeeDetailsModal(empId: string) {
+    const dialogRef =this.dialog.open(EmployeeDetailsModalComponent,{
+       // Set the width to 100% to maximize
+      // Apply your custom CSS class
+    })
+    dialogRef.componentInstance.openModal(empId)
+  
+  }
 }

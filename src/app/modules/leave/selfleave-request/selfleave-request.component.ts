@@ -94,9 +94,15 @@ export class SelfleaveRequestComponent {
   selectedFirstSupervisor:string='';
   postion :EmployeePosition;
   buttons = [  
-    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
+    { label: 'Leave Request',
+    dropdownOptions: [
+      { label: ' Employee LeaveRequest Form ', route: '/leave/leave-request-form' }, 
+      { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+   
+     ]},
+   // { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-    { label: ' Self LeaveRequest Form ', route: '/leave/self-leave' }, 
+   // { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
     { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
     { label: 'Admin Leave Approval ', route: '/leave/leave-requests' },
@@ -104,7 +110,6 @@ export class SelfleaveRequestComponent {
 
 
   ];  
-  
   leaveRequest: LeaveRequest = { 
     pId: 0, 
     leaveRequestId:undefined, 

@@ -24,7 +24,7 @@
                   <mat-label>Select Position</mat-label> 
                   <mat-select placeholder="Select Position" name="selectedPosition" required [(ngModel)]="selectedPosition"> 
                     <mat-option *ngFor="let position of positions" [value]="position.positionId"> 
-                      {{ position.description }} 
+                      {{ position.name }} 
                     </mat-option> 
                   </mat-select> 
                 </mat-form-field> 
@@ -95,7 +95,7 @@
       <thead>
         <tr>
           <th>Title</th> 
-          <th>Requirement</th>
+   
        <th>Position</th>
           <th>Grade</th>
           <th>Deadline</th>
@@ -106,7 +106,7 @@
       <tbody>
         <tr *ngFor="let vacancy of vacancies">
           <td>{{capitalizeFirstLetter(vacancy.title)}}</td>   
-          <td>{{ vacancy.requirement }}</td>  
+        
             <td>{{ getPositionName(vacancy.positionId)}}</td>
           <td>{{ getGradeName(vacancy.levelId)}}</td>
           <td>{{ vacancy.deadline| date:'yyyy-MM-dd' }}</td>

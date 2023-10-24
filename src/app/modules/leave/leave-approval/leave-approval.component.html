@@ -1,7 +1,7 @@
 
 <app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
 <app-employee-details-modal *ngIf="employeeDetailsModalService.isOpen$ | async"></app-employee-details-modal>
-    <div class="card col-md-10 mb-5 ml-5">
+    <div class="card col-md-11 mb-5 ml-5">
       <div class="">
         <div class="card-header  ">
           <h4 class="card-title  ">Leave Approval</h4>
@@ -44,8 +44,10 @@
                        <td >{{getDepartmentName(Pend.departmentId)}}</td>
                       <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Pend)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                         style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
-                        <mat-icon>get_app</mat-icon></button></td>
-        
+                        <mat-icon>get_app</mat-icon></button>
+                        <mat-error  *ngIf="FileNull && id == Pend.leaveRequestId"
+                        class="  pull-right">No File</mat-error >
+      </td>
                       <td>
                         <!-- leave-approval.component.html -->
                      
@@ -53,7 +55,7 @@
                         <button class="btn btn-sm btnedit" (click)="approveleavePendding(Pend)">
                           <mat-icon>how_to_reg</mat-icon>Approve</button>
                           <button class="btn btn-sm btndanger" (click)="rejectleavePendding(Pend)">
-                            <mat-icon></mat-icon>Reject</button>
+                            <mat-icon>cancel</mat-icon>Reject</button>
                          
                       </td>
                     </tr>

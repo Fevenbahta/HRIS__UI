@@ -4,7 +4,7 @@
 
   
             <div class="col-md-12">
-              <div class=" mt-5 mb-5">
+              <div class=" mb-5">
                   <div class="card">
                       <div class="card-header ">
                           <h4 class="card-title">Attendances</h4>
@@ -17,7 +17,7 @@
                           <h6>Add Employee</h6>
                         <div class="card-body">
                           <div class="row">
-                            <div class="col-md-4 form-group">
+                            <div class="col-md-6 form-group">
                               <mat-select class="select" placeholder="Select Employee" name="selectedEmployee" required [(ngModel)]="selectedEmployee">
                                 <mat-option *ngFor="let employee of employees" [value]="employee.empId">
                                   {{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}
@@ -49,29 +49,46 @@
                           
 
               </div>
-          </div>
+
           <!-- Attendance.component.html -->
-  <h6>Attendance info </h6>
-  <div>
-    <label for="fromDate">From Date:</label>
-    <input type="date" id="fromDate" [(ngModel)]="fromDate">
-    <label for="toDate">To Date:</label>
-    <input type="date" id="toDate" [(ngModel)]="toDate">
-    <button (click)="filterByDateRange()">Search</button>
+  <h6 class="ml-5 mt-5">Attendance info </h6>
+  <div class="row mt-4 ml-3 ">
+    <div class="form-group col-md-2"> 
+      <div class="form-field">
+    
+      <input type="date" id="fromDate" [(ngModel)]="fromDate"><label  for="fromDate">From Date:</label>
+      </div></div>
+      <div class="form-group col-md-2"> 
+      <div class="form-field">
+    <input type="date" id="toDate" [(ngModel)]="toDate"> <label for="toDate">To Date:</label>
   </div>
-  <table  class="table table-bordered table-striped compact-table">
+    </div>
+    <div *ngIf="attendance">Not Found</div>
+                          
+                          
+      
+      <div class="col-md-3 ">  <button (click)="filterByDateRange()"  class="btn btn-sm "><mat-icon>search</mat-icon>
+      Search</button>
+</div>
+<div><input  class="search inputserach mt-3" type="search" placeholder="Search By Department/Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+ </div>
+   
+        
+    </div>
+  <table  class="table table-bordered table-striped compact-table mt-3">
     <thead>
       <tr>
   
         <th>Employee Name</th>
         <th>Attendance Id </th>
+        <th>Department</th>
         <th>Date</th>
         <th>Time Table</th>
         <th>On Duty</th>
         <th>Off Duty</th>
         <th>Clock In</th>
         <th>Clock Out</th>
-        <th>NormalTime</th>
+        
         <th>RealTime</th>
       
         <th>Late</th>
@@ -85,6 +102,7 @@
      
         <td>{{ getEmployeeName(at.empId) }}</td>
         <td>{{ at.attendanceId}}</td>
+        <td>{{ at.department}}</td>
         <td>{{ at.date| date:'yyyy-MM-dd' }}</td>
         <td>{{ at.timeTable }}</td>
         <td>{{ at.onDuty }}</td>
@@ -92,7 +110,7 @@
         <td>{{ at.offDuty }}</td>
         <td>{{ at.clockIn }}</td>
         <td>{{ at.clockOut }}</td>
-        <td>{{ at.normall }}</td>
+      
         <td>{{ at.realTime }}</td>
         <td>{{ at.late }}</td>
         <td>{{ at.earl }}</td>
@@ -100,8 +118,8 @@
       </tr>
     </tbody>
   </table>
-  </div>
-
+  </div></div>
+</div>
     </div>
   </div>
   </div>

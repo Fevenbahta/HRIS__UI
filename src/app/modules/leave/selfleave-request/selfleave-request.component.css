@@ -77,3 +77,12 @@
     font-weight: 400;
     }
     
+    .select{
+      border-bottom: 1px solid #ced4da;
+      font-size: 14px;
+    }
+    .select2{
+      border: none;
+      border-bottom:1px solid #ced4da;
+      width:60%
+    }

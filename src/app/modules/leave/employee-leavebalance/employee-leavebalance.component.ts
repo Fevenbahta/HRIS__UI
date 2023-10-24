@@ -21,16 +21,23 @@ export class EmployeeLeavebalanceComponent {
  employee:Employee
    leaveTypes:LeaveType[]=[];
    
- 
-   buttons = [ 
-    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
+   buttons = [  
+    { label: 'Leave Request',
+    dropdownOptions: [
+      { label: ' Employee LeaveRequest Form ', route: '/leave/leave-request-form' }, 
+      { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+   
+     ]},
+   // { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-    { label: ' Leave Approval ', route: '/leave/leave-approve' }, 
+   // { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+    { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
-    { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
+    { label: 'Admin Leave Approval ', route: '/leave/leave-requests' },
     { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
-   ]; 
- 
+
+
+  ];  
   leaveBalance:AnnualLeaveBalance[]=[]
 
 

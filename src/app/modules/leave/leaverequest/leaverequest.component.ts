@@ -89,6 +89,8 @@ export class LeaverequestComponent {
   leaveName: string='' 
   downloadFileUrl: string=''; 
   pdfUrl:string='' 
+  FileNull:boolean = false;
+  id:string;
   selectedEmployee: string=''; 
   leaveRequestSaved: boolean = false; 
   leaveRequestUpdated: boolean = false; 
@@ -102,8 +104,8 @@ export class LeaverequestComponent {
   fileData: string = ''; 
     IsPdf:boolean = false;
   IsBig:boolean = false;
-  FileNull:boolean = false;
-  id:string;
+ 
+  
   selectedFullPay:number;
   selectedHalfPay:number;
   selectedWoPay:number;

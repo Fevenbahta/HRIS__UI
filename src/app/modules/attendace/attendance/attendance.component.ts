@@ -15,6 +15,8 @@ export class AttendanceComponent {
     { label: ' Attendance', route: '/attendance' },
 
   ];
+  searchTerm: string = ''; 
+  attendance:boolean
   showAttendanceForm: boolean = false;
   AttendanceSaved:string;
   Attendances:Attendance[]=[]
@@ -105,8 +107,13 @@ this.attendanceService.getAllAttendance().subscribe({
       } else {
         // If both dates are not selected, show all attendances
         this.filteredAttendances = this.Attendances;
-      }
-    }
+           
+        this.attendance=true;
+        setTimeout(() => {
+          this.attendance= false;
+        }, 2000);}}
+      
+      
     
     
     
@@ -127,6 +134,28 @@ this.attendanceService.getAllAttendance().subscribe({
   
   }})
     }
+    onSearch() {
+
+
+      // this.filteredEmployees = this.employees; 
+       if (this.searchTerm.trim() === '') {
+    
+         this.filteredAttendances = [];
+       } else {
+      
+         this.filteredAttendances = this.Attendances.filter(at => {
+           
+           return (
+             at.department.toLowerCase().startsWith(this.searchTerm.toLowerCase()) ||
+             this.getEmployeeName(at.empId).toLowerCase().startsWith(this.searchTerm.toLowerCase()) 
+              );
+           
+           
+         });
+       }
+      
+       }
+     
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];

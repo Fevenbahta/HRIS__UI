@@ -1,12 +1,12 @@
 
 <app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
 
-    <div class="card col-md-10 mb-5 ml-5">
+    <div class="card col-md-11 mb-5 ml-5">
       <div class="">
         <div class="card-header  ">
-          <h4 class="card-title  "> Approv Leaves</h4>
+          <h4 class="card-title  "> Approve Leaves</h4>
         
-           
+          
         </div>
 
         <button *ngIf="leaveRejected"class="alert  btndanger btn-sm pull-right">  Rejected
@@ -39,14 +39,16 @@
                       <td >{{getDepartmentName(leavePending.departmentId)}}</td>
                       <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leavePending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                         style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
-                        <mat-icon>get_app</mat-icon>File</button></td>
-        
+                        <mat-icon>get_app</mat-icon></button>
+                        <mat-error  *ngIf="FileNull && id == leavePending.leaveRequestId"
+                        class="  pull-right">No File</mat-error ></td>
+                    
                       <td>
                         <button class="btn btn-sm btnedit" (click)="approveleavePendding(leavePending)">
                           <mat-icon>how_to_reg</mat-icon>Approve</button>
                         <!-- leave-approval.component.html -->
                         <button class="btn btn-sm btndanger" (click)="rejectleavePendding(leavePending)">
-                          <mat-icon></mat-icon>Reject</button>
+                          <mat-icon>cancel</mat-icon>Reject</button>
                      
                       </td>
                     </tr>

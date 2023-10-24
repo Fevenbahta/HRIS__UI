@@ -27,6 +27,10 @@
       <td>{{ promotionRelationPending.promotionStatus }}</td>
       <td>
         <!-- "Approve" button -->
+        
+        <button class="btn btn-sm btnedit" (click)="openEmployeeDetailsModal(promotionRelationPending.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+          <mat-icon>info</mat-icon> 
+        </button>
         <button class="btn btn-sm btnedit" (click)="togglePromotionForm(promotionRelationPending)" >
           <mat-icon>how_to_reg</mat-icon>
         </button>
@@ -49,6 +53,7 @@
       </mat-form-field>
     </div>
     <!-- Add other form fields here if needed -->
+    
     <button type="submit"  class="btn btn-sm btnsave" (click)="approvePromotionPendding()" >
       <mat-icon>add</mat-icon> Promote
     </button>

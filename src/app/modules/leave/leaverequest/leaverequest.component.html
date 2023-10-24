@@ -1,9 +1,9 @@
 
 <app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
-
-<div class="col-md-11 main-body">
- 
-    <div class="card card-body">
+<!-- First Column -->
+<div class="col-md-11 ml-5">
+  <div class="card mb-5">
+    <div class="card-body " >
       <div class="card-header ">
         <h4 class="card-title">Leave Request</h4>
         <p class="card-category">Complete your Leave Request</p>
@@ -16,7 +16,7 @@
     <div *ngIf="showLeaveForm"class="mt-4">
       <h6 class="mb-3">Leave Form</h6>
       <form   >
-        <div class="card-body">
+        <div class="card-body ml-2 ">
           <div class="row">
             <div class="col-md-4 form-group">
               <mat-select class="select" placeholder="Select Employee" name="selectedEmployee" required [(ngModel)]="selectedEmployee" (ngModelChange)="onemployeeselected()">
@@ -25,26 +25,7 @@
                 </mat-option>
               </mat-select>
             </div>
-            <div class="col-md-4 ">
-                             
-              <label> Employee Position   </label>
-              <input class="form-field select2" placeholder=" " name="selectedPosition"
-              required [(ngModel)]="selectedPosition" [disabled]="true">
-                <!-- Use *ngFor on mat-option to loop through departments -->
-              
-                
-           
-          </div>
-          <div class="col-md-4">
-                             
-            <label>Department</label>
-            <input class="form-field select2" placeholder=" " name="selectedEmployeeDepartment"
-            required [(ngModel)]="selectedEmployeeDepartment" [disabled]="true">
-              <!-- Use *ngFor on mat-option to loop through departments -->
-            
-              
-         
-        </div>
+       
             <div class="col-md-4 form-group">
               <mat-select class="select"  placeholder="Select Leave Type" name="selectedLeaveType" required [(ngModel)]="selectedLeaveType" (ngModelChange)="availableLeaveBalance()">
                 <mat-option *ngFor="let leaveType of leaveTypes" [value]="leaveType.leaveTypeId">
@@ -72,10 +53,34 @@
              
 
             
-            </div>
-          </div>
+            </div></div>
           
-          <div class="row">
+            <div class="row mt-3">
+            <div class="col-md-4 ">
+                             
+              <label> Employee Position</label><br>
+              <input class="form-field select2" placeholder=" " name="selectedPosition"
+              required [(ngModel)]="selectedPosition" [disabled]="true">
+                <!-- Use *ngFor on mat-option to loop through departments -->
+              
+                
+           
+          </div>
+      
+          <div class="col-md-4">
+                             
+            <label>Department</label><br>
+            <input class="form-field select2" placeholder=" " name="selectedEmployeeDepartment"
+            required [(ngModel)]="selectedEmployeeDepartment" [disabled]="true">
+              <!-- Use *ngFor on mat-option to loop through departments -->
+            
+              
+         
+        </div>
+      </div>
+            
+          
+          <div class="row ">
             <div class="col-md-4  form-field mt-4 ">
               <input  placeholder=" " type="text" name="workingDays" [(ngModel)]="leaveRequest.workingDays">
               <label >Working Days</label>
@@ -85,19 +90,19 @@
               <input placeholder=" " type="text" name="reason" [(ngModel)]="leaveRequest.reason">
                  <label>Reason</label>
             </div>
-            <div class="col-md-4 mt-3"*ngIf="leaveName!='Annual'">
+            <div class="col-md-4 mt-3 "*ngIf="leaveName!='Annual'">
               <label for="name" >Supporting File</label>
               <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
               <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
               <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
     
             </div>
-          </div></div>
+          </div>
           
       
             <form [formGroup]="leaveRequestForm">
-              <div class="card-body">
-                 <div class="row mt-3"> <div class="col-md-4">
+              <div class="card-body ">
+                 <div class="row mt-3 "> <div class="col-md-4">
                 <!-- Start Date -->
                 <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
                   <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="startDate"  formControlName="startDate">
@@ -140,10 +145,10 @@
             <button type="button" class="btn btnsave btn-sm" *ngIf="leaveRequest.leaveRequestId" (click)="updateleaveRequest()">Update</button>
             <div *ngIf="leaveRequestUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
           </div>
-      
+        </div>
       </form>
       </div>
-
+</div>
               <div class="mt-3"><p >Leave Request History</p></div>
               <table *ngIf="leaveRequest" class="table table-striped table-bordered compact-table">
                 <thead>
@@ -178,6 +183,7 @@
                       <mat-icon>get_app</mat-icon></button>
                       <mat-error  *ngIf="FileNull && id == leaveRequest.leaveRequestId"
                       class="  pull-right">No File</mat-error >
+                      
     
                   </td>
                     <td>

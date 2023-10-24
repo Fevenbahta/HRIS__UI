@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Attendance } from 'app/models/Attendance.model';
 import { Department } from 'app/models/education.model';
 import { Employee } from 'app/models/employee.model';
 import { Division, EmployeePosition, Position } from 'app/models/job-description.model';
@@ -22,32 +23,43 @@ import { Observable, of, switchMap } from 'rxjs';
   styleUrls: ['./approvedleaves.component.css']
 })
 export class ApprovedleavesComponent {
+  searchTerm: string = ''; 
+  leaveApprove:boolean
   leaveTypes:LeaveType[]=[]
   selectedLeaveType: string='';
   selectedEmployee: string='';
   employees:Employee[]=[];
 leaveApproved: boolean = false;
+leave: boolean = false;
 leaveRequests:LeaveRequest[]=[]; 
 downloadFileUrl: string=''; 
 divisions:Division[]= [];
   departments:Department[]=[];
    positions:Position[]= [];
    employeePosition:EmployeePosition;
-   
+   filteredLeave: LeaveRequest[]; // Array to hold filtered attendances
+   fromDate: string; // Variable to store the "From" date
+   toDate: string;
+   FileNull:boolean = false;
+   id:string;
  leaveStatus:string="Admin-Approved";
+ buttons = [  
+  { label: 'Leave Request',
+  dropdownOptions: [
+    { label: ' Employee LeaveRequest Form ', route: '/leave/leave-request-form' }, 
+    { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+ 
+   ]},
+ // { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
+  { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
+ // { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+  { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
+  { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
+  { label: 'Admin Leave Approval ', route: '/leave/leave-requests' },
+  { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
 
-  buttons = [ 
-    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
-    { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-    { label: ' Leave Approval ', route: '/leave/leave-approve' }, 
-    { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
-    { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
-    { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
-   
 
-
-
-  ]; 
+];  
   approvedLeaves:LeaveRequest[]=[]
   leavependding:LeaveRequest;
   constructor(
@@ -140,6 +152,7 @@ divisions:Division[]= [];
     this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
       next: (leaveRequest) => {
         this.approvedLeaves = leaveRequest
+        this.filteredLeave=leaveRequest
         ;
         console.log(leaveRequest)
       },
@@ -232,7 +245,8 @@ subscribe({
   fetchAndDisplayPDF(leave: LeaveRequest):void { 
     // Call your service method to fetch the PDF file  
     console.log(leave.leaveRequestId)
-    const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
+    const leaveRequestToEdit = this.filteredLeave.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
+    console.log(leave.leaveRequestId)
     leaveRequestToEdit.leaveRequestId 
     
     this.leaveRequestservice.getLeaveRequestFile(leaveRequestToEdit.leaveRequestId) 
@@ -245,11 +259,11 @@ subscribe({
           //console.log(this.leaveRequest.leaveRequestId); 
            
         }, 
-         
-        (error) => { 
-          console.error('Error loading PDF:', error); 
-          // Handle the error, e.g., display an error message to the user. 
-        } 
+        (error) => {
+          this.FileNull=true
+          console.error('Error loading PDF:', error);
+         this.id= leaveRequestToEdit.leaveRequestId
+        }
       ); 
   } 
   
@@ -280,5 +294,50 @@ console.log("updated")
       });
     });
 }
+
+onSearch() {
+
+
+  // this.filteredEmployees = this.employees; 
+   if (this.searchTerm.trim() === '') {
+
+     this.filteredLeave =this.approvedLeaves;
+   } else {
+  
+     this.filteredLeave = this.approvedLeaves.filter(at => {
+       
+       return (
+         this.getDepartmentName(at.departmentId).toLowerCase().startsWith(this.searchTerm.toLowerCase()) ||
+         this.getPositionName(at.employeePositionId).toLowerCase().startsWith(this.searchTerm.toLowerCase()) ||
+         this.getEmployeeName(at.empId).toLowerCase().startsWith(this.searchTerm.toLowerCase()) 
+          );
+       
+       
+     });
+   }
+  
+   }
+ 
+   filterByDateRange() {
+    if (this.fromDate && this.toDate) {
+      let fromDate = new Date(this.fromDate);
+      let toDate = new Date(this.toDate);
+  
+      // Subtract one day from the "From" date
+      toDate.setDate(toDate.getDate() + 1);
+  
+      this.filteredLeave = this.approvedLeaves.filter(at => {
+        const attendanceStartDate = new Date(at.startDate);
+        const attendanceEndDate = new Date(at.endDate);
+        return attendanceStartDate >= fromDate && attendanceEndDate <= toDate;
+      });
+    } else {
+      // If both dates are not selected, show all attendances
+      this.filteredLeave = this.approvedLeaves;
+         
+      this.leave=true;
+      setTimeout(() => {
+        this.leave= false;
+      }, 2000);}}
   }
 

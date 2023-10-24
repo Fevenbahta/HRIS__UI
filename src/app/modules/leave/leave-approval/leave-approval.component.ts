@@ -38,19 +38,29 @@ divisions:Division[]= [];
    positions:Position[]= [];
    employeePosition:EmployeePosition;
    employeePositions:EmployeePosition[]=[];
-   
+   FileNull:boolean = false;
+   id:string;
  leaveStatus:string="pendding";
  leaverejectStatus:string="Reject";
  empId="17320a72-e4bd-46b9-894a-dfe5bf3d967c";
  supervisor:string="";
-  buttons = [ 
-    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
-    { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-    { label: ' Leave Approval ', route: '/leave/leave-approve' }, 
-    { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
-    { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
-    { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
-  ]; 
+ buttons = [  
+  { label: 'Leave Request',
+  dropdownOptions: [
+    { label: ' Employee LeaveRequest Form ', route: '/leave/leave-request-form' }, 
+    { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+ 
+   ]},
+ // { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
+  { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
+ // { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+  { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
+  { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
+  { label: 'Admin Leave Approval ', route: '/leave/leave-requests' },
+  { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
+
+
+];  
   leavePenddings:LeaveRequest[]=[]
   leavependding:LeaveRequest;
   constructor(
@@ -252,11 +262,11 @@ subscribe({
           //console.log(this.leaveRequest.leaveRequestId); 
            
         }, 
-         
-        (error) => { 
-          console.error('Error loading PDF:', error); 
-          // Handle the error, e.g., display an error message to the user. 
-        } 
+        (error) => {
+          this.FileNull=true
+          console.error('Error loading PDF:', error);
+         this.id= leaveRequestToEdit.leaveRequestId
+        }
       ); 
   } 
   

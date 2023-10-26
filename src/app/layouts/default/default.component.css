@@ -25,24 +25,17 @@
 @media (max-width: 576px) {
 
 
- 
-  .sidebar {
-      width: 100px;
-  }
+
 
 }
 
 @media (max-width: 992px) {
-  .sidebar {
-      width: 200px;
-  }
+
 
 }
 
 @media (max-width: 1200px) {
-  .sidebar {
-      width: 230px;
-  }
+ 
  
 
 }

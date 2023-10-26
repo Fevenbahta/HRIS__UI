@@ -116,7 +116,7 @@
                     <p class="card-head">Employee Position</p>
                     <!-- Table for employee position -->
                     <div class="table-responsive">
-                      <table *ngIf="employeeData.employeePositions" class="table table-border table-striped  compact-table">
+                      <table *ngIf="employeeData.employeePostions" class="table table-border table-striped  compact-table">
                         <thead>
                           <tr>
                             <th>Division</th>
@@ -128,12 +128,12 @@
                         </thead>
                
             <tbody>
-              <tr *ngIf="employeeData.employeePositions">
-                <td>{{ getDivisionName(employeeData.employeePositions.divisionId) }}</td>
-                <td>{{ getPositionName(employeeData.employeePositions.position) }}</td>
-                <td>{{ getStepName(employeeData.employeePositions.stepId) }}</td>
-                <td>{{ getBranchName(employeeData.employeePositions.branchId) }}</td>
-                <td>{{ employeeData.employeePositions.startDate}}</td>
+              <tr *ngIf="employeeData.employeePostions">
+                <td>{{ getDivisionName(employeeData.employeePostions.divisionId) }}</td>
+                <td>{{ getPositionName(employeeData.employeePostions.position) }}</td>
+                <td>{{ getStepName(employeeData.employeePostions.stepId) }}</td>
+                <td>{{ getBranchName(employeeData.employeePostions.branchId) }}</td>
+                <td>{{ employeeData.employeePostions.startDate }}</td>
               </tr>
             </tbody>
           </table> </div>

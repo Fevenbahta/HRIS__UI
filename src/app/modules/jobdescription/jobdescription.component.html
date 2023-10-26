@@ -165,7 +165,7 @@
         <td>{{ getStepName(employeePosition.stepId) }}</td>
         <td>{{ getBranchName(employeePosition.branchId) }}</td>
       
-        <td>{{ employeePosition.startDate | date:'yyyy-MM-dd'}}</td>
+        <td>{{ employeePosition.startDate | date:'yyyy-MM-dd' }}</td>
 
         <td>
           <button class="btn btn-sm btnedit" (click)="editEmployeePosition(employeePosition)">

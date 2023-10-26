@@ -100,8 +100,8 @@
         <tr *ngFor="let workExperience of workExperiences" >
           <td>{{ workExperience.companyName }}</td>
           <td>{{ workExperience.postionHeld }}</td>
-          <td>{{ workExperience.from }}</td>
-          <td>{{ workExperience.to }}</td>
+          <td>{{ workExperience.from | date:'yyyy-MM-dd'}}</td>
+          <td>{{ workExperience.to | date:'yyyy-MM-dd'}}</td>
           <td>
             <button class="btn btn-sm btnedit" (click)="editWorkExperience(workExperience)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
               <mat-icon>edit</mat-icon></button>

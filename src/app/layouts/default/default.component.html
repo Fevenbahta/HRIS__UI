@@ -1,11 +1,11 @@
 
 
      <ng-container *ngIf="!isLoginPage; else loginTemplate">
-        <mat-drawer-container class="row ">
-          <mat-drawer class="col-md-2" mode="side" [opened]="sideBarOpen">
+        <mat-drawer-container >
+          <mat-drawer mode="side" [opened]="sideBarOpen">
             <app-sidebar></app-sidebar>
           </mat-drawer>
-          <mat-drawer-content  class="col-md-10 ">
+          <mat-drawer-content >
             <app-header (toggleSideBarForMe)="toggleSideBar($event)"></app-header>
             <router-outlet></router-outlet>
             <app-footer></app-footer>

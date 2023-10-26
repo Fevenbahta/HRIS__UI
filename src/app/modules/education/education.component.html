@@ -95,8 +95,8 @@
           <td>{{ getEducationName(education.eductionName)}}</td>
           <td>{{ education.nameOfInstitute }}</td>
           <td>{{ education.fieldOfStudy }}</td>
-          <td>{{ education.from }}</td>
-          <td>{{ education.to }}</td>
+          <td>{{ education.from | date:'yyyy-MM-dd' }}</td>
+          <td>{{ education.to | date:'yyyy-MM-dd' }}</td>
           <td>
             <button class="btn btn-sm btnedit" (click)="editEducation(education)">
               <mat-icon>edit</mat-icon>Edit</button>

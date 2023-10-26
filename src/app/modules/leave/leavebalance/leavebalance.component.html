@@ -99,25 +99,25 @@
                 <tr  >
                 
                   <th scope="col">Employee</th>
-                  <th scope="col">Sick Leave Default</th>
+                  
                   <th scope="col">Sick Leave Remainig</th>
                   <th scope="col">Sick LeaveStart Date</th>
                   <th scope="col">Sick Leave End Date</th> 
-                  <th scope="col">Marraige Leave Default</th>
+               
                   <th scope="col">Marraige Leave Remainig</th>
-                  <th scope="col">Paternity Leave Default</th>
+                 
                   <th scope="col">Paternity Leave Remainig</th>
-                  <th scope="col">Maternity Leave Default</th>
+            
                   <th scope="col">Maternity Leave Remainig</th>
-                  <th scope="col">compasionate Leave Default</th>
+                 
                   <th scope="col">compasionate Leave Remainig</th>
-                  <th scope="col">Education Leave Default</th>
+             
                   <th scope="col">Education Leave Remainig</th>
-                  <th scope="col">LeaveWithOutPay Default</th>
+          
                   <th scope="col">LeaveWithOutPay Remainig</th>
-                  <th scope="col">Court Leave Default</th>
+               
                   <th scope="col">Court Leave  Remainig</th>
-                  <th scope="col">Abortion Leave Default</th>
+               
                   <th scope="col">Abortion Leave  Remainig</th>
                 </tr>
               </thead>
@@ -126,30 +126,28 @@
                 <tr *ngFor="let otherLeaveBalance of filteredotherLeaveBalances"  >
                     <td>{{ getEmployeeName( otherLeaveBalance.empId) }}</td> 
                      
-                  <td>{{ otherLeaveBalance.sickDefaultBalance }}</td>
+
                   <td>{{ otherLeaveBalance.sickRemainingBalance }}</td>
                   <td>{{ otherLeaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
                   <td>{{ otherLeaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
          
-                  <td>{{ otherLeaveBalance.marriageDefaultBalance }}</td>
                   <td>{{ otherLeaveBalance.marriageRemainingBalance}}</td>
                   
-                  <td>{{ otherLeaveBalance.paternityDefaultBalance}}</td>
+                
                   <td>{{ otherLeaveBalance.paternityRemainingBalance}}</td>
               
-                    <td>{{ otherLeaveBalance.maternityDefaultBalance}}</td>
+               
              
                       <td>{{ otherLeaveBalance.maternityRemainingBalance}}</td>
-                      <td>{{ otherLeaveBalance.compassinateDefaultBalance}}</td>
-        
+                     
                       <td>{{ otherLeaveBalance.compassinateRemainingBalance}}</td>
-                      <td>{{ otherLeaveBalance.educationDefaultBalance}}</td>
+                   
                       <td>{{ otherLeaveBalance.educationRemainingBalance}}</td>
-                      <td>{{ otherLeaveBalance.leaveWotPayDefaultBalance}}</td>
+                
                       <td>{{ otherLeaveBalance.leaveWotPayRemainingBalance}}</td>
-                      <td>{{ otherLeaveBalance.courtLeaveDefaultBalance}}</td>
+                  
                       <td>{{ otherLeaveBalance.courtLeaveRemainingBalance}}</td>
-                      <td>{{ otherLeaveBalance.abortionLeaveDefaultBalance}}</td>
+                     
                       <td>{{ otherLeaveBalance.abortionLeaveRemainingBalance}}</td>
                    
                  <td>      <button class="btn btn-sm btnedit" (click)="openOtherLeaveDetailsModal(otherLeaveBalance.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">

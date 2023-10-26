@@ -65,8 +65,8 @@
                         <tr  *ngFor="let otherleavebalance of otherleaveBalance">
                           <td>{{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}</td>
                           <td>{{ otherleavebalance.sickRemainingBalance }}</td>
-                          <td>{{ otherleavebalance.sickStartDate| date:'yyyy-MM-dd'}}</td>
-                          <td>{{ otherleavebalance.sickEndDate| date:'yyyy-MM-dd' }}</td>
+                          <td>{{ otherleavebalance.startDate| date:'yyyy-MM-dd'}}</td>
+                          <td>{{ otherleavebalance.endDate| date:'yyyy-MM-dd' }}</td>
                           <td>{{ otherleavebalance.marriageRemainingBalance}}</td>
                           <td>{{ otherleavebalance.paternityRemainingBalance}}</td>
                      

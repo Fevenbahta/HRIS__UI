@@ -78,8 +78,8 @@
           <!-- Use *ngFor to loop through the trainings array and display each training record -->
           <tr *ngFor="let training of trainings">
             <td>{{ training.typeOfTraining }}</td>
-            <td>{{ training.from }}</td>
-            <td>{{ training.to }}</td>
+            <td>{{ training.from | date:'yyyy-MM-dd'}}</td>
+            <td>{{ training.to | date:'yyyy-MM-dd'}}</td>
             <td> <button class="btn btn-sm btnedit" (click)="editTraining(training)">
               <mat-icon>edit</mat-icon>Edit</button>
               <button class="btn btn-sm btndanger" (click)="deleteTraining(training)">

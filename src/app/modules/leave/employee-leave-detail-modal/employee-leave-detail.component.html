@@ -1,8 +1,42 @@
 
 
 <div class="custom-modal">
-    
+  <div class="logo">
+    <a href="#" class="simple-text">
+        <div>
+            <img  class="logo-img"src="/assets/img/ECXLogo.png"/>
+        </div>
+   
+          
+    </a>
+    <h5>    ETHIOPIAN COMMODITY EXCHANGE</h5>
+    <P>Tel.+251 554 7010, Fax +251 554 7010, P.O.Box 17341 Alsam Chelelek Tower 2, Addis Ababa,Ethiopia www.ecx.com.et</P>
+
+</div>
       <div class="employee-details" *ngIf="leaveData ">
+        <div class="col-md-6  "> 
+          <p class="card-head">Employee</p>
+          <!-- Table for addresses -->
+          <div class="table-responsive ">
+            <table *ngIf="leaveData.employee" class="table table-border table-striped col-md-6 compact-table">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Sex</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="leaveData.employee">
+                  <td>{{ leaveData.employee.firstName }}  {{ leaveData.employee.middleName }}  {{ leaveData.employee.lastName }}</td>
+                  <td>{{ leaveData.employee.sex }}</td>
+
+             
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 <div class="col-md-6 mt-4">
     <p class="card-head">Annual Leave</p>
     <!-- Table for annual leave -->
@@ -40,27 +74,26 @@
         <thead>
           <tr>
 
-                       
-<th scope="col">Employee</th>
-<th scope="col">Sick Leave Default</th>
+
+
 <th scope="col">Sick Leave Remainig</th>
 <th scope="col">Sick LeaveStart Date</th>
 <th scope="col">Sick Leave End Date</th> 
-<th scope="col">Marraige Leave Default</th>
+
 <th scope="col">Marraige Leave Remainig</th>
-<th scope="col">Paternity Leave Default</th>
+
 <th scope="col">Paternity Leave Remainig</th>
-<th scope="col">Maternity Leave Default</th>
+
 <th scope="col">Maternity Leave Remainig</th>
-<th scope="col">compasionate Leave Default</th>
+
 <th scope="col">compasionate Leave Remainig</th>
-<th scope="col">Education Leave Default</th>
+
 <th scope="col">Education Leave Remainig</th>
-<th scope="col">LeaveWithOutPay Default</th>
+
 <th scope="col">LeaveWithOutPay Remainig</th>
-<th scope="col">Court Leave Default</th>
+
 <th scope="col">Court Leave  Remainig</th>
-<th scope="col">Abortion Leave Default</th>
+
 <th scope="col">Abortion Leave  Remainig</th>
 </tr>
        
@@ -68,30 +101,29 @@
         <tbody>
           <tr *ngFor="let otherLeaveBalance of leaveData.otherLeaveBalances">
            
-            <td>{{ otherLeaveBalance.sickDefaultBalance }}</td>
+         
             <td>{{ otherLeaveBalance.sickRemainingBalance }}</td>
             <td>{{ otherLeaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
             <td>{{ otherLeaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
    
-            <td>{{ otherLeaveBalance.marriageDefaultBalance }}</td>
+      
             <td>{{ otherLeaveBalance.marriageRemainingBalance}}</td>
-            
-            <td>{{ otherLeaveBalance.paternityDefaultBalance}}</td>
+    
             <td>{{ otherLeaveBalance.paternityRemainingBalance}}</td>
         
-              <td>{{ otherLeaveBalance.maternityDefaultBalance}}</td>
+        
        
                 <td>{{ otherLeaveBalance.maternityRemainingBalance}}</td>
-                <td>{{ otherLeaveBalance.compassinateDefaultBalance}}</td>
+        
   
                 <td>{{ otherLeaveBalance.compassinateRemainingBalance}}</td>
-                <td>{{ otherLeaveBalance.educationDefaultBalance}}</td>
+             
                 <td>{{ otherLeaveBalance.educationRemainingBalance}}</td>
-                <td>{{ otherLeaveBalance.leaveWotPayDefaultBalance}}</td>
+              
                 <td>{{ otherLeaveBalance.leaveWotPayRemainingBalance}}</td>
-                <td>{{ otherLeaveBalance.courtLeaveDefaultBalance}}</td>
+               
                 <td>{{ otherLeaveBalance.courtLeaveRemainingBalance}}</td>
-                <td>{{ otherLeaveBalance.abortionLeaveDefaultBalance}}</td>
+               
                 <td>{{ otherLeaveBalance.abortionLeaveRemainingBalance}}</td>
              
            <!-- Add similar data cells for other leave types -->
@@ -121,8 +153,8 @@
             <td>{{  getLeaveTypeName(leaveRequest.leaveTypeId) }}</td>
             <td>{{ leaveRequest.startDate | date:'yyyy-MM-dd' }}</td>
             <td>{{ leaveRequest.endDate | date:'yyyy-MM-dd' }}</td>
-            <td>{{ leaveRequest.status }}</td>
-            <td>{{ leaveRequest.approvedBy }}</td>
+            <td>{{ leaveRequest.leaveStatus }}</td>
+            <td>{{ getPositionName(leaveRequest.approvedBy)}}</td>
             <td>{{ leaveRequest.approveDate | date:'yyyy-MM-dd' }}</td>
           </tr>
         </tbody>

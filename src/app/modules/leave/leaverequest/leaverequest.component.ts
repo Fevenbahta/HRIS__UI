@@ -156,7 +156,7 @@ export class LeaverequestComponent {
     departmentId:""
   }; 
  
-   selectedFile: File | null = null; 
+  
  
  
   constructor( 
@@ -356,6 +356,7 @@ subscribe({
     const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId); 
     return leaveType ? leaveType.leaveTypeName : ''; 
   } 
+  selectedFile: File | null = null; 
   onFileSelected(event: any) { 
    
     const file: File = event.target.files[0]; 

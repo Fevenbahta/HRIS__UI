@@ -36,7 +36,7 @@
             <div class="col-md-4">
               <label *ngIf="selectedLeaveBalance > 0">Available Balance</label>
               <input class="form-control" *ngIf="selectedLeaveBalance > 0" name="selectedLeaveBalance" required [(ngModel)]="selectedLeaveBalance" [disabled]="true">
-              <div *ngIf="selectedLeaveBalance <= 0 && leaveName">
+              <div *ngIf="selectedLeaveBalance <= 0 && leaveName && leaveName!='OtherLeave'">
                 <p class="insufficient-balance">Insufficient Balance</p>
               </div>
               <label *ngIf="leaveName === 'Annual'">Previous Year Balance</label>
@@ -125,7 +125,7 @@
                 </mat-form-field>
               
 
-        <mat-error *ngIf="leaveRequestForm.hasError('invalidLeaveBalance')">
+        <mat-error *ngIf="leaveRequestForm.hasError('invalidLeaveBalance') && leaveName!='OtherLeave'">
           Date difference exceeds selected leave balance
            </mat-error>
               <!-- Display validation errors if needed -->

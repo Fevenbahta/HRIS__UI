@@ -84,7 +84,7 @@ abortionLeaveDefaultBalance: number,
 abortionLeaveRemainingBalance: number,
 sickEndDate: string,
 sickStartDate: string,
-
+otherLeaveRemainingBalance: number,
 
 
 

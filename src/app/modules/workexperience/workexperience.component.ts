@@ -20,7 +20,10 @@ export class WorkexperienceComponent {
     workExperienceSaved: boolean = false;
     workExperienceUpdated: boolean = false;
     workExperiences: WorkExperience[] = [];
-  
+    downloadFileUrl: string=''; 
+  pdfUrl:string='' 
+  FileNull:boolean = false;
+  id:string;
     buttons = [
       { label: ' Add Employee ', route: "/employee-registration" },
       { label: '  List Employee ', route: "/employee-list" },
@@ -43,6 +46,7 @@ export class WorkexperienceComponent {
       to: "",
       salary: 0,
       reasonTermination: "",
+      file:'',
     };
   
    
@@ -109,6 +113,7 @@ export class WorkexperienceComponent {
             to: "",
             salary: 0,
             reasonTermination: "",
+            file:'',
           };
         },
         error(response) {
@@ -158,9 +163,41 @@ export class WorkexperienceComponent {
       to: "",
       salary: 0,
       reasonTermination: "",
+      file:'',
     };
   }
+  selectedFile: File | null = null; 
+  onFileSelected(event: any) { 
+   
+    const file: File = event.target.files[0]; 
+    const reader = new FileReader(); 
+    reader.onload = () => { 
+        const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
+        this.workExperience.file = base64String; 
+    }; 
+    reader.readAsDataURL(file); 
+  } 
+  fetchAndDisplayPDF(workExperience: WorkExperience): void {
+    const workExperienceToEdit = this.workExperiences.find(
+      (workExperiences) => workExperiences.id === workExperience.id
+    );
 
+  
+    this.workExperienceService.getWorkExperienceFile(workExperienceToEdit.id).subscribe(
+      (pdf: Blob) => {
+   
+        var file = new Blob([pdf], { type: 'application/pdf' });
+
+        this.downloadFileUrl = window.URL.createObjectURL(file);
+        window.open(this.downloadFileUrl, '_blank');    
+      },
+      (error) => {
+        this.FileNull=true
+        console.error('Error loading PDF:', error);
+       this.id= workExperienceToEdit.id
+      }
+    );
+  }
   editWorkExperience(WorkExperience: WorkExperience): void {
     const contactToEdit = this.workExperiences.find(workExperience => workExperience.id === workExperience.id);
     this.workExperience = contactToEdit;

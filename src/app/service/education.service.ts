@@ -19,6 +19,10 @@ export class EducationService {
   getAllEducation(): Observable<Education[]> {
     return this.http.get<Education[]>(this.apiUrlService.apiUrl + 'Education');
   }
+  getEducationFile(Id: string): Observable<Blob> {
+    const url = this.apiUrlService.apiUrl +'Education/fileId/'+Id;
+    return this.http.get(url, { responseType: 'blob' });
+  }
   getEducation(id:string): Observable<Education> {
     return this.http.get<Education>(this.apiUrlService.apiUrl + 'Education/'+id);
   }

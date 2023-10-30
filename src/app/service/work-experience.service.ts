@@ -19,6 +19,10 @@ export class WorkExperienceService {
   getAllWorkExperience(): Observable<WorkExperience[]> {
     return this.http.get<WorkExperience[]>(this.apiUrlService.apiUrl + 'WorkExperience');
   }
+  getWorkExperienceFile(Id: string): Observable<Blob> {
+    const url = this.apiUrlService.apiUrl +'WorkExperience/'+Id;
+    return this.http.get(url, { responseType: 'blob' });
+  }
   getWorkExperience(id:string): Observable<WorkExperience> {
     return this.http.get<WorkExperience>(this.apiUrlService.apiUrl + 'WorkExperience/'+id);
   }

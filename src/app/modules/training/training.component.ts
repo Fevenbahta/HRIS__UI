@@ -16,7 +16,10 @@ export class TrainingComponent implements OnInit {
   trainingSaved: boolean = false;
   trainingUpdated: boolean = false;
   trainings: Training[] = [];
-
+  downloadFileUrl: string=''; 
+  pdfUrl:string='' 
+  FileNull:boolean = false;
+  id:string;
 
   training: Training = {
     pId: 0,
@@ -30,6 +33,7 @@ export class TrainingComponent implements OnInit {
     typeOfTraining: "",
     from: "",
     to: "",
+    file:'',
   
   };
  
@@ -57,6 +61,27 @@ export class TrainingComponent implements OnInit {
       }, 
   });
 
+  }
+    fetchAndDisplayPDF(training: Training): void {
+    const trainingToEdit = this.trainings.find(
+      (trainin) => trainin.id === training.id
+    );
+
+  
+    this.trainingService.getTrainingFile(trainingToEdit.id).subscribe(
+      (pdf: Blob) => {
+   
+        var file = new Blob([pdf], { type: 'application/pdf' });
+
+        this.downloadFileUrl = window.URL.createObjectURL(file);
+        window.open(this.downloadFileUrl, '_blank');    
+      },
+      (error) => {
+        this.FileNull=true
+        console.error('Error loading PDF:', error);
+       this.id= trainingToEdit.id
+      }
+    );
   }
   addTraining() {
     this.training.empId = this.employeeIdService.employeeId;
@@ -92,6 +117,7 @@ export class TrainingComponent implements OnInit {
           typeOfTraining: "",
           from: "",
           to: "",
+          file:'',
         };
       },
       error(response) {
@@ -134,9 +160,21 @@ export class TrainingComponent implements OnInit {
       typeOfTraining: "",
       from: "",
       to: "",
+      file:'',
     
     };
   }
+  selectedFile: File | null = null; 
+  onFileSelected(event: any) { 
+   
+    const file: File = event.target.files[0]; 
+    const reader = new FileReader(); 
+    reader.onload = () => { 
+        const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
+        this.training.file = base64String; 
+    }; 
+    reader.readAsDataURL(file); 
+  } 
   editTraining(training: Training): void {
     const contactToEdit = this.trainings.find(training => training.id === training.id);
     this.training = contactToEdit;

@@ -103,7 +103,7 @@ abortionLeaveDefaultBalance: 0,
 abortionLeaveRemainingBalance: 0,
 sickEndDate: '2023-07-21T08:09:41.138Z',
 sickStartDate: '2023-07-21T08:09:41.138Z',
-
+otherLeaveRemainingBalance:0,
 
 }
  
@@ -279,7 +279,7 @@ UnusedDays:0
     abortionLeaveRemainingBalance: this.otherleaveBalance.abortionLeaveRemainingBalance,
     sickEndDate: this.otherleaveBalance.sickEndDate,
     sickStartDate: this.otherleaveBalance.sickStartDate,
-  
+    otherLeaveRemainingBalance: this.otherleaveBalance.otherLeaveRemainingBalance,
   };
 
   this.otherleaveBalanceService.addOtherLeaveBalance(newotherLeaveBalance).subscribe({

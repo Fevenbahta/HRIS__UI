@@ -28,17 +28,6 @@
     padding-left: 10%;
     
   }
-  .select{
-    border-bottom: 1px solid #ced4da;
-    font-size: 13px;
-  }
-  // .custom-select{
-  //   border: 1px solid #ced4da; /* Add your desired border styles here */
-  //   border-radius: 4px; /* Optional: Add border radius for rounded corners */
-  // }
-  // .custom-select .mat-select-arrow {
-  //   display: none;
-  // }
 
     .form-field {
       position: relative;
@@ -81,5 +70,36 @@
     .file{
       color:#fcc034;
     font-weight: 400;
+    }
+    
+
+
+  .cardhead{
+      background-color: rgb(224, 224, 217);
+  }
+  
+    .select{
+      border-bottom: 1px solid #ced4da;
+      font-size: 14px;
+    }
+    .select2{
+      border: none;
+      border-bottom:1px solid #ced4da;
+      width:60%
+    }
+    .compact-table th {
+      font-size: 13px;
+      color: black;
+      font-weight:650; /* Adjust the font size as needed */
+    }
+    .compact-table tr {
+      font-size: 13px; /* Adjust the font size as needed */
+    }
+    
+    .compact-table th, .compact-table td {
+      padding: 4px 8px; 
+    }
+    td ,th{
+      white-space: nowrap; /* Prevent text wrapping */
     }
     

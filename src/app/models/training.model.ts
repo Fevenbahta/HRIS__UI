@@ -10,4 +10,5 @@ export interface Training{
   typeOfTraining: string,
   from: string,
   to: string,
+  file:string,
 }

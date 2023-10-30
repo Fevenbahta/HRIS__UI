@@ -21,13 +21,18 @@ import { PositionService } from 'app/service/position.service';
 })
 export class AdminLeaverequestComponent {
 
+
   employees:Employee[]=[];
   leaveTypes:LeaveType[]=[]
   leavePenddings:LeaveRequest[]=[]
   leavependding:LeaveRequest;
   leaveRejected: boolean = false;
   leaverejectStatus:string="Admin Reject";
+  leave:boolean= false;
 
+  fromDate: string; // Variable to store the "From" date
+  toDate: string;
+  filteredLeave:LeaveRequest[]=[]
   selectedLeaveType: string='';
   selectedEmployee: string='';
   divisions:Division[]= [];
@@ -36,14 +41,25 @@ export class AdminLeaverequestComponent {
 leaveApproved: boolean = false;
 leaveRequests:LeaveRequest[]=[]; 
 downloadFileUrl: string=''; 
-buttons = [ 
-  { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
+FileNull:boolean = false;
+id:string;
+buttons = [  
+  { label: 'Leave Request',
+  dropdownOptions: [
+    { label: ' Employee LeaveRequest Form ', route: '/leave/leave-request-form' }, 
+    { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+ 
+   ]},
+ // { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
   { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-  { label: ' Leave Approval ', route: '/leave/leave-approve' }, 
+ // { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+  { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
   { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
-  { label: 'Admin Leave Approval ', route: '/leave/leave-requests' }, 
+  { label: 'Admin Leave Approval ', route: '/leave/leave-requests' },
   { label: 'Approved Leaves ', route: '/leave/approvedleaves' }, 
-]; 
+
+
+];  
   constructor(    private leaveRequestservice: LeaveRequestService,
     private router: Router,
     private employeeService:EmployeeService,
@@ -100,7 +116,9 @@ buttons = [
 
 this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
   next: (leaveRequest) => {
+    this.leaveRequests=leaveRequest
     this.leavePenddings = leaveRequest
+    this.filteredLeave=leaveRequest
     ;
     console.log(leaveRequest)
   },
@@ -124,7 +142,7 @@ subscribe({
 
   fetchAndDisplayPDF(leave: LeaveRequest):void { 
     // Call your service method to fetch the PDF file  
-    const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
+    const leaveRequestToEdit = this.leavePenddings.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
     leaveRequestToEdit.leaveRequestId 
     this.leaveRequestservice.getLeaveRequestFile(leaveRequestToEdit.leaveRequestId) 
     
@@ -135,12 +153,14 @@ subscribe({
           window.open(this.downloadFileUrl, '_blank'); 
           //console.log(this.leaveRequest.leaveRequestId); 
            
+      
         }, 
          
-        (error) => { 
-          console.error('Error loading PDF:', error); 
-          // Handle the error, e.g., display an error message to the user. 
-        } 
+        (error) => {
+          this.FileNull=true
+          console.error('Error loading PDF:', error);
+         this.id= leaveRequestToEdit.leaveRequestId
+        }
       ); 
   } 
   
@@ -222,5 +242,8 @@ console.log("updated")
     });
   });
 }
+
+
+
 }
 

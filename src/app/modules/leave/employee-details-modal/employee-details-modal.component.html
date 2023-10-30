@@ -1,5 +1,17 @@
 <div class="custom-modal">
   <div class="col-md-12">
+     <div class="logo">
+            <a href="#" class="simple-text">
+                <div>
+                    <img  class="logo-img"src="/assets/img/ECXLogo.png"/>
+                </div>
+           
+                  
+            </a>
+            <h5>    ETHIOPIAN COMMODITY EXCHANGE</h5>
+            <P>Tel.+251 554 7010, Fax +251 554 7010, P.O.Box 17341 Alsam Chelelek Tower 2, Addis Ababa,Ethiopia www.ecx.com.et</P>
+     
+        </div>
     <div class="employee-details" *ngIf="employeeData ">
         <div class="container-fluid">
        
@@ -13,7 +25,31 @@
               <!-- Tables Column -->
            
                 <div class="row">
-                    <div class="col-md-6 card"> 
+                  
+                      <div class="col-md-6 card"> 
+                        <p class="card-head">Employee</p>
+                        <!-- Table for addresses -->
+                        <div class="table-responsive ">
+                          <table *ngIf="employeeData.addresses" class="table table-border table-striped col-md-6 compact-table">
+                            <thead>
+                              <tr>
+                                <th>First Name</th>
+                                <th>Sex</th>
+           
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngIf="employeeData.employee">
+                                <td>{{ employeeData.employee.firstName }}  {{ employeeData.employee.middleName }}  {{ employeeData.employee.lastName }}</td>
+                                <td>{{ employeeData.employee.sex }}</td>
+
+                           
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-6 card"> 
                     <p class="card-head">Contact</p>
                     <!-- Table for addresses -->
                     <div class="table-responsive ">
@@ -116,7 +152,7 @@
                     <p class="card-head">Employee Position</p>
                     <!-- Table for employee position -->
                     <div class="table-responsive">
-                      <table *ngIf="employeeData.employeePositions" class="table table-border table-striped  compact-table">
+                      <table *ngIf="employeeData.employeePostions" class="table table-border table-striped  compact-table">
                         <thead>
                           <tr>
                             <th>Division</th>
@@ -128,12 +164,12 @@
                         </thead>
                
             <tbody>
-              <tr *ngIf="employeeData.employeePositions">
-                <td>{{ getDivisionName(employeeData.employeePositions.divisionId) }}</td>
-                <td>{{ getPositionName(employeeData.employeePositions.position) }}</td>
-                <td>{{ getStepName(employeeData.employeePositions.stepId) }}</td>
-                <td>{{ getBranchName(employeeData.employeePositions.branchId) }}</td>
-                <td>{{ employeeData.employeePositions.startDate}}</td>
+              <tr *ngIf="employeeData.employeePostions">
+                <td>{{ getDivisionName(employeeData.employeePostions.divisionId) }}</td>
+                <td>{{ getPositionName(employeeData.employeePostions.position) }}</td>
+                <td>{{ getStepName(employeeData.employeePostions.stepId) }}</td>
+                <td>{{ getBranchName(employeeData.employeePostions.branchId) }}</td>
+                <td>{{ employeeData.employeePostions.startDate| date:'yyyy-MM-dd' }}</td>
               </tr>
             </tbody>
           </table> </div>

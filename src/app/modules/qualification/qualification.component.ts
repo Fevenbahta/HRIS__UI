@@ -49,6 +49,7 @@ export class QualificationComponent implements OnInit {
     to: "",
     salary: 0,
     reasonTermination: "",
+    file:"",
   };
 
   addEducationRequest: Education = {
@@ -65,6 +66,7 @@ export class QualificationComponent implements OnInit {
     nameOfInstitute: '',
     fieldOfStudy: '',
     eductionName: '',
+    file:"",
   };
 
   constructor(
@@ -135,6 +137,7 @@ this.workExperienceService.getAllWorkExperience()
           to: "",
           salary: 0,
           reasonTermination: "",
+          file:"",
         };
       },
       error(response) {
@@ -169,6 +172,7 @@ this.workExperienceService.getAllWorkExperience()
           nameOfInstitute: '',
           fieldOfStudy: '',
           eductionName: '',
+          file:"",
         };
       },
       error(response) {

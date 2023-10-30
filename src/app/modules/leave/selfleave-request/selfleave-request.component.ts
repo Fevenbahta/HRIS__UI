@@ -73,7 +73,7 @@ export class SelfleaveRequestComponent {
   leaveName: string='' 
   downloadFileUrl: string=''; 
   pdfUrl:string='' 
-  selectedEmployee: string='faa95e94-e32b-4bd3-8b6e-4b506ab70476'; 
+  selectedEmployee: string='bb6e36eb-253f-43ee-82b1-016af85d18ef'; 
   leaveRequestSaved: boolean = false; 
   leaveRequestUpdated: boolean = false; 
   employees:Employee[]=[]; 
@@ -94,9 +94,15 @@ export class SelfleaveRequestComponent {
   selectedFirstSupervisor:string='';
   postion :EmployeePosition;
   buttons = [  
-    { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
+    { label: 'Leave Request',
+    dropdownOptions: [
+      { label: ' Employee LeaveRequest Form ', route: '/leave/leave-request-form' }, 
+      { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
+   
+     ]},
+   // { label: ' Leave Request Form ', route: '/leave/leave-request-form' }, 
     { label: ' Leave Balance ', route: '/leave/leave-balance' }, 
-    { label: ' Self LeaveRequest Form ', route: '/leave/self-leave' }, 
+   // { label: ' Self LeaveRequest Form', route: '/leave/self-leave' }, 
     { label: ' Leave Approve ', route: '/leave/leave-approve' }, 
     { label: ' Employee Leave Balance ', route: '/leave/employeeleavebalance' }, 
     { label: 'Admin Leave Approval ', route: '/leave/leave-requests' },
@@ -104,7 +110,6 @@ export class SelfleaveRequestComponent {
 
 
   ];  
-  
   leaveRequest: LeaveRequest = { 
     pId: 0, 
     leaveRequestId:undefined, 
@@ -113,13 +118,13 @@ export class SelfleaveRequestComponent {
     updatedDate: "2023-07-26T06:13:52.512Z", 
     updatedBy: "", 
     status: 0, 
-    empId:'18B48DBC-152D-420C-8830-2B2E6FB78314', 
+    empId:'bb6e36eb-253f-43ee-82b1-016af85d18ef', 
     startDate: null, 
     endDate: null, 
     leaveTypeId: '', 
     leaveStatus: 'Pendding', 
     approvedBy:'', 
-    approvedDate:'', 
+    approveDate:undefined, 
     reason: '', 
     file:null, 
     employeePositionId:'',
@@ -452,7 +457,7 @@ console.log(this.leaveRequest.employeePositionId)
     leaveTypeId: '', 
     leaveStatus: 'Pendding', 
     approvedBy:'', 
-    approvedDate:'', 
+    approveDate:undefined, 
     reason: '', 
     file: null, 
     employeePositionId:'',
@@ -596,7 +601,7 @@ availableLeaveBalance(): void {
     const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.courtLeaveRemainingBalance; 
     } 
-    if( this.leaveName === "LeaveWithOutPay") 
+    if( this.leaveName === "Leave With Out Pay") 
     { 
     const selectedBalance = this.otherLeaveBalances.find((balance) => balance.empId === this.selectedEmployee) 
     this.selectedLeaveBalance=selectedBalance.leaveWotPayRemainingBalance; 
@@ -679,7 +684,7 @@ this.leaveRequest.endDate = selectedEndDate;
       leaveTypeId: '', 
       leaveStatus: 'Pendding', 
       approvedBy:'', 
-      approvedDate:'', 
+      approveDate:undefined, 
       reason: '', 
       file: '', 
       workingDays: 0, 

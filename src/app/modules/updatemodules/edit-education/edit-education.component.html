@@ -54,6 +54,13 @@
                         <mat-datepicker #toPicker></mat-datepicker>
                       </mat-form-field>
                     </div>
+                    <div class="col-md-4 mt-3 ">
+                      <label for="name" >Supporting File</label>
+                      <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+                      <!-- <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+                      <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+             -->
+                    </div>
                     </div>
                   </div> 
               
@@ -100,8 +107,8 @@
           <td>{{ getEducationName(education.eductionName)}}</td>
           <td>{{ education.nameOfInstitute }}</td>
           <td>{{ education.fieldOfStudy }}</td>
-          <td>{{ education.from }}</td>
-          <td>{{ education.to }}</td>
+          <td>{{ education.from | date:'yyyy-MM-dd' }}</td>
+          <td>{{ education.to | date:'yyyy-MM-dd' }}</td>
           <td>
             <button class="btn btn-sm btnedit" (click)="editEducation(education)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
               <mat-icon>edit</mat-icon></button>

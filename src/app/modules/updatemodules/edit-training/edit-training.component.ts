@@ -15,6 +15,10 @@ import { TrainingService } from 'app/service/training.service';
 })
 export class EditTrainingComponent implements OnInit {
   trainingId: string;
+  downloadFileUrl: string=''; 
+  pdfUrl:string='' 
+  FileNull:boolean = false;
+  id:string;
   training: Training = {
     pId: 0,
     id: undefined,
@@ -27,6 +31,7 @@ export class EditTrainingComponent implements OnInit {
     typeOfTraining: "",
     from: "",
     to: "",
+    file:"",
   
   };
  ;
@@ -102,7 +107,7 @@ export class EditTrainingComponent implements OnInit {
       typeOfTraining: "",
       from: "",
       to: "",
-    
+      file:"",
     };
   }
   editTraining(training: Training): void {
@@ -142,6 +147,38 @@ export class EditTrainingComponent implements OnInit {
       }
     });
   }
+  selectedFile: File | null = null; 
+  onFileSelected(event: any) { 
+   
+    const file: File = event.target.files[0]; 
+    const reader = new FileReader(); 
+    reader.onload = () => { 
+        const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
+        this.training.file = base64String; 
+    }; 
+    reader.readAsDataURL(file); 
+  } 
+  fetchAndDisplayPDF(training: Training): void {
+    const trainingToEdit = this.trainings.find(
+      (trainin) => trainin.id === training.id
+    );
+
+  
+    this.trainingService.getTrainingFile(trainingToEdit.id).subscribe(
+      (pdf: Blob) => {
+   
+        var file = new Blob([pdf], { type: 'application/pdf' });
+
+        this.downloadFileUrl = window.URL.createObjectURL(file);
+        window.open(this.downloadFileUrl, '_blank');    
+      },
+      (error) => {
+        this.FileNull=true
+        console.error('Error loading PDF:', error);
+       this.id= trainingToEdit.id
+      }
+    );
+  }
   
   addTraining() {
     this.training.empId = this.employeeIdService.employeeId;
@@ -178,6 +215,7 @@ export class EditTrainingComponent implements OnInit {
           typeOfTraining: "",
           from: "",
           to: "",
+          file:"",
         };
       },
       error(response) {

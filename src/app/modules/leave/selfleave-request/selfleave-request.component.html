@@ -1,9 +1,10 @@
 
 <app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
 
-<div class="col-md-11 main-body">
- 
-    <div class="card card-body">
+<!-- First Column -->
+<div class="col-md-11 ml-5">
+  <div class="card mb-5">
+    <div class="">
       <div class="card-header ">
         <h4 class="card-title">Leave Request</h4>
         <p class="card-category">Complete your Leave Request</p>
@@ -21,7 +22,7 @@
             </div> -->
             <div class="col-md-4">
                              
-              <label>Employee Position</label>
+              <label>Employee Position</label><br>
               <input class="form-field select2" placeholder=" " name="selectedPosition"
               required [(ngModel)]="selectedPosition" [disabled]="true">
                 <!-- Use *ngFor on mat-option to loop through departments -->
@@ -31,7 +32,7 @@
           </div>
           <div class="col-md-4">
                              
-            <label>Department</label>
+            <label>Department</label><br>
             <input class="form-field select2" placeholder=" " name="selectedEmployeeDepartment"
             required [(ngModel)]="selectedEmployeeDepartment" [disabled]="true">
               <!-- Use *ngFor on mat-option to loop through departments -->
@@ -147,7 +148,7 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Status</th>
-                    <th>Approved By</th>
+              
                     <th>Approved Date</th>
                     <th></th>
                   </tr>
@@ -162,8 +163,8 @@
                     <td>{{ leaveRequest.startDate | date:'yyyy-MM-dd' }}</td>
                     <td>{{ leaveRequest.endDate | date:'yyyy-MM-dd' }}</td>
                     <td>{{ leaveRequest.leaveStatus }}</td>
-                    <td>{{ leaveRequest.approvedBy }}</td>
-                    <td>{{ leaveRequest.approvedDate | date:'yyyy-MM-dd' }}</td>
+            
+                    <td>{{ leaveRequest.approveDate | date:'yyyy-MM-dd' }}</td>
                   
                     <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveRequest.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                       <mat-icon>info</mat-icon> 
@@ -172,7 +173,7 @@
                       style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
                       <mat-icon>get_app</mat-icon></button>
                       <mat-error  *ngIf="FileNull && id == leaveRequest.leaveRequestId"
-                      class="  pull-right">No File</mat-error >
+                      class="pull-right">No File</mat-error >
     
                   </td>
                     <td>

@@ -70,7 +70,7 @@ function dateRangeValidator(selectedLeaveBalance: number): ValidatorFn {
 export class LeaverequestComponent { 
   showLeaveForm: boolean = false;
   currentSupervisorPosition:string
-  currentEmployee:string='17320a72-e4bd-46b9-894a-dfe5bf3d967c';
+  currentEmployee:string='b59d425a-bc45-4992-8844-5e7f76b2dc68';
   leaveRequestForm: FormGroup;
   positionsOfSupervisor:string[]=[]
   departments:Department[]=[]
@@ -89,7 +89,9 @@ export class LeaverequestComponent {
   leaveName: string='' 
   downloadFileUrl: string=''; 
   pdfUrl:string='' 
-  selectedEmployee: string='b6c5a662-34e3-4acf-845e-b9524dceaf14'; 
+  FileNull:boolean = false;
+  id:string;
+  selectedEmployee: string=''; 
   leaveRequestSaved: boolean = false; 
   leaveRequestUpdated: boolean = false; 
   employees:Employee[]=[]; 
@@ -102,8 +104,8 @@ export class LeaverequestComponent {
   fileData: string = ''; 
     IsPdf:boolean = false;
   IsBig:boolean = false;
-  FileNull:boolean = false;
-  id:string;
+ 
+  
   selectedFullPay:number;
   selectedHalfPay:number;
   selectedWoPay:number;
@@ -137,13 +139,13 @@ export class LeaverequestComponent {
     updatedDate: "2023-07-26T06:13:52.512Z", 
     updatedBy: "", 
     status: 0, 
-    empId:'b6c5a662-34e3-4acf-845e-b9524dceaf14', 
+    empId:'', 
     startDate: null, 
     endDate: null, 
     leaveTypeId: '', 
     leaveStatus: 'Pendding', 
     approvedBy:'', 
-    approvedDate:'', 
+  approveDate:undefined, 
     reason: '', 
     file:"", 
     employeePositionId:'',
@@ -154,7 +156,7 @@ export class LeaverequestComponent {
     departmentId:""
   }; 
  
-   selectedFile: File | null = null; 
+  
  
  
   constructor( 
@@ -209,7 +211,7 @@ this.departmentService.getAllDepartment()
     this.leaveRequestservice.getAllLeaveRequest().subscribe({ 
       next: (leaveRequestd) => { 
         this.leaveRequests = leaveRequestd.filter(leave=>leave.createdBy==this.currentEmployee); 
-         
+         console.log( this.leaveRequests)
 
       }, 
       error: (response) => { 
@@ -354,6 +356,7 @@ subscribe({
     const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId); 
     return leaveType ? leaveType.leaveTypeName : ''; 
   } 
+  selectedFile: File | null = null; 
   onFileSelected(event: any) { 
    
     const file: File = event.target.files[0]; 
@@ -432,13 +435,13 @@ console.log(this.leaveRequest.employeePositionId)
     updatedDate: "2023-07-26T06:13:52.512Z", 
     updatedBy: "", 
     status: 0, 
-    empId:'b6c5a662-34e3-4acf-845e-b9524dceaf14', 
+    empId:'', 
     startDate: null, 
     endDate: null, 
     leaveTypeId: '', 
     leaveStatus: 'Pendding', 
     approvedBy:'', 
-    approvedDate:'', 
+  approveDate:undefined, 
     reason: '', 
     file: "", 
     employeePositionId:'',
@@ -658,13 +661,13 @@ this.leaveRequest.endDate = selectedEndDate;
       updatedDate: "2023-07-26T06:13:52.512Z", 
       updatedBy: "", 
       status: 0, 
-      empId:'b6c5a662-34e3-4acf-845e-b9524dceaf14', 
+      empId:'', 
       startDate: null, 
       endDate: null, 
       leaveTypeId: '', 
       leaveStatus: 'Pendding', 
       approvedBy:'', 
-      approvedDate:'', 
+    approveDate:undefined, 
       reason: '', 
       file: '', 
       workingDays: 0, 
@@ -676,7 +679,6 @@ this.leaveRequest.endDate = selectedEndDate;
    
     };} 
   
- 
  
  
  

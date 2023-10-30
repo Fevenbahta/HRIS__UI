@@ -4,11 +4,16 @@ import { Department } from 'app/models/education.model';
 import { CombinedEmployeeData } from 'app/models/employee.model';
 import { Branch, Division, EducationLevel, EmployeePosition, Grade, Position, Step } from 'app/models/job-description.model';
 import { LeaveType } from 'app/models/leaveType.model';
+import { BranchService } from 'app/service/branch.service';
+import { DepartmentService } from 'app/service/department.service';
+import { DivisionService } from 'app/service/division.service';
 
 import { EmployeePositionService } from 'app/service/employee-position';
 import { EmployeeService } from 'app/service/employee.service';
+import { GradeService } from 'app/service/grade.service';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
 import { PositionService } from 'app/service/position.service';
+import { StepService } from 'app/service/step.service';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 
 @Component({
@@ -28,7 +33,13 @@ export class EmployeeDetailsModalComponent {
   constructor(
     private employeeservice: EmployeeService,
     public dialogRef: MatDialogRef<EmployeeDetailsModalComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: any,private postionService: PositionService, private employeePosition:EmployeePositionService) {} // Replace with your actual backend service
+      @Inject(MAT_DIALOG_DATA) public data: any,
+      private divisionservice: DivisionService,
+      private departmentservice: DepartmentService,
+       private positionservice:PositionService ,
+        private stepservice: StepService,
+        private levelService: GradeService,
+      private branchservice: BranchService,) {} // Replace with your actual backend service
 
       selectedEmployee: string;
       selectedPosition:string;
@@ -36,7 +47,7 @@ export class EmployeeDetailsModalComponent {
       selectedBranch:string;
       division:Division[];
       positions:Position[]
-      employePosition:EmployeePosition[]
+      employeePostions:EmployeePosition[]
     
 
 
@@ -44,7 +55,61 @@ export class EmployeeDetailsModalComponent {
   this.dialogRef.close(false);
 }
 ngOnInit(): void {
-  
+  this.branchservice.getAllBranch()
+.subscribe({
+  next: (branchs) => {
+    this.branches=branchs;
+  },
+  error(response){
+    console.log(response)
+  }
+});
+  this.positionservice.getAllPosition()
+  .subscribe({
+    next: (positions) => {
+      this.positions=positions;
+      
+    },
+    error(response){
+      console.log(response)
+    }
+  });
+  this.divisionservice.getAllDivisions()
+  .subscribe({
+    next: (division) => {
+      this.divisions=division;
+    },
+    error(response){
+      console.log(response)
+    }
+  });
+  this.departmentservice.getAllDepartment()
+  .subscribe({
+    next: (department) => {
+      this.departments=department;
+    },
+    error(response){
+      console.log(response)
+    }
+  });
+  this.levelService.getAllGrade()
+  .subscribe({
+    next: (level) => {
+      this.levels=level;
+    },
+    error(response){
+      console.log(response)
+    }
+  });
+  this.stepservice.getAllStep()
+.subscribe({
+  next: (steps) => {
+    this.steps=steps;
+  },
+  error(response){
+    console.log(response)
+  }
+});
 }
 
 private isOpen = new BehaviorSubject<boolean>(false);
@@ -98,7 +163,7 @@ openModal(empId: string) {
       this.employeeData = data;
       console.log('Employee:', data.employee);
       console.log('Addresses:', data.addresses);
-      console.log('Emergency Contacts:', data.spouses);
+      console.log('Emergency Contacts:', data.employeePostions);
     
      
     },

@@ -17,7 +17,10 @@ export class EditWorkexperienceComponent {
   workExperienceSaved: boolean = false;
 
   workExperienceId: string;
-
+  downloadFileUrl: string=''; 
+  pdfUrl:string='' 
+  FileNull:boolean = false;
+  id:string;
   workExperience: WorkExperience = {
     pId: 0,
     id: undefined,
@@ -34,6 +37,7 @@ export class EditWorkexperienceComponent {
     to: "",
     salary: 0,
     reasonTermination: "",
+    file:"",
   };
 ;
   workExperiences: WorkExperience[] = [];
@@ -74,7 +78,38 @@ export class EditWorkexperienceComponent {
       })
     
   }
+  selectedFile: File | null = null; 
+  onFileSelected(event: any) { 
+   
+    const file: File = event.target.files[0]; 
+    const reader = new FileReader(); 
+    reader.onload = () => { 
+        const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
+        this.workExperience.file = base64String; 
+    }; 
+    reader.readAsDataURL(file); 
+  } 
+  fetchAndDisplayPDF(workExperience: WorkExperience): void {
+    const workExperienceToEdit = this.workExperiences.find(
+      (workExperience) => workExperience.id === workExperience.id
+    );
+
   
+    this.workExperienceService.getWorkExperienceFile(workExperienceToEdit.id).subscribe(
+      (pdf: Blob) => {
+   
+        var file = new Blob([pdf], { type: 'application/pdf' });
+
+        this.downloadFileUrl = window.URL.createObjectURL(file);
+        window.open(this.downloadFileUrl, '_blank');    
+      },
+      (error) => {
+        this.FileNull=true
+        console.error('Error loading PDF:', error);
+       this.id= workExperienceToEdit.id
+      }
+    );
+  }
   updateWorkExperience(): void {
 
     // Assuming the WorkExperienceService has a method to update work experience
@@ -116,6 +151,7 @@ export class EditWorkexperienceComponent {
       to: "",
       salary: 0,
       reasonTermination: "",
+      file:"",
     };
   }
 
@@ -188,6 +224,7 @@ export class EditWorkexperienceComponent {
           to: "",
           salary: 0,
           reasonTermination: "",
+          file:"",
         };
       },
       error(response) {

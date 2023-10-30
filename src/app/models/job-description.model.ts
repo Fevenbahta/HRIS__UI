@@ -71,8 +71,8 @@ export interface EmployeePosition{
   branchId: string,
   position: string,
   status:0,
-  startDate: String,
-  endDate: String
+  startDate: string,
+  endDate: string
 createdBy: string,
 createdDate: string,
 updatedDate: string,

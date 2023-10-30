@@ -14,6 +14,7 @@ export interface WorkExperience{
   to: string,
   salary: number,
   reasonTermination: string,
+  file:string,
 
 }
 export interface Education{
@@ -30,4 +31,5 @@ export interface Education{
   nameOfInstitute: string,
   fieldOfStudy: string,
   eductionName: string,
+  file:string,
 }

@@ -54,7 +54,7 @@ promotionRelations:PromotionRelation[]=[];
   updatedBy: "",
   status: 0,
 vacancyId:undefined,
-empId:"cdd54097-fb5e-44e2-bfd1-dca6a169bbbd",
+empId:"2b500348-4371-4f1a-a62d-461d9f822e25",
 approvedDate: "2023-09-13T07:12:00.970Z",
 promotionStatus: "Pendding",
 
@@ -62,7 +62,7 @@ promotionStatus: "Pendding",
 
   ngOnInit(): void { 
 
-    // this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6a169bbbd").subscribe({
+    // this.promotionRelationService.getPromotionRelation("2b500348-4371-4f1a-a62d-461d9f822e25").subscribe({
     //   next: (promotionRelation) => {
     //     this.promotionRelations = promotionRelation
        
@@ -85,7 +85,7 @@ promotionStatus: "Pendding",
     });
     // Assuming this.vacancies and this.promotionRelations are arrays of objects
 
-this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6a169bbbd").subscribe({
+this.promotionRelationService.getPromotionRelation("2b500348-4371-4f1a-a62d-461d9f822e25").subscribe({
   next: (promotionRelation) => {
     this.promotionRelations = promotionRelation;
 
@@ -157,7 +157,7 @@ this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6
   }
   
   apply(vacancy :Vacancy){
-  this.promotionRelation.empId="cdd54097-fb5e-44e2-bfd1-dca6a169bbbd";
+  this.promotionRelation.empId="2b500348-4371-4f1a-a62d-461d9f822e25";
   this.promotionRelation.vacancyId=vacancy.vacancyId;
   this.promotionRelation.promotionStatus="Applied";
     this.promotionRelationService.addPromotionRelation(this.promotionRelation)
@@ -171,7 +171,7 @@ this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6
 
 
       
-    this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6a169bbbd").subscribe({
+    this.promotionRelationService.getPromotionRelation("2b500348-4371-4f1a-a62d-461d9f822e25").subscribe({
       next: (promotionRelation) => {
         this.promotionRelations = promotionRelation
        
@@ -192,7 +192,7 @@ this.promotionRelationService.getPromotionRelation("cdd54097-fb5e-44e2-bfd1-dca6
           updatedBy: "",
           status: 0,
         vacancyId:undefined,
-        empId:"cdd54097-fb5e-44e2-bfd1-dca6a169bbbd",
+        empId:"2b500348-4371-4f1a-a62d-461d9f822e25",
         approvedDate: "2023-09-13T07:12:00.970Z",
         promotionStatus: "Pendding",
         };

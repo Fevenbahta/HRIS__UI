@@ -18,6 +18,10 @@ export class EditEducationComponent {
   educationUpdated: boolean = false;
   educationSaved:boolean = false;
   educationId: string; 
+  downloadFileUrl: string=''; 
+  pdfUrl:string='' 
+  FileNull:boolean = false;
+  id:string;
   education: Education = {
     pId: 0,
     id:undefined,
@@ -32,6 +36,7 @@ export class EditEducationComponent {
     nameOfInstitute: '',
     fieldOfStudy: '',
     eductionName: '',
+    file:"",
   };
   educations: Education[] = [];
   educationlevels: EducationLevel[] = [];
@@ -87,6 +92,38 @@ export class EditEducationComponent {
   
 
   }
+  selectedFile: File | null = null; 
+  onFileSelected(event: any) { 
+   
+    const file: File = event.target.files[0]; 
+    const reader = new FileReader(); 
+    reader.onload = () => { 
+        const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
+        this.education.file = base64String; 
+    }; 
+    reader.readAsDataURL(file); 
+  } 
+  fetchAndDisplayPDF(education: Education): void {
+    const EducationToEdit = this.educations.find(
+      (educatio) => educatio.id === education.id
+    );
+
+  
+    this.educationService.getEducationFile(EducationToEdit.id).subscribe(
+      (pdf: Blob) => {
+   
+        var file = new Blob([pdf], { type: 'application/pdf' });
+
+        this.downloadFileUrl = window.URL.createObjectURL(file);
+        window.open(this.downloadFileUrl, '_blank');    
+      },
+      (error) => {
+        this.FileNull=true
+        console.error('Error loading PDF:', error);
+       this.id= EducationToEdit.id
+      }
+    );
+  }
 
   updateEducation(): void { 
     console.log(this.education)
@@ -127,6 +164,7 @@ export class EditEducationComponent {
       nameOfInstitute: '',
       fieldOfStudy: '',
       eductionName: '',
+      file:"",
     };
   }
 
@@ -206,6 +244,7 @@ export class EditEducationComponent {
           nameOfInstitute: '',
           fieldOfStudy: '',
           eductionName: '',
+          file:"",
         };
       },
       error(response) {

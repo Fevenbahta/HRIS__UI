@@ -50,7 +50,7 @@ export interface CombinedEmployeeData {
   employee: Employee;
   addresses: Contact;
   emergencyContacts: EmergencyContact[];
-  employeePositions: EmployeePosition;
+  employeePostions: EmployeePosition;
   educations: Education[];
   trainings: Training[];
   spouses:Spouse[];

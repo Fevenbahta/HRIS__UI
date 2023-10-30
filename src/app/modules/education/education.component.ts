@@ -22,7 +22,10 @@ export class EducationComponent {
   educationUpdated:boolean=false;
   educationSaved: boolean = false;
   workExperienceSaved: boolean = false;
-
+  downloadFileUrl: string=''; 
+  pdfUrl:string='' 
+  FileNull:boolean = false;
+  id:string;
   educations: Education[] = [];
  
 
@@ -31,6 +34,18 @@ export class EducationComponent {
     { label: '  List Employee ', route: "/employee-list" },
     {label:'Employee History', route:'/history'}
   ];
+  selectedFile: File | null = null; 
+  onFileSelected(event: any) { 
+   
+    const file: File = event.target.files[0]; 
+    const reader = new FileReader(); 
+    reader.onload = () => { 
+        const base64String = reader.result.toString().split(',')[1]; // Extract the base64 part 
+        this.education.file = base64String; 
+    }; 
+    reader.readAsDataURL(file); 
+  } 
+
 
 
   education: Education = {
@@ -47,6 +62,7 @@ export class EducationComponent {
     nameOfInstitute: '',
     fieldOfStudy: '',
     eductionName: '',
+    file:'',
   };
 
   constructor(
@@ -90,9 +106,10 @@ subscribe({
   addEducation() {
     this.education.empId = this.employeeIdService.employeeId;
     this.education.eductionName = this.selectedEducationLevel;
+
     this.educationservice.addEducation(this.education).subscribe({
       next: (employee) => {
-        
+        console.log("sss")
       //  this.router.navigate(['/employee-registration/work-experience']); 
 
       this.educationSaved=true
@@ -125,6 +142,7 @@ subscribe({
           nameOfInstitute: '',
           fieldOfStudy: '',
           eductionName: '',
+          file:'',
         };
       },
       error(response) {
@@ -132,16 +150,39 @@ subscribe({
       }
     });
   }
+  fetchAndDisplayPDF(education: Education): void {
+    const EducationToEdit = this.educations.find(
+      (educatio) => educatio.id === education.id
+    );
+
+  
+    this.educationservice.getEducationFile(EducationToEdit.id).subscribe(
+      (pdf: Blob) => {
+   
+        var file = new Blob([pdf], { type: 'application/pdf' });
+
+        this.downloadFileUrl = window.URL.createObjectURL(file);
+        window.open(this.downloadFileUrl, '_blank');    
+      },
+      (error) => {
+        this.FileNull=true
+        console.error('Error loading PDF:', error);
+       this.id= EducationToEdit.id
+      }
+    );
+  }
   updateEducation(): void { 
-    console.log(this.education)
+  
    
     this.education.eductionName = this.selectedEducationLevel;
+    this.education.file
     this.educationservice.updateEducation(this.education, this.education.id).subscribe({
       next: () => {
+ 
         this.educationUpdated = true;
         setTimeout(() => {
   this.educationUpdated = false;
-        }, 
+        }, 2000
         )
         this.educationservice.getAllEducation().subscribe({
           next: (educations) => {
@@ -171,9 +212,9 @@ subscribe({
       nameOfInstitute: '',
       fieldOfStudy: '',
       eductionName: '',
+      file:'',
     };
   }
-
 
 
 

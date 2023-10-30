@@ -20,9 +20,11 @@ export class TrainingService {
   getAllTraining(): Observable<Training[]> {
     return this.http.get<Training[]>(this.apiUrlService.apiUrl + 'Training');
   }
-  getTraining(id:string): Observable<Training> {
-    return this.http.get<Training>(this.apiUrlService.apiUrl + 'Training/'+id);
+  getTrainingFile(Id: string): Observable<Blob> {
+    const url = this.apiUrlService.apiUrl +'Training/fileId/'+Id;
+    return this.http.get(url, { responseType: 'blob' });
   }
+
 
   addTraining(addTrainingRequest:Training): Observable<Training> {
     // addEmployeeRequest.id="0000000-0000-0000-0000-000000000000"

@@ -43,7 +43,7 @@
                           </div>
                           
                           <div class="col-md-4">
-                            <label>Department</label>
+                            <label>Department</label><br>
                             <input class="form-field select2" placeholder="Department" name="department"
                             required [(ngModel)]="department" [disabled]="true">
                           </div>
@@ -97,7 +97,7 @@
                                   </div>
            
                                   <div class="col-md-4">
-                                  <label>Grade Level</label>
+                                  <label>Grade Level</label><br>
                                     <input class="form-field select2" placeholder="Level" name="selectedLevel"
                                     required [(ngModel)]="selectedLevel" [disabled]="true">
                                   </div>
@@ -165,7 +165,7 @@
         <td>{{ getStepName(employeePosition.stepId) }}</td>
         <td>{{ getBranchName(employeePosition.branchId) }}</td>
       
-        <td>{{ employeePosition.startDate}}</td>
+        <td>{{ employeePosition.startDate | date:'yyyy-MM-dd' }}</td>
 
         <td>
           <button class="btn btn-sm btnedit" (click)="editEmployeePosition(employeePosition)">

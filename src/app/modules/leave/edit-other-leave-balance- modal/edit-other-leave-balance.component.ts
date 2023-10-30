@@ -65,7 +65,7 @@ successMessage: string | null = null; // Add this property
      
       createdDate: '2023-07-21T08:09:41.138Z',
 updatedDate: '2023-07-21T08:09:41.138Z',
-      
+otherLeaveRemainingBalance: 0,
       }
     
       ngOnInit(): void{

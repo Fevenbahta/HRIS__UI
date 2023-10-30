@@ -1,8 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Position } from 'app/models/job-description.model';
 import { LeaveType } from 'app/models/leaveType.model';
 import { CombinedLeaveData } from 'app/models/leaverequestmodel';
 import { LeaveRequestService } from 'app/service/leaveRequest.service';
+import { LeaveTypeService } from 'app/service/leaveType.service';
+import { PositionService } from 'app/service/position.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -12,6 +15,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class EmployeeLeaveDetailComponent {
   constructor(
+    private positionservice:PositionService ,
+    private leavetypeservice: LeaveTypeService,
     private leaveService: LeaveRequestService,
     public dialogRef: MatDialogRef<EmployeeLeaveDetailComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any, private leaveRequestService: LeaveRequestService) {} // Replace with your actual backend service
@@ -21,16 +26,36 @@ export class EmployeeLeaveDetailComponent {
       private isOpen = new BehaviorSubject<boolean>(false);
 isOpen$ = this.isOpen.asObservable();
 
+positions:Position[]= [];
+ngOnInit(): void {
+  this.leavetypeservice.getAllLeaveType().
+  subscribe({
+    next: (leaveType) => {
+    //this.leaveRequest.leaveTypeId = this.selectedLeaveType;
+      this.leaveTypes= leaveType
+      ;
+    },
+    error: (response) => {
+      console.log(response);
+    }
+  });   
 
-
+  this.positionservice.getAllPosition()
+  .subscribe({
+    next: (positions) => {
+      this.positions=positions;
+    
+      
+    },
+    error(response){
+      console.log(response)
+    }
+  });}
 
 public employeeName = new BehaviorSubject<string | null>(null); // Corrected property name
 employeeName$ = this.employeeName.asObservable();
 leaveTypes:LeaveType[]=[] 
-getLeaveTypeName(leavetypeId: string): string { 
-  const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId); 
-  return leaveType ? leaveType.leaveTypeName : ''; 
-} 
+
 
 
       leaveData: CombinedLeaveData;
@@ -41,7 +66,7 @@ openModal(empId: string) {
       this.leaveData = data;
       console.log('Employee:', data.employee);
       console.log('LeaveRequest:', data.leaveRequests);
-      console.log('Annual:', data.annualLeaveBalances);
+      console.log('Annual:', data.otherLeaveBalances);
     
      
     },
@@ -63,5 +88,15 @@ printEmployeeDetails() {
   // You can use browser-specific printing techniques or a library like ngx-print to handle printing.
   window.print();
   console.log(this.selectedEmployee);
+}
+getPositionName(positionId: string): string {
+
+  const position = this.positions.find((position) => position.positionId === positionId);  
+  
+  return position ? position.name : '';
+}
+getLeaveTypeName(leavetypeId: string): string {
+  const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId);
+  return leaveType ? leaveType.leaveTypeName : '';
 }
 }

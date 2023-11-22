@@ -69,8 +69,6 @@ function dateRangeValidator(selectedLeaveBalance: number): ValidatorFn {
 }) 
 export class LeaverequestComponent { 
   showLeaveForm: boolean = false;
-  currentSupervisorPosition:string
-  currentEmployee:string='b59d425a-bc45-4992-8844-5e7f76b2dc68';
   leaveRequestForm: FormGroup;
   positionsOfSupervisor:string[]=[]
   departments:Department[]=[]
@@ -111,6 +109,9 @@ export class LeaverequestComponent {
   selectedWoPay:number;
   positions:Position[]= [];
   divisions:Division[]= [];
+  currentSupervisorPosition:string
+  currentEmployee:string='b59d425a-bc45-4992-8844-5e7f76b2dc68';
+  
   assignedSupervisors:AssignSupervisor[]=[];
   selectedFirstSupervisor:string='';
   buttons = [  

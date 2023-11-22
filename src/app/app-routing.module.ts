@@ -50,7 +50,8 @@ import { HolidaysComponent } from './modules/Admin module/holidays/holidays.comp
 import { ApprovedleavesComponent } from './modules/leave/approvedleaves/approvedleaves.component';
 import { SelfleaveRequestComponent } from './modules/leave/selfleave-request/selfleave-request.component';
 import { AttendanceComponent } from './modules/attendace/attendance/attendance.component';
-
+import { NewattendanceComponent } from './modules/newattendance/newattendance.component';
+import { OtherspromotionComponent } from './modules/Promotion/otherspromotion/otherspromotion.component';
 
 const routes: Routes = [
   {path: '',
@@ -153,6 +154,8 @@ component:VacancymanagmentComponent},
 component:VacancyComponent},
 {path:'approvepromotion',
 component:ApprovepromotionComponent},
+{path:'otherspromotion',
+component:OtherspromotionComponent},
 {path:'holiday',
 component:HolidaysComponent},
 {path:'attendance',

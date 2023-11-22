@@ -26,6 +26,10 @@ export class PromotionRelationService {
     
     return this.http.get<PromotionRelation[]>(this.apiUrlService.apiUrl + 'promotionRelation/status/'+promotionStatus)
   }
+  getPromotionFile(vacancyid: string, empid: string): Observable<Blob> {
+    const url = this.apiUrlService.apiUrl +'PromotionRelation/file/'+vacancyid + '/' +empid;
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
   getPromotionRelation(id:string): Observable<PromotionRelation[]> {
     return this.http.get<PromotionRelation[]>(this.apiUrlService.apiUrl + 'PromotionRelation/'+id);

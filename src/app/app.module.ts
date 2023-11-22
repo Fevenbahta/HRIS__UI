@@ -35,15 +35,21 @@ import { VacancymanagmentComponent } from './modules/Promotion/vacancymanagment/
 import { ActingAssigmentComponent } from './modules/acting-assigment/acting-assigment.component';
 import { ApprovepromotionComponent } from './modules/Promotion/approvepromotion/approvepromotion.component';
 import { EmployeeLeaveDetailComponent } from './modules/leave/employee-leave-detail-modal/employee-leave-detail.component';
-
-
-
+import { EvaluationModalComponent } from './modules/Promotion/evaluation-modal/evaluation-modal.component';
+import { NewattendanceComponent } from './modules/newattendance/newattendance.component';
+import { ResultModalComponent } from './modules/Promotion/result-modal/result-modal.component';
+import { ReportComponent } from './modules/attendace/report/report.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ReportComponent,
+
+
+
+
    
 
 

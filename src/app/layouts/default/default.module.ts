@@ -93,6 +93,10 @@ import { ApprovedleavesComponent } from 'app/modules/leave/approvedleaves/approv
 import { SelfleaveRequestComponent } from 'app/modules/leave/selfleave-request/selfleave-request.component';
 import { AttendanceComponent } from 'app/modules/attendace/attendance/attendance.component';
 import { EmployeeLeaveDetailComponent } from 'app/modules/leave/employee-leave-detail-modal/employee-leave-detail.component';
+import { NewattendanceComponent } from 'app/modules/newattendance/newattendance.component';
+import { EvaluationModalComponent } from 'app/modules/Promotion/evaluation-modal/evaluation-modal.component';
+import { ResultModalComponent } from 'app/modules/Promotion/result-modal/result-modal.component';
+import { OtherspromotionComponent } from 'app/modules/Promotion/otherspromotion/otherspromotion.component';
 
 
 
@@ -155,11 +159,13 @@ ApprovepromotionComponent,
 EditLeaveBalanceModalComponent,
 HolidaysComponent,
 AttendanceComponent,
-
 EditOtherLeaveBalanceComponent, 
 ApprovedleavesComponent,
 SelfleaveRequestComponent,
-
+NewattendanceComponent,
+EvaluationModalComponent,
+ResultModalComponent,
+OtherspromotionComponent
   ],
 
   imports: [

@@ -18,8 +18,9 @@
           <th>Employee</th> 
           <th>Position</th>
           <th>Grade</th>
+          <th>Branch</th>
           <th>startDate</th>
-   
+          <th>Evaluation</th>
    
         </tr>
       </thead>
@@ -29,9 +30,12 @@
           <td>{{ capitalizeFirstLetter(getEmployeeName(promotion.empId ))}}</td>  
             <td>{{ getPositionName(promotion.positionId)}}</td>
           <td>{{ getGradeName(promotion.levelId)}}</td>
+          <td>{{ getBranchName(promotion.branchId)}}</td>
           <td>{{ promotion.startDate| date:'yyyy-MM-dd' }}</td>
-      
-     
+      <td>{{getEvaluation(promotion.empId)}}</td>
+      <button class="btn btn-sm btnedit" (click)="openResultModal(promotion.empId,promotion.vacancyId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+        <mat-icon>info</mat-icon> 
+      </button>
         </tr>
       </tbody>
     </table>

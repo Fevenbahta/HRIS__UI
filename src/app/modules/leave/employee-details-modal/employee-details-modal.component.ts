@@ -147,7 +147,7 @@ getBranchName(branchId: string): string {
   const branch = this.branches.find((branch) => branch.id === branchId);
   return branch ? branch.name : '';
 }
-ge
+
 getPositionName(positionId: string): string {
   
   const position = this.positions.find((g) => g.positionId === positionId);

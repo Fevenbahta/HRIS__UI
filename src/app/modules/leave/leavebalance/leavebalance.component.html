@@ -58,10 +58,7 @@
           <th>Annual Remainig</th>
           <th>Previous Annual</th>
           <th>Previous Two Year</th>
-
-     
-
-          <th>UnusedDays</th>
+ <th>UnusedDays</th>
 
          
   
@@ -77,8 +74,7 @@
           <td>{{ leaveBalance.annualRemainingBalance }}</td>
           <td>{{ leaveBalance.previousYearAnnualBalance }}</td>
           <td>{{ leaveBalance.previousTwoYear }}</td>
-
-          <td>{{ leaveBalance.UnusedDays }}</td>
+          <td>{{ leaveBalance.unusedDays }}</td>
 
           <td>      <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveBalance.empId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
             <mat-icon>edit</mat-icon>
@@ -123,34 +119,34 @@
               </thead>
               <tbody>
                 <!-- Use *ngFor to loop through the leaveBalances array and display each employee position -->
-                <tr *ngFor="let otherLeaveBalance of filteredotherLeaveBalances"  >
-                    <td>{{ getEmployeeName( otherLeaveBalance.empId) }}</td> 
+                <tr *ngFor="let otherLeave of filteredotherLeaveBalances"  >
+                    <td>{{ getEmployeeName( otherLeave.empId) }}</td> 
                      
 
-                  <td>{{ otherLeaveBalance.sickRemainingBalance }}</td>
-                  <td>{{ otherLeaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
-                  <td>{{ otherLeaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
+                  <td>{{ otherLeave.sickRemainingBalance }}</td>
+                  <td>{{ otherLeave.startDate| date:'yyyy-MM-dd' }}</td>
+                  <td>{{ otherLeave.endDate| date:'yyyy-MM-dd' }}</td>
          
-                  <td>{{ otherLeaveBalance.marriageRemainingBalance}}</td>
+                  <td>{{ otherLeave.marriageRemainingBalance}}</td>
                   
                 
-                  <td>{{ otherLeaveBalance.paternityRemainingBalance}}</td>
+                  <td>{{ otherLeave.paternityRemainingBalance}}</td>
               
                
              
-                      <td>{{ otherLeaveBalance.maternityRemainingBalance}}</td>
+                      <td>{{ otherLeave.maternityRemainingBalance}}</td>
                      
-                      <td>{{ otherLeaveBalance.compassinateRemainingBalance}}</td>
+                      <td>{{ otherLeave.compassinateRemainingBalance}}</td>
                    
-                      <td>{{ otherLeaveBalance.educationRemainingBalance}}</td>
+                      <td>{{ otherLeave.educationRemainingBalance}}</td>
                 
-                      <td>{{ otherLeaveBalance.leaveWotPayRemainingBalance}}</td>
+                      <td>{{ otherLeave.leaveWotPayRemainingBalance}}</td>
                   
-                      <td>{{ otherLeaveBalance.courtLeaveRemainingBalance}}</td>
+                      <td>{{ otherLeave.courtLeaveRemainingBalance}}</td>
                      
-                      <td>{{ otherLeaveBalance.abortionLeaveRemainingBalance}}</td>
+                      <td>{{ otherLeave.abortionLeaveRemainingBalance}}</td>
                    
-                 <td>      <button class="btn btn-sm btnedit" (click)="openOtherLeaveDetailsModal(otherLeaveBalance.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                 <td>      <button class="btn btn-sm btnedit" (click)="openOtherLeaveDetailsModal(otherLeave.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                   <mat-icon>edit</mat-icon>
                 </button></td>
                 </tr>

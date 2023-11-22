@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Grade, Position } from 'app/models/job-description.model';
+import { Branch, Grade, Position } from 'app/models/job-description.model';
 import { Vacancy } from 'app/models/vacancy/vacancy.model';
+import { BranchService } from 'app/service/branch.service';
 import { GradeService } from 'app/service/grade.service';
 import { PositionService } from 'app/service/position.service';
 import { VacancyService } from 'app/service/vacancy.service';
@@ -20,11 +21,13 @@ export class VacancymanagmentComponent {
   vacancyUpdated: boolean = false;
 positions:Position[]=[];
 grades:Grade[]=[];
+branches:Branch[]=[];
 selectedPosition:string="";
+selectedBranch:string="";
 selectedGrade:string="";
   vacancy: Vacancy = {
     pId: 0,
-    id: undefined,
+
     createdBy: "",
     createdDate: "2023-07-26T06:13:52.512Z",
     updatedDate: "2023-07-26T06:13:52.512Z",
@@ -35,6 +38,11 @@ deadline:"",
 positionId:"",
 levelId:"",
 title:"",
+branchId: "",
+ 
+availability: "",
+purpose: "",
+responsibility:"",
 requirement:"",
 vacancyId:undefined
   
@@ -45,7 +53,8 @@ vacancyId:undefined
     private dialog: MatDialog, 
     private vacancyService: VacancyService,
     private positionservice: PositionService,
-    private gradeservice: GradeService
+    private gradeservice: GradeService,
+    private branchService: BranchService
   ) {
      
   } 
@@ -74,6 +83,17 @@ vacancyId:undefined
         console.log(response)
       }
     });
+
+    this.branchService.getAllBranch()
+    .subscribe({
+      next: (branch) => {
+        this.branches=branch;
+      },
+      error(response){
+        console.log(response)
+      }
+    });
+
     this.vacancyService.getAllVacancy()
     .subscribe({
       next: (vacancy) => {
@@ -89,15 +109,41 @@ vacancyId:undefined
      { label: 'Promotions ', route: '/promotionhistory' }, 
     { label: 'Vacancy Management', route: '/vacancymanagment' },  
     { label: ' Vacancy', route: '/vacancy' },
-    
+    { label: ' Others Vacancy', route: '/otherspromotion' },
+  
     { label: ' Approve Promotion', route: '/approvepromotion' },
  
   ];  
   toggleVacancyForm() {
     this.showVacancyForm = !this.showVacancyForm;
+    this.selectedBranch="";
+    this.selectedPosition="";
+    this.selectedGrade=""
+    this.vacancy = {
+      pId: 0,
+
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+  releaseDate:"",
+  deadline:"",
+  positionId:"",
+  levelId:"",
+  title:"",
+  requirement:"",
+  branchId: "",
+
+availability: "",
+purpose: "",
+responsibility:"",
+  vacancyId:undefined
+    };
   }
 
   addVacancy() {
+    this.vacancy.branchId =this.selectedBranch;
     this.vacancy.positionId = this.selectedPosition;
     this.vacancy.levelId = this.selectedGrade;
     this.vacancyService.addVacancy(this.vacancy)
@@ -122,7 +168,7 @@ vacancyId:undefined
         // Reset the form fields
         this.vacancy = {
           pId: 0,
-          id: undefined,
+ 
           createdBy: "",
           createdDate: "2023-07-26T06:13:52.512Z",
           updatedDate: "2023-07-26T06:13:52.512Z",
@@ -134,6 +180,11 @@ vacancyId:undefined
       levelId:"",
       title:"",
       requirement:"",
+      branchId: "",
+ 
+  availability: "",
+  purpose: "",
+  responsibility:"",
       vacancyId:undefined
         };
       },
@@ -145,7 +196,7 @@ vacancyId:undefined
 updatevacancy(){
   this.vacancy.positionId = this.selectedPosition;
   this.vacancy.levelId = this.selectedGrade;
-  this.vacancyService.updateVacancy(this.vacancy,this.vacancy.id).subscribe(
+  this.vacancyService.updateVacancy(this.vacancy,this.vacancy.vacancyId).subscribe(
     () => {       this.vacancyUpdated=true; 
       setTimeout(() => {
         this.vacancyUpdated=false; 
@@ -168,7 +219,7 @@ updatevacancy(){
   );
   this.vacancy = {
     pId: 0,
-    id: undefined,
+
     createdBy: "",
     createdDate: "2023-07-26T06:13:52.512Z",
     updatedDate: "2023-07-26T06:13:52.512Z",
@@ -179,6 +230,11 @@ deadline:"",
 positionId:"",
 levelId:"",
 title:"",
+branchId: "",
+ 
+availability: "",
+purpose: "",
+responsibility:"",
 requirement:"",
 vacancyId:""
   
@@ -189,8 +245,35 @@ getPositionName(positionId: string): string {
   const position = this.positions.find((g) => g.positionId === positionId);
   return position ? position.name : 'Unknown Grade';
 }
+getBranchName(branchId: string): string {
+  const branch = this.branches.find((g) => g.id === branchId);
+  return branch ? branch.name : 'Unknown branch';
+}
 getGradeName(levelId: string): string {
   const grade = this.grades.find((g) => g.levelId === levelId);
   return grade ? grade.description : 'Unknown Grade';
 } 
+editVacancy(vacancy:
+  Vacancy): void { 
+    this.toggleVacancyForm();
+      const vacancyEdit = this.vacancies.find(vac => vac.vacancyId === vacancy.vacancyId); 
+      this.vacancy = vacancyEdit; 
+      this.selectedBranch=vacancyEdit.branchId ;
+      this.selectedGrade=vacancyEdit.levelId 
+      this.selectedPosition=vacancyEdit.positionId 
+      
+       console.log("this.selectedBranch", this.vacancy)
+     
+    
+      this.vacancyService.getVacancy(vacancyEdit.vacancyId).subscribe({ 
+        next: (va) => { 
+          this.vacancy = va; 
+           
+         
+        }, 
+        error: (response) => { 
+          console.log(response); 
+        } 
+      }); 
+    } 
 }

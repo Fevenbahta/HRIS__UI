@@ -12,6 +12,7 @@ import { PositionService } from 'app/service/position.service';
 import { PromotionService } from 'app/service/promotion.service';
 import { PromotionRelationService } from 'app/service/promotionrelation.service';
 import { VacancyService } from 'app/service/vacancy.service';
+import { EvaluationModalComponent } from '../evaluation-modal/evaluation-modal.component';
 
 @Component({
   selector: 'app-approvepromotion',
@@ -23,7 +24,8 @@ export class ApprovepromotionComponent {
     { label: 'Promotions ', route: '/promotionhistory' }, 
    { label: 'Vacancy Management', route: '/vacancymanagment' },  
    { label: ' Vacancy', route: '/vacancy' },
-   
+   { label: ' Others Vacancy', route: '/otherspromotion' },
+  
    { label: ' Approve Promotion', route: '/approvepromotion' },
  ]; 
 
@@ -32,7 +34,10 @@ export class ApprovepromotionComponent {
  employees:Employee[]=[];
  PromotionApproved: boolean = false;
  promotionSaved:boolean = false;
-
+ downloadFileUrl: string=''; 
+  pdfUrl:string='' 
+  FileNull:boolean = false;
+  id:string;
 positions:Position[]=[];
 grades:Grade[]=[];
 promotionStatus="Applied"
@@ -53,7 +58,7 @@ empId:"",
 positionId: '',
 levelId: '',
 startDate: '',
-
+branchId:""
 
 
 };
@@ -76,6 +81,7 @@ startDate: '',
   .subscribe({
     next: (vacancy) => {
       this.vacancies=vacancy;
+      console.log("VA",this.vacancies)
     },
     error(response){
       console.log(response)
@@ -124,22 +130,74 @@ this.gradeservice.getAllGrade()
   }
 });
 }
+fetchAndDisplayPDF(promotion: PromotionRelation): void {
+  const promotionRelationToEdit = this.promotionRelationPenddings.find(
+    (prmotionrelation) => prmotionrelation.id === promotion.id
+  );
 
 
+  this.PromotionRelationService.getPromotionFile(promotionRelationToEdit.vacancyId, promotionRelationToEdit.empId)
+  .subscribe(
+    (pdf: Blob) => {
+ 
+      var file = new Blob([pdf], { type: 'application/pdf' });
+
+      this.downloadFileUrl = window.URL.createObjectURL(file);
+      window.open(this.downloadFileUrl, '_blank');    
+    },
+    (error) => {
+      this.FileNull=true
+      console.error('Error loading PDF:', error);
+     this.id= promotionRelationToEdit.id
+    }
+  );
+}
+// shouldDisplayApplyButton(vacancyId: string): boolean {
+  // Find the corresponding PromotionRelation
+//   const promotionRelation = this.promotionRelations.find((pr) => pr.vacancyId === vacancyId);
+
+//   return !promotionRelation || promotionRelation.promotionStatus === 'Pendding';
+// }
+getdeadate(vacancyId:string){
+var date=Date.now();
+
+  const promt= this.vacancies.find((g)=>g.vacancyId == vacancyId)
+  console.log("vacancies",)
+  if(promt){
+    const dead = new Date(promt.deadline);
+    const today = new Date(date);
+    
+  }
+ // if(dead < today){
+  //   return true;
+  // }
+  console.log("hhh",  promt==undefined?false:true)
+return promt==undefined?false:true
+}
  getEmployeeName(empId: string): string { 
   const employee = this.employees.find((g) => g.empId === empId); 
   return employee ? `${employee.firstName}  ${employee.middleName} ${employee.lastName}`:'Unknown EMPLOYEE'; 
 } 
+getBranch(vacancyId:string){
+  const vacancy = this.vacancies.find((g) => g.vacancyId === vacancyId); 
+  return vacancy ? vacancy.branchId:null; 
+}
 getTitle(vacancyId:string)
 {
   const vacancy = this.vacancies.find((g) => g.vacancyId === vacancyId); 
-  return vacancy ? `${vacancy.title}`:'Unknown '; 
+  return vacancy ? `${this.getPosition(vacancy.positionId)}`:'Unknown '; 
 
 }
-getPosition(vacancyId:string)
+getPosition(position:string)
+{
+  const po = this.positions.find((g) => g.positionId === position); 
+  return po ? `${po.name}`:'Unknown '; 
+
+}
+getPo(vacancyId:string)
 {
   const vacancy = this.vacancies.find((g) => g.vacancyId === vacancyId); 
-  return vacancy ? `${vacancy.positionId}`:'Unknown '; 
+  return vacancy ? vacancy.positionId:null; 
 
 }
 getLevel(vacancyId:string)
@@ -153,7 +211,7 @@ approvePromotionPendding(){
     
   var Id=promotionRelation.id
   promotionRelation.promotionStatus="Promoted"
- 
+  console.log("promotionRelation",promotionRelation)
   this.PromotionRelationService
   .updatePromotionRelation(promotionRelation,Id)
   .subscribe(() =>{
@@ -224,19 +282,22 @@ togglePromotionForm(promotionRelationPending) {
 
 }
 addPromotion(){
+  console.log("THERE")
   if (this.selectedPromotionRelationPending) {
 
   this.promotion.startDate=this.selectedDate;
 
   this.promotion.empId=this.selectedPromotionRelationPending.empId;
   this.promotion.vacancyId=this.selectedPromotionRelationPending.vacancyId;
-  this.promotion.positionId=this.getPosition(this.selectedPromotionRelationPending.vacancyId);
+  this.promotion.positionId=this.getPo(this.selectedPromotionRelationPending.vacancyId);
   this.promotion.levelId=this.getLevel(this.selectedPromotionRelationPending.vacancyId);
-
+  this.promotion.branchId=this.getBranch(this.selectedPromotionRelationPending.vacancyId);
+  console.log("pro",this.promotion)
     this.PromotionService.addPromotion(this.promotion)
     .subscribe({
       next: (employee) => {
         this.promotionSaved = true;
+        console.log("in",this.promotion)
           setTimeout(() => {
         this.promotionSaved = false;
       }, 2000);
@@ -256,6 +317,7 @@ addPromotion(){
         positionId: '',
         levelId: '',
         startDate: '',
+        branchId:""
         };
       },
       error(response) {
@@ -271,5 +333,13 @@ addPromotion(){
     })
     dialogRef.componentInstance.openModal(empId)
   
+  }
+
+  openEvaluationModal(empId:string, vacancyId:string){
+    const dialogRef =this.dialog.open(EvaluationModalComponent,{
+      // Set the width to 100% to maximize
+     // Apply your custom CSS class
+   })
+   dialogRef.componentInstance.openModal(empId,vacancyId)
   }
 }

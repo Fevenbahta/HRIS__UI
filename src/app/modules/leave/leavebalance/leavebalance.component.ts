@@ -66,7 +66,7 @@ totalRemaining: 0,
 totalRequest: 0,
 annualDefaultBalance: 0,
 annualRemainingBalance: 0,
-UnusedDays:0,
+unusedDays:0,
 
   }
   
@@ -221,7 +221,7 @@ previousTwoYear:this.leaveBalance.previousTwoYear,
 
 totalRemaining: this.leaveBalance.totalRemaining,
 totalRequest: this.leaveBalance.totalRequest,
-UnusedDays:0
+unusedDays:0
 
     };
 
@@ -295,7 +295,7 @@ UnusedDays:0
    
 
       // Add the current leave balance to the array
-      this.filteredotherLeaveBalances.push({ ...newotherLeaveBalance });
+
 
 
       this.employeeService.getAllEmployees() 

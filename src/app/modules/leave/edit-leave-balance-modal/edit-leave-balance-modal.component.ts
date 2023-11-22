@@ -49,7 +49,7 @@ successMessage: string | null = null; // Add this property
       totalRequest: 0,
       annualDefaultBalance: 0,
       annualRemainingBalance: 0,
-      UnusedDays:0,
+      unusedDays:0,
       createdDate: '2023-07-21T08:09:41.138Z',
 updatedDate: '2023-07-21T08:09:41.138Z',
       
@@ -90,7 +90,7 @@ getEmployeeName(empId: string): string {
 console.log(this.editedLeaveData.empId)
 
 
-console.log(leaveBalance)
+console.log("ll",leaveBalance)
     this.leaveBalanceService.updateLeaveBalance(leaveBalance,empId).subscribe(
       (response) => {
         // Handle the response if needed

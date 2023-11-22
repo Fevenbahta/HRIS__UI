@@ -35,7 +35,7 @@ export class LeaveBalanceService {
 
   updateLeaveBalance(LeaveBalanceDetails:AnnualLeaveBalance, Id:string): Observable<AnnualLeaveBalance> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<AnnualLeaveBalance>(this.apiUrlService.apiUrl+ 'api/LeaveBalance/'+Id, LeaveBalanceDetails,httpOptions);
+    return this.http.put<AnnualLeaveBalance>(this.apiUrlService.apiUrl+ 'LeaveBalance/'+Id, LeaveBalanceDetails,httpOptions);
   }
 
   deleteLeaveBalance(Id: string): Observable<string> {

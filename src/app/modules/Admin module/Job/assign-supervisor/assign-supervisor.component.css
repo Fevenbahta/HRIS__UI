@@ -1,4 +1,6 @@
-.compact-table th {
+.margin{
+  margin-left: 25%;
+}.compact-table th {
     font-size: 13px;
     color: black;
     font-weight: bold; /* Adjust the font size as needed */

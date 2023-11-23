@@ -404,9 +404,7 @@ console.log(this.leaveRequest.employeePositionId)
   
     this.leaveRequestservice.addLeaveRequest(this.leaveRequest).subscribe({ 
       next: (employee) => { 
-        console.log( this.leaveRequest
-          )
-         
+        
       //  this.router.navigate(['/employee-registration/work-experience']);  
  
       this.leaveRequestSaved=true 
@@ -416,7 +414,9 @@ console.log(this.leaveRequest.employeePositionId)
         this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
           next: (leaveRequestd) => { 
             this.leaveRequests = leaveRequestd.filter(leave=>leave.createdBy==this.currentEmployee); 
-           
+            console.log( "leavenew",this.leaveRequest
+              )
+             
           }, 
           error: (response) => { 
             console.log(response); 

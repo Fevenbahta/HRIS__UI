@@ -1,4 +1,6 @@
-.formcontainer {
+.margin{
+  margin-left: 25%;
+}.formcontainer {
     max-width: 1000px; /* Adjust this value to change the form width */
     margin-left: 100px;
     margin-top: 40px;

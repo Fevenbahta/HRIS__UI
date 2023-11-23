@@ -78,87 +78,45 @@ divisions:Division[]= [];
   ) { }
 
   ngOnInit(): void {
-
-
-    this.positionservice.getAllPosition()
+    this.divisionservice.getAllDivisions()
     .subscribe({
-      next: (positions) => {
-        this.positions=positions;
+      next: (division) => {
+        this.divisions=division;
+      },
       
-        
-      },
-      error(response){
-        console.log(response)
-      }
-    });
-    this.divisionservice.getAllDivisions()
-    .subscribe({
-      next: (division) => {
-        this.divisions=division;
-      },
-      error(response){
-        console.log(response)
-      }
     });
     this.departmentservice.getAllDepartment()
     .subscribe({
       next: (department) => {
         this.departments=department;
       },
-      error(response){
-        console.log(response)
-      }
+     
     });
     this.positionservice.getAllPosition()
     .subscribe({
       next: (positions) => {
         this.positions=positions;
-        
-      },
-      error(response){
-        console.log(response)
-      }
+            },
     });
-    this.divisionservice.getAllDivisions()
-    .subscribe({
-      next: (division) => {
-        this.divisions=division;
-      },
-      error(response){
-        console.log(response)
-      }
-    });
-    this.departmentservice.getAllDepartment()
-    .subscribe({
-      next: (department) => {
-        this.departments=department;
-      },
-      error(response){
-        console.log(response)
-      }
-    });
+  
     this.employeeService.getAllEmployees() 
 .subscribe({ 
   next: (employees) => {
     // this.leaveRequest.empId = this.selectedEmployee;
     this.employees=employees
    },
-  error: (response) => {
-    console.log(response);
-  }
+  
 });
 
 
     this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
       next: (leaveRequest) => {
-        this.approvedLeaves = leaveRequest
-        this.filteredLeave=leaveRequest
-        ;
+        this.approvedLeaves = leaveRequest;
+        this.filteredLeave=leaveRequest;
+        
         console.log(leaveRequest)
       },
-      error: (response) => {
-        console.log(response);
-      }
+      
     });
 this.leavetypeservice.getAllLeaveType().
 subscribe({
@@ -167,49 +125,11 @@ subscribe({
     this.leaveTypes= leaveType
     ;
   },
-  error: (response) => {
-    console.log(response);
-  }
+  
 });   
-this.leaveRequestservice.getAllLeaveRequest().
-subscribe({
-  next: (leave) => {
-  //this.leaveRequest.leaveTypeId = this.selectedLeaveType;
-    this.leaveRequests= leave
-    ;
-  },
-  error: (response) => {
-    console.log(response);
+
   }
-});  
-  }
-//   getPosition(empId:string){
 
-//     this.employeepositionservice.getEmployeePosition(empId) 
-//   .subscribe({ 
-//     next: (employeepositions) => { 
-//       var position = employeepositions.position; 
-//      console.log(this.getPositionName(position))
-//       return  this.getPositionName(position);
-//           }, 
-
-// });
-
-//   }
-  // getPosition(empId: string): string{
-    
-
-  //   this.employeepositionservice.getAllEmployeePosition()
-  //   .subscribe({
-  //     next: (employeePositions) => {
-  //       this.employeePosition = employeePositions.find(employeePositions => employeePositions.empId === empId);
-            
-             
-  //     },
-     
-  //   });
-  //   return this.employeePosition? this.getPositionName(this.employeePosition.position):'';
-  // }
   getPosition(empId: string): Observable<string> {
     return this.employeepositionservice.getAllEmployeePosition().pipe(
       switchMap(employeePositions => {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Holiday } from 'app/models/holiday';
@@ -46,13 +47,23 @@ export class HolidaysComponent {
        { label: 'Supervisor', route:"/admin/supervisor" },
         { label: 'Assign-Supervisor', route:"/admin/assign-supervisor" },
        ]},
-   
-       { label: 'Education-Level' , route:"/admin/education-level"},
+       { label: 'Leave',
+       dropdownOptions: [
+        { label: 'Holiday', route:"/holiday" },
         { label: 'Leave-Type', route:"/leave/leave-type" },
-
-   
-     ];
-     constructor(private holidayService :HolidayService, private router:Router,private dialog:MatDialog,) { }
+       ]},
+   { label: 'Education-Level' , route:"/admin/education-level"},
+   { label: 'PayRoll',
+   dropdownOptions: [
+    { label: 'Tax',route:"/admin/tax"  },
+    { label: 'Bank',  route:"/admin/bank"  },
+    { label: 'DeductionType',route:"/admin/deductionType" },
+    { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+    
+    ]}, ];
+     constructor(private holidayService :HolidayService, 
+      private router:Router,private dialog:MatDialog,
+      private snackBar :MatSnackBar) { }
 
      ngOnInit(): void {
        this.holidayService.getAllHoliday()
@@ -65,15 +76,24 @@ export class HolidaysComponent {
          }
        });
      }
+     showSucessMessage(message:string) : void{
+      this.snackBar.open(message,'Close',
+      {duration:3000,
+      
+      horizontalPosition:'end',
+        verticalPosition:'top',
+          panelClass:['cardhead']
+        })
+        
+        }
      addholiday(){
    
        this.holidayService.addHoliday(this.addholidayRequest)
        .subscribe({
        next:(holiday)=>{
-         this.holidaySaved = true;
-         setTimeout(() => {
-           this.holidaySaved = false;
-         }, 2000);
+ 
+        this.showSucessMessage('Sucessfully Added!!')
+
          this.holidays.push({ ...this.addholidayRequest });
    
          this.addholidayRequest = {

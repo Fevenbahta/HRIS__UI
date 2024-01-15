@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component } from '@angular/core';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-branch',
   templateUrl: './branch.component.html',
@@ -53,9 +54,19 @@ buttons = [
       { label: 'Leave-Type', route:"/leave/leave-type" },
      ]},
  { label: 'Education-Level' , route:"/admin/education-level"},
-   ];
-  constructor(private branchservice: BranchService,private router:Router,
-    private dialog:MatDialog,
+ { label: 'PayRoll',
+ dropdownOptions: [
+  { label: 'Tax',route:"/admin/tax"  },
+  { label: 'Bank',  route:"/admin/bank"  },
+  { label: 'DeductionType',route:"/admin/deductionType" },
+  { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+  
+
+  ]}, ];
+  constructor(private branchservice: BranchService,
+    private router:Router,
+    private dialog:MatDialog,  
+    private snackBar :MatSnackBar
   ){}
   ngOnInit():void {
     this.branchservice.getAllBranch()
@@ -68,15 +79,24 @@ buttons = [
       }
     });
   }
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   addBranch(){
    
   this.branchservice.addBranch(this.addBranchRequest)
   .subscribe({
   next:(branch)=>{
-    this.branchSaved = true;
-    setTimeout(() => {
-      this.branchSaved = false;
-    }, 2000);
+
+    this.showSucessMessage('Sucessfully Added!!')
+
     this.branchs.push({ ...this.addBranchRequest });
 
     this.addBranchRequest = {

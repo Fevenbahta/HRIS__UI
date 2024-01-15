@@ -176,7 +176,10 @@ getEmployees() {
       console.log(error);  
     }  
   );  
-}  
+}  capitalizeFirstLetter(text: string): string {
+  if (!text) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
 private updateFilteredEmployees() {
   const startIndex = (this.currentPage - 1) * this.pageSize;
   const endIndex = startIndex + this.pageSize;
@@ -219,17 +222,17 @@ onSearch() {
       if (result === true) { 
         this.employeeservice.deleteEmployee(id).subscribe({
           next: () => {
-                this.dialog.open(DeletesucessfullmessageComponent)
-                this.employeeservice.getAllEmployees().subscribe((employees) => {
-                  this.filteredEmployees = employees;
-                });
+                  
               }, 
               error(response){ 
                 console.log(response) 
               }
             });
-          
-              
+            this.employeeservice.getAllEmployees().subscribe((employees) => {
+              this.filteredEmployees = employees;
+            });
+            this.dialog.open(DeletesucessfullmessageComponent)
+                
           } });
       
       }

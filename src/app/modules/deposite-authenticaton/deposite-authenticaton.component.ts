@@ -8,6 +8,9 @@ import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confi
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { BankService } from 'app/service/bank.service';
+import { Bank } from 'app/models/Payroll/Bank.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-deposite-authenticaton',
   templateUrl: './deposite-authenticaton.component.html',
@@ -18,9 +21,9 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
   export class DepositeAuthenticationComponent implements OnInit {
     depositeauthenticationSaved: boolean = false;
     depositeauthentications: DepositeAuthentication[] = []; 
-
+    Banks:Bank[]=[];
     depositeAuthenticationUpdated: boolean = false;
-
+selectedBank:string;
     depositeAuthentication:DepositeAuthentication={
       pId:0,
       id: undefined,
@@ -30,7 +33,7 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
        updatedBy: '', 
        empId: "",
        status:0,
-     bank: '',
+     bankId: '',
      bankBranch: '',
      bankAccount:0,
      tinNumber: '',
@@ -39,11 +42,13 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
   
   constructor(
     private formBuilder: FormBuilder,
+    private bankService: BankService,
   
     private depositeauthenticationservice: DepositeAuthenticationService,
     private employeeIdService: EmployeeIdService,
     private router:Router,
-    private dialog: MatDialog ){}
+    private dialog: MatDialog,
+    private snackBar :MatSnackBar ){}
 
 
   ngOnInit():void {
@@ -57,8 +62,22 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
         console.log(response); 
       }, 
   });
+  this.bankService.getAllBank() 
+  .subscribe({ 
+    next: (bank) => { 
+      this.Banks = bank;
+      ; 
+          }, 
+    error(response) { 
+      console.log(response); 
+    }, 
+});
+
 
   }
+
+
+
   depositeauthenticationForm: FormGroup = this.formBuilder.group({
     phoneNumber: ['', Validators.required],
   });
@@ -68,15 +87,23 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
     { label: '  List Employee ', route: '/employee-list' },
     {label:'Employee History', route:'/history'}
   ];
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   addDepositeAuthentication() {
+    this.depositeAuthentication.bankId=this.selectedBank
     this.depositeAuthentication.empId = this.employeeIdService.employeeId;
     this.depositeauthenticationservice.addDepositeAuthentication(this.depositeAuthentication)
     .subscribe({
       next: (employee) => {
-        this.depositeauthenticationSaved = true;
-        setTimeout(() => {
-          this.depositeauthenticationSaved = false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Added!!')
         // Add the current work experience to the array
         this.depositeauthentications.push({ ...this.depositeAuthentication });
         // Reset the form fields
@@ -90,7 +117,7 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
             console.log(response); 
           }, 
       });
-
+this.selectedBank=""
         this.depositeAuthentication = {
           pId:0,
           id:  undefined,
@@ -100,7 +127,7 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
            updatedBy: '', 
            empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
            status:0,
-         bank: '',
+         bankId: '',
          bankBranch: '',
          bankAccount:0,
          tinNumber: '',
@@ -111,14 +138,11 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
   }
   })}
   updateDepositeAuthentication(): void {
+    this.depositeAuthentication.bankId=this.selectedBank
 
     this.depositeauthenticationservice.updateDepositeAuthentication(this.depositeAuthentication, this.depositeAuthentication.id).subscribe({
       next: () => {
-        this.depositeAuthenticationUpdated = true;
-
-        setTimeout(() => {
-          this.depositeAuthenticationUpdated = false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Updated!!')
       },
       error: (response) => {
         console.log(response);
@@ -134,6 +158,7 @@ import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/de
         console.log(response); 
       }, 
   });
+  this.selectedBank=""
 this.depositeAuthentication ={
   pId:0,
   id:  undefined,
@@ -143,7 +168,7 @@ this.depositeAuthentication ={
    updatedBy: '', 
    empId: "",
    status:0,
- bank: '',
+ bankId: '',
  bankBranch: '',
  bankAccount:0,
  tinNumber: '',
@@ -187,6 +212,10 @@ deleteDepositeAuthentication(depositeAuthentication: DepositeAuthentication): vo
       );
     }
   });
+}
+getBankName(id: string): string {
+  const Bank = this.Banks.find((Bank) => Bank.id === id);
+  return Bank ? Bank.bankName : '';
 }
 
 }

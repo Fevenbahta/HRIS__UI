@@ -31,7 +31,15 @@ export class OrganizationInfoComponent implements OnInit {
         { label: 'Leave-Type', route:"/leave/leave-type" },
        ]},
    { label: 'Education-Level' , route:"/admin/education-level"},
-  ];
+   { label: 'PayRoll',
+   dropdownOptions: [
+    { label: 'Tax',route:"/admin/tax"  },
+    { label: 'Bank',  route:"/admin/bank"  },
+    { label: 'DeductionType',route:"/admin/deductionType" },
+    { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+    
+  
+    ]}, ];
   constructor() { }
 
   ngOnInit(): void {

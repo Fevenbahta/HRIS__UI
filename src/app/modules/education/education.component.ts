@@ -8,6 +8,7 @@ import { EducationLevelService } from 'app/service/educationlevel.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-education',
@@ -72,6 +73,7 @@ export class EducationComponent {
     private educationlevelservice:EducationLevelService,
     private employeeIdService: EmployeeIdService,
     private dialog: MatDialog,
+    private snackBar :MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -98,6 +100,16 @@ subscribe({
 
   }
 
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   getEducationName(educationLevelId: string): string {
     const educationLevel = this.educationlevels.find((educationLevel) => educationLevel.id === educationLevelId);
     return educationLevel ? educationLevel.educationName : '';
@@ -112,10 +124,7 @@ subscribe({
         console.log("sss")
       //  this.router.navigate(['/employee-registration/work-experience']); 
 
-      this.educationSaved=true
-        setTimeout(() => {
-          this.educationSaved = false;
-        }, 2000);
+      this.showSucessMessage('Sucessfully Added!!')
         this.educationservice.getAllEducation().subscribe({
           next: (educations) => {
             this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
@@ -179,11 +188,7 @@ subscribe({
     this.educationservice.updateEducation(this.education, this.education.id).subscribe({
       next: () => {
  
-        this.educationUpdated = true;
-        setTimeout(() => {
-  this.educationUpdated = false;
-        }, 2000
-        )
+        this.showSucessMessage('Sucessfully Updated!!')
         this.educationservice.getAllEducation().subscribe({
           next: (educations) => {
             this.educations = educations.filter(education => education.empId === this.employeeIdService.employeeId);
@@ -215,8 +220,6 @@ subscribe({
       file:'',
     };
   }
-
-
 
   editEducation(education: Education): void {
     const educationToEdit = this.educations.find(education => education.id === education.id);

@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-grade',
@@ -55,9 +56,22 @@ buttons = [
       { label: 'Leave-Type', route:"/leave/leave-type" },
      ]},
  { label: 'Education-Level' , route:"/admin/education-level"},
-   ];
+ { label: 'PayRoll',
+ dropdownOptions: [
+  { label: 'Tax',route:"/admin/tax"  },
+  { label: 'Bank',  route:"/admin/bank"  },
+  { label: 'DeductionType',route:"/admin/deductionType" },
+  { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+  
 
-  constructor(private positionservice: PositionService , private gradeservice :GradeService ,private dialog:MatDialog,private router:Router) { }
+  ]}, ];
+
+  constructor(private positionservice: PositionService ,
+     private gradeservice :GradeService ,
+     private dialog:MatDialog,
+     private router:Router,
+     private snackBar :MatSnackBar
+     ) { }
 
   ngOnInit(): void {
     this.positionservice.getAllPosition()
@@ -79,15 +93,24 @@ buttons = [
       }
     });
   }
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   addGrade(){
     this.addGradeRequest.positionId = this.selectedPosition;
     this.gradeservice.addGrade(this.addGradeRequest)
     .subscribe({
     next:(grade)=>{
-      this.gradeSaved = true;
-      setTimeout(() => {
-        this.gradeSaved = false;
-      }, 2000);
+
+      this.showSucessMessage('Sucessfully Added!!')
+
       this.grades.push({ ...this.addGradeRequest });
 
       this.addGradeRequest = {

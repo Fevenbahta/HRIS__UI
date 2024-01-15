@@ -55,7 +55,7 @@ export class EmployeeLeavebalanceComponent {
    private router:Router){}
    ngOnInit(): void {
     console.log('Fetching employee...');
-    this.employeeService.getEmployee("feae3a58-36a7-4c05-8041-ce71515d6813")
+    this.employeeService.getEmployee("465d0c27-0eb7-4b27-8c71-88a23e3ac404")
       .subscribe({
         next: (employee) => {
           this.employee = employee;
@@ -67,7 +67,7 @@ export class EmployeeLeavebalanceComponent {
       });
   
     console.log('Fetching leave balance...');
-    this.leaveBalanceService.getLeaveBalance("feae3a58-36a7-4c05-8041-ce71515d6813")
+    this.leaveBalanceService.getLeaveBalance("465d0c27-0eb7-4b27-8c71-88a23e3ac404")
       .subscribe({
         next: (leaveBalance) => {
           this.leaveBalance = leaveBalance;
@@ -80,7 +80,7 @@ export class EmployeeLeavebalanceComponent {
       });
   
     console.log('Fetching other leave balance...');
-    this.otherleaveBalanceService.getOtherLeaveBalance("feae3a58-36a7-4c05-8041-ce71515d6813")
+    this.otherleaveBalanceService.getOtherLeaveBalance("465d0c27-0eb7-4b27-8c71-88a23e3ac404")
       .subscribe({
         next: (otherleaveBalance) => {
           this.otherleaveBalance = otherleaveBalance;
@@ -93,7 +93,10 @@ export class EmployeeLeavebalanceComponent {
   }
   
 
-  
+  capitalizeFirstLetter(text: string): string {
+    if (!text) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
    getLeaveTypeName(Id: string): string { 
      const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id); 
      return leaveType ? `${leaveType.leaveTypeName} `:'Unknown EMPLOYEE'; 

@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
@@ -30,7 +31,8 @@ export class EditEmergencyContactComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private employeeIdService:EmployeeIdService
+    private employeeIdService:EmployeeIdService,
+    private snackBar :MatSnackBar
   ) {}
     emergencyContact: EmergencyContact ={
         pId:0,
@@ -69,7 +71,16 @@ export class EditEmergencyContactComponent implements OnInit {
       });
     });
   }
-  
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      } 
 
   updateEmergencyContact(): void {
     this.emergencyContactUpdated=true;
@@ -78,9 +89,7 @@ export class EditEmergencyContactComponent implements OnInit {
     .subscribe({
     
       next: (emergencyContact) => {
-        setTimeout(() => {
-          this.emergencyContactUpdated = false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Updated!!')
         this.emergencyContactService.getAllEmergencyContact()
         .subscribe({
           next: (emergencycontacts) => {
@@ -169,11 +178,7 @@ export class EditEmergencyContactComponent implements OnInit {
   this.emergencyContactService.addEmergencyContact(this.emergencyContact)
   .subscribe({
     next: (employee) => {
-      this.emergencycontactSaved = true;
-     // this.router.navigate(['/employee-registration/spouse']);
-      setTimeout(() => {
-        this.emergencycontactSaved = false;
-      }, 2000);
+      this.showSucessMessage('Sucessfully Added!!')
       this.emergencyContactService.getAllEmergencyContact()
       .subscribe({
         next: (emergencycontacts) => {

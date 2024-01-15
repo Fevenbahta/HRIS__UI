@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Department } from 'app/models/education.model';
@@ -60,12 +61,23 @@ divisions:Division[]=[];
         { label: 'Leave-Type', route:"/leave/leave-type" },
        ]},
    { label: 'Education-Level' , route:"/admin/education-level"},
-     ];
+   { label: 'PayRoll',
+   dropdownOptions: [
+    { label: 'Tax',route:"/admin/tax"  },
+    { label: 'Bank',  route:"/admin/bank"  },
+    { label: 'DeductionType',route:"/admin/deductionType" },
+    { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+    
   
+    ]}, ];
   filteredDivision: Division[] = []; 
   searchTerm: string = ''; 
  
-constructor(private departmentservice: DepartmentService,private divisionservice: DivisionService,private dialog:MatDialog,private router:Router){}
+constructor(private departmentservice: DepartmentService,
+  private divisionservice: DivisionService,
+  private dialog:MatDialog,
+  private router:Router,
+  private snackBar :MatSnackBar){}
 ngOnInit():void {
   this.departmentservice.getAllDepartment()
 .subscribe({
@@ -90,17 +102,25 @@ ngOnInit():void {
   });
 }
 
-
+showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
+  
+  horizontalPosition:'end',
+    verticalPosition:'top',
+      panelClass:['cardhead']
+    })
+    
+    }
 addDivision(){
   console.log(this.addDivisionRequest)
   this.addDivisionRequest.departmentId = this.selectedDepartment;
 this.divisionservice.addDivision(this.addDivisionRequest)
 .subscribe({
 next:(Division)=>{
-  this.divisionSaved = true;
-  setTimeout(() => {
-    this.divisionSaved = false;
-  }, 2000);
+
+  this.showSucessMessage('Sucessfully Added!!')
+
   this.divisions.push({ ...this.addDivisionRequest });
 
   this.addDivisionRequest = {

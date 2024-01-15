@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-contact',
@@ -34,7 +35,8 @@ export class EditContactComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private employeeIdService:EmployeeIdService
+    private employeeIdService:EmployeeIdService,
+    private snackBar :MatSnackBar
   ) {}
   contact:Contact={
     pId:0,
@@ -85,11 +87,7 @@ export class EditContactComponent implements OnInit {
     .subscribe({
     
       next: (contact) => { 
-        
-        this.contactUpdate=true;
-        setTimeout(() => {
-          this.contactUpdate= false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Updated!!')
 
 
             this.contact = {
@@ -116,7 +114,16 @@ export class EditContactComponent implements OnInit {
       });
     
   }
-
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   editContact(Contact: Contact): void {
     // Here, we will navigate to the edit page for the selected Contact.
     const contactToEdit = this.contacts.find(contact => contact.id === contact.id);
@@ -162,10 +169,7 @@ export class EditContactComponent implements OnInit {
   .subscribe({ 
   next:(contacts)=>{
    
-    this.contactSaved = true;
-        setTimeout(() => {
-          this.contactSaved = false;
-        }, 2000);
+    this.showSucessMessage('Sucessfully Added!!')
         // Add the current work experience to the array
         this.contacts.push({ ...this.contact });
         // Reset the form fields

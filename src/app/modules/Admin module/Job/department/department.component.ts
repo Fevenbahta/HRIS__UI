@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Department } from 'app/models/education.model';
@@ -54,10 +55,19 @@ status:0,
         { label: 'Leave-Type', route:"/leave/leave-type" },
        ]},
    { label: 'Education-Level' , route:"/admin/education-level"},
-     ];
+   { label: 'PayRoll',
+   dropdownOptions: [
+    { label: 'Tax',route:"/admin/tax"  },
+    { label: 'Bank',  route:"/admin/bank"  },
+    { label: 'DeductionType',route:"/admin/deductionType" },
+    { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+    
+  
+    ]}, ];
   constructor(
     private departmentService :DepartmentService,
-    private router:Router,private dialog:MatDialog,) { }
+    private router:Router,private dialog:MatDialog,
+    private snackBar :MatSnackBar) { }
 
   ngOnInit(): void {
     this.departmentService.getAllDepartment()
@@ -71,15 +81,24 @@ status:0,
       }
     });
   }
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   addDepartment(){
 
     this.departmentService.addDepartment(this.addDepartmentRequest)
     .subscribe({
     next:(department)=>{
-      this.departmentSaved = true;
-      setTimeout(() => {
-        this.departmentSaved = false;
-      }, 2000);
+
+      this.showSucessMessage('Sucessfully Added!!')
+
       this.departments.push({ ...this.addDepartmentRequest });
 
       this.addDepartmentRequest = {

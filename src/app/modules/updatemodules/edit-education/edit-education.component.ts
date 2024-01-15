@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { EducationLevel } from 'app/models/job-description.model';
@@ -55,8 +56,8 @@ export class EditEducationComponent {
     private route: ActivatedRoute,
     private router: Router,
     private educationlevelservice: EducationLevelService,
-    private employeeIdService:EmployeeIdService
-
+    private employeeIdService:EmployeeIdService,
+    private snackBar :MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -124,7 +125,16 @@ export class EditEducationComponent {
       }
     );
   }
-
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   updateEducation(): void { 
     console.log(this.education)
    

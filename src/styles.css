@@ -1,6 +1,16 @@
 .btnsave  { 
-  background-color: #76a53b; 
+  background-color: #76a53b
+
 } 
+.btnheader { 
+  background-color:radial-gradient( circle, #76a53b,rgb(243, 160, 5)) ;
+ 
+
+
+} 
+.yellow{
+  color:rgb(243, 160, 5)
+ }
 .btnupdate { 
   background-color: #76a53b; 
 } 
@@ -15,17 +25,49 @@ padding: 4px 19px;
 border-radius: 10%; 
 }  
 
-
+.small{
+  padding: -50px;
+  margin: -50px;
+}
 .btndanger{ 
-color: rgb(22, 21, 21); 
-font-weight: 600; 
-font-size:small; 
-width: fit-content;
-border-color: white; 
- 
-  border-color: white;
-  border-radius: 10%; 
+color: rgb(3, 3, 3); 
+font-weight:normal; 
+font-size :small; 
+width:min-content;
+border-color: #fcc034; 
+
+  border-radius: 8% 8% ; 
   background-color:#fcc034 ; 
    
   }
-  
+  .btndanger:focus {
+    box-shadow: 0 0 3px 0 #fcc034;
+    background-color:#fcc034 ; 
+    color: rgb(3, 3, 3); 
+    border-color:#fcc034;
+    outline: none;
+    }
+    .btndanger:hover {
+      box-shadow: 0 0 3px 0 #fcc034;
+      background-color:#fcc034 ; 
+      color: rgb(3, 3, 3); 
+      border-color:#fcc034;
+      outline: none;
+      }
+      .btndanger:active {
+        box-shadow: 0 0 3px 0 #fcc034;
+        background-color:#fcc034 ; 
+        color: rgb(3, 3, 3); 
+        border-color:#fcc034;
+        outline: none;
+        }
+        .btndanger:checked {
+          box-shadow: 0 0 3px 0 #fcc034;
+          background-color:#fcc034 ; 
+          color: rgb(3, 3, 3); 
+          border-color:#fcc034;
+          outline: none;
+          }
+      
+          
+        

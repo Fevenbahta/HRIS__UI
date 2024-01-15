@@ -1,5 +1,6 @@
 import { Component, ElementRef, Pipe, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Branch, Grade, Position } from 'app/models/job-description.model';
 import { PromotionRelation } from 'app/models/vacancy/promotion.model';
@@ -38,8 +39,8 @@ export class VacancyComponent {
     private gradeservice: GradeService,
     private branchService: BranchService,
    
-    private promotionRelationService:PromotionRelationService
-
+    private promotionRelationService:PromotionRelationService,
+    private snackBar :MatSnackBar
   ) {
      
   } 
@@ -64,7 +65,7 @@ promotionRelations:PromotionRelation[]=[];
   evaluation:"",
   File:"",
 vacancyId:undefined,
-empId:"2b500348-4371-4f1a-a62d-461d9f822e25",
+empId:"c6b2f0a9-8af0-473b-820b-73e47628189f",
 approvedDate: "2023-09-13T07:12:00.970Z",
 promotionStatus: "Pendding",
 
@@ -104,7 +105,7 @@ console.log("this.vacancies",this.vacancies)
     });
     // Assuming this.vacancies and this.promotionRelations are arrays of objects
 
-this.promotionRelationService.getPromotionRelation("2b500348-4371-4f1a-a62d-461d9f822e25").subscribe({
+this.promotionRelationService.getPromotionRelation("c6b2f0a9-8af0-473b-820b-73e47628189f").subscribe({
   next: (promotionRelation) => {
     this.promotionRelations = promotionRelation;
 
@@ -170,7 +171,16 @@ this.id=vacancy.vacancyId;
     }; 
     reader.readAsDataURL(file); 
   } 
-
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   updateVacanciesWithAppliedStatus(): void {
     // Iterate through vacancies and set an "applied" property based on the promotion relations
     this.promotionRelations.forEach((vacancy) => {
@@ -209,21 +219,18 @@ this.id=vacancy.vacancyId;
 
   
   apply(vacancy :Vacancy){
-  this.promotionRelation.empId="2b500348-4371-4f1a-a62d-461d9f822e25";
+  this.promotionRelation.empId="c6b2f0a9-8af0-473b-820b-73e47628189f";
   this.promotionRelation.vacancyId=vacancy.vacancyId;
   this.promotionRelation.promotionStatus="Applied";
     this.promotionRelationService.addPromotionRelation(this.promotionRelation)
     .subscribe({
       next: (employee) => {
-        this.promotionRelationSaved = true;
-          setTimeout(() => {
-        this.promotionRelationSaved = false;
-      }, 2000);
+        this.showSucessMessage('Sucessfully Applied!!')
      
 
 
       
-    this.promotionRelationService.getPromotionRelation("2b500348-4371-4f1a-a62d-461d9f822e25").subscribe({
+    this.promotionRelationService.getPromotionRelation("c6b2f0a9-8af0-473b-820b-73e47628189f").subscribe({
       next: (promotionRelation) => {
         this.promotionRelations = promotionRelation
        
@@ -245,7 +252,7 @@ this.id=vacancy.vacancyId;
           status: 0,
           evaluation:"",
         vacancyId:undefined,
-        empId:"2b500348-4371-4f1a-a62d-461d9f822e25",
+        empId:"c6b2f0a9-8af0-473b-820b-73e47628189f",
         approvedDate: "2023-09-13T07:12:00.970Z",
         promotionStatus: "Pendding",
         File:"",

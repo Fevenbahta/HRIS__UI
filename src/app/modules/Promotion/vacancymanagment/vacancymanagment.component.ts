@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Branch, Grade, Position } from 'app/models/job-description.model';
 import { Vacancy } from 'app/models/vacancy/vacancy.model';
@@ -54,11 +55,21 @@ vacancyId:undefined
     private vacancyService: VacancyService,
     private positionservice: PositionService,
     private gradeservice: GradeService,
-    private branchService: BranchService
+    private branchService: BranchService,
+    private snackBar :MatSnackBar
   ) {
      
   } 
-
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   capitalizeFirstLetter(text: string): string {
     if (!text) return text;
     return text.charAt(0).toUpperCase() + text.slice(1);
@@ -149,10 +160,8 @@ responsibility:"",
     this.vacancyService.addVacancy(this.vacancy)
     .subscribe({
       next: (employee) => {
-        this.vacancySaved = true;
-          setTimeout(() => {
-        this.vacancySaved = false;
-      }, 2000);
+        this.showSucessMessage('Sucessfully Added!!')
+
       this.vacancyService.getAllVacancy() 
       .subscribe({ 
         next: (vacancy) => { 
@@ -197,10 +206,8 @@ updatevacancy(){
   this.vacancy.positionId = this.selectedPosition;
   this.vacancy.levelId = this.selectedGrade;
   this.vacancyService.updateVacancy(this.vacancy,this.vacancy.vacancyId).subscribe(
-    () => {       this.vacancyUpdated=true; 
-      setTimeout(() => {
-        this.vacancyUpdated=false; 
-      }, 2000);
+    () => {       
+        this.showSucessMessage('Sucessfully Updated!!')
 
       this.vacancyService.getAllVacancy() 
       .subscribe({ 

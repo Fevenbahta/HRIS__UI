@@ -8,7 +8,9 @@
           <img class="img" [src]="employeeForm.get('imageData').value ? employeeForm.get('imageData').value : './assets/img/profile.jpg'" (click)="openImageDialog()" style="cursor: pointer;" />
           <input type="file" id="image" name="image" (change)="onImageSelected($event)" accept="image/*" style="display: none;">
 
-      <app-min-nav></app-min-nav> 
+      <app-min-nav>
+        
+      </app-min-nav> 
     </div> 
     </div>
     </div>
@@ -22,7 +24,7 @@
             <p class="card-category">Complete your profile</p>
           </div>
           <div class="card-body mt-2">
-            <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
+            <form [formGroup]="employeeForm">
               <div class="row">
                   <div class="col-md-4 form-field">
                     <div class="form-field">

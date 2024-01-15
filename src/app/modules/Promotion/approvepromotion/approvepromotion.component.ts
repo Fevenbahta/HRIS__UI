@@ -13,6 +13,7 @@ import { PromotionService } from 'app/service/promotion.service';
 import { PromotionRelationService } from 'app/service/promotionrelation.service';
 import { VacancyService } from 'app/service/vacancy.service';
 import { EvaluationModalComponent } from '../evaluation-modal/evaluation-modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-approvepromotion',
@@ -72,6 +73,7 @@ branchId:""
    private gradeservice: GradeService,
    private employeeService:EmployeeService,
    private vacancyService: VacancyService,
+   private snackBar :MatSnackBar
  ) {
     
  } 
@@ -158,6 +160,16 @@ fetchAndDisplayPDF(promotion: PromotionRelation): void {
 
 //   return !promotionRelation || promotionRelation.promotionStatus === 'Pendding';
 // }
+showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
+  
+  horizontalPosition:'end',
+    verticalPosition:'top',
+      panelClass:['cardhead']
+    })
+    
+    }
 getdeadate(vacancyId:string){
 var date=Date.now();
 
@@ -215,11 +227,7 @@ approvePromotionPendding(){
   this.PromotionRelationService
   .updatePromotionRelation(promotionRelation,Id)
   .subscribe(() =>{
-    this.PromotionApproved = true;
-console.log("updated")
-      setTimeout(() => {
-        this.PromotionApproved= false;
-      }, 2000);
+    this.showSucessMessage('Sucessfully Approved!!')
 
     
       this.vacancyService.getAllVacancy()

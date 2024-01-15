@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Department } from 'app/models/education.model';
 import { Employee } from 'app/models/employee.model';
@@ -69,6 +70,7 @@ buttons = [
     private divisionservice: DivisionService,
     private departmentservice: DepartmentService,
      private positionservice:PositionService ,
+     private snackBar :MatSnackBar
   ) { }
   leaveStatus:string="First-Approved";
 
@@ -139,7 +141,10 @@ subscribe({
   }
 });    
   }
-
+  capitalizeFirstLetter(text: string): string {
+    if (!text) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
   fetchAndDisplayPDF(leave: LeaveRequest):void { 
     // Call your service method to fetch the PDF file  
     const leaveRequestToEdit = this.leavePenddings.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
@@ -165,6 +170,16 @@ subscribe({
   } 
   
 
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
 getLeaveTypeName(leavetypeId: string): string {
   const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId);
   return leaveType ? leaveType.leaveTypeName : '';
@@ -183,12 +198,7 @@ rejectleavePendding
   this.leaveRequestservice
   .updateLeaveRequest(leaveRequest,leaveRequestId)
   .subscribe(() =>{
-    this.leaveRejected = true;
-console.log("updated")
-      setTimeout(() => {
-        this.leaveRejected= false;
-      }, 2000);
-
+    this.showSucessMessage('Sucessfully Rejected!!')
     
     this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
       next: (leaveRequest) => {
@@ -224,12 +234,7 @@ approveleavePendding(leaveRequest: LeaveRequest){
   this.leaveRequestservice
   .updateLeaveRequest(leaveRequest,leaveRequestId)
   .subscribe(() =>{
-    this.leaveApproved = true;
-console.log("updated")
-      setTimeout(() => {
-        this.leaveApproved= false;
-      }, 2000);
-
+    this.showSucessMessage('Sucessfully Approved!!')
     
     this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
       next: (leaveRequest) => {

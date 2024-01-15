@@ -16,9 +16,10 @@ export const ROUTES: RouteInfo[] = [
   { path: '/promotionhistory', title: 'Promotion',  icon:'train', class: '' },
     
     { path: '/attendance', title: 'Attendance',  icon:'book', class: '' },
-    { path: '/acting-assigment', title: 'Assignment',  icon:'people', class: '' },
+    { path: '/medicalRequest', title: 'Medical Fund',  icon:'people', class: '' },
   
-
+    { path: '/payroll', title: 'PayRoll',  icon:'people', class: '' },
+  
 ];
 
 @Component({

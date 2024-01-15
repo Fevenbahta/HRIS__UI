@@ -3,12 +3,12 @@
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
  
-<div class="col-md-9 ml-2">
+<div class="col-md-8">
   <div class="card margin" >
   <form (ngSubmit)="addstep()"> 
     <div class="row " style="margin-left: 15px; margin-top:25px;"> 
       
-      <div class="col-md-5"> 
+      <div class="col-md-4"> 
         <div > 
           <mat-form-field style="height: 65px; width:160px"  > 
             <mat-label>Select Grade</mat-label> 
@@ -20,18 +20,21 @@
           </mat-form-field> 
         </div> 
         </div> 
-      <div class="col-md-5 ml-2 mt-2"> 
+      <div class="col-md-4 ml-2 mt-2"> 
         <div class="form-field"> 
       
           <input  id="stepDescription" rows="1" required placeholder=" "  name="description" [(ngModel)]="addStepRequest.description" name="description" required>
             <label for="stepDescription">Step Description</label> </div> 
       </div> 
+
+      <div class="col-md-4 ml-2 mt-4"> 
+        <div class="form-field"> 
       
-     
-     
-     
+          <input  id="salary" rows="1" required placeholder=" "  name="salary" [(ngModel)]="addStepRequest.salary" name="salary" required>
+            <label for="salary">Basic Salary</label> </div> 
+      </div> 
     </div> 
-    <button type="submit" class="btn btn-sm btnsave ml-3">Save</button> 
+    <button type="submit" class="btn btn-sm btnsave ml-3 mt-4">Save</button> 
     <div *ngIf="stepSaved" class=" btndanger btn-sm pull-right">
       Successfully Added!
     </div>
@@ -50,7 +53,7 @@
   <tr> 
     <th>Grade Level</th>
     <th>Description</th>
-    
+    <th>Basic Salary</th>
     
   </tr> 
   </thead> 
@@ -58,7 +61,7 @@
     <tr *ngFor="let step of steps"> 
       <td>{{ getGradeName(step.levelId) }} </td>
       <td>{{step.description}}</td>
- 
+      <td>{{step.salary}}</td>
     
  
       <td>   

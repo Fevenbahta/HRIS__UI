@@ -22,6 +22,7 @@ import { DivisionService } from 'app/service/division.service';
 import { AssignSupervisorService } from 'app/service/AssignSupervisor';
 import { Department } from 'app/models/education.model';
 import { DepartmentService } from 'app/service/department.service';
+import { MatSnackBar ,MatSnackBarRef} from '@angular/material/snack-bar';
 
 // function dateRangeValidator(control: AbstractControl): ValidationErrors | null {
 //   const startDate = control.get('startDate').value;
@@ -65,9 +66,12 @@ function dateRangeValidator(selectedLeaveBalance: number): ValidatorFn {
 @Component({ 
   selector: 'app-leaverequest', 
   templateUrl: './leaverequest.component.html', 
-  styleUrls: ['./leaverequest.component.scss'] 
+  styleUrls: ['./leaverequest.component.scss'] ,
+
 }) 
 export class LeaverequestComponent { 
+  filteredLeaveRequests:LeaveRequest[]=[]
+  searchTerm:string;
   showLeaveForm: boolean = false;
   leaveRequestForm: FormGroup;
   positionsOfSupervisor:string[]=[]
@@ -78,6 +82,7 @@ export class LeaverequestComponent {
   employeePostions :EmployeePosition[]=[]
   selectedEmployeepostion:string='';
   selectedPosition:string=''
+tPosition:string=''
   selectedDepartment:string='';
   leaveBalances:AnnualLeaveBalance[]=[] 
   selectedLeaveBalance:number=0; 
@@ -94,6 +99,7 @@ export class LeaverequestComponent {
   leaveRequestUpdated: boolean = false; 
   employees:Employee[]=[]; 
   supervisorPositions:AssignSupervisor[]=[]
+displayEmployees:Employee[]=[]; 
   supervisorEmployees:Employee[]=[]; 
   supervisoremployees:EmployeePosition[]=[]
   otherLeaveBalances:OtherLeaveBalance[]=[] 
@@ -110,10 +116,11 @@ export class LeaverequestComponent {
   positions:Position[]= [];
   divisions:Division[]= [];
   currentSupervisorPosition:string
-  currentEmployee:string='b59d425a-bc45-4992-8844-5e7f76b2dc68';
+  currentEmployee:string='43f0da20-9130-4fc8-89b8-d190abefe675';
   
   assignedSupervisors:AssignSupervisor[]=[];
   selectedFirstSupervisor:string='';
+  isLoading:boolean=false;
   buttons = [  
     { label: 'Leave Request',
     dropdownOptions: [
@@ -156,29 +163,26 @@ export class LeaverequestComponent {
     supervisor:" ",
     departmentId:""
   }; 
- 
-  
- 
- 
+
   constructor( 
-   
+    private positionservice:PositionService ,
+    private employeepostionservice : EmployeePositionService,
+    private departmentService:DepartmentService,
     private divisionservice: DivisionService,
    private formBuilder: FormBuilder,
     private leaveRequestservice: LeaveRequestService, 
     private router: Router, 
     private employeeService:EmployeeService, 
     private otherLeaveBalanceService:OtherLeaveBalanceService, 
-    private employeepostionservice : EmployeePositionService,
     private leavetypeservice: LeaveTypeService, 
     private leaveBalanceService: LeaveBalanceService, 
     private employeeIdService: EmployeeIdService, 
-    private positionservice:PositionService ,
     private assignSupervisorService:AssignSupervisorService,
-    private departmentService:DepartmentService,
-
-    private dialog: MatDialog, 
+     private dialog: MatDialog, 
     private http: HttpClient, 
-  ) {  
+    private snackBar :MatSnackBar
+  ) 
+  {  
       this.leaveRequestForm = this.formBuilder.group({
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
@@ -190,6 +194,8 @@ export class LeaverequestComponent {
   
  
   ngOnInit(): void { 
+    this.isLoading=true;
+
     this.divisionservice.getAllDivisions()
 .subscribe({
   next: (division) => {
@@ -212,8 +218,9 @@ this.departmentService.getAllDepartment()
     this.leaveRequestservice.getAllLeaveRequest().subscribe({ 
       next: (leaveRequestd) => { 
         this.leaveRequests = leaveRequestd.filter(leave=>leave.createdBy==this.currentEmployee); 
-         console.log( this.leaveRequests)
-
+        this.filteredLeaveRequests= this.leaveRequests;
+         console.log("t",leaveRequestd)
+this.isLoading=false;
       }, 
       error: (response) => { 
         console.log(response); 
@@ -256,10 +263,13 @@ console.log("s",supervisoremployeePostions)
   //this.positionsOfSupervisor=this.supervisorPositions.positionId;
     //console.log("sup pos",this.positionsOfSupervisor)
     this.employeePostions=employeePostions 
-  this.supervisorPositions.forEach(element => {
-      this.supervisoremployees=employeePostions.filter(emp=>emp.position === element.positionId)
-   
-      console.log(" employees", this.supervisoremployees)
+
+
+this.supervisorPositions.forEach(element =>
+   {
+    this.supervisoremployees=employeePostions.filter(emp=>emp.position === element.positionId )
+          
+      console.log(" employees",element.positionId)
 
      
 });
@@ -270,14 +280,18 @@ console.log("s",supervisoremployeePostions)
      next: (employees) => { 
        // this.leaveRequest.empId = this.selectedEmployee; 
        this.employees=employees 
+  
+          
        this.supervisoremployees.forEach(element=> {
+        
       const sup=employees.find(emp => emp.empId === element.empId);
-       this.supervisorEmployees.push(sup)
-
-
+      this.supervisorEmployees.push(sup);
+    
+      console.log("cc",sup)
+      console.log("dd",this.displayEmployees)
+     
        
-       }); console.log(" suvemp", this.supervisorEmployees)
-           }, 
+       }); }, 
      error: (response) => { 
        console.log(response); 
      } 
@@ -340,23 +354,40 @@ subscribe({
 }); 
  
   } 
- 
+  onSearch() {
+    // this.filteredEmployees = this.employees; 
+       if (this.searchTerm.trim() ==='') {
     
-  // private getBase64(file: File): Promise<any> { 
-  //   return new Promise((resolve, reject) => { 
-  //     const reader = new FileReader(); 
-  //     reader.readAsDataURL(file); 
-  //     reader.onload = () => resolve(reader.result); 
-  //     reader.onerror = (error) => reject(error); 
-  //   }); 
-  // } 
-  
- 
- 
+         this.filteredLeaveRequests =this.leaveRequests;
+       } else {
+      
+         this.filteredLeaveRequests = this.leaveRequests.filter(at => {
+   
+           return (
+               this.getEmployeeName(at.empId).toLowerCase().startsWith(this.searchTerm.toLowerCase()) 
+              );
+           
+           
+         });
+       }
+      
+       }
   getLeaveTypeName(leavetypeId: string): string { 
     const leaveType = this.leaveTypes.find((leave) => leave.leaveTypeId === leavetypeId); 
     return leaveType ? leaveType.leaveTypeName : ''; 
   } 
+
+
+  showSucessMessage(message:string) : void{
+this.snackBar.open(message,'Close',
+{duration:3000,
+
+horizontalPosition:'end',
+  verticalPosition:'top',
+    panelClass:['cardhead']
+  })
+  
+  }
   selectedFile: File | null = null; 
   onFileSelected(event: any) { 
    
@@ -368,7 +399,10 @@ subscribe({
     }; 
     reader.readAsDataURL(file); 
   } 
- 
+  capitalizeFirstLetter(text: string): string {
+    if (!text) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
 
   addleaveRequest() { 
 
@@ -379,7 +413,7 @@ subscribe({
     this.leaveRequest.employeePositionId = this.selectedEmployeepostion; 
     this.leaveRequest.departmentId=this.selectedDepartment
 console.log(this.leaveRequest.employeePositionId)
-    this.leaveRequest.supervisor = "bc314c90-d887-4733-9583-08203986b1c9"; 
+    this.leaveRequest.supervisor = this.currentEmployee; 
     const selectedStartDate = new Date(this.leaveRequestForm.get('startDate').value);
     const selectedEndDate = new Date(this.leaveRequestForm.get('endDate').value);
     
@@ -407,10 +441,12 @@ console.log(this.leaveRequest.employeePositionId)
         
       //  this.router.navigate(['/employee-registration/work-experience']);  
  
-      this.leaveRequestSaved=true 
-        setTimeout(() => { 
-          this.leaveRequestSaved = false; 
-        }, 2000); 
+      // this.leaveRequestSaved=true 
+      //   setTimeout(() => { 
+      //     this.leaveRequestSaved = false; 
+      //   }, 2000); 
+      this.showSucessMessage('Sucessfully Added!!')
+
         this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
           next: (leaveRequestd) => { 
             this.leaveRequests = leaveRequestd.filter(leave=>leave.createdBy==this.currentEmployee); 
@@ -498,7 +534,7 @@ console.log(this.leaveRequest.employeePositionId)
 
       this.selectedDepartment = selectedDepartment.departmentId;
       this.selectedEmployeeDepartment=this.getDepartmentName(this.selectedDepartment )
-   console.log("deppartment",  this.selectedEmployeeDepartment);
+   console.log("deppartment",  this.selectedDepartment);
  
     const selectedPosition = this.selectedEmployeepostion;
    
@@ -681,10 +717,9 @@ this.leaveRequest.endDate = selectedEndDate;
     };} 
   
  
- 
- 
   editleaveRequest(leave:
 LeaveRequest): void { 
+  this.showLeaveForm =true;
     const leaveRequestToEdit = this.leaveRequests.find(leaveRequest => leaveRequest.leaveRequestId === leave.leaveRequestId); 
     this.leaveRequest = leaveRequestToEdit; 
     this.selectedLeaveType=leaveRequestToEdit.leaveTypeId 
@@ -725,6 +760,10 @@ LeaveRequest): void {
  
     dialogRef.afterClosed().subscribe((result) => { 
       if (result === true) { 
+        this.leaveRequestservice.deleteLeaveRequest(leaveRequest.leaveRequestId).subscribe({
+          next: () => { 
+            this.dialog.open(DeletesucessfullmessageComponent)  
+          
         this.leaveRequestservice.getLeaveRequestByEmp(this.selectedEmployee).subscribe({ 
           next: (leaveRequestd) => { 
             this.leaveRequests = leaveRequestd; 
@@ -734,11 +773,12 @@ LeaveRequest): void {
           error: (response) => { 
             console.log(response); 
           } 
-        }); 
+        }); }})
       } 
     }); 
   } 
    
+ 
  
   getEmployeeName(empId: string): string {  
     const employee = this.employees.find((g) => g.empId === empId);  
@@ -754,9 +794,6 @@ LeaveRequest): void {
     dialogRef.componentInstance.openModal(empId)
   
   }
-  // getLeaveTypeName(Id: string): string {  
-  //   const leaveType = this.leaveTypes.find((g) => g.leaveTypeId === Id);  
-  //   return leaveType ? ${leaveType.leaveTypeName} :'Unknown EMPLOYEE';  
-  // } 
+
  
 }

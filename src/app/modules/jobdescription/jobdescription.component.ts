@@ -20,6 +20,7 @@ import { Department } from 'app/models/education.model';
 import { GradeService } from 'app/service/grade.service';
 import { AssignSupervisorService } from 'app/service/AssignSupervisor';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-jobdescription',
@@ -97,7 +98,8 @@ constructor(
   private dialog: MatDialog,
   private assignSupervisorService:AssignSupervisorService,
 
-  private router:Router){}
+  private router:Router,
+  private snackBar :MatSnackBar){}
 ngOnInit(): void{
   this.positionservice.getAllPosition()
 .subscribe({
@@ -178,16 +180,27 @@ this.branchservice.getAllBranch()
 });
 
 
-this.employeepositionservice.getEmployeePosition(this.employeeIdService.employeeId) 
-  .subscribe({ 
-    next: (employeepositions) => { 
-      this.employeePosition = employeepositions; 
-          }, 
-    error(response) { 
-      console.log(response); 
-    }, 
-});
+// this.employeepositionservice.getEmployeePosition(this.employeeIdService.employeeId) 
+//   .subscribe({ 
+//     next: (employeepositions) => { 
+//       this.employeePosition = employeepositions; 
+//           }, 
+//     error(response) { 
+//       console.log(response); 
+//     }, 
+// });
 }
+showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
+  
+  horizontalPosition:'end',
+    verticalPosition:'top',
+      panelClass:['cardhead']
+    })
+    
+    }
+
 updateEmployeePosition(): void {
  
   
@@ -200,10 +213,8 @@ updateEmployeePosition(): void {
   .subscribe({
   
     next: (employeePosition) => { 
-        this.employeePositionUpdated=true;
-      setTimeout(() => {
-        this.employeePositionUpdated = false;
-      }, 2000);
+      this.showSucessMessage('Sucessfully Updated!!')
+    
       this.employeepositionservice.getAllEmployeePosition().subscribe((employeePositions) => {
         this.employeepositions = employeePositions.filter(employeePositions => employeePositions.empId === this.employeeIdService.employeeId);})
       this.selectedDivision =  "";
@@ -243,11 +254,8 @@ addEmployeePosition(){   console.log("dkjhlghl",this.selectedDivision)
   this.employeepositionservice.addEmployeePosition(this.employeePosition)
   .subscribe({
   next:()=>{
-    this.employeePositionSaved = true;
-
-    setTimeout(() => {
-      this.employeePositionSaved = false;
-    }, 2000);
+    this.showSucessMessage('Sucessfully Added!!')
+    
     this.employeepositionservice.getEmployeePosition(this.employeeIdService.employeeId) 
   .subscribe({ 
     next: (employeepositions) => { 

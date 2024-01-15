@@ -1,6 +1,7 @@
 // edit-spouse.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Spouse } from 'app/models/spouse.model';
@@ -43,8 +44,8 @@ export class EditSpouseComponent implements OnInit {
     private router: Router,
     private spouseService: SpouseService,
     private dialog: MatDialog,
-    private employeeIdService:EmployeeIdService
-
+    private employeeIdService:EmployeeIdService,
+    private snackBar :MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -65,17 +66,21 @@ console.log(this.spouses)
   }
 
 
-
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   updateSpouse(): void {
     this.spouseService.updateSpouse(this.spouse, this.spouse.id).subscribe(
       () => {
    
-        this.spouseUpdated = true;
-        //  this.router.navigate(['employee-registration/job-description']);
-          setTimeout(() => {
-            this.spouseUpdated= false;
-          }, 2000);
-
+        this.showSucessMessage('Sucessfully Updated!!')
           this.spouseService.getAllSpouse() 
           .subscribe({ 
             next: (spouse) => { 
@@ -149,27 +154,23 @@ addSpouse() {
   this.spouse.empId = this.employeeIdService.employeeId
   this.spouseService.addSpouse(this.spouse).subscribe({
     next: (employee) => {
-      this.spouseSaved = true;
-    //  this.router.navigate(['employee-registration/job-description']);
-      setTimeout(() => {
-        this.spouseSaved = false;
-      }, 2000);
+      this.showSucessMessage('Sucessfully Added!!')
       this.spouses.push({ ...this.spouse });
 
-      this.spouse = {
-        pId: 0,
-        id: undefined,
-        name: "",
-        createdBy: "",
-        createdDate: "2023-07-26T06:13:52.512Z",
-        updatedDate: "2023-07-26T06:13:52.512Z",
-        updatedBy: "",
-        status: 0,
-        empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
-       dateOfBirth:"2023-07-26T06:33:36.714Z",
-      relationship: '',
-    
-      };
+     this.spouse= {
+    pId: 0,
+    id: undefined,
+    name: "",
+    createdBy: "",
+    createdDate: "2023-07-26T06:13:52.512Z",
+    updatedDate: "2023-07-26T06:13:52.512Z",
+    updatedBy: "",
+    status: 0,
+    empId: " ",
+   dateOfBirth:" ",
+  relationship: '',
+
+  };
     },
     error(response) {
       console.log(response)

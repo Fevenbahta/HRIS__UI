@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Attendance } from 'app/models/Attendance.model';
 import { Employee } from 'app/models/employee.model';
 import { AttendanceService } from 'app/service/attendance.service';
@@ -31,9 +32,7 @@ export class AttendanceComponent {
   fromDate: string; // Variable to store the "From" date
   toDate: string;
   isLoading:boolean=false;
-  addAttendance(){
 
-  }
 
   att:Attendance={
     pId:0,
@@ -68,7 +67,8 @@ realTime:0,
   selectedFile: File | null = null;
 
   constructor(private attendanceService: AttendanceService,
-    private employeeService:EmployeeService, ) {}
+    private employeeService:EmployeeService,   
+       private snackBar :MatSnackBar) {}
     
     ngOnInit(): void { 
       this.attendanceService.addAtt(this.att)
@@ -80,6 +80,7 @@ this.attendanceService.getAllAttendance().subscribe({
   next: (at) => { 
     // this.leaveRequest.empId = this.selectedEmployee; 
     this.Attendances=at 
+    this.filteredAttendances=at
    }, 
   error: (response) => { 
     console.log(response); 
@@ -126,7 +127,20 @@ this.attendanceService.getAllAttendance().subscribe({
       } 
     }); 
     }
-
+    showSucessMessage(message:string) : void{
+      this.snackBar.open(message,'Close',
+      {duration:3000,
+      
+      horizontalPosition:'end',
+        verticalPosition:'top',
+          panelClass:['cardhead']
+        })
+        
+        }
+    capitalizeFirstLetter(text: string): string {
+      if (!text) return text;
+      return text.charAt(0).toUpperCase() + text.slice(1);
+    }
     filterByDateRange() {
       if (this.fromDate && this.toDate) {
         let fromDate = new Date(this.fromDate);
@@ -186,14 +200,18 @@ this.attendanceService.getAllAttendance().subscribe({
        } else {
       
          this.filteredAttendances = this.Attendances.filter(at => {
-          if(at.department){
-        
-          
+          if(at.attendanceId){
+            if(at.department){
+          var dep=at.department
+            }else{
+              dep="unknown"
+            }
            return (
-         
-             at.department.toLowerCase().startsWith(this.searchTerm.toLowerCase()) ||
+   
              this.getEmployeeName(at.empId).toLowerCase().startsWith(this.searchTerm.toLowerCase()) 
-              );
+           ||  at.attendanceId.toString().includes(this.searchTerm) || 
+           dep.toLowerCase().startsWith(this.searchTerm.toLowerCase())
+             );
            }
            
          });
@@ -233,15 +251,13 @@ this.attendanceService.getAllAttendance().subscribe({
   updateEmployee(): void {
 console.log(this.employee)
 console.log(this.selectedEmployee)
+this.employee.attendanceId=this.selectedAttendanceId;
     this.attendanceService.updateAttendance(this.employee,this.selectedEmployee )
     .subscribe({
     
       next: (contact) => { 
         
-        this.attendanceUpdate=true;
-        setTimeout(() => {
-          this.attendanceUpdate= false;
-        }, 2000);}})
+        this.showSucessMessage('Sucessfully Updated!!');}})
 }
 getEmployeeName(empId: string): string { 
   const employee = this.employees.find((g) => g.empId === empId); 

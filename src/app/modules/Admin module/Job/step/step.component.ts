@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -62,8 +63,20 @@ buttons = [
       { label: 'Leave-Type', route:"/leave/leave-type" },
      ]},
  { label: 'Education-Level' , route:"/admin/education-level"},
-   ];
-  constructor( private gradeservice: GradeService,private dialog:MatDialog, private stepservice: StepService,private router:Router) { }
+ { label: 'PayRoll',
+ dropdownOptions: [
+  { label: 'Tax',route:"/admin/tax"  },
+  { label: 'Bank',  route:"/admin/bank"  },
+  { label: 'DeductionType',route:"/admin/deductionType" },
+  { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+  
+
+  ]}, ];
+  constructor( private gradeservice: GradeService,
+    private dialog:MatDialog, 
+    private stepservice: StepService,
+    private router:Router,
+    private snackBar :MatSnackBar) { }
 
   ngOnInit(): void {
     this.gradeservice.getAllGrade()
@@ -86,15 +99,25 @@ buttons = [
     });
    
   }
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   addstep(){
     this.addStepRequest.levelId = this.selectedGrade;
+  this.addStepRequest.description="G".concat(this.getGradeName(this.selectedGrade).charAt(6)).concat(" ").concat(this.addStepRequest.description);
     this.stepservice.addStep(this.addStepRequest)
     .subscribe({
     next:(step)=>{
-      this.stepSaved = true;
-      setTimeout(() => {
-        this.stepSaved = false;
-      }, 2000);
+
+      this.showSucessMessage('Sucessfully Added!!')
+
       this.steps.push({ ...this.addStepRequest });
 
       this.addStepRequest={

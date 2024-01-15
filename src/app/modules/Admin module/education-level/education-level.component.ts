@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-education-level',
@@ -52,8 +53,18 @@ status:0,
         { label: 'Leave-Type', route:"/leave/leave-type" },
        ]},
    { label: 'Education-Level' , route:"/admin/education-level"},
-     ];
-  constructor(private educationLevelService :EducationLevelService,private router:Router,private dialog:MatDialog,) { }
+   { label: 'PayRoll',
+   dropdownOptions: [
+    { label: 'Tax',route:"/admin/tax"  },
+    { label: 'Bank',  route:"/admin/bank"  },
+    { label: 'DeductionType',route:"/admin/deductionType" },
+    { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+    
+  
+    ]}, ];
+  constructor(private educationLevelService :EducationLevelService,
+    private router:Router,private dialog:MatDialog,
+    private snackBar :MatSnackBar) { }
 
   ngOnInit(): void {
     this.educationLevelService.getAllEducationLevels()
@@ -66,15 +77,24 @@ status:0,
       }
     });
   }
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   addEducationLevel(){
 
     this.educationLevelService.addEducationLevel(this.addEducationLevelRequest)
     .subscribe({
     next:(educationLevel)=>{
-      this.educationLevelSaved = true;
-      setTimeout(() => {
-        this.educationLevelSaved = false;
-      }, 2000);
+ 
+      this.showSucessMessage('Sucessfully Added!!')
+
       this.educationLevels.push({ ...this.addEducationLevelRequest });
 
       this.addEducationLevelRequest = {

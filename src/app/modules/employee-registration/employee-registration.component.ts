@@ -12,6 +12,7 @@ import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confi
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
  function  validateDate(control) {
   const selectedDate = new Date(control.joinDate);
   const currentDate = new Date();
@@ -50,7 +51,8 @@ export class EmployeeRegistrationComponent implements OnInit {
   buttons = [ 
     { label: ' Add Employee ', route: '/employee-registration' }, 
     { label: '  List Employee ', route: '/employee-list' } ,
-    {label:'Employee History', route:'/history'}
+    {label:'Employee History', route:'/history'},
+    {label:'Contract Registration', route:'/contract-regstration'}
   ]; 
  
   constructor( 
@@ -60,7 +62,8 @@ export class EmployeeRegistrationComponent implements OnInit {
     private router: Router, 
     private supervisorService:SupervisorService ,
     private dialog: MatDialog, 
-    private employeeIdService:EmployeeIdService
+    private employeeIdService:EmployeeIdService,
+    private snackBar :MatSnackBar
   ) {
    
   } 
@@ -123,7 +126,16 @@ export class EmployeeRegistrationComponent implements OnInit {
        
     }); 
 } 
+showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
   
+  horizontalPosition:'end',
+    verticalPosition:'top',
+      panelClass:['cardhead']
+    })
+    
+    }
  
 getEmployees() {  
   this.employeeservice.getEmployee(this.employeeIdService.employeeId)
@@ -157,11 +169,7 @@ validateJoinDate(control: AbstractControl): { [key: string]: boolean } | null {
       this.employeeservice.addEmployee(formData)
       .subscribe({ 
         next: (contact) => { 
-      console.log(formData)
-          this.employeeSaved = true; 
-          setTimeout(() => { 
-            this.employeeSaved = false; 
-          }, 2000); 
+          this.showSucessMessage('Sucessfully Added!!')
           this.employeeservice.getAllEmployees()
           .subscribe((employees) => {
             this.employees = employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
@@ -341,10 +349,7 @@ validateAllFormFields(formGroup: FormGroup) {
          const formData = this.employeeForm.value;
       this.employeeservice.updateEmployee(formData,this.employee.empId ).subscribe({
         next: () => {
-          this.employeeUpdated = true;
-          setTimeout(() => {
-            this.employeeUpdated = false;
-          }, 2000);
+          this.showSucessMessage('Sucessfully Updated!!')
 
           this.employeeForm = this.formBuilder.group({ 
             pId: [0], // You can add any specific validation rule here, like Validators.required 

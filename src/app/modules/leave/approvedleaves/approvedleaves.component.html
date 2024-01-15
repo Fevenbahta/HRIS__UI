@@ -47,7 +47,7 @@
                   <tbody>
                     <!-- Use *ngFor to loop through the leavePendings array and display each leavePending record -->
                     <tr *ngFor="let Pending of filteredLeave" >
-                      <td>{{ getEmployeeName(Pending.empId)}}</td>
+                      <td>{{ capitalizeFirstLetter(getEmployeeName(Pending.empId))}}</td>
                       <td>{{ getLeaveTypeName(Pending.leaveTypeId) }}</td>
                       <td>{{ Pending.startDate| date:'yyyy-MM-dd' }}</td>
                       <td>{{ Pending.endDate| date:'yyyy-MM-dd' }}</td>

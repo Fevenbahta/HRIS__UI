@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 import { Component, OnInit } from '@angular/core';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
@@ -47,7 +48,8 @@ export class TrainingComponent implements OnInit {
     private dialog: MatDialog ,
     private trainingService: TrainingService,
     private employeeIdService: EmployeeIdService,
-    private router: Router,) { }
+    private router: Router,
+    private snackBar :MatSnackBar) { }
 
   ngOnInit(): void {
     this.trainingService.getAllTraining() 
@@ -83,15 +85,22 @@ export class TrainingComponent implements OnInit {
       }
     );
   }
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   addTraining() {
     this.training.empId = this.employeeIdService.employeeId;
     this.trainingService.addTraining(this.training)
     .subscribe({
       next: (employee) => {
-        this.trainingSaved = true;
-          setTimeout(() => {
-        this.trainingSaved = false;
-      }, 2000);
+        this.showSucessMessage('Sucessfully Added!!')
       this.trainingService.getAllTraining() 
       .subscribe({ 
         next: (training) => { 
@@ -128,10 +137,7 @@ export class TrainingComponent implements OnInit {
 
   updateTraining(): void {
     this.trainingService.updateTraining(this.training,this.training.id).subscribe(
-      () => {       this.trainingUpdated=true; 
-        setTimeout(() => {
-          this.trainingUpdated=false; 
-        }, 2000);
+      () => {          this.showSucessMessage('Sucessfully Updated!!')
  
         this.trainingService.getAllTraining() 
         .subscribe({ 

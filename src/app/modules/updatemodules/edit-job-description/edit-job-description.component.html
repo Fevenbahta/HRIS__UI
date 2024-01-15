@@ -12,7 +12,7 @@
                       <p class="card-category">Edit your Job Description</p>
                   </div>
                   <div class="card-body">
-                      <form (ngSubmit)="updateEmployeePosition()">
+                      <form >
                           
                       
                               <div class="card-body">
@@ -125,7 +125,7 @@
               
             </div>
                           
-                          <button  mat-raised-button type="submit" *ngIf="employeePosition.id!=undefined" class="btn btn-sm btnedit">Update</button>
+                          <button  mat-raised-button *ngIf="employeePosition.id!=undefined" (click)="updateEmployeePosition()" class="btn btn-sm btnedit">Update</button>
                           <div class="clearfix"></div>
                           <div *ngIf="employeePositionUpdated" class=" btndanger btn-sm pull-right">
                             Updated successfully!

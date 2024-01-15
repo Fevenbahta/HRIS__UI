@@ -52,14 +52,14 @@
                                         <td>{{employee.pensionNo}}</td>
                                      
                                  
-                                        <button class="btn btn-sm btnedit" (click)="openEmployeeDetailsModal(employee.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
-                                            <mat-icon>info</mat-icon> 
-                                          </button>
-                                  <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
-                                    <mat-icon>edit</mat-icon></button></td>
+                                    <td><button class="btn btn-sm btnedit" (click)="openEmployeeDetailsModal(employee.empId)">
+                                            <mat-icon class="small">info</mat-icon> 
+                                          </button></td>    
+                                  <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)" >
+                                    <mat-icon class="small">edit</mat-icon></button></td>
 
-                                  <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
-                                    <mat-icon>delete</mat-icon></button>
+                                  <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)" >
+                                    <mat-icon class="small">delete</mat-icon></button>
                         </td> 
                                    
                                          

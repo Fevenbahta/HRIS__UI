@@ -90,3 +90,7 @@
   td ,th{
     white-space: nowrap; /* Prevent text wrapping */
   }
+  ::ng-deep .mat-snack-bar-container{
+    background-color: yellow;
+    color:#76a53b
+  }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Supervisor } from 'app/models/employee.model';
@@ -77,11 +78,22 @@ fifthSupervisor:"",
         { label: 'Leave-Type', route:"/leave/leave-type" },
        ]},
    { label: 'Education-Level' , route:"/admin/education-level"},
-     ];
+   { label: 'PayRoll',
+   dropdownOptions: [
+    { label: 'Tax',route:"/admin/tax"  },
+    { label: 'Bank',  route:"/admin/bank"  },
+    { label: 'DeductionType',route:"/admin/deductionType" },
+    { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+    
+  
+    ]}, ];
 constructor(
   private positionservice: PositionService,
   private AssignSupervisorservice: AssignSupervisorService,
-  private supervisorService :SupervisorService,private dialog:MatDialog,private router:Router){}
+  private supervisorService :SupervisorService,
+  private dialog:MatDialog,private router:Router, 
+   private snackBar :MatSnackBar
+  ){}
 ngOnInit():void {
   this.supervisorService.getAllSupervisors()
 .subscribe({
@@ -119,7 +131,16 @@ ngOnInit():void {
   });
 }
 
-
+showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
+  
+  horizontalPosition:'end',
+    verticalPosition:'top',
+      panelClass:['cardhead']
+    })
+    
+    }
 addAssignSupervisor(){
 
 
@@ -133,11 +154,9 @@ addAssignSupervisor(){
 this.AssignSupervisorservice.addAssignSupervisor(this.assignSupervisor)
 .subscribe({
 next:()=>{
-  this.assignSupervisorSaved=true;
-  setTimeout(() => {
-    this.assignSupervisorSaved = false;
-  }, 2000);
-        
+
+  this.showSucessMessage('Sucessfully Added!!')
+
   this.selectedFirstSupervisor =  "";
   this.selectedPosition  ="" ;
    this.selectedFifthSupervisor= "" ;

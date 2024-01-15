@@ -17,6 +17,7 @@ import { Division, EmployeePosition, Position } from 'app/models/job-description
 import { Department } from 'app/models/education.model';
 import { EmployeePositionService } from 'app/service/employee-position';
 import { Observable, of, switchMap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-leave-approval',
@@ -76,7 +77,7 @@ divisions:Division[]= [];
      private positionservice:PositionService ,
      private employeepositionservice:EmployeePositionService,
      private employeepostionservice : EmployeePositionService,
-
+     private snackBar :MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -182,7 +183,10 @@ subscribe({
 //   }
 
 
-
+capitalizeFirstLetter(text: string): string {
+  if (!text) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
   getPosition(empId: string): string{
 
     this.employeepositionservice.getAllEmployeePosition()
@@ -272,6 +276,16 @@ subscribe({
   
   
   
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   approveleavePendding(leaveRequest: LeaveRequest){
     
     var leaveRequestId=leaveRequest.leaveRequestId
@@ -280,12 +294,7 @@ subscribe({
     this.leaveRequestservice
     .updateLeaveRequest(leaveRequest,leaveRequestId)
     .subscribe(() =>{
-      this.leaveApproved = true;
-console.log("updated")
-        setTimeout(() => {
-          this.leaveApproved= false;
-        }, 2000);
-
+      this.showSucessMessage('Sucessfully Approved!!')
       
       this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
         next: (leaveRequest) => {

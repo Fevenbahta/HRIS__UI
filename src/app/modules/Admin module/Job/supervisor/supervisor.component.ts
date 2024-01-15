@@ -8,6 +8,7 @@ import { Position } from 'app/models/job-description.model';
 import { Supervisor } from 'app/models/employee.model';
 import { PositionService } from 'app/service/position.service';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-supervisor',
@@ -58,9 +59,21 @@ buttons = [
       { label: 'Leave-Type', route:"/leave/leave-type" },
      ]},
  { label: 'Education-Level' , route:"/admin/education-level"},
-   ];
+ { label: 'PayRoll',
+ dropdownOptions: [
+  { label: 'Tax',route:"/admin/tax"  },
+  { label: 'Bank',  route:"/admin/bank"  },
+  { label: 'DeductionType',route:"/admin/deductionType" },
+  { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+  
 
-  constructor(private positionservice: PositionService ,private dialog:MatDialog, private supervisorservice :SupervisorService ,private router:Router) { }
+  ]}, ];
+
+  constructor(private positionservice: PositionService ,
+    private dialog:MatDialog, private supervisorservice :SupervisorService ,
+    private router:Router,
+    private snackBar :MatSnackBar
+    ) { }
 
   ngOnInit(): void {
     this.positionservice.getAllPosition()
@@ -83,6 +96,16 @@ buttons = [
       }
     });
   }
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   addSupervisor(){
     this.addSupervisorRequest.positionId = this.selectedPosition;
     this.supervisorservice.addSupervisor(this.addSupervisorRequest)

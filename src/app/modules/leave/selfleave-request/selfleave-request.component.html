@@ -37,7 +37,6 @@
             required [(ngModel)]="selectedEmployeeDepartment" [disabled]="true">
               <!-- Use *ngFor on mat-option to loop through departments -->
             
-              
          
         </div>
             <div class="col-md-4 form-group">
@@ -156,7 +155,7 @@
                 <tbody>
                   <!-- Use *ngFor to loop through the leaveRequests array and display each leaveRequest record -->
                   <tr *ngFor="let leaveRequest of leaveRequests">
-                    <td>{{ getEmployeeName(leaveRequest.empId) }}</td>
+                    <td>{{ capitalizeFirstLetter(getEmployeeName(leaveRequest.empId)) }}</td>
                     
                     <td>{{ getLeaveTypeName(leaveRequest.leaveTypeId) }}</td>
                    

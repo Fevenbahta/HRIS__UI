@@ -17,9 +17,16 @@
                           <form (ngSubmit)="updateDepositeAuthentication()">
                             <div class="card-body">
                               <div class="row">
-                                <div class="col-md-6 form-field">
-                                  <input placeholder=" " type="text" name="bank" [(ngModel)]="depositeAuthentication.bank">
-                                  <label>Bank</label>
+                                <div class="col-md-4">
+                       
+                                    <mat-select class="form-field select" placeholder="Select Bank" required name="selectedBank" [(ngModel)]="selectedBank" >
+                                      <!-- Replace the options below with your actual division options -->
+                                      <mat-option *ngFor="let bank of Banks" [value]="bank.id">
+                                        {{bank.bankName}}
+                                      </mat-option>
+                                     
+                                    </mat-select>
+                                 
                                 </div>
                                 <div class="col-md-6 form-field">
                                   <input  placeholder=" " type="text" name="bankBranch" [(ngModel)]="depositeAuthentication.bankBranch">
@@ -68,7 +75,7 @@
       <tbody>
         <!-- Use *ngFor to loop through the depositeauthentications array and display each deposit authentication record -->
         <tr *ngFor="let depositeAuthentication of depositeAuthentications" >
-          <td>{{depositeAuthentication.bank }}</td>
+          <td>{{ getBankName(depositeAuthentication.bankId)}}</td>
           <td>{{ depositeAuthentication.bankBranch }}</td>
           <td>{{depositeAuthentication.bankAccount }}</td>
           <td>{{ depositeAuthentication.tinNumber }}</td>

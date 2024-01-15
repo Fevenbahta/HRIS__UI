@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Division, EducationLevel } from 'app/models/job-description.model';
 import { Education, WorkExperience,} from 'app/models/work-experience.model';
@@ -76,6 +77,7 @@ export class QualificationComponent implements OnInit {
     private router: Router,
     private educationlevelservice:EducationLevelService,
     private employeeIdService: EmployeeIdService,
+    private snackBar :MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -151,10 +153,7 @@ this.workExperienceService.getAllWorkExperience()
     this.addEducationRequest.eductionName = this.selectedEducationLevel;
     this.educationservice.addEducation(this.addEducationRequest).subscribe({
       next: (employee) => {
-        this.educationSaved = true;
-        setTimeout(() => {
-          this.educationSaved = false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Added!!')
         // Add the current education to the array
         this.educations.push({ ...this.addEducationRequest });
         // Reset the form fields
@@ -180,7 +179,16 @@ this.workExperienceService.getAllWorkExperience()
       }
     });
   }
-
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   editEducation(education: Education): void {
     // Here, we will navigate to the edit page for the selected Education.
     this.router.navigate(['/edit-education', education.id]);

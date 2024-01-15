@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Attendance } from 'app/models/Attendance.model';
 import { Department } from 'app/models/education.model';
@@ -74,7 +75,7 @@ divisions:Division[]= [];
     private departmentservice: DepartmentService,
      private positionservice:PositionService ,
      private employeepositionservice:EmployeePositionService,
-
+     private snackBar :MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -129,7 +130,21 @@ subscribe({
 });   
 
   }
-
+  
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
+  capitalizeFirstLetter(text: string): string {
+    if (!text) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
   getPosition(empId: string): Observable<string> {
     return this.employeepositionservice.getAllEmployeePosition().pipe(
       switchMap(employeePositions => {
@@ -196,12 +211,7 @@ subscribe({
     this.leaveRequestservice
     .updateLeaveRequest(leaveRequest,leaveRequestId)
     .subscribe(() =>{
-      this.leaveApproved = true;
-console.log("updated")
-        setTimeout(() => {
-          this.leaveApproved= false;
-        }, 2000);
-
+      this.showSucessMessage('Sucessfully Approved!!')
       
       this.leaveRequestservice.getAllLeaveRequestByStatus(this.leaveStatus).subscribe({
         next: (leaveRequest) => {

@@ -15,6 +15,7 @@ import { AssignSupervisorService } from 'app/service/AssignSupervisor';
 import { DepartmentService } from 'app/service/department.service';
 import { GradeService } from 'app/service/grade.service';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-job-description',
@@ -87,8 +88,8 @@ updatedBy: '',
     private dialog: MatDialog,
     private assignSupervisorService:AssignSupervisorService,
     private departmentservice:DepartmentService,
-    private levelService:GradeService
-
+    private levelService:GradeService,
+    private snackBar :MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -161,7 +162,16 @@ this.assignSupervisorService.getAllAssignSupervisor()
         });
       
     }
-  
+    showSucessMessage(message:string) : void{
+      this.snackBar.open(message,'Close',
+      {duration:3000,
+      
+      horizontalPosition:'end',
+        verticalPosition:'top',
+          panelClass:['cardhead']
+        })
+        
+        }
   getemployeePositionById(): void {
     this.employeePositionService.getEmployeePosition(this.employeeIdService.employeeId).subscribe(
       (employeePosition) => {
@@ -184,10 +194,7 @@ this.assignSupervisorService.getAllAssignSupervisor()
     .subscribe({
     
       next: (employeePosition) => { 
-          this.employeePositionUpdated=true;
-        setTimeout(() => {
-          this.employeePositionUpdated = false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Updated!!')
         this.employeePositionService.getAllEmployeePosition().subscribe((employeePositions) => {
           this.employeePositions = employeePositions.filter(employeePositions => employeePositions.empId === this.employeeIdService.employeeId);})
          
@@ -334,12 +341,7 @@ if(selectedassignedSupervisor){
     this.employeePositionService.addEmployeePosition(this.employeePosition)
     .subscribe({
     next:()=>{
-      this.employeePositionSaved = true;
-    
-      setTimeout(() => {
-        this.employeePositionSaved = false;
-      }, 2000);
-      // Add the
+      this.showSucessMessage('Sucessfully Added!!')
        this.employeePositions.push({ ...this.employeePosition });
   
       this.employeePosition={

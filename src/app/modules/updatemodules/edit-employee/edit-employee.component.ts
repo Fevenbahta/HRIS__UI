@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Contact } from 'app/models/contact.model';
@@ -44,7 +45,8 @@ supervisors:Supervisor[]=[];
     private router: Router,
     private supervisorService:SupervisorService ,
     private employeeIdService: EmployeeIdService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar :MatSnackBar
 
   ) {}
 
@@ -71,10 +73,10 @@ supervisors:Supervisor[]=[];
       nationality: ['', Validators.required], 
       pensionNo: ['', Validators.required], 
       imageData: [''], 
-      crime: [true], 
+      crime: [false], 
       crimeDescription: [''], 
       status: [0,] ,
-      
+      attendanceId:undefined,
     });
     this.supervisorService.getAllSupervisors() 
     .subscribe({ 
@@ -115,7 +117,16 @@ this.employeeService.getAllEmployees()
   this.employees = employees.filter(employees => employees.empId === this.employeeIdService.employeeId);
 })
   }
-
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   populateForm(): void {
     
     // Set the form values with the employee data
@@ -145,7 +156,8 @@ this.employeeService.getAllEmployees()
       imageData: this.employee.imageData,
       crime: this.employee.crime,
       crimeDescription: this.employee.crimeDescription,
-  
+      attendanceId:this.employee.attendanceId,
+     
       status: this.employee.status
     });
   }
@@ -161,10 +173,7 @@ this.employeeService.getAllEmployees()
          const formData = this.employeeForm.value;
       this.employeeService.updateEmployee(formData,this.employee.empId ).subscribe({
         next: () => {
-          this.employeeUpdated = true;
-          setTimeout(() => {
-            this.employeeUpdated = false;
-          }, 2000);
+          this.showSucessMessage('Sucessfully Updated!!')
 
           this.employeeService.getAllEmployees()
           .subscribe((employees) => {
@@ -268,8 +277,8 @@ this.employeeService.getAllEmployees()
   //     panelClass: ['mat-toolbar', panelClass], 
   //   }); 
   // } 
-  editEmployee(employee: Employee): void { 
-    const employeeToEdit = this.employees.find(employee => employee.empId === this.employeeId);
+  editEmployee(employe: Employee): void { 
+    const employeeToEdit = this.employees.find(employee => employee.empId === employe.empId);
     this.employee = employeeToEdit;
 
  

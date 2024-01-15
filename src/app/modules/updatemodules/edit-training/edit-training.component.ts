@@ -1,6 +1,7 @@
 // edit-training.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { Training } from 'app/models/training.model';
@@ -50,7 +51,7 @@ export class EditTrainingComponent implements OnInit {
     private trainingService: TrainingService,
     private employeeIdService:EmployeeIdService,
     private dialog: MatDialog,
-
+    private snackBar :MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -70,15 +71,21 @@ export class EditTrainingComponent implements OnInit {
       }, 
   });
   }
-
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
 
 
   updateTraining(): void {
     this.trainingService.updateTraining(this.training,this.training.id).subscribe(
-      () => {          this.trainingSaved=true; 
-        setTimeout(() => {
-          this.trainingSaved=false; 
-        }, 2000);
+      () => {         this.showSucessMessage('Sucessfully Updated!!')
  
         this.trainingService.getAllTraining() 
         .subscribe({ 
@@ -185,11 +192,7 @@ export class EditTrainingComponent implements OnInit {
     this.trainingService.addTraining(this.training)
     .subscribe({
       next: (employee) => {
-      //  this.router.navigate(['/employee-registration/deposite-authentication']); 
-      this.trainingAdded = true;
-          setTimeout(() => {
-        this.trainingAdded = false;
-      }, 2000);
+        this.showSucessMessage('Sucessfully Added!!')
       this.trainingService.getAllTraining() 
       .subscribe({ 
         next: (training) => { 

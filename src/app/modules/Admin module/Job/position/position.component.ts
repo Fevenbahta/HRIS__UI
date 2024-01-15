@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PositionService } from 'app/service/position.service';
 import { Component, OnInit } from '@angular/core';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-position',
@@ -69,12 +70,24 @@ fifthSupervisor:"",
         { label: 'Leave-Type', route:"/leave/leave-type" },
        ]},
    { label: 'Education-Level' , route:"/admin/education-level"},
-     ];
+   { label: 'PayRoll',
+   dropdownOptions: [
+    { label: 'Tax',route:"/admin/tax"  },
+    { label: 'Bank',  route:"/admin/bank"  },
+    { label: 'DeductionType',route:"/admin/deductionType" },
+    { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+    
+  
+    ]}, ];
   
   filteredPosition: Position[] = []; 
   searchTerm: string = ''; 
  
-constructor(private divisionservice: DivisionService,private positionservice: PositionService,private dialog:MatDialog,private router:Router){}
+constructor(private divisionservice: DivisionService,
+  private positionservice: PositionService,
+  private dialog:MatDialog,
+  private router:Router,
+  private snackBar :MatSnackBar){}
 ngOnInit():void {
   this.divisionservice.getAllDivisions()
 .subscribe({
@@ -99,7 +112,16 @@ ngOnInit():void {
   });
 }
 
-
+showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
+  
+  horizontalPosition:'end',
+    verticalPosition:'top',
+      panelClass:['cardhead']
+    })
+    
+    }
 addposition(){
   console.log(this.addPositionRequest)
   this.addPositionRequest.divisionId = this.selectedDivision;
@@ -107,10 +129,9 @@ this.positionservice.addPosition(this.addPositionRequest)
 .subscribe({
 next:(position)=>{
   
-  this.positionSaved = true;
-  setTimeout(() => {
-    this.positionSaved = false;
-  }, 2000);
+
+  this.showSucessMessage('Sucessfully Added!!')
+
   this.positions.push({ ...this.addPositionRequest });
 
   this.addPositionRequest = {

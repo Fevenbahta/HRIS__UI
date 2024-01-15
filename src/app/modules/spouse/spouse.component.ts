@@ -7,6 +7,7 @@ import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confi
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-spouse',
@@ -19,17 +20,20 @@ export class SpouseComponent implements OnInit {
   spouses: Spouse[] = []; 
   spouseUpdated:boolean =false;
   spouse: Spouse = {
-    pId: 0,
-    id: undefined,
-    name: "",
-    createdBy: "",
-    createdDate: "2023-07-26T06:13:52.512Z",
-    updatedDate: "2023-07-26T06:13:52.512Z",
-    updatedBy: "",
-    status: 0,
-    empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
-  dateOfBirth:"",
-  relationship: '',
+   
+      pId: 0,
+      id: undefined,
+      name: "",
+      createdBy: "",
+      createdDate: "2023-07-26T06:13:52.512Z",
+      updatedDate: "2023-07-26T06:13:52.512Z",
+      updatedBy: "",
+      status: 0,
+      empId: " ",
+     dateOfBirth:" ",
+    relationship: '',
+  
+    
 
   };
 
@@ -38,7 +42,8 @@ export class SpouseComponent implements OnInit {
     private spouseService:SpouseService,
     private employeeIdService: EmployeeIdService,
     private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private snackBar :MatSnackBar) { }
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
     { label: '  List Employee ', route: '/employee-list' },
@@ -64,16 +69,22 @@ export class SpouseComponent implements OnInit {
     //   error(response) { 
     //     console.log(response); 
     //   }, })
-  }
+  }  
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   addSpouse() {
     this.spouse.empId = this.employeeIdService.employeeId
     this.spouseService.addSpouse(this.spouse).subscribe({
       next: (employee) => {
-        this.spouseSaved = true;
-      
-        setTimeout(() => {
-          this.spouseSaved = false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Added!!')
         this.spouseService.getAllSpouse() 
     .subscribe({ 
       next: (spouse) => { 
@@ -85,17 +96,17 @@ export class SpouseComponent implements OnInit {
       }, })
         this.spouses.push({ ...this.spouse });
 
-        this.spouse = {
+      this.spouse= {
           pId: 0,
-          id: this.spouse.id,
+          id: undefined,
           name: "",
           createdBy: "",
           createdDate: "2023-07-26T06:13:52.512Z",
           updatedDate: "2023-07-26T06:13:52.512Z",
           updatedBy: "",
           status: 0,
-          empId: "A3C5647E-0A7B-4CB2-A51C-064B23295DD9",
-         dateOfBirth:"2023-07-26T06:33:36.714Z",
+          empId: " ",
+         dateOfBirth:" ",
         relationship: '',
       
         };
@@ -105,16 +116,12 @@ export class SpouseComponent implements OnInit {
       }
     });
   }
-  
+
   updateSpouse(): void {
     this.spouseService.updateSpouse(this.spouse, this.spouse.id).subscribe(
       () => {
    
-        this.spouseUpdated = true;
-        //  this.router.navigate(['employee-registration/job-description']);
-          setTimeout(() => {
-            this.spouseUpdated= false;
-          }, 2000);
+        this.showSucessMessage('Sucessfully Updated!!')
 
           this.spouseService.getAllSpouse() 
           .subscribe({ 

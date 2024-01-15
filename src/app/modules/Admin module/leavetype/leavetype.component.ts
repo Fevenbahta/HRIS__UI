@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
 import { LeaveType } from 'app/models/leaveType.model';
@@ -51,8 +52,18 @@ export class LeavetypeComponent {
         { label: 'Leave-Type', route:"/leave/leave-type" },
        ]},
    { label: 'Education-Level' , route:"/admin/education-level"},
-     ];
-     constructor(private leaveTypeService :LeaveTypeService,private router:Router,private dialog:MatDialog,) { }
+   { label: 'PayRoll',
+   dropdownOptions: [
+    { label: 'Tax',route:"/admin/tax"  },
+    { label: 'Bank',  route:"/admin/bank"  },
+    { label: 'DeductionType',route:"/admin/deductionType" },
+    { label: 'AllowanceType',  route:"/admin/allowanceType"  }
+    
+  
+    ]}, ];
+     constructor(private leaveTypeService :LeaveTypeService,
+      private router:Router,private dialog:MatDialog,
+      private snackBar :MatSnackBar) { }
 
      ngOnInit(): void {
        this.leaveTypeService.getAllLeaveType()
@@ -65,15 +76,24 @@ export class LeavetypeComponent {
          }
        });
      }
+     showSucessMessage(message:string) : void{
+      this.snackBar.open(message,'Close',
+      {duration:3000,
+      
+      horizontalPosition:'end',
+        verticalPosition:'top',
+          panelClass:['cardhead']
+        })
+        
+        }
      addLeaveType(){
    
        this.leaveTypeService.addLeaveType(this.addLeaveTypeRequest)
        .subscribe({
        next:(LeaveType)=>{
-         this.leaveTypeSaved = true;
-         setTimeout(() => {
-           this.leaveTypeSaved = false;
-         }, 2000);
+       
+  this.showSucessMessage('Sucessfully Added!!')
+
          this.leaveTypes.push({ ...this.addLeaveTypeRequest });
    
          this.addLeaveTypeRequest = {

@@ -2,16 +2,16 @@
     <div class="container-fluid ">
   <div class="row  " >
 
-  
             <div class="col-md-12">
-              <div class=" mb-5">
+
                   <div class="card">
                        <div class="card-header ">
-                          <h4 class="card-title">Attendances</h4>
+                          <h4 class="ml-2 card-title">Attendances</h4>
                          
-                          <button class="btn " (click)="toggleAttendanceForm()">Register </button>
+                          <button class="btn btndanger  mt-4 ml-2" (click)="toggleAttendanceForm()">Register </button>
                    
-                      </div> <div [ngClass]="{'blur-background':isLoading}">
+                      </div> 
+                      <div [ngClass]="{'blur-background':isLoading}">
                 
                         <form class="ml-5" *ngIf="showAttendanceForm">
                           <div class="card ml-5 col-md-7">
@@ -55,7 +55,7 @@
               </div>
 
           <!-- Attendance.component.html -->
-  <h6 class="ml-5 mt-5">Attendance info </h6>
+  <h6 class="ml-5 mt-3">Attendance info </h6>
   <div class="row mt-4 ml-3 ">
     <div class="form-group col-md-2"> 
       <div class="form-field">
@@ -81,7 +81,7 @@
     </div>
       
   </div>  
-  <table  class="table table table-responsive table-bordered table-striped  table-sm compact-tablemt-3">
+  <table  class="table table table-responsive table-bordered table-striped  table-sm compact-table mt-3">
     <thead>
       <tr>
   
@@ -112,7 +112,7 @@
       <ng-template #loadedData>
       <tr *ngFor="let at of filteredAttendances" >
      
-        <td>{{ getEmployeeName(at.empId) }}</td>
+        <td>{{ capitalizeFirstLetter(getEmployeeName(at.empId) )}}</td>
         <td>{{ at.attendanceId}}</td>
         <td>{{ at.department}}</td>
         <td>{{ at.date| date:'yyyy-MM-dd' }}</td>
@@ -133,6 +133,6 @@
   </div></div>
 </div>
     </div>
-  </div>
+
 
   

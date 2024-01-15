@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, filter } from 'rxjs';
 import { EmployeeService } from 'app/service/employee.service';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact',
@@ -51,6 +52,7 @@ constructor(
   private employeeIdService: EmployeeIdService,
   //private employeeService: EmployeeService,
   private dialog:MatDialog,
+  private snackBar :MatSnackBar,
   private router:Router){}
   subscription: Subscription;
 
@@ -78,6 +80,16 @@ this.contactservice.getAllContacts()
 });
   
  }
+ showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
+  
+  horizontalPosition:'end',
+    verticalPosition:'top',
+      panelClass:['cardhead']
+    })
+    
+    }
 addContact(){
   // if (this.contactForm.invalid) {
   //   this.contactForm.markAllAsTouched();
@@ -87,10 +99,7 @@ addContact(){
 this.contactservice.addContact(this.contact)
 .subscribe({ 
 next:(contacts)=>{
-  this.contactSaved = true;
-  setTimeout(() => {
-    this.contactSaved = false;
-  }, 2000);
+  this.showSucessMessage('Sucessfully Added!!')
   this.contacts.push({ ...this.contact });
   // Reset the form fields
   this.contact = {
@@ -145,10 +154,7 @@ updateContact(): void {
   
     next: (contact) => { 
       
-      this.contactUpdate=true;
-      setTimeout(() => {
-        this.contactUpdate= false;
-      }, 2000);
+      this.showSucessMessage('Sucessfully Updated!!')
 
       this.contactservice.getAllContacts()
       .subscribe({

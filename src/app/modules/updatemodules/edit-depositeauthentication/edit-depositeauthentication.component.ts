@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { Bank } from 'app/models/Payroll/Bank.model';
 import { DepositeAuthentication } from 'app/models/deposite-authentication.model';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
+import { BankService } from 'app/service/bank.service';
 import { DepositeAuthenticationService } from 'app/service/deposite-authentcation.service';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 
@@ -14,6 +17,8 @@ import { EmployeeIdService } from 'app/service/employee-id.service';
 })
 export class EditDepositeAuthenticationComponent implements OnInit {
   depositeAuthenticationId: string;
+  selectedBank: string ;
+  Banks:Bank[]=[];
   depositeAuthentication: DepositeAuthentication ={
     pId:0,
     id:undefined,
@@ -23,7 +28,7 @@ export class EditDepositeAuthenticationComponent implements OnInit {
      updatedBy: '', 
      empId: "",
      status:0,
-   bank: '',
+   bankId: '',
    bankBranch: '',
    bankAccount:0,
    tinNumber: '',
@@ -40,6 +45,8 @@ export class EditDepositeAuthenticationComponent implements OnInit {
     private router: Router,
     private employeeIdService: EmployeeIdService,
     private dialog: MatDialog,
+    private bankService: BankService,
+    private snackBar :MatSnackBar
   ) {}
   buttons = [
     { label: ' Add Employee ', route: '/employee-registration' },
@@ -63,23 +70,46 @@ export class EditDepositeAuthenticationComponent implements OnInit {
       console.log(response); 
     }, 
 });
-}
+this.bankService.getAllBank() 
+.subscribe({ 
+  next: (bank) => { 
+    this.Banks = bank;
+    ; 
+        }, 
+  error(response) { 
+    console.log(response); 
+  }, 
+});
 
+}
+showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
   
+  horizontalPosition:'end',
+    verticalPosition:'top',
+      panelClass:['cardhead']
+    })
+    
+    }
+getBankName(id: string): string {
+  const Bank = this.Banks.find((Bank) => Bank.id === id);
+  return Bank ? Bank.bankName : '';
+} 
   updateDepositeAuthentication(): void {
+    this.depositeAuthentication.bankId=this.selectedBank
     this. depositeAuthenticationUpdated=true;
     this.depositeAuthenticationService.updateDepositeAuthentication(this.depositeAuthentication, this.depositeAuthentication.id).subscribe({
       next: () => {
         this.depositeAuthenticationUpdated = true;
 
-        setTimeout(() => {
-          this.depositeAuthenticationUpdated = false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Updated!!')
       },
       error: (response) => {
         console.log(response);
       }
     });
+    this.selectedBank=""
 this.depositeAuthentication ={
   pId:0,
   id:  undefined,
@@ -89,7 +119,7 @@ this.depositeAuthentication ={
    updatedBy: '', 
    empId: "",
    status:0,
- bank: '',
+ bankId: '',
  bankBranch: '',
  bankAccount:0,
  tinNumber: '',
@@ -136,17 +166,17 @@ this.depositeAuthentication ={
   }
   
   addDepositeAuthentication() {
+    this.depositeAuthentication.bankId=this.selectedBank
+
     this.depositeAuthentication.empId = this.employeeIdService.employeeId;
     this.depositeAuthenticationService.addDepositeAuthentication(this.depositeAuthentication)
     .subscribe({
       next: (employee) => {
-        this.depositeauthenticationSaved = true;
-        setTimeout(() => {
-          this.depositeauthenticationSaved = false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Added!!')
         // Add the current work experience to the array
         this.depositeAuthentications.push({ ...this.depositeAuthentication });
         // Reset the form fields
+        this.selectedBank=""
         this.depositeAuthentication = {
           pId:0,
           id: undefined,
@@ -156,7 +186,7 @@ this.depositeAuthentication ={
            updatedBy: '', 
            empId: "A78C1592-6804-4FB3-81EA-26BB1FF7F7A5",
            status:0,
-         bank: '',
+         bankId: '',
          bankBranch: '',
          bankAccount:0,
          tinNumber: '',

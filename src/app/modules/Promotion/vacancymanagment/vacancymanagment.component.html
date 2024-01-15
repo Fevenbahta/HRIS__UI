@@ -6,7 +6,7 @@
     <div class="card-header ">
     <h5 class="text-center card-title">Vacancy Management</h5>
 </div>
-    <button class="btn btnedit" (click)="toggleVacancyForm()">Add Vacancy</button>
+    <button class="btn btndanger" (click)="toggleVacancyForm()"><mat-icon>add</mat-icon>Add Vacancy</button>
   
     <!-- Vacancy Form (Initially Hidden) -->
     <div *ngIf="showVacancyForm" class="mt-4">
@@ -144,9 +144,9 @@
             <td>{{ vacancy.deadline| date:'yyyy-MM-dd' }}</td>
             <td>{{ vacancy.releaseDate| date:'yyyy-MM-dd' }}</td>
          
-        <td class="btn btn-sm btnedit"  (click)="editVacancy(vacancy)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
-          <mat-icon>edit</mat-icon>
-        </td>
+        <td>        <button class="btn btn-sm btnedit"  (click)="editVacancy(vacancy)" >
+  <mat-icon class="small">edit</mat-icon>
+     </button></td>
         </tr>
     
       </tbody>

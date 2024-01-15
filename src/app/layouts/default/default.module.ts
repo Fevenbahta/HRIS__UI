@@ -19,7 +19,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-
+import{MatSnackBarModule} from '@angular/material/snack-bar'
 
 
 import { EmployeeRegistrationComponent } from 'app/modules/employee-registration/employee-registration.component';
@@ -97,6 +97,29 @@ import { NewattendanceComponent } from 'app/modules/newattendance/newattendance.
 import { EvaluationModalComponent } from 'app/modules/Promotion/evaluation-modal/evaluation-modal.component';
 import { ResultModalComponent } from 'app/modules/Promotion/result-modal/result-modal.component';
 import { OtherspromotionComponent } from 'app/modules/Promotion/otherspromotion/otherspromotion.component';
+import { MedicalRequestComponent } from 'app/modules/medical/medical-request/medical-request.component';
+import { MedicalBalanceComponent } from 'app/modules/medical/medical-balance/medical-balance.component';
+import { MedicalselfrequestComponent } from 'app/modules/medical/medicalselfrequest/medicalselfrequest.component';
+import { HrApproveComponent } from 'app/modules/medical/hr-approve/hr-approve.component';
+import { FinanceApproveComponent } from 'app/modules/medical/finance-approve/finance-approve.component';
+import { SelfMedicalBalanceComponent } from 'app/modules/medical/self-medical-balance/self-medical-balance.component';
+import { ReportComponent } from 'app/modules/attendace/report/report.component';
+import { PayrollComponent } from 'app/modules/Payroll/payroll/payroll.component';
+import { DeductionComponent } from 'app/modules/Payroll/deduction/deduction.component';
+import { AllowanceComponent } from 'app/modules/Payroll/allowance/allowance.component';
+import { OverTimeComponent } from 'app/modules/Payroll/over-time/over-time.component';
+import { TaxComponent } from 'app/modules/Admin module/tax/tax.component';
+import { BankComponent } from 'app/modules/Admin module/bank/bank.component';
+import { DeductionTypeComponent } from 'app/modules/Admin module/deduction-type/deduction-type.component';
+import { AllowanceTypeComponent } from 'app/modules/Admin module/allowance-type/allowance-type.component';
+import { MainPayrollComponent } from 'app/modules/Payroll/main-payroll/main-payroll.component';
+import { ApprovedMedicalRequestsComponent } from 'app/modules/medical/approved-medical-requests/approved-medical-requests.component';
+import { PayrollcontractComponent } from 'app/modules/PayrollContract/payrollcontract/payrollcontract.component';
+import { ConttactRegstrationComponent } from 'app/modules/Payroll/contract-regstration/conttact-regstration.component';
+import { PayrollReportComponent } from 'app/modules/Payroll/payrollreport/payrollreport.component';
+import { MedicalreportComponent } from 'app/modules/medical/medicalreport/medicalreport.component';
+import { MedicalPayComponent } from 'app/modules/medical/medical-pay/medical-pay.component';
+import { OutsourceComponent } from 'app/modules/PayrollContract/outsource/outsource.component';
 
 
 
@@ -165,10 +188,35 @@ SelfleaveRequestComponent,
 NewattendanceComponent,
 EvaluationModalComponent,
 ResultModalComponent,
-OtherspromotionComponent
+OtherspromotionComponent,
+MedicalRequestComponent,
+MedicalBalanceComponent,
+MedicalselfrequestComponent,
+HrApproveComponent,
+FinanceApproveComponent,
+SelfMedicalBalanceComponent,
+ReportComponent,
+PayrollComponent,
+DeductionComponent,
+AllowanceComponent,
+OverTimeComponent,
+TaxComponent,
+BankComponent,
+DeductionTypeComponent,
+AllowanceTypeComponent,
+MainPayrollComponent,
+ApprovedMedicalRequestsComponent,
+PayrollcontractComponent,
+ConttactRegstrationComponent,
+ReportComponent,
+PayrollReportComponent,
+MedicalreportComponent,
+MedicalPayComponent,
+OutsourceComponent
   ],
 
   imports: [
+    MatSnackBarModule,
     CommonModule,
     RouterModule,
     FormsModule,

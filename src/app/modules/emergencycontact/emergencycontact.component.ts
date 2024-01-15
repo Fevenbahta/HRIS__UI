@@ -9,6 +9,7 @@ import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confi
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-emergencycontact',
@@ -43,7 +44,8 @@ constructor(
   private emergencycontactservice: EmergencyContactService,
   private employeeIdService: EmployeeIdService,
   private dialog: MatDialog,
-  private router:Router){}
+  private router:Router,
+  private snackBar :MatSnackBar){}
 ngOnInit():void {
   this.emergencycontactservice.getAllEmergencyContact()
       .subscribe({
@@ -66,16 +68,24 @@ buttons = [
   { label: '  List Employee ', route: '/employee-list' }, 
     {label:'Employee History', route:'/history'}
 ];
+showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
+  
+  horizontalPosition:'end',
+    verticalPosition:'top',
+      panelClass:['cardhead']
+    })
+    
+    }
 addEmergencyContact() {
   this.emergencycontact.empId = this.employeeIdService.employeeId;
   this.emergencycontactservice.addEmergencyContact(this.emergencycontact)
   .subscribe({
     next: (emergencycontacts) => {
 
-     this.emergencycontactSaved=true
-      setTimeout(() => {
-        this.emergencycontactSaved = false;
-      }, 2000);
+      this.showSucessMessage('Sucessfully Added!!')
+      
       this.emergencycontactservice.getAllEmergencyContact()
       .subscribe({
         next: (emergencycontacts) => {
@@ -122,9 +132,7 @@ updateEmergencyContact(): void {
   .subscribe({
   
     next: (emergencyContact) => {
-      setTimeout(() => {
-        this.emergencyContactUpdated = false;
-      }, 2000);
+      this.showSucessMessage('Sucessfully Updated!!')
       this.emergencycontactservice.getAllEmergencyContact()
       .subscribe({
         next: (emergencycontacts) => {

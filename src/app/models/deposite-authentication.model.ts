@@ -7,7 +7,7 @@ export interface DepositeAuthentication{
   updatedBy: string,
   status:number,
   empId: string,
-  bank: string,
+  bankId: string,
   bankBranch: string,
   bankAccount: Number,
   tinNumber: string,

@@ -29,7 +29,7 @@ import { WorkexperienceComponent } from './modules/workexperience/workexperience
 import { EducationComponent } from './modules/education/education.component';
 import { EditWorkexperienceComponent } from './modules/updatemodules/edit-workexperience/edit-workexperience.component';
 import { EditEducationComponent } from './modules/updatemodules/edit-education/edit-education.component';
-import { NgModule } from '@angular/core';
+import { ApplicationRef, NgModule } from '@angular/core';
 import { AssignSupervisorComponent } from './modules/Admin module/Job/assign-supervisor/assign-supervisor.component';
 import { HistoryComponent } from './modules/history/history.component';
 import { DepartmentComponent } from './modules/Admin module/Job/department/department.component';
@@ -52,6 +52,29 @@ import { SelfleaveRequestComponent } from './modules/leave/selfleave-request/sel
 import { AttendanceComponent } from './modules/attendace/attendance/attendance.component';
 import { NewattendanceComponent } from './modules/newattendance/newattendance.component';
 import { OtherspromotionComponent } from './modules/Promotion/otherspromotion/otherspromotion.component';
+import { MedicalRequestComponent } from './modules/medical/medical-request/medical-request.component';
+import { MedicalBalanceComponent } from './modules/medical/medical-balance/medical-balance.component';
+import { MedicalselfrequestComponent } from './modules/medical/medicalselfrequest/medicalselfrequest.component';
+import { FinanceApproveComponent } from './modules/medical/finance-approve/finance-approve.component';
+import { HrApproveComponent } from './modules/medical/hr-approve/hr-approve.component';
+import { SelfMedicalBalanceComponent } from './modules/medical/self-medical-balance/self-medical-balance.component';
+import { BankComponent } from './modules/Admin module/bank/bank.component';
+import { TaxComponent } from './modules/Admin module/tax/tax.component';
+import { PayrollComponent } from './modules/Payroll/payroll/payroll.component';
+import { DeductionComponent } from './modules/Payroll/deduction/deduction.component';
+import { AllowanceComponent } from './modules/Payroll/allowance/allowance.component';
+import { OverTimeComponent } from './modules/Payroll/over-time/over-time.component';
+import { DeductionTypeComponent } from './modules/Admin module/deduction-type/deduction-type.component';
+import { AllowanceTypeComponent } from './modules/Admin module/allowance-type/allowance-type.component';
+import { MainPayrollComponent } from './modules/Payroll/main-payroll/main-payroll.component';
+import { ApprovedMedicalRequestsComponent } from './modules/medical/approved-medical-requests/approved-medical-requests.component';
+import { PayrollcontractComponent } from './modules/PayrollContract/payrollcontract/payrollcontract.component';
+import { ConttactRegstrationComponent } from './modules/Payroll/contract-regstration/conttact-regstration.component';
+import { ReportComponent } from './modules/attendace/report/report.component';
+import { PayrollReportComponent } from './modules/Payroll/payrollreport/payrollreport.component';
+import { MedicalreportComponent } from './modules/medical/medicalreport/medicalreport.component';
+import { MedicalPayComponent } from './modules/medical/medical-pay/medical-pay.component';
+import { OutsourceComponent } from './modules/PayrollContract/outsource/outsource.component';
 
 const routes: Routes = [
   {path: '',
@@ -107,10 +130,21 @@ component: EducationLevelComponent},
 component: BranchComponent},
 {path:'admin/supervisor',
 component: SupervisorComponent},
+{path:'admin/bank',
+component:BankComponent},
+{path:'admin/tax',
+component:TaxComponent},
+{path:'admin/allowanceType',
+component:AllowanceTypeComponent},
+{path:'admin/deductionType',
+component:DeductionTypeComponent},
 {path:'employee-list',
 component: EmployeeListComponent},
 {path:'history',
 component: HistoryComponent},
+{path:'contract-regstration',
+component:ConttactRegstrationComponent},
+
 {path:'edit-employee/:empId',
 component: EditEmployeeComponent},
 {path:'edit-contact/:empId',
@@ -160,6 +194,42 @@ component:OtherspromotionComponent},
 component:HolidaysComponent},
 {path:'attendance',
 component:AttendanceComponent},
+{path:'medicalRequest',
+component:MedicalRequestComponent},
+{path:'medicalBalance',
+component:MedicalBalanceComponent},
+{path:'medicalSelfRequest',
+component:MedicalselfrequestComponent},
+{path:'medicalFinance',
+component:FinanceApproveComponent},
+{path:'approvedMedical',
+component:ApprovedMedicalRequestsComponent},
+{path:'medicalHr',
+component:HrApproveComponent},
+{path:'medicalReport',
+component:MedicalreportComponent},
+{path:'medicalPay',
+component:MedicalPayComponent},
+{path:'selfMedBalance',
+component:SelfMedicalBalanceComponent},
+{path:'payroll',
+component:PayrollComponent},
+{path:'payroll/deduction',
+component:DeductionComponent},
+
+{path:'payroll/allowance',
+component:AllowanceComponent},
+
+{path:'payroll/overtime',
+component:OverTimeComponent},
+{path:'payroll/mainPayroll',
+component:MainPayrollComponent},
+{path:'payroll/contract',
+component:PayrollcontractComponent},
+{path:'payroll/report',
+component:PayrollReportComponent},
+{path:'payroll/outsource',
+component:OutsourceComponent},
 ]
 
 }]

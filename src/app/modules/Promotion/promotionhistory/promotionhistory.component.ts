@@ -72,15 +72,7 @@ promotionRelation:PromotionRelation[]=[];
       console.log(response)
     }
   });
-  this.positionservice.getAllPosition()
-.subscribe({
-  next: (positions) => {
-    this.positions=positions;
-  },
-  error(response){
-    console.log(response)
-  }
-});
+
 this.promotionRelationService.getAllPromotionRelation()
 .subscribe({
   next: (promotion) => {
@@ -94,6 +86,15 @@ this.gradeservice.getAllGrade()
 .subscribe({
   next: (grades) => {
     this.grades=grades;
+  },
+  error(response){
+    console.log(response)
+  }
+});
+this.positionservice.getAllPosition()
+.subscribe({
+  next: (positions) => {
+    this.positions=positions;
   },
   error(response){
     console.log(response)

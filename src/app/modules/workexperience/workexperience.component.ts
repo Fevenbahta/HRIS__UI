@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { Component } from '@angular/core';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -54,8 +55,8 @@ export class WorkexperienceComponent {
       private workExperienceService: WorkExperienceService,
       private router: Router,
       private employeeIdService: EmployeeIdService,
-      private dialog: MatDialog
-
+      private dialog: MatDialog,
+      private snackBar :MatSnackBar
     ) { }
   
     ngOnInit(): void {
@@ -72,16 +73,22 @@ export class WorkexperienceComponent {
   },
 });
     }
-  
+    showSucessMessage(message:string) : void{
+      this.snackBar.open(message,'Close',
+      {duration:3000,
+      
+      horizontalPosition:'end',
+        verticalPosition:'top',
+          panelClass:['cardhead']
+        })
+        
+        }
     addWorkExperience() {
       this.workExperience.empId = this.employeeIdService.employeeId;
       this.workExperienceService.addWorkExperience(this.workExperience).subscribe({
         next: () => {
         //  this.router.navigate(['/employee-registration/training']); 
-        this.workExperienceSaved = true;
-          setTimeout(() => {
-            this.workExperienceSaved = false;
-          }, 2000);
+        this.showSucessMessage('Sucessfully Added!!')
           // Add the current work experience to the array
         
   this.workExperienceService.getAllWorkExperience()
@@ -126,10 +133,8 @@ export class WorkexperienceComponent {
 
     // Assuming the WorkExperienceService has a method to update work experience
     this.workExperienceService.updateWorkExperience(this.workExperience, this.workExperience.id).subscribe({
-      next: () => {    this.workExperienceUpdated = true;
-        setTimeout(() => {
-          this.workExperienceUpdated = false;
-        }, 2000);
+      next: () => {    
+             this.showSucessMessage('Sucessfully Updated!!')
         this.workExperienceService.getAllWorkExperience().subscribe({
           next: (workExperience) => {
             this.workExperiences = workExperience.filter(workexperience => workexperience.empId === this.employeeIdService.employeeId);

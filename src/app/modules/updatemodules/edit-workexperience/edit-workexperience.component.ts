@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/modules/delete-confirmation/delete-confirmation.component';
 import { EmployeeIdService } from 'app/service/employee-id.service';
 import { DeletesucessfullmessageComponent } from 'app/deletesucessfullmessage/deletesucessfullmessage.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-edit-workexperience',
   templateUrl: './edit-workexperience.component.html',
@@ -54,7 +55,8 @@ export class EditWorkexperienceComponent {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private employeeIdService:EmployeeIdService
+    private employeeIdService:EmployeeIdService,
+    private snackBar :MatSnackBar
 
 
   ) { }
@@ -89,6 +91,16 @@ export class EditWorkexperienceComponent {
     }; 
     reader.readAsDataURL(file); 
   } 
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   fetchAndDisplayPDF(workExperience: WorkExperience): void {
     const workExperienceToEdit = this.workExperiences.find(
       (workExperience) => workExperience.id === workExperience.id
@@ -114,10 +126,7 @@ export class EditWorkexperienceComponent {
 
     // Assuming the WorkExperienceService has a method to update work experience
     this.workExperienceService.updateWorkExperience(this.workExperience, this.workExperience.id).subscribe({
-      next: () => {    this.workExperienceUpdated = true;
-        setTimeout(() => {
-          this.workExperienceUpdated = false;
-        }, 2000);
+      next: () => {         this.showSucessMessage('Sucessfully Updated!!')
         this.workExperienceService.getAllWorkExperience().subscribe({
           next: (workExperience) => {
             this.workExperiences = workExperience.filter(workexperience => workexperience.empId === this.employeeIdService.employeeId);
@@ -191,10 +200,7 @@ export class EditWorkexperienceComponent {
     this.workExperience.empId = this.employeeIdService.employeeId;
     this.workExperienceService.addWorkExperience(this.workExperience).subscribe({
       next: () => {
-        this.workExperienceSaved = true;
-        setTimeout(() => {
-          this.workExperienceSaved = false;
-        }, 2000);
+        this.showSucessMessage('Sucessfully Added!!')
         this.workExperienceService.getAllWorkExperience().subscribe({
           next: (workExperience) => {
             this.workExperiences = workExperience.filter(workexperience => workexperience.empId === this.employeeIdService.employeeId);

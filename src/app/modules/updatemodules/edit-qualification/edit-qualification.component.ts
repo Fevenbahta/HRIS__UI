@@ -6,6 +6,7 @@ import { WorkExperienceService } from 'app/service/work-experience.service';
 import { Education, WorkExperience } from 'app/models/work-experience.model';
 import { EducationLevel } from 'app/models/job-description.model';
 import { EducationLevelService } from 'app/service/educationlevel.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-qualification',
@@ -35,7 +36,8 @@ export class EditQualificationComponent implements OnInit {
     private workExperienceService: WorkExperienceService,
     private route: ActivatedRoute,
     private router: Router,
-    private educationlevelservice: EducationLevelService
+    private educationlevelservice: EducationLevelService,
+    private snackBar :MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -93,7 +95,16 @@ export class EditQualificationComponent implements OnInit {
 
   }
   
-
+  showSucessMessage(message:string) : void{
+    this.snackBar.open(message,'Close',
+    {duration:3000,
+    
+    horizontalPosition:'end',
+      verticalPosition:'top',
+        panelClass:['cardhead']
+      })
+      
+      }
   updateEducation(): void {
     this.educationUpdated = true;
 

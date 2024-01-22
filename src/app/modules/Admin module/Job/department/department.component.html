@@ -1,17 +1,26 @@
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
 
-    <div class="col-md-8">
-        <div class="card margin" >
-<form (ngSubmit)="addDepartment()">   <div class="row mt-5">
-    <div class="col-md-7 ml-3"> 
+    <div class="col-md-8 ml-5">
+        <div class="card " >
+<form (ngSubmit)="addDepartment()">   
+    <div class="row mt-3 ml-4">
+        <h6 class="card-title ml-3">Department</h6>
+    <div class="col-md-7 ml-3 mt-3"> 
     <div class="form-field "> 
     
       <input type="text" id="departmentName" placeholder=" " [(ngModel)]="addDepartmentRequest.description" name="addDepartmentRequest.description" required> 
      <label for="department">Department Level Name</label>  
     </div> 
- <div class="col-md-3 mt-2"><button type="submit" class="btn  btn-sm btnsave">Save </button>
-    </div></div></div> <div *ngIf="departmentSaved" class="btndanger btn-sm pull-right">
+ </div>
+
+
+</div>
+
+    <button type="submit" class="btn  btn-sm btnsave ml-3 mt-3">
+    <mat-icon>add</mat-icon>Save </button>
+
+<div *ngIf="departmentSaved" class="btndanger btn-sm pull-right ">
         Successfully Added!
       </div> 
     
@@ -24,12 +33,12 @@
   
  
     <h6 class="mb-3 mt-3 ml-2"> 
-        Department 
+        List Of Department 
     </h6> 
  
  
      
-<table id="example1" class="table table-bordered table-striped compact-table ml-2 "  *ngIf="departments && departments.length>0"> 
+<table id="example1" class="table table-bordered table-striped compact-table  "  *ngIf="departments && departments.length>0"> 
     <thead> 
         <tr> 
           

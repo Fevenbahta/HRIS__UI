@@ -238,19 +238,31 @@ this.PayrollService.getAllPayRoll().subscribe({
     var allpayroll=at.map(d =>new Date( d.payRollStartDate)
     )
    
-    ;
-  const sorted=allpayroll.sort((a,b)=>b.getMonth()- a.getMonth())
-  
-  const sortedAll =sorted.sort((a, b)=> a.getFullYear()-b.getFullYear())
-  
+ const sortedAll =allpayroll.sort((a, b)=>{
+
+      if(a.getFullYear() !== b.getFullYear()){
+   return b.getFullYear() -a.getFullYear()
+      }
+
+      
+      if(a.getMonth() !== b.getMonth()){
+        return b.getMonth() -a.getMonth()
+           }
+           
+
+  return b.getDate() -a.getDate();
+    
+    });
+    console.log("sorted", sortedAll)
         const currentDate =new Date();
     const start =sortedAll.find(d => d < currentDate)
-    this.end=new Intl.DateTimeFormat('en-US',{month:'long'}).format(new Date (2022,start.getMonth()-1,1))
+
+    this.end=new Intl.DateTimeFormat('en-US',{month:'long'}).format(new Date (2022,start.getMonth(),1))
  this.filteredPayRolls=at.filter(p => new Date(p.payRollStartDate).getMonth() == start.getMonth()&&
     new Date(p.payRollStartDate).getFullYear() == start.getFullYear()
     );
-    this.PayRolls=this.filteredPayRolls
-    console.log(" this.filteredPayRolls", this.filteredPayRolls)
+    this.PayRolls=at
+  
    }, 
   error: (response) => { 
     console.log(response); 
@@ -312,53 +324,17 @@ this.PayrollService.getAllPayRoll().subscribe({
         })
         
         }
+        getMonth(st:string){
+          const stt=new Date(st)
+           this.end=new Intl.DateTimeFormat('en-US',{month:'long'}).format(new Date (2022,stt.getMonth(),1));
+          return this.end;
+         }
     filterByMonth() {
       this.selectedMonthStatus=this.selectedMonth;
-      if (this.selectedMonth=="September")
-      {
-        this.fromDate="8/16/2023";
-        this.toDate="9/15/2023";
-      }
-      else if(this.selectedMonth=="October"){
-        this.fromDate="9/16/2023";
-        this.toDate="10/15/2023";
-      }else if(this.selectedMonth=="November"){
-        this.fromDate="10/16/2023";
-        this.toDate="11/15/2023";
-      }else if(this.selectedMonth=="December"){
-        this.fromDate="11/16/2023";
-        this.toDate="12/15/2023";
-      }else if(this.selectedMonth=="January"){
-        this.fromDate="12/16/2023";
-        this.toDate="1/15/2024";
-      }else if(this.selectedMonth=="February"){
-        this.fromDate="1/16/2024";
-        this.toDate="2/15/2024";
-      }else if(this.selectedMonth=="March"){
-        this.fromDate="2/16/2024";
-        this.toDate="3/15/2024";
-      }else if(this.selectedMonth=="April"){
-        this.fromDate="3/16/2024";
-        this.toDate="4/15/2024";
-      }else if(this.selectedMonth=="May"){
-        this.fromDate="4/16/2024";
-        this.toDate="5/15/2024";
-      }else if(this.selectedMonth=="June"){
-        this.fromDate="5/16/2024";
-        this.toDate="6/15/2024";
-      }else if(this.selectedMonth=="July"){
-        this.fromDate="6/16/2024";
-        this.toDate="7/15/2024";
-      }else if(this.selectedMonth=="August"){
-        this.fromDate="7/16/2024";
-        this.toDate="8/15/2024";
-      }
+     
 
-      if (this.fromDate && this.toDate) {
-        let fromDate = new Date(this.fromDate);
-        let toDate = new Date(this.toDate);
-        console.log("date",fromDate.getDate()) 
-        // Subtract one day from the "From" date
+      if (true) {
+  
  
     
         this.filteredPayRolls = this.PayRolls.filter(p => {
@@ -369,9 +345,11 @@ this.PayrollService.getAllPayRoll().subscribe({
             this.isLoading= false;
           }, 2000);
         
- var re=(PayRollDate.getMonth() >= fromDate.getMonth() && PayRollEndDate.getMonth() <= toDate.getMonth()) && PayRollDate.getFullYear() == this.selectedYear && (PayRollDate.getDate() >= fromDate.getDate() && PayRollEndDate.getDate() <= toDate.getDate()) 
- console.log("re",re)
-   
+ var  re=( this.getMonth(p.payRollStartDate) == this.selectedMonth)
+ && PayRollDate.getFullYear() == this.selectedYear
+  && (PayRollDate.getDate() >= 16
+   && PayRollEndDate.getDate() <= 15) 
+console.log("re",this.getMonth(p.payRollStartDate))
                  return re    ;
         });
     

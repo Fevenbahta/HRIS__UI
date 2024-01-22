@@ -7,13 +7,14 @@
 
 <form (ngSubmit)="addAllowanceType()">   
     <div class="row ml-4">
-    <div class="col-md-5 mt-5 "> 
+        <h6 class="card-title mt-3">Allowance Type</h6>
+    <div class="col-md-5 mt-3 "> 
     <div class="form-field"> 
     
       <input type="text" id="deductionTypeName" placeholder=" " [(ngModel)]="addAllowanceTypeRequest.name" name="name" Required> 
      <label for="deductionType">Allowance Type Name</label>  </div> </div>
   
- <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3">Save </button> </div>
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3"><mat-icon>add</mat-icon>Save </button> </div>
    
  </div>   <div *ngIf="AllowanceTypeSaved" class="alert  btndanger btn-sm pull-right">
         Successfully Added!
@@ -24,7 +25,7 @@
 
   
   <h6 class="mb-3 ml-3 mt-2"> 
-Alowance Type
+   List of Alowance Type
 </h6> 
 
 

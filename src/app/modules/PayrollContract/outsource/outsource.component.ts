@@ -133,15 +133,11 @@ getYear(st:string){
 const year=stt.getFullYear();
   return year;
  }
+ 
  filterByMonth() {
   this.selectedYear
   this.selectedMonthStatus=this.selectedMonth;
-
-
   if (true) {
-
-
-
     this.filteredOutsources = this.Outsources.filter(p => {
       const PayRollDate = new Date(p.date);
       const PayRollEndDate = new Date(p.date);

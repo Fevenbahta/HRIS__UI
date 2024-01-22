@@ -2,16 +2,28 @@
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
 <div class="row" > 
     <div class="col-md-6 ml-5">
-      <div class="card margin" >
+      <div class="card " >
 
 
 <form (ngSubmit)="addTax()">   
-    <div class="row ml-4">
-    <div class="col-md-5 mt-5 "> 
+    <div class="row ml-4 mt-3">
+        <h6 class="card-title ml-3">Tax</h6>
+        <div class="row">
+    <div class="col-md-5 mt-3 "> 
     <div class="form-field"> 
     
       <input type="text" id="TaxName" placeholder=" " [(ngModel)]="addTaxRequest.name" name="name" required> 
-     <label for="TaxName">Tax Name</label>  </div> </div>
+     <label for="TaxName">Tax Name</label>  
+    </div> </div>
+
+    <div class="col-md-5 mt-3 ml-3"> 
+        <div class="form-field"> 
+            <input type="text" id="taxrate" placeholder="" [(ngModel)]="addTaxRequest.taxRate" name="taxrate" required> 
+           <label for="taxrate">Tax Rate</label>  
+          
+          </div>
+         </div> 
+         </div>
      <div class="row ">
   
      <div class="col-md-5 mt-5"> 
@@ -19,22 +31,19 @@
       <input type="text" id="from" placeholder=" " [(ngModel)]="addTaxRequest.salaryStart" name="start" required> 
      <label for="from">Range From</label>  
     </div>
-    </div>  <div class="col-md-5 mt-5 ml-2"> 
+    </div>  
+    <div class="col-md-5 mt-5 ml-3"> 
     <div class="form-field"> 
         <input type="text" id="to" placeholder=" " [(ngModel)]="addTaxRequest.salaryEnd" name="end" required> 
        <label for="to">Range To</label>  
       
-      </div>  </div></div>
-      <div class="col-md-5 mt-5"> 
-    <div class="form-field"> 
-        <input type="text" id="taxrate" placeholder=" " [(ngModel)]="addTaxRequest.taxRate" name="taxrate" required> 
-       <label for="taxrate">Tax Rate</label>  
-      
-      </div>
-     </div> <div class="col-md-6 mt-5"> 
+      </div>  
+    </div></div>
+   
+     <div class="col-md-6 mt-4"> 
      
       </div>
- <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3">Save </button> </div>
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave "><mat-icon>add</mat-icon>Save </button> </div>
    
  </div>   <div *ngIf="TaxSaved" class="alert  btndanger btn-sm pull-right">
         Successfully Added!
@@ -45,7 +54,7 @@
 
   
   <h6 class="mb-3 ml-3 mt-2"> 
-Tax
+List Of Tax 
 </h6> 
 
 

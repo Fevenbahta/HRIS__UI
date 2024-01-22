@@ -24,8 +24,8 @@ export class HolidaysComponent {
   updatedBy: '',
   status:0,
   year: "",
-  date: " ",
-  description: " ",
+  date: "",
+  description: "",
 
   }
   buttons = [

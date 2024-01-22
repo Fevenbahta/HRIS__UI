@@ -189,7 +189,7 @@ payRollEndDate: "2023-07-20T13:56:00.062Z",
       
             const currentDate =new Date();
         const start =sortedAll.find(d => d < currentDate)
-        this.end=new Intl.DateTimeFormat('en-US',{month:'long'}).format(new Date (2022,start.getMonth()-1,1))
+        this.end=new Intl.DateTimeFormat('en-US',{month:'long'}).format(new Date (2022,start.getMonth(),1))
      this.filteredPayRollContracts=at.filter(p => new Date(p.payRollStartDate).getMonth() == start.getMonth()&&
         new Date(p.payRollStartDate).getFullYear() == start.getFullYear()
         );
@@ -293,7 +293,7 @@ this.PayrollService.getAllPayRoll().subscribe({
   
         const currentDate =new Date();
     const start =sortedAll.find(d => d < currentDate)
-    this.end=new Intl.DateTimeFormat('en-US',{month:'long'}).format(new Date (2022,start.getMonth()-1,1))
+    this.end=new Intl.DateTimeFormat('en-US',{month:'long'}).format(new Date (2022,start.getMonth(),1))
  this.filteredPayRolls=at.filter(p => new Date(p.payRollStartDate).getMonth() == start.getMonth()&&
     new Date(p.payRollStartDate).getFullYear() == start.getFullYear()
     );
@@ -303,6 +303,7 @@ this.PayrollService.getAllPayRoll().subscribe({
   error: (response) => { 
     console.log(response); 
   } 
+
 
 })
 

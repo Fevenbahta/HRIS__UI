@@ -260,6 +260,7 @@ this.tempPayrollService.getAllTempPayroll().subscribe({
     var start=new Date (at.find(t=>new Date(t.payRollEndDate)!=undefined).payRollEndDate)
     this.end=new Intl.DateTimeFormat('en-US',{month:'long'}).format(new Date (2022,start.getMonth()-1,1))
 
+    
    }, 
   error: (response) => { 
     console.log(response); 
@@ -374,46 +375,7 @@ capitalizeFirstLetter(text: string): string {
 }
 
     filterByMonth() {
-      this.selectedYear
-      if (this.selectedMonth=="September")
-      {
-        this.fromDate="9/15/2023";
-        this.toDate="10/16/2023";
-      }
-      else if(this.selectedMonth=="October"){
-        this.fromDate="10/15/2023";
-        this.toDate="11/16/2023";
-      }else if(this.selectedMonth=="November"){
-        this.fromDate="11/15/2023";
-        this.toDate="12/16/2023";
-      }else if(this.selectedMonth=="December"){
-        this.fromDate="12/15/2023";
-        this.toDate="1/16/2024";
-      }else if(this.selectedMonth=="January"){
-        this.fromDate="1/15/2024";
-        this.toDate="2/16/2024";
-      }else if(this.selectedMonth=="February"){
-        this.fromDate="2/15/2024";
-        this.toDate="3/16/2024";
-      }else if(this.selectedMonth=="March"){
-        this.fromDate="3/15/2024";
-        this.toDate="4/16/2024";
-      }else if(this.selectedMonth=="April"){
-        this.fromDate="4/15/2024";
-        this.toDate="5/16/2024";
-      }else if(this.selectedMonth=="May"){
-        this.fromDate="5/15/2024";
-        this.toDate="6/16/2024";
-      }else if(this.selectedMonth=="June"){
-        this.fromDate="7/15/2024";
-        this.toDate="8/16/2024";
-      }else if(this.selectedMonth=="July"){
-        this.fromDate="8/15/2024";
-        this.toDate="9/16/2024";
-      }else if(this.selectedMonth=="August"){
-        this.fromDate="10/15/2024";
-        this.toDate="11/16/2024";
-      }
+
 
       if (this.fromDate && this.toDate) {
         let fromDate = new Date(this.fromDate);

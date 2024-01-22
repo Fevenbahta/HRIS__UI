@@ -4,14 +4,14 @@
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
 <div class="row" > 
-  <div class="col-md-9 ml-3">
-    <div class="card margin" >
+  <div class="col-md-9 ml-5">
+    <div class="card " >
 <form (ngSubmit)="addAssignSupervisor()"> 
 
   <div class="row mt-4 ml-3" >
-
-<div class="col-3"> 
-  <div class="form-field"> 
+    <h6 class="card-title mt-3">Assign Supervisor</h6>
+<div class="col-3 mt-3"> 
+  <div class="form-field "> 
 
     <mat-form-field > 
       <mat-label>Select position 
@@ -27,7 +27,7 @@
   </div> 
 
 
-<div class="col-3 ml-4"> 
+<div class="col-3 ml-4 mt-3"> 
  
 
     <mat-form-field  > 
@@ -100,11 +100,14 @@
   </div> 
 </div>
 
-<button type="submit" class="btn btn-sm btnsave ml-2">Save</button> 
+<button type="submit" class="btn btn-sm btnsave ml-2"><mat-icon>add</mat-icon>Save</button> 
 <div *ngIf="assignSupervisorSaved" class=" btndanger btn-sm pull-right">
   Successfully Added!
   </div>
 </form> 
+<h6 class="mb-3 ml-3 mt-2"> 
+  List Of Assign Supervisor
+  </h6> 
 <table id="example1" class="table table-bordered table-striped compact-table"> 
 <thead> 
 <tr> 

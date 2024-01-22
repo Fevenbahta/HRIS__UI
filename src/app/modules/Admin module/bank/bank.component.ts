@@ -88,7 +88,7 @@ export class BankComponent {
      }
    
      addBank(){
-   
+     this.addBankRequest.bankName=this.capitalizeFirstLetter(this.addBankRequest.bankName)
        this.BankService.addBank(this.addBankRequest)
        .subscribe({
        next:(Bank)=>{
@@ -144,4 +144,11 @@ export class BankComponent {
           const Bank = this.Banks.find((g) => g.id == Id); 
           return Bank ? `${Bank.bankName} `:'Unknown EMPLOYEE'; 
         } 
+
+        capitalizeFirstLetter(text: string): string {
+        const te= text.split(' ');
+          if (!text) return text;
+           const capitalizeWords= te.map(t=>t.charAt(0).toUpperCase() + t.slice(1));
+           return capitalizeWords.join(' ');
+        }
 }

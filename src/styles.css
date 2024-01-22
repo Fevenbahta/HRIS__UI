@@ -1,24 +1,37 @@
 .btnsave  { 
-  background-color: #76a53b
-
+  background-color: #76a53b;
+  box-shadow: 0 0 3px 0 #bbb;
+  border-color: #76a53b;
+  color:aliceblue
 } 
+.btncancel{
+  background-color: white;
+  color:#76a53b;
+}
 .btnheader { 
   background-color:radial-gradient( circle, #76a53b,rgb(243, 160, 5)) ;
  
-
+  text-shadow: 0 0 3px 0 #fcc034;
+  border-color:#fcc034;
+  outline: none;
 
 } 
-.yellow{
-  color:rgb(243, 160, 5)
+.yellowColor{
+  color:rgb(243, 160, 5);
+  font-size:400px;
+  text-shadow: 0 0 3px 0 #fcc034;
+border-color:#fcc034;
+outline: none;
  }
 .btnupdate { 
   background-color: #76a53b; 
 } 
 .btnedit{ 
   background-color: #76a53b;; 
-  color:rgb(22, 20, 20); 
-
-
+  color:rgb(255, 254, 254); 
+  box-shadow: 0 0 3px 0 #bbb;
+  border-color: #76a53b;
+  outline: none;
 border-style:groove; 
 font-size:small;
 padding: 4px 19px;
@@ -30,18 +43,18 @@ border-radius: 10%;
   margin: -50px;
 }
 .btndanger{ 
-color: rgb(3, 3, 3); 
+color: rgb(33, 31, 31); 
 font-weight:normal; 
 font-size :small; 
 width:min-content;
 border-color: #fcc034; 
-
+outline: none;
   border-radius: 8% 8% ; 
   background-color:#fcc034 ; 
    
   }
   .btndanger:focus {
-    box-shadow: 0 0 3px 0 #fcc034;
+    text-shadow: 0 0 3px 0 #fcc034;
     background-color:#fcc034 ; 
     color: rgb(3, 3, 3); 
     border-color:#fcc034;

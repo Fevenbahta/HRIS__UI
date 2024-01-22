@@ -15,10 +15,10 @@
         
             <ul class="nav">
                 <li routerLinkActive="actives" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-                    <a class="nav-link" [routerLink]="[menuItem.path]">
-                        <i class="material-icons">{{menuItem.icon}}</i>
+                    <a class="nav-link "[routerLink]="[menuItem.path]">
+                        <i class="material-icons " routerLinkActive="itm" >{{menuItem.icon}}</i>
                         
-                        <p>{{menuItem.title}}</p>
+                        <p routerLinkActive="itm">{{menuItem.title}}</p>
                     </a>
                 </li>
             </ul>

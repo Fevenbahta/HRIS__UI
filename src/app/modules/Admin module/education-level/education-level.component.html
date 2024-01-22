@@ -2,16 +2,18 @@
   <app-shared-nav [buttons]="buttons"></app-shared-nav> 
   <div class="row" > 
     <div class="col-md-6 ml-5">
-        <div class="card margin" >
+        <div class="card " >
 
 
-<form (ngSubmit)="addEducationLevel()">   <div class="row">
+<form (ngSubmit)="addEducationLevel()">   
+    <div class="row ml-4">
+        <h6 class="card-title mt-3">Education Level</h6>
     <div class="col-md-12 ml-4 mt-4"> 
     <div class="form-field"> 
     
       <input type="text" id="educationLevelName" placeholder=" " [(ngModel)]="addEducationLevelRequest.educationName" name="educationName" required> 
      <label for="educationLevel">Education Level Name</label>  </div> 
- <div  class="col-md-3"><button type="submit" class="btn  btn-sm btnsave mt-3">Save </button> </div>
+ <div  class="col-md-3"><button type="submit" class="btn  btn-sm btnsave mt-3"><mat-icon>add</mat-icon>Save </button> </div>
    
   </div></div>   <div *ngIf="educationLevelSaved" class=" btndanger btn-sm pull-right ">
         Successfully Added!
@@ -23,7 +25,7 @@
  
  
     <h6 class="mb-2 mt-3 ml-3"> 
-        EducationLevel 
+       List Of EducationLevel 
     </h6> 
  
  

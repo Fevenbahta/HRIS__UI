@@ -129,9 +129,9 @@
             
    
           <div class="mt-3">
-            <button type="button" class="btn btnsave btn-sm" *ngIf="!leaveRequest.leaveRequestId" (click)="addleaveRequest()">Add</button>
+            <button type="button" class="btn btnsave btn-sm" *ngIf="!leaveRequest.leaveRequestId" (click)="addleaveRequest()"><mat-icon>add</mat-icon>Add</button>
             <div *ngIf="leaveRequestSaved" class=" btndanger btn-sm pull-right">Added successfully!</div>
-            <button type="button" class="btn btnsave btn-sm" *ngIf="leaveRequest.leaveRequestId" (click)="updateleaveRequest()">Update</button>
+            <button type="button" class="btn btnsave btn-sm" *ngIf="leaveRequest.leaveRequestId" (click)="updateleaveRequest()"><mat-icon>add</mat-icon>Update</button>
             <div *ngIf="leaveRequestUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
           </div>
       

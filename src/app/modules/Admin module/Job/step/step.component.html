@@ -3,12 +3,13 @@
 
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
  
-<div class="col-md-8">
-  <div class="card margin" >
+<div class="col-md-8 ml-5">
+  <div class="card " >
   <form (ngSubmit)="addstep()"> 
-    <div class="row " style="margin-left: 15px; margin-top:25px;"> 
+    <div class="row ml-4 mt-3" > 
+      <h6 class="card-title ml-3">Step</h6>
       
-      <div class="col-md-4"> 
+      <div class="col-md-4 mt-2"> 
         <div > 
           <mat-form-field style="height: 65px; width:160px"  > 
             <mat-label>Select Grade</mat-label> 
@@ -20,7 +21,7 @@
           </mat-form-field> 
         </div> 
         </div> 
-      <div class="col-md-4 ml-2 mt-2"> 
+      <div class="col-md-4 ml-2 mt-3"> 
         <div class="form-field"> 
       
           <input  id="stepDescription" rows="1" required placeholder=" "  name="description" [(ngModel)]="addStepRequest.description" name="description" required>
@@ -34,7 +35,7 @@
             <label for="salary">Basic Salary</label> </div> 
       </div> 
     </div> 
-    <button type="submit" class="btn btn-sm btnsave ml-3 mt-4">Save</button> 
+    <button type="submit" class="btn btn-sm btnsave ml-3 mt-4"><mat-icon>add</mat-icon>Save</button> 
     <div *ngIf="stepSaved" class=" btndanger btn-sm pull-right">
       Successfully Added!
     </div>
@@ -42,7 +43,7 @@
  
     
     <h6 class="mb-2 ml-3 mt-3"> 
-        Step 
+       List Of Step 
     </h6> 
     
  

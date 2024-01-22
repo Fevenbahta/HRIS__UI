@@ -2,12 +2,13 @@
 <app-shared-nav [buttons]="buttons"></app-shared-nav> 
 <div class="row" > 
     <div class="col-md-6 ml-5">
-      <div class="card margin" >
+      <div class="card " >
 
 
 <form (ngSubmit)="addBank()">   
     <div class="row ml-4">
-    <div class="col-md-5 mt-5 "> 
+        <h6 class="card-title mt-3">Bank</h6>
+    <div class="col-md-5 mt-4 "> 
     <div class="form-field"> 
     
       <input type="text" id="BankName" placeholder=" " [(ngModel)]="addBankRequest.bankName" name="name" required> 
@@ -15,10 +16,8 @@
      <div class="row ">
   
   </div>
-    <div class="col-md-6 mt-5"> 
-     
-      </div>
- <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3">Save </button> </div>
+   
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3"><mat-icon>add</mat-icon>Save </button> </div>
    
  </div>   <div *ngIf="BankSaved" class="alert  btndanger btn-sm pull-right">
         Successfully Added!
@@ -28,8 +27,8 @@
 
 
   
-  <h6 class="mb-3 ml-3 mt-2"> 
-Bank
+  <h6 class="mb-3 ml-3 mt-3"> 
+List Of Bank
 </h6> 
 
 
@@ -37,7 +36,7 @@ Bank
 <table id="example1" class="table table-bordered table-striped compact-table"  *ngIf="Banks && Banks.length>0"> 
 <thead> 
     <tr> 
-        <th> Bank Name</th> 
+        <th>Bank Name</th> 
        
    
         
@@ -47,7 +46,7 @@ Bank
 <tbody> 
     <tr *ngFor="let Bank of Banks"> 
        
-        <td>{{Bank.bankName}}</td> 
+        <td>{{capitalizeFirstLetter(Bank.bankName)}}</td> 
     
      
 

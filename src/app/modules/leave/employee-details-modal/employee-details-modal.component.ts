@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Department } from 'app/models/education.model';
 import { CombinedEmployeeData } from 'app/models/employee.model';
@@ -22,7 +22,9 @@ import { BehaviorSubject, forkJoin } from 'rxjs';
   styleUrls: ['./employee-details-modal.component.css']
 })
 export class EmployeeDetailsModalComponent {
-
+ 
+  @ViewChild('printableCard') printableCard !:ElementRef
+  
   divisions:Division[]= [];
   departments:Department[]=[];
 
@@ -51,9 +53,7 @@ export class EmployeeDetailsModalComponent {
     
 
 
- onCancelClick(): void {
-  this.dialogRef.close(false);
-}
+
 ngOnInit(): void {
   this.branchservice.getAllBranch()
 .subscribe({
@@ -178,10 +178,14 @@ openModal(empId: string) {
 closeModal() {
   this.isOpen.next(false);
 }
-printEmployeeDetails() {
-  // Implement printing functionality here
-  // You can use browser-specific printing techniques or a library like ngx-print to handle printing.
+printCard(){
+  let printContents=this.printableCard.nativeElement.innerHTML;
+  let orginalContent=document.body.innerHTML;
+  document.body.innerHTML=printContents
   window.print();
-  console.log(this.selectedEmployee);
+  document.body.innerHTML=orginalContent;
+ }
+ onCancelClick(): void {
+  this.dialogRef.close(true);
 }
 }

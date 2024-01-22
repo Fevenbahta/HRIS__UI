@@ -125,12 +125,12 @@
             
           </div>
                       
-          <button  mat-raised-button  *ngIf="employeePosition.id!=undefined" class="btn btn-sm btnsave" (click)="updateEmployeePosition()">update</button>
+          <button  mat-raised-button  *ngIf="employeePosition.id!=undefined" class="btn btn-sm btnsave" (click)="updateEmployeePosition()"><mat-icon>add</mat-icon>update</button>
           <div class="clearfix"></div>
           <div *ngIf="employeePositionUpdated" class=" btndanger btn-sm pull-right">
            Updated successfully!
           </div>
-          <button type="button" class="btn btn-sm btnsave"  *ngIf="employeePosition.id===undefined" (click)="addEmployeePosition()">
+          <button type="button" class="btn btn-sm btnsave"  *ngIf="employeePosition.id===undefined" (click)="addEmployeePosition()"><mat-icon>add</mat-icon>
             Add</button>
      
 <div *ngIf="employeePositionSaved" class=" btndanger btn-sm pull-right">

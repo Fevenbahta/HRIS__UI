@@ -3,24 +3,24 @@
 
       <app-shared-nav [buttons]="buttons"></app-shared-nav> 
       <div class="col-md-8 ml-2">
-        <div class="card margin" >
+        <div class="card " >
       <form (ngSubmit)="addBranch()"> 
-        <div class="row" style="margin: 20px; margin-top: 40px; padding: 5px;"> 
-          
-          <div class="col-4"> 
+        <div class="row ml-4" > 
+          <h6 class="card-title mt-3">Branch</h6>
+          <div class="col-4 mt-3"> 
             <div class="form-field"> 
               
           
           <input type="text"  id="branchName" required placeholder=" "  [(ngModel)]="addBranchRequest.name"name="name" required> 
             <label for="branchName">Branch Name</label> </div> 
             </div> 
-          <div class="col-4"> 
+          <div class="col-4 mt-3"> 
             <div class="form-field"> 
        
               <input id="branchCity" rows="1" required placeholder=" " [(ngModel)]="addBranchRequest.city" name="city" required>
                   <label for="branchCity">Branch City</label>  </div> 
           </div> 
-        </div> <div class="col-md-3"> <button type="submit" class="btn btn-sm btnsave">Save</button>
+        </div> <div class="col-md-3 mt-2"> <button type="submit" class="btn btn-sm btnsave"><mat-icon>add</mat-icon>Save</button>
            </div><div *ngIf="branchSaved" class=" btndanger btn-sm pull-right">
             Successfully Added!
           </div>

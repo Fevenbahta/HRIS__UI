@@ -157,7 +157,7 @@ displayEmployees:Employee[]=[];
     reason: '', 
     file:"", 
     employeePositionId:'',
-    workingDays: null, 
+    workingDays: 0, 
     sickStartDate: "2023-07-26T06:13:52.512Z", 
     sickEndDate: "2023-07-26T06:13:52.512Z", 
     supervisor:" ",
@@ -184,9 +184,15 @@ displayEmployees:Employee[]=[];
   ) 
   {  
       this.leaveRequestForm = this.formBuilder.group({
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
+      workingDays: [null, Validators.required],
       
+      leaveTypeId: ['', Validators.required],
+      
+      reason: ['', Validators.required],
+      
+           
     },  {  validator: dateRangeValidator(this.selectedLeaveBalance)}); // Add the custom validator here
     console.log(this.selectedLeaveBalance);
   } 
@@ -405,7 +411,9 @@ horizontalPosition:'end',
   }
 
   addleaveRequest() { 
+    if(this.leaveRequestForm.valid){
 
+  
     this.leaveRequest.leaveTypeId = this.selectedLeaveType; 
     this.leaveRequest.empId = this.selectedEmployee;
     this.leaveRequest.createdBy=this.currentEmployee;
@@ -498,7 +506,7 @@ console.log(this.leaveRequest.employeePositionId)
     console.log('Invalid date range');
   }
     
-  } 
+  } }
 
   fetchAndDisplayPDF(leave: LeaveRequest): void {
     const leaveRequestToEdit = this.leaveRequests.find(

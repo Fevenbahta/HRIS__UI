@@ -9,7 +9,7 @@
                   <div class="card ">
                        <div class="card-header ">
                         
-                          <h4 class="card-title">Monthly PayRolls</h4>
+                          <h4 class="card-title ">Monthly PayRolls</h4>
                           <button  class="btn mt-5 ml-3 btn-sm btndanger" (click)="addTempPayroll()">
                             <mat-icon>perm_data_setting</mat-icon> Calculate </button>
                             <div><mat-error *ngIf="errormessage" class=" "> {{getEmployeeName(incompleteEmployee)}} Information Not Completed!</mat-error>
@@ -17,7 +17,7 @@
                             
                             <div *ngIf="PayRollSaved" class=" btndanger btn-sm pull-right"> successfull!</div>
            
-                            <h6 class=" mt-5 ml-5">Monthly info </h6>    
+                            <h6 class=" mt-5 ml-5 yellow">Monthly info </h6>    
                              </div>  
               
                   

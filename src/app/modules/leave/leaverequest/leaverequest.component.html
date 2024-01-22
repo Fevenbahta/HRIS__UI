@@ -85,7 +85,10 @@
             <div class="col-md-4  form-field mt-4 ">
               <input  placeholder=" " type="text" name="workingDays" [(ngModel)]="leaveRequest.workingDays">
               <label >Working Days</label>
-            </div>
+              <mat-error *ngIf="leaveRequestForm.get('workingDays').invalid && leaveRequestForm.get('workingDays').touched">
+              Working Days  is required
+            </mat-error>  </div>
+        
             <div class="col-md-4  form-field mt-4">
            
               <input placeholder=" " type="text" name="reason" [(ngModel)]="leaveRequest.reason">
@@ -141,9 +144,9 @@
             
    
           <div class="mt-3">
-            <button type="button" class="btn btnsave btn-sm" *ngIf="!leaveRequest.leaveRequestId" (click)="addleaveRequest()">Add</button>
+            <button type="button" class="btn btnsave btn-sm" *ngIf="!leaveRequest.leaveRequestId" (click)="addleaveRequest()"><mat-icon>add</mat-icon>Add</button>
             <div *ngIf="leaveRequestSaved" class=" btndanger btn-sm pull-right">Added successfully!</div>
-            <button type="button" class="btn btnsave btn-sm" *ngIf="leaveRequest.leaveRequestId" (click)="updateleaveRequest()">Update</button>
+            <button type="button" class="btn btnsave btn-sm" *ngIf="leaveRequest.leaveRequestId" (click)="updateleaveRequest()"><mat-icon>add</mat-icon>Update</button>
             <div *ngIf="leaveRequestUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
           </div>
         </div>

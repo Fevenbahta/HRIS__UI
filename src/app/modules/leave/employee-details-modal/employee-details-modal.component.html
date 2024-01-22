@@ -1,6 +1,10 @@
 <div class="custom-modal">
+
   <div class="col-md-12">
-     <div class="logo">
+    <div #printableCard>
+
+
+     <div>
             <a href="#" class="simple-text">
                 <div>
                     <img  class="logo-img"src="/assets/img/ECXLogo.png"/>
@@ -16,8 +20,7 @@
         <div class="container-fluid">
        
               <!-- Selected Column -->
-           
-                
+          
                 <h6>Employee Details</h6>
                 <!-- Content for selected column -->
               </div>
@@ -222,14 +225,17 @@
                     </div>
                   </div>
                   
-      
+                </div>
       </div>
-      <button (click)="printEmployeeDetails()">Print</button>
-      <button (click)="onCancelClick()">Cancel</button>
     </div>
+
+      <button (click)="printCard()" class="btn btnedit">Print</button> 
+         
+      <button (click)="onCancelClick()" class="btn btncancel ml-2">Cancel</button>
+  
+
+</div>
 
 </div>
 
 
-
-  </div>

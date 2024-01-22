@@ -164,9 +164,9 @@
              <div *ngIf="errormessage" >
               <p class="insufficient-balance">Insufficient Balance</p>
             </div>
-            <button type="button" class="btn btnsave btn-sm" *ngIf="!medicalRequest.medicalRequestId" (click)="addmedicalRequest()">Add</button>
+            <button type="button" class="btn btnsave btn-sm" *ngIf="!medicalRequest.medicalRequestId" (click)="addmedicalRequest()"><mat-icon>add</mat-icon>Add</button>
             <div *ngIf="medicalRequestSaved" class=" btndanger btn-sm pull-right">Added successfully!</div>
-            <button type="button" class="btn btnsave btn-sm" *ngIf="medicalRequest.medicalRequestId" (click)="updatemedicalRequest()">Update</button>
+            <button type="button" class="btn btnsave btn-sm" *ngIf="medicalRequest.medicalRequestId" (click)="updatemedicalRequest()"><mat-icon>add</mat-icon>Update</button>
             <div *ngIf="medicalRequestUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
           </div>
 

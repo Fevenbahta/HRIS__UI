@@ -48,12 +48,12 @@ export interface Supervisor{
 }
 export interface CombinedEmployeeData {
   employee: Employee;
-  addresses: Contact;
-  emergencyContacts: EmergencyContact[];
-  employeePostions: EmployeePosition;
-  educations: Education[];
-  trainings: Training[];
-  spouses:Spouse[];
+  addresses?: Contact;
+  emergencyContacts?: EmergencyContact[];
+  employeePostions?: EmployeePosition;
+  educations?: Education[];
+  trainings?: Training[];
+  spouses?:Spouse[];
   
   workExperiences:WorkExperience[];
   // Add other properties as needed to match the API response

@@ -21,6 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import{MatSnackBarModule} from '@angular/material/snack-bar'
 
+import{MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 import { EmployeeRegistrationComponent } from 'app/modules/employee-registration/employee-registration.component';
 
@@ -244,7 +245,7 @@ OutsourceComponent
  SharedModule,
  MatDialogModule,
  MatIconModule,
-
+ MatProgressSpinnerModule
 
   ],
 

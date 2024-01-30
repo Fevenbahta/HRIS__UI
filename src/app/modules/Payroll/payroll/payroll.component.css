@@ -1,12 +1,9 @@
-::ng-deep .cardhead{
-   background-color: rgb(224, 224, 217);
+/* styles.css */
 
-    }
-::ng-deep .mat-snack-bar-container{
-  background-color: rgb(224, 224, 217);
-
-}
-
+.success-snackbar .mat-mdc-snack-bar-actions {
+  background-color: green;
+  color: black;
+  }
   form-field {
     position: relative;
     margin-bottom: 20px;

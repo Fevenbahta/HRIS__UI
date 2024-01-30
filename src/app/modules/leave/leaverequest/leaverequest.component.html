@@ -191,22 +191,20 @@
                     <td>{{ leaveRequest.endDate | date:'yyyy-MM-dd' }}</td>
                     <td>{{ leaveRequest.leaveStatus }}</td>
             
-                  
-                    <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveRequest.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                  <td>  <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveRequest.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                       <mat-icon>info</mat-icon> 
                     </button>
-                    <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leaveRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                  
+                     <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leaveRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
                       style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
                       <mat-icon>get_app</mat-icon></button>
                       <mat-error  *ngIf="FileNull && id == leaveRequest.leaveRequestId"
                       class="  pull-right">No File</mat-error >
                       
-    
-                  </td>
-                    <td>
                       <button class="btn btn-sm btnedit" (click)="editleaveRequest(leaveRequest)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                         <mat-icon>edit</mat-icon>
                       </button>
+                      
                       <button class="btn btn-sm btndanger" *ngIf="leaveRequest.leaveStatus === 'Pendding'" (click)="deleteleaveRequest(leaveRequest)"
                       [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                         <mat-icon>delete</mat-icon>

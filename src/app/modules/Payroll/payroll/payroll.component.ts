@@ -18,11 +18,28 @@ import { PositionService } from 'app/service/position.service';
 import { StepService } from 'app/service/step.service';
 
 import { TempPayrollService,  } from 'app/service/temppayroll.service copy';
-
+import {
+  Router,
+  Event as RouterEvent,
+  NavigationStart,
+  NavigationEnd,
+  NavigationCancel,
+  NavigationError
+} from '@angular/router'
 @Component({
   selector: 'app-payroll',
   templateUrl: './payroll.component.html',
-  styleUrls: ['./payroll.component.css']
+  styleUrls: ['./payroll.component.css'],
+  styles: [`
+  ::ng-deep .mat-snack-bar-container{
+    color: #155724 !important;
+    background-color: #d4edda !important;
+    border-color: #c3e6cb !important;
+  }
+  ::ng-deep .mat-simple-snackbar-action {
+    color: red;
+  }
+`]
 })
 export class PayrollComponent {
   selectedMonth:string;
@@ -79,9 +96,7 @@ export class PayrollComponent {
   incompleteEmployee:string=null;
   end:string;
 
-  addPayRoll(){
 
-  }
 
  pay:TempPayroll={
     pId:0,
@@ -163,8 +178,13 @@ payRollEndDate: "2023-07-20T13:56:00.062Z",
     private branchservice: BranchService,
     private gradeservice: GradeService,
     private snackBar :MatSnackBar,
-    private renderer:Renderer2
- ) {}
+    private renderer:Renderer2,
+    private router: Router
+ ) {
+  router.events.subscribe((event: RouterEvent) => {
+    this.navigationInterceptor(event)
+  })
+ }
     
    
     
@@ -354,20 +374,31 @@ this.payrollService.getAllPayRoll().subscribe({
     
   
 }
-showSucessMessage(message:string) : void{
-  // this.snackBar.open(message,'Close',
-  // {duration:3000,
-  
-  // horizontalPosition:'end',
-  //   verticalPosition:'top',
+navigationInterceptor(event: RouterEvent): void {
+  if (event instanceof NavigationStart) {
+    this.isLoading = true;
+  }
+  if (event instanceof NavigationEnd) {
+    this.isLoading = false;
+  }
 
-  //   })
-    const config=new MatSnackBarConfig();
-    config.duration=3000;
-    config.panelClass=['cardhead'];
-    config.horizontalPosition='end';
-    config.verticalPosition='top',
-    this.snackBar.open(message,'Close',config)
+  // Set loading state to false in both of the below events to hide the spinner in case a request fails
+  if (event instanceof NavigationCancel) {
+    this.isLoading = false;
+  }
+  if (event instanceof NavigationError) {
+    this.isLoading = false;
+  }
+}
+showSucessMessage(message:string) : void{
+  this.snackBar.open(message,'Close',
+  {duration:3000,
+    panelClass: ['success-snackbar'],
+  horizontalPosition:'end',
+    verticalPosition:'top',
+
+    })
+   
     }
 capitalizeFirstLetter(text: string): string {
   if (!text) return text;

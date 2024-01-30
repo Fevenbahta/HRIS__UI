@@ -213,7 +213,8 @@ ReportComponent,
 PayrollReportComponent,
 MedicalreportComponent,
 MedicalPayComponent,
-OutsourceComponent
+OutsourceComponent,
+
   ],
 
   imports: [

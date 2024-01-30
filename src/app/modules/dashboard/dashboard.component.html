@@ -1,109 +1,18 @@
-<div class="main-content mt-5">
-    <div class="container-fluid ">
-        
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card card-chart">
-                    <div class="card-header">
-                        <div class="ct-chart" id="dailySalesChart"></div>
-                    </div>
-                    <div class="card-body green">
-                        <h4 class="card-title  yellowColor">Leave Information</h4>
-                        <p class="card-category">
-                            <span class="text-success"><i class="fa fa-long-arrow-up"></i> </span>Employees on leave </p>
-                            <div class="chart-container">
-                                <canvas >
-                                </canvas>
-                            </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-chart">
-                    <div class="card-header ">
-                        <div class="ct-chart" id="websiteViewsChart"></div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title yellowColor">Attendance Information</h4>
-                    
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 style">
-                <div class="card card-chart  ">
-                    <div class="card-header ">
-                        <div class="" id=""></div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title yellowColor">EmployeesInformation </h4>
-                       
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- dashboard.component.html -->
+<app-shared-nav  [buttons]="buttons">
+</app-shared-nav>
+
+
+<div class="container mt-5">
+    <div class="row">
+   
+  
+      <div class="container">
+        <!-- ... (previous code) -->
+        <div class="col-lg-6">
+          <!-- Display a Highcharts chart -->
+          <div id="genderChart" #genderChartContainer></div>
         </div>
-       
-                        </div>
-                
-                        <p></p>
-            <!-- <div class="col-lg-6 col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-warning">
-                        <h4 class="card-title">Employees Stats</h4>
-                        <p class="card-category">New employees on 15th September, 2023</p>
-                    </div>
-                    <div class="card-body table-responsive">
-                        <table class="table table-hover">
-                            <thead class="text-warning">
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>job title</th>
-                              
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>developer</td>
-                                 
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Minerva Hooper</td>
-                                    <td>Accountant</td>
-                                  
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Sage Rodriguez</td>
-                                    <td>sales</td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Philip Chaney</td>
-                                    <td>Hr</td>
-                                 
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> -->
-  
-  
-  
+      </div>
+    </div>
+  </div>

@@ -230,6 +230,7 @@ component:PayrollcontractComponent},
 component:PayrollReportComponent},
 {path:'payroll/outsource',
 component:OutsourceComponent},
+
 ]
 
 }]

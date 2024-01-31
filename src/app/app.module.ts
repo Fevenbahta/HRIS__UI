@@ -8,7 +8,7 @@ import { DefaultModule } from './layouts/default/default.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MedicalreportComponent } from './modules/medical/medicalreport/medicalreport.component';
 import { OutsourceComponent } from './modules/PayrollContract/outsource/outsource.component';
-
+import * as Dashboards from '@highcharts/dashboards/dashboards';
 
 @NgModule({
   declarations: [

@@ -2,7 +2,10 @@
  @import "~@angular/material/prebuilt-themes/indigo-pink.css";
  @import '~bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
 
-
+ @import url('https://code.highcharts.com/css/highcharts.css');
+ @import url('https://code.highcharts.com/datagrid/css/datagrid.css');
+ @import url('https://code.highcharts.com/dashboards/css/dashboards.css');
+ @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 .card {
     font-size: .875rem; }
   

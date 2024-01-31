@@ -5,36 +5,7 @@
 
 }
 
-:root {
-  --blue: #4e73df;
-  --indigo: #6610f2;
-  --purple: #6f42c1;
-  --pink: #e83e8c;
-  --red: #e74a3b;
-  --orange: #fd7e14;
-  --yellow: #f6c23e;
-  --green: #1cc88a;
-  --teal: #20c9a6;
-  --cyan: #36b9cc;
-  --white: #fff;
-  --gray: #858796;
-  --gray-dark: #5a5c69;
-  --primary: #4e73df;
-  --secondary: #858796;
-  --success: #1cc88a;
-  --info: #36b9cc;
-  --warning: #f6c23e;
-  --danger: #e74a3b;
-  --light: #f8f9fc;
-  --dark: #5a5c69;
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
+
 
 *,
 *::before,
@@ -154,13 +125,16 @@ sup {
 }
 
 a {
-  color: #4e73df;
+  color:#76a53b;
   text-decoration: none;
   background-color: transparent;
 }
-
+.style{
+  width: 400px;
+  height: 800px;
+}
 a:hover {
-  color: #224abe;
+  color: #76a53b;
   text-decoration: underline;
 }
 
@@ -11278,4 +11252,72 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+h1#title {
+  padding-top: 10px;
+  margin: 0;
+  background-color: #3d3d3d;
+  text-align: center;
+  color: white;
+}
+
+#kpi-vitamin-a .highcharts-dashboards-component-title::before,
+#kpi-iron .highcharts-dashboards-component-title::before {
+  width: 14px;
+  height: 14px;
+  border-radius: 28px;
+  display: inline-block;
+  padding: 0;
+  margin-right: 4px;
+  background-color: var(--highcharts-color-0);
+  content: ' ';
+}
+
+#kpi-iron .highcharts-dashboards-component-title::before {
+  background-color: var(--highcharts-color-2);
+}
+
+#kpi-vitamin-a .highcharts-dashboards-component-kpi-subtitle,
+#kpi-iron .highcharts-dashboards-component-kpi-subtitle {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: var(--highcharts-neutral-color-60);
+}
+
+#kpi-vitamin-a .highcharts-dashboards-component-kpi-value,
+#kpi-iron .highcharts-dashboards-component-kpi-value {
+  font-size: 4em;
+  font-weight: normal;
+  line-height: 2.4rem;
+  margin-top: 10px;
+  color: var(--highcharts-color-0);
+}
+
+#kpi-iron .highcharts-dashboards-component-kpi-value {
+  color: var(--highcharts-color-2);
+}
+
+#dashboard-col-1 .highcharts-color-0 {
+  fill: var(--highcharts-color-2);
+  stroke: var(--highcharts-color-2);
+}
+
+#kpi-vitamin-a .highcharts-dashboards-component-kpi-value::after,
+#kpi-iron .highcharts-dashboards-component-kpi-value::after {
+  content: 'micrograms';
+  display: block;
+  font-size: 1rem;
+}
+
+.highcharts-plot-line {
+  stroke-dasharray: 2px;
+  stroke: var(--highcharts-color-3);
+}
+
+.highcharts-plot-line-label {
+  fill: var(--highcharts-color-3);
+}
+
+.highcharts-description {
+  padding: 0 20px;
 }

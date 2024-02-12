@@ -190,6 +190,8 @@
                     <td>{{ leaveRequest.startDate | date:'yyyy-MM-dd' }}</td>
                     <td>{{ leaveRequest.endDate | date:'yyyy-MM-dd' }}</td>
                     <td>{{ leaveRequest.leaveStatus }}</td>
+               
+
             
                   <td>  <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveRequest.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
                       <mat-icon>info</mat-icon> 

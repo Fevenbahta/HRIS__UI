@@ -41,10 +41,10 @@ divisions:Division[]= [];
    employeePositions:EmployeePosition[]=[];
    FileNull:boolean = false;
    id:string;
- leaveStatus:string="pendding";
+ leaveStatus:string="Pendding";
  leaverejectStatus:string="Reject";
  empId="17320a72-e4bd-46b9-894a-dfe5bf3d967c";
- supervisor:string="";
+ supervisor:string="deeb00cf-2078-4e6e-921f-a4784404f063";
  buttons = [  
   { label: 'Leave Request',
   dropdownOptions: [
@@ -127,7 +127,7 @@ this.employeepostionservice.getEmployeePosition(this.empId)
   next: (employeePostion) => { 
     // this.leaveRequest.empId = this.selectedEmployee; 
     this.supervisor=employeePostion.position
-   console.log( this.supervisor)
+  
    }, 
   error: (response) => { 
     console.log(response); 
@@ -138,6 +138,7 @@ this.employeepostionservice.getEmployeePosition(this.empId)
     this.leaveRequestservice.getLeaveRequestByStatus(this.leaveStatus,this.supervisor).subscribe({
       next: (leaveRequest) => {
         this.leavePenddings = leaveRequest
+    
         ;
       },
       error: (response) => {
@@ -200,7 +201,7 @@ capitalizeFirstLetter(text: string): string {
     }); 
     const  positionId=this.employeePosition.position
     const position = this.positions.find((position) => position.positionId === positionId);  
-    console.log('position  ',position.name)
+   // console.log('position  ',position.name)
     return position ? position.name : '';
 
    // return  this.employeePosition? this.employeePosition.position:" ";
@@ -229,7 +230,7 @@ capitalizeFirstLetter(text: string): string {
   getPositionName(positionId: string): string {
 
     const position = this.positions.find((position) => position.positionId === positionId);  
-    console.log('position  ',position.name)
+    //console.log('position  ',position.name)
     this.employee=true
     return position ? position.name  : '';
   }

@@ -52,7 +52,7 @@ export class OtherspromotionComponent {
 
  divisions:Division[]= [];
  currentSupervisorPosition:string
- currentEmployee:string='b59d425a-bc45-4992-8844-5e7f76b2dc68';
+ currentEmployee:string='c6b2f0a9-8af0-473b-820b-73e47628189f';
  
  assignedSupervisors:AssignSupervisor[]=[];
  selectedFirstSupervisor:string='';
@@ -260,8 +260,11 @@ console.log("s",supervisoremployeePostions)
        // this.leaveRequest.empId = this.selectedEmployee; 
        this.employee=employees 
        this.supervisoremployees.forEach(element=> {
-      const sup=employees.find(emp => emp.empId === element.empId);
-       this.supervisorEmployees.push(sup)
+      const sup=employees.find(emp => emp.empId == element.empId);
+      if(sup!==undefined)[
+ this.supervisorEmployees.push(sup)
+      ]
+      
 
 
        

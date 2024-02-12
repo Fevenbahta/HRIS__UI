@@ -55,7 +55,7 @@ export class EmployeeLeavebalanceComponent {
    private router:Router){}
    ngOnInit(): void {
     console.log('Fetching employee...');
-    this.employeeService.getEmployee("465d0c27-0eb7-4b27-8c71-88a23e3ac404")
+    this.employeeService.getEmployee("c6b2f0a9-8af0-473b-820b-73e47628189f")
       .subscribe({
         next: (employee) => {
           this.employee = employee;
@@ -67,7 +67,7 @@ export class EmployeeLeavebalanceComponent {
       });
   
     console.log('Fetching leave balance...');
-    this.leaveBalanceService.getLeaveBalance("465d0c27-0eb7-4b27-8c71-88a23e3ac404")
+    this.leaveBalanceService.getLeaveBalance("c6b2f0a9-8af0-473b-820b-73e47628189f")
       .subscribe({
         next: (leaveBalance) => {
           this.leaveBalance = leaveBalance;
@@ -80,7 +80,7 @@ export class EmployeeLeavebalanceComponent {
       });
   
     console.log('Fetching other leave balance...');
-    this.otherleaveBalanceService.getOtherLeaveBalance("465d0c27-0eb7-4b27-8c71-88a23e3ac404")
+    this.otherleaveBalanceService.getOtherLeaveBalance("c6b2f0a9-8af0-473b-820b-73e47628189f")
       .subscribe({
         next: (otherleaveBalance) => {
           this.otherleaveBalance = otherleaveBalance;

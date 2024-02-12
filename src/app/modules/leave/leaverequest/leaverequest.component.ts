@@ -116,7 +116,7 @@ displayEmployees:Employee[]=[];
   positions:Position[]= [];
   divisions:Division[]= [];
   currentSupervisorPosition:string
-  currentEmployee:string='43f0da20-9130-4fc8-89b8-d190abefe675';
+  currentEmployee:string='c6b2f0a9-8af0-473b-820b-73e47628189f';
   
   assignedSupervisors:AssignSupervisor[]=[];
   selectedFirstSupervisor:string='';
@@ -186,15 +186,15 @@ displayEmployees:Employee[]=[];
       this.leaveRequestForm = this.formBuilder.group({
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
-      workingDays: [null, Validators.required],
+      workingDays: [null, ],
       
-      leaveTypeId: ['', Validators.required],
+      leaveTypeId: ['', ],
       
-      reason: ['', Validators.required],
+      reason: ['',],
       
            
     },  {  validator: dateRangeValidator(this.selectedLeaveBalance)}); // Add the custom validator here
-    console.log(this.selectedLeaveBalance);
+    console.log("this.selectedLeaveBalance",this.selectedLeaveBalance);
   } 
 
   
@@ -220,18 +220,7 @@ this.departmentService.getAllDepartment()
     console.log(response)
   }
 });
-            console.log(this.selectedEmployee )
-    this.leaveRequestservice.getAllLeaveRequest().subscribe({ 
-      next: (leaveRequestd) => { 
-        this.leaveRequests = leaveRequestd.filter(leave=>leave.createdBy==this.currentEmployee); 
-        this.filteredLeaveRequests= this.leaveRequests;
-         console.log("t",leaveRequestd)
-this.isLoading=false;
-      }, 
-      error: (response) => { 
-        console.log(response); 
-      } 
-    }); 
+      
   
     this.positionservice.getAllPosition()
     .subscribe({
@@ -280,7 +269,18 @@ this.supervisorPositions.forEach(element =>
      
 });
     
-
+console.log(this.selectedEmployee )
+this.leaveRequestservice.getAllLeaveRequest().subscribe({ 
+  next: (leaveRequestd) => { 
+    this.leaveRequests = leaveRequestd.filter(leave=>leave.createdBy==this.currentEmployee); 
+    this.filteredLeaveRequests= this.leaveRequests;
+     console.log("t",leaveRequestd)
+this.isLoading=false;
+  }, 
+  error: (response) => { 
+    console.log(response); 
+  } 
+}); 
    this.employeeService.getAllEmployees()  
    .subscribe({  
      next: (employees) => { 
@@ -291,7 +291,10 @@ this.supervisorPositions.forEach(element =>
        this.supervisoremployees.forEach(element=> {
         
       const sup=employees.find(emp => emp.empId === element.empId);
-      this.supervisorEmployees.push(sup);
+      if(sup!==undefined){
+          this.supervisorEmployees.push(sup);
+    
+      }
     
       console.log("cc",sup)
       console.log("dd",this.displayEmployees)
